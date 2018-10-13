@@ -1,0 +1,83 @@
+Next:
+  * Cylinder with axis
+  * Other primitives
+  * Scale(X*2)
+
+Library:
+  * [Medium] from cadlib import * sollte alle Kürzel importieren und sonst nix
+
+Geometry:
+  * [Low]    Matrix: Add @classmethods .from_rows (forwards to constructor) and .from_columns (accept list-of-list and vectors)
+  * [Low]    Allow creating square matrices from a simple list of values
+
+Object:
+  * [Medium] Assembly objects
+             Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
+             returns self
+  * [Medium] larger, smaller
+             Since we can't enlarge an assembly without rendering it first, we may need to defer enlarging to
+             render-time by adding an Enlarge class.
+  * [Medium] Anchors
+             Idea:
+                 wheel = Wheel(2).center.at(car.front_left_wheel)
+  * [Medium] center flag (and use in examples where appropriate)
+  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])
+  * [Low]    Shape (2-dimensional object) and associated primitives
+  * [Low]    Investigate part/hole
+               * Are we supposed to do Pipe+Hole or Pipe-Hole?
+               * Can we do Block - (Pipe +- Hole)?
+               * Is Hole * Object defined?
+  * [Medium] Can we do [cube, sphere, cylinder].sum()?
+  * [Medium] Primitives' __repr__ is not a repr
+
+Primitives:
+  * [High]   Cylinder with axis
+  * [Medium] More primitives
+  * [Medium] More ways of specifying parameters (e. g. radius or diameter; cylinder axis; plane through point)
+
+CSG:
+  * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
+
+Transform:
+  * [High]   Scale:
+               * scale(X * 2) == scale([2, 1, 1]) (not [2, 0, 0]!)
+  * [Medium] mirror(along which axis and which point/offset)
+  * [Low]    class MatrixTransform
+  * [Low]    .to_matrix
+  * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.
+  * [Low]    Clean up transform_generators.rotate, maybe use a generic dispatch mechanism
+  * [Low]    IdentityTransform (for testing, we should probably have an empty SCAD object first)
+
+CSG:
+  * [Medium] Make it so that a-(b+c) == a-b-c. Two options:
+               * Difference always has a single subtrahend, which is an Object or a Union
+                   * This is probably better
+               * When subtracting a union, extract its children (must also be done for Object - Union)
+  * [Low]    Can we make Union and Intersection independent of the order, so that a+b == b+a?
+               * We could use a set instead of a list, or we could convert the list to a set for comparison. This would
+                 require a hash method
+               * We could manually compare the list elements, but that would be in O(n^2)
+
+Scad:
+  * [Low]    Remove union when implicit (e. g. in translate, or from the second one in difference)
+  * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
+             tests for part/hole
+  * [Low]    There should be an empty ScadObject that we can pass into and return from Object.to_scad; this would remove
+             special case handling, e.g. RotateYpr.to_scad if target==None and ypr==(0, 0, 0)
+  * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
+  * [Medium] Ausgegebenen Code kommentieren (z. B. examples/plane)
+  * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
+             constants
+  * [Low]    Modifiers: %background, #debug, !root, *disable
+  * [Low]    Colors (RGBA)
+
+Model:
+  * [Low]    Name for transforms and objects - show in tree representation and as comment in SCAD code
+  * [Low]    keep flag for transforms and CSG
+               * Will not merge
+  * [Low]    use_named flag for transforms and objects
+               * Will not merge
+               * Will write an SCAD module and be referenced by name
+  * [Low]    SymbolicConstant for parametric SCAD files
+               * Add symbol arithmetic classes
+               * Allow in Matrix/Vector

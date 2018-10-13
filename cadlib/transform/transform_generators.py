@@ -1,0 +1,144 @@
+from numbers import Number
+from warnings import warn
+
+from cadlib.transform import transform_primitives as tp
+from cadlib.geometry import Vector
+
+__all__ = ['rotate', 'scale', 'translate']
+
+def to_vector(value):
+    if isinstance(value, Vector):
+        return value
+    elif isinstance(value, (list, tuple)):
+        return Vector(*value)
+    else:
+        raise TypeError("Not a vector")
+
+def both(a, b):
+    return a is not None and b is not None
+
+def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, frm = None, to = None, xyz = None, ypr = None, ignore_ambiguity = False):
+    # Signatures (canonical forms):
+    #   * rotate(axis = x, angle = 45)
+    #   * rotate(frm = x, to = y)
+    #   * rotate(xyz = [45, 0, 30])
+    #   * rotate(ypr = [45, -30, 10])
+    # Signatures (convenience forms):
+    #   * rotate(x, 45)
+    #   * rotate(x, angle = 45)
+    #   * rotate(x, y)
+    #   * rotate(x, to = y)
+    #
+    # Canonical forms:
+    #     axis_or_axmag_or_frm  angle_or_to  axis  angle  frm   to   xyz   ypr
+    #                        -            -   vec    num    -    -     -     -  # Axis/angle
+    #                        -            -     -      -  vec  vec     -     -  # From/to
+    #                        -            -     -      -    -    -  list     -  # XYZ
+    #                        -            -     -      -    -    -     -  list  # Yaw/pitch/roll
+    # Convenience forms (-: must be None, *: overwritten)
+    #                      vec          num     *      *    -    -     -     -  # Axis/angle (implicit)
+    #                      vec            -     *    num    -    -     -     -  # Axis/angle (explicit)
+    #                      vec          vec     -      -    *    *     -     -  # From/to (implicit)
+    #                      vec            -     -      -    *  vec     -     -  # From/to (explicit)
+    #
+    # "Vector type" is Vector, list, or tuple
+
+    # Make sure that there are no conflicts between convenience parameters and canonical parameters
+    if both(axis_or_frm, axis ): raise ValueError("axis"  " cannot be specified together with axis_or_frm")
+    if both(axis_or_frm, frm  ): raise ValueError("frm"   " cannot be specified together with axis_or_frm")
+    if both(angle_or_to, angle): raise ValueError("angle" " cannot be specified together with angle_or_to")
+    if both(angle_or_to, to   ): raise ValueError("to"    " cannot be specified together with angle_or_to")
+
+    # Transform the convenience forms to canonical form
+    if axis_or_frm is not None:
+        if not isinstance(axis_or_frm, (Vector, list, tuple)):
+            raise TypeError("axis must be a vector type")
+
+        if angle_or_to is not None:
+            if isinstance(angle_or_to, Number):
+                # Axis/angle (implicit)
+                axis = axis_or_frm
+                angle = angle_or_to
+            elif isinstance(angle_or_to, (Vector, list, tuple)):
+                # From/to (implicit)
+                frm = axis_or_frm
+                to = angle_or_to
+            else:
+                raise TypeError("angle_or_to must be a number or a vector type")
+        elif angle is not None:
+            # Axis/angle (explicit)
+            axis = axis_or_frm
+        elif to is not None:
+            # From/to (explicit)
+            frm = axis_or_frm
+
+    # Check the parameters that must appear in pairs
+    if axis  is not None and angle is None: raise ValueError("angle" " is required when " "axis"  " is given")
+    if angle is not None and axis  is None: raise ValueError("axis"  " is required when " "angle" " is given")
+    if frm   is not None and to    is None: raise ValueError("to"    " is required when " "frm"   " is given")
+    if to    is not None and frm   is None: raise ValueError("frm"   " is required when " "to"    " is given")
+
+    # Handle the different cases
+    if axis is not None:
+        # Check that no other specification is given
+        if frm is not None: raise ValueError("frm" " cannot be specified together with axis")
+        if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
+        if ypr is not None: raise ValueError("ypr" " cannot be specified together with axis")
+
+        return tp.RotateAxisAngle(axis, angle)
+
+    elif frm is not None:
+        # Check that no other specification is given
+        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
+        if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with frm")
+        if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with frm")
+
+        frm = to_vector(frm)
+        to  = to_vector(to)
+
+        if frm.length_squared == 0: raise ValueError("frm" " cannot be the zero vector")
+        if to .length_squared == 0: raise ValueError("to"  " cannot be the zero vector")
+
+        axis = frm.cross(to)
+        if axis.length == 0:
+            # Special case: the vectors are colinear. This means either no rotation (same direction, dot product
+            # positive) or rotation by 180 around ambiguous axis (opposite directions, dot product negative).
+            if frm.dot(to) > 0:
+                # Rotation has no effect - return an identity transform
+                return tp.RotateXyz(0, 0, 0)
+            else:
+                # Rotation is ambiguous
+                if not ignore_ambiguity:
+                    warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
+                         .format(frm.values, to.values), RuntimeWarning, 2)
+                return tp.RotateAxisAngle(frm.normal().normalized(), 180)
+        else:
+            # Regular case
+            angle = frm.angle(to)
+            return tp.RotateAxisAngle(axis.normalized(), angle)
+
+
+    elif xyz is not None:
+        # Check that no other specification is given
+        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
+        if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
+        if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with axis")
+
+        return tp.RotateXyz(*xyz)
+
+    elif ypr is not None:
+        # Check that no other specification is given
+        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
+        if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
+        if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with axis")
+
+        return tp.RotateYpr(*ypr)
+
+    else:
+        raise ValueError("Invalid call signature")
+
+def scale(xyz):
+    return tp.Scale(xyz)
+
+def translate(vector):
+    return tp.Translate(vector)
