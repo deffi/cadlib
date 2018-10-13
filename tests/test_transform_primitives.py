@@ -1,60 +1,67 @@
+from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
+from cadlib.transform.primitives.rotate_xyz import RotateXyz
+from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
-from cadlib.transform.transform_primitives import *
-from cadlib.transform.transform_primitives import _to_vector, _to_number, _to_list_of_numbers
-from cadlib.geometry import Vector
+from cadlib.util.number import to_number, to_list_of_numbers
+from cadlib.geometry import Vector, to_vector
 
 class TestTransformPrimitives(TestCase):
+    # TODO move to test_vector
     def test_to_vector_helper(self):
         # Regular call without length check
-        self.assertEqual(_to_vector(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
-        self.assertEqual(_to_vector(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
-        self.assertEqual(_to_vector(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
+        self.assertEqual(to_vector(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
+        self.assertEqual(to_vector(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
+        self.assertEqual(to_vector(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
 
         # Empty
-        self.assertEqual(_to_vector([], "dummy", None), Vector())
+        self.assertEqual(to_vector([], "dummy", None), Vector())
 
         # Length check
-        self.assertEqual(                   _to_vector([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
-        with self.assertRaises(ValueError): _to_vector([1, 2, 3], "dummy", 4)                   # Failure
+        self.assertEqual(                   to_vector([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
+        with self.assertRaises(ValueError): to_vector([1, 2, 3], "dummy", 4)                   # Failure
 
         # Invalid values
-        with self.assertRaises(TypeError ): _to_vector(None       , "dummy", None)
-        with self.assertRaises(TypeError ): _to_vector(1          , "dummy", None)
-        with self.assertRaises(TypeError ): _to_vector(""         , "dummy", None)
-        with self.assertRaises(TypeError ): _to_vector("123"      , "dummy", None)
-        with self.assertRaises(TypeError ): _to_vector([1, 2, "3"], "dummy", None)
+        with self.assertRaises(TypeError ): to_vector(None       , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector(1          , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector(""         , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector([1, 2, "3"], "dummy", None)
 
+    # TODO move to test_number
     def test_to_list_of_numbers_helper(self):
         # Regular call without length check
-        self.assertEqual(_to_list_of_numbers(Vector(1, 2, 3), "dummy", None), [1, 2, 3]) # From Vector
-        self.assertEqual(_to_list_of_numbers(      [1, 2, 3], "dummy", None), [1, 2, 3]) # From list
-        self.assertEqual(_to_list_of_numbers(      (1, 2, 3), "dummy", None), [1, 2, 3]) # From tuple
+        self.assertEqual(to_list_of_numbers(Vector(1, 2, 3), "dummy", None), [1, 2, 3]) # From Vector
+        self.assertEqual(to_list_of_numbers(      [1, 2, 3], "dummy", None), [1, 2, 3]) # From list
+        self.assertEqual(to_list_of_numbers(      (1, 2, 3), "dummy", None), [1, 2, 3]) # From tuple
 
         # Empty
-        self.assertEqual(_to_list_of_numbers([], "dummy", None), [])
+        self.assertEqual(to_list_of_numbers([], "dummy", None), [])
 
         # Length check
-        self.assertEqual(                   _to_list_of_numbers([1, 2, 3], "dummy", 3), [1, 2, 3]) # Success
-        with self.assertRaises(ValueError): _to_list_of_numbers([1, 2, 3], "dummy", 4)             # Failure
+        self.assertEqual(                   to_list_of_numbers([1, 2, 3], "dummy", 3), [1, 2, 3]) # Success
+        with self.assertRaises(ValueError): to_list_of_numbers([1, 2, 3], "dummy", 4)             # Failure
 
         # Invalid values
-        with self.assertRaises(TypeError ): _to_list_of_numbers(None       , "dummy", None)
-        with self.assertRaises(TypeError ): _to_list_of_numbers(1          , "dummy", None)
-        with self.assertRaises(TypeError ): _to_list_of_numbers(""         , "dummy", None)
-        with self.assertRaises(TypeError ): _to_list_of_numbers("123"      , "dummy", None)
-        with self.assertRaises(TypeError ): _to_list_of_numbers([1, 2, "3"], "dummy", None)
+        with self.assertRaises(TypeError ): to_list_of_numbers(None       , "dummy", None)
+        with self.assertRaises(TypeError ): to_list_of_numbers(1          , "dummy", None)
+        with self.assertRaises(TypeError ): to_list_of_numbers(""         , "dummy", None)
+        with self.assertRaises(TypeError ): to_list_of_numbers("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): to_list_of_numbers([1, 2, "3"], "dummy", None)
 
+    # TODO move to test_number
     def test_to_number_helper(self):
-        self.assertEqual(_to_number(42 , None, "dummy", []), 42 ) # Int
-        self.assertEqual(_to_number(4.2, None, "dummy", []), 4.2) # Float
+        self.assertEqual(to_number(42 , None, "dummy", []), 42 ) # Int
+        self.assertEqual(to_number(4.2, None, "dummy", []), 4.2) # Float
 
-        self.assertEqual(_to_number(None, 999, "dummy"), 999) # Default value
+        self.assertEqual(to_number(None, 999, "dummy"), 999) # Default value
 
-        with self.assertRaises(TypeError): _to_number(None, 999, "dummy", []) # No default value
+        with self.assertRaises(TypeError): to_number(None, 999, "dummy", []) # No default value
 
         # Invalid values
-        with self.assertRaises(TypeError): _to_number(""  , 999, "dummy")
-        with self.assertRaises(TypeError): _to_number([]  , 999, "dummy")
+        with self.assertRaises(TypeError): to_number(""  , 999, "dummy")
+        with self.assertRaises(TypeError): to_number([]  , 999, "dummy")
 
 
     def test_construction(self):

@@ -1,7 +1,8 @@
 from cadlib.object.primitives import Sphere
-from cadlib.object.object import Transformed
-from cadlib.transform.transform_primitives import Translate, RotateYpr
-from cadlib.transform.transform_shortcuts import *
+from cadlib.object.transformed import Transformed
+from cadlib.transform.primitives.translate import Translate
+from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.shortcuts import *
 from tests.unit_test import TestCase
 
 class TestTransform(TestCase):

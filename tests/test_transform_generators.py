@@ -1,6 +1,10 @@
+from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
+from cadlib.transform.primitives.rotate_xyz import RotateXyz
+from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
-from cadlib.transform.transform_primitives import *
-from cadlib.transform.transform_generators import *
+from cadlib.transform.generators import *
 from cadlib.geometry import Vector, X, Y, Z
 
 class TestTransformGenerators(TestCase):

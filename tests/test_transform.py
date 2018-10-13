@@ -1,5 +1,7 @@
-from cadlib.transform.transform import Chained
-from cadlib.transform.transform_primitives import RotateXyz, Scale, Translate
+from cadlib.transform.chained import Chained
+from cadlib.transform.primitives.translate import Translate
+from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.scad.scad import ScadObject
 from tests.unit_test import TestCase
 

@@ -42,6 +42,7 @@ Transform:
   * [High]   Scale:
                * scale(X * 2) == scale([2, 1, 1]) (not [2, 0, 0]!)
   * [Medium] mirror(along which axis and which point/offset)
+  * [Medium] RotateFromTo?
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
   * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.

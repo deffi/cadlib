@@ -1,0 +1,23 @@
+from numbers import Number
+
+from cadlib.object.object import Object
+from cadlib.scad.scad import ScadObject
+
+
+class Cube(Object):
+    def __init__(self, size):
+        if isinstance(size, Number):
+            self._size = [size, size, size]
+        elif len(size) == 3:
+            self._size = size
+        else:
+            raise ValueError("Invalid size: {}".format(size))
+
+    def __eq__(self, other):
+        return isinstance(other, Cube) and other._size == self._size
+
+    def __repr__(self):
+        return "Cube with size {}".format(self._size)
+
+    def to_scad(self):
+        return ScadObject("cube", [self._size], None, None)

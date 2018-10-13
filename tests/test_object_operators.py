@@ -1,7 +1,9 @@
-from cadlib.csg.csg import Union, Difference, Intersection
-from cadlib.object.object import Transformed
+from cadlib.csg.intersection import Intersection
+from cadlib.csg.difference import Difference
+from cadlib.csg.union import Union
+from cadlib.object.transformed import Transformed
 from cadlib.object.primitives import Sphere, Cube, Cylinder
-from cadlib.transform.transform_primitives import Translate
+from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
 
 class TestOperators(TestCase):

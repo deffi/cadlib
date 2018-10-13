@@ -3,6 +3,19 @@ from numbers import Number
 from cadlib.util.table import Table
 from cadlib.geometry import Matrix
 
+
+def to_vector(value, label = None, required_length = None):
+    if required_length is not None and len(value) != required_length:
+        raise ValueError("Invalid length for {}, must be {}".format(label, required_length))
+
+    if isinstance(value, Vector):
+        return value
+    elif isinstance(value, (list, tuple)):
+        return Vector(*value)
+    else:
+        raise TypeError("Invalid vector: {}".format(label, value))
+
+
 class Vector:
     '''
     Note that __len__, like the dimensions property, returns the number of elements. The length property returns the

@@ -1,5 +1,5 @@
 from unittest import TestCase as OriginalTestCase
-from cadlib.transform.transform_primitives import Transform
+from cadlib.transform.transform import Transform
 from contextlib import contextmanager
 
 class TestCase(OriginalTestCase):
@@ -20,4 +20,3 @@ class TestCase(OriginalTestCase):
             self.assertEqual(thing.to_scad(None).to_code(inline=True, simplify=True), code)
         else:
             self.assertEqual(thing.to_scad().to_code(inline=True, simplify=True), code)
-

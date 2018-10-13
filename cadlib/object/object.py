@@ -1,12 +1,8 @@
 from cadlib.util.tree import Node
 from cadlib.transform.transform import Transform
-from cadlib.transform.transform_generators import rotate, scale, translate
-from cadlib.transform import transform_shortcuts
+from cadlib.transform.generators import rotate, scale, translate
+from cadlib.transform import shortcuts
 
-
-################
-## Base class ##
-################
 
 # Note that, while Union is a subclass of Object, the special case of adding an
 # Object and a Union (in either order) or adding two Unions is handled
@@ -49,7 +45,7 @@ class Object:
     ################
 
     def __add__(self, other):
-        from cadlib.csg.csg import Union
+        from cadlib.csg.union import Union
         if isinstance(other, Union):
             # Object + Union - defer to Union.__radd__ (see note above)
             return NotImplemented
@@ -72,12 +68,12 @@ class Object:
             Difference(1, 2) - Object(3) => Difference(Difference(1, 2), 3)
         """
         if isinstance(other, Object):
-            from cadlib.csg.csg import Difference
+            from cadlib.csg.difference import Difference
             return Difference([self, other])
         else:
             return NotImplemented
 
-        from csg.csg import Difference
+        from cadlib.csg.difference import Difference
         if isinstance(other, Difference):
             # Object - Difference - defer to Difference.__rsub__ (see note above)
             return NotImplemented
@@ -89,7 +85,7 @@ class Object:
             return NotImplemented
 
     def __mul__(self, other):
-        from cadlib.csg.csg import Intersection
+        from cadlib.csg.intersection import Intersection
         if isinstance(other, Intersection):
             # Object * Intersection - defer to Intersection.__rmul__ (see note above)
             return NotImplemented
@@ -101,6 +97,7 @@ class Object:
             return NotImplemented
 
     def __rmul__(self, other):
+        from cadlib.object.transformed import Transformed
         if isinstance(other, Transform):
             # Transform * Object - create Transformed Object
             return Transformed(other, self)
@@ -127,60 +124,16 @@ class Object:
     ## Transform shortcuts ##
     #########################
 
-    def up     (self, a): return transform_shortcuts.up     (a) * self
-    def down   (self, a): return transform_shortcuts.down   (a) * self
-    def left   (self, a): return transform_shortcuts.left   (a) * self
-    def right  (self, a): return transform_shortcuts.right  (a) * self
-    def forward(self, a): return transform_shortcuts.forward(a) * self
-    def back   (self, a): return transform_shortcuts.back   (a) * self
+    def up     (self, a): return shortcuts.up     (a) * self
+    def down   (self, a): return shortcuts.down   (a) * self
+    def left   (self, a): return shortcuts.left   (a) * self
+    def right  (self, a): return shortcuts.right  (a) * self
+    def forward(self, a): return shortcuts.forward(a) * self
+    def back   (self, a): return shortcuts.back   (a) * self
 
-    def yaw_left  (self, a): return transform_shortcuts.yaw_left  (a) * self
-    def yaw_right (self, a): return transform_shortcuts.yaw_right (a) * self
-    def pitch_up  (self, a): return transform_shortcuts.pitch_up  (a) * self
-    def pitch_down(self, a): return transform_shortcuts.pitch_down(a) * self
-    def roll_right(self, a): return transform_shortcuts.roll_right(a) * self
-    def roll_left (self, a): return transform_shortcuts.roll_left (a) * self
-
-
-
-
-############################
-## Transforming an object ##
-############################
-
-class Transformed(Object):
-    def __init__(self, transform, object):
-        # Parameter check
-        if not isinstance(transform, Transform):
-            raise TypeError("transform must be a Transform")
-        if not isinstance(object, Object):
-            raise TypeError("object must be an Object")
-
-        self._transform = transform
-        self._object    = object
-
-    def __eq__(self, other):
-        return isinstance(other, Transformed) and \
-            other._transform == self._transform and \
-            other._object    == self._object
-
-    def __str__(self):
-        return "Transformed object"
-
-    def __rmul__(self, other):
-        if isinstance(other, Transform):
-            # Transformation of an already-transformed object. Instead of transforming the object twice, we merge the
-            # individual transform. While this is not strictly required, we want the following two terms to be equal:
-            #   (a) (transform2 * transform1) * object
-            #   (b) transform2 * (transform1 * object)
-            # Basically, we're turning case (b) into case (a).
-            return Transformed(other * self._transform, self._object)
-        else:
-            # Defer to the base class
-            return super().__rmul__(other)
-
-    def to_tree(self):
-        return Node(self, [self._transform.to_tree(), self._object.to_tree()])
-
-    def to_scad(self):
-       return self._transform.to_scad(self._object.to_scad())
+    def yaw_left  (self, a): return shortcuts.yaw_left  (a) * self
+    def yaw_right (self, a): return shortcuts.yaw_right (a) * self
+    def pitch_up  (self, a): return shortcuts.pitch_up  (a) * self
+    def pitch_down(self, a): return shortcuts.pitch_down(a) * self
+    def roll_right(self, a): return shortcuts.roll_right(a) * self
+    def roll_left (self, a): return shortcuts.roll_left (a) * self
