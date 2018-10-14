@@ -5,6 +5,7 @@ from cadlib.transform.primitives.translate import Translate
 from cadlib.transform.primitives.scale import Scale
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.scad.scad import ScadObject
+from cadlib.geometry.vector import X, Y, Z
 from tests.unit_test import TestCase
 
 # Operations with objects are tested in test_csg.py
@@ -17,7 +18,7 @@ class TestObject(TestCase):
         cube2 = Cube([11, 22, 33])
         with self.assertRaises(ValueError): Cube([])       # Empty size
         with self.assertRaises(ValueError): Cube([11, 22]) # Wrong-size size
-        cylinder = Cylinder(11, 22)
+        cylinder = Cylinder(Z, 11, 22)
 
         # Transformed object
         t = Translate([10, 20, 30])
@@ -69,10 +70,10 @@ class TestObject(TestCase):
 
     def test_to_scad(self):
         # Primitives
-        self.assertEqual(Cube    (11          ).to_scad(), ScadObject("cube"    , [[11, 11, 11]], None      , None))
-        self.assertEqual(Cube    ([11, 22, 33]).to_scad(), ScadObject("cube"    , [[11, 22, 33]], None      , None))
-        self.assertEqual(Sphere  (11          ).to_scad(), ScadObject("sphere"  , [11]          , None      , None))
-        self.assertEqual(Cylinder(11, 4       ).to_scad(), ScadObject("cylinder", [11]          , [('r', 4)], None))
+        self.assertEqual(Cube    (   11          ).to_scad(), ScadObject("cube"    , [[11, 11, 11]], None      , None))
+        self.assertEqual(Cube    (   [11, 22, 33]).to_scad(), ScadObject("cube"    , [[11, 22, 33]], None      , None))
+        self.assertEqual(Sphere  (   11          ).to_scad(), ScadObject("sphere"  , [11]          , None      , None))
+        self.assertEqual(Cylinder(Z, 11, 4       ).to_scad(), ScadObject("cylinder", [11]          , [('r', 4)], None))
 
         r = RotateXyz(60, 30, 15)
         s = Scale([1, 2, -1])
@@ -96,11 +97,11 @@ class TestObject(TestCase):
 
     def test_to_scad_code(self):
         # Primitives
-        self.assertScadCode(Cube    (11          ), "cube([11, 11, 11]);")
-        self.assertScadCode(Cube    (11          ), "cube([11, 11, 11]);")
-        self.assertScadCode(Cube    ([11, 22, 33]), "cube([11, 22, 33]);")
-        self.assertScadCode(Sphere  (11          ), "sphere(11);")
-        self.assertScadCode(Cylinder(11, 4       ), "cylinder(11, r = 4);")
+        self.assertScadCode(Cube    (   11          ), "cube([11, 11, 11]);")
+        self.assertScadCode(Cube    (   11          ), "cube([11, 11, 11]);")
+        self.assertScadCode(Cube    (   [11, 22, 33]), "cube([11, 22, 33]);")
+        self.assertScadCode(Sphere  (   11          ), "sphere(11);")
+        self.assertScadCode(Cylinder(Z, 11, 4       ), "cylinder(11.0, r = 4);")
 
     def test_postfix_transform(self):
         cube = Cube(11)
