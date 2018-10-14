@@ -1,7 +1,3 @@
-Next:
-  * Other primitives
-  * Scale(X*2)
-
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
@@ -23,6 +19,8 @@ Object:
              Idea:
                  wheel = Wheel(2).center.at(car.front_left_wheel)
   * [Medium] center flag (and use in examples where appropriate)
+             Probably better: .center() which transforms to the center
+             Probably even better: use the anchor mechanism
   * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])
   * [Low]    Shape (2-dimensional object) and associated primitives
   * [Low]    Investigate part/hole
@@ -43,8 +41,17 @@ CSG:
 Transform:
   * [High]   Scale:
                * scale(X * 2) == scale([2, 1, 1]) (not [2, 0, 0]!)
+             Better:
+               * scale(xyz = [...]) as before
+               * scale(axis, factor)
+               * Separate classes for RotateXyz and RotateAxisFactor
+                   * RotateXyz should not accept a vector, similar to RotateXyz
+                     and RotateYpr
+                 And rotate() frontend
   * [Medium] mirror(along which axis and which point/offset)
   * [Medium] RotateFromTo?
+  * [Medium] Scaling along a vector
+  * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
   * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.
