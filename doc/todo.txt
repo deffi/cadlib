@@ -1,12 +1,14 @@
 Next:
-  * Cylinder with axis
   * Other primitives
   * Scale(X*2)
 
 Library:
-  * [Medium] from cadlib import * sollte alle Kürzel importieren und sonst nix
+  * [Medium] from cadlib import * short import all shortcuts, and only those
 
 Geometry:
+  * [Medium] Vector: static is_valid (to replace isinstance (Vector, list, tuple))
+  * [Medium] Vector: is_zero
+  * [Medium] Vector: is_colinear
   * [Low]    Matrix: Add @classmethods .from_rows (forwards to constructor) and .from_columns (accept list-of-list and vectors)
   * [Low]    Allow creating square matrices from a simple list of values
 
@@ -31,9 +33,9 @@ Object:
   * [Medium] Primitives' __repr__ is not a repr
 
 Primitives:
-  * [High]   Cylinder with axis
-  * [Medium] More primitives
-  * [Medium] More ways of specifying parameters (e. g. radius or diameter; cylinder axis; plane through point)
+  * [Medium] More primitives: cone
+  * [Medium] Plane: through point
+  * [Medium] Sphere: optionally specify diameter
 
 CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
@@ -82,3 +84,6 @@ Model:
   * [Low]    SymbolicConstant for parametric SCAD files
                * Add symbol arithmetic classes
                * Allow in Matrix/Vector
+
+Tests:
+  * [Low]    Primitives (object and transform): test negative numbers

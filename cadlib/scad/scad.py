@@ -58,7 +58,7 @@ class ScadObject():
         return True
 
     def __repr__(self):
-        return "ScadObject({}, {}, {})".format(repr(self._id), repr(self._parameters), repr(self._children))
+        return "ScadObject({}, {}, {}, {})".format(repr(self._id), repr(self._parameters), repr(self._kw_parameters), repr(self._children))
 
     def to_tree(self):
         children_nodes = [child.to_tree() for child in self._children]

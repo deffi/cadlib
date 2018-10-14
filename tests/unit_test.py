@@ -1,6 +1,7 @@
 from unittest import TestCase as OriginalTestCase
 from cadlib.transform.transform import Transform
 from contextlib import contextmanager
+from cadlib.scad.scad import ScadObject
 
 class TestCase(OriginalTestCase):
     def assertEqualToItself(self, x):
@@ -14,6 +15,10 @@ class TestCase(OriginalTestCase):
 
         # ...this makes the implementation very simple:
         yield
+
+
+    def assertScadObject(self, thing, id, parameters, kw_parameters, children = None):
+        self.assertEqual(thing.to_scad(), ScadObject(id, parameters, kw_parameters, children))
 
     def assertScadCode(self, thing, code):
         if isinstance(thing, Transform):

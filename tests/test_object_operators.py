@@ -4,13 +4,14 @@ from cadlib.csg.union import Union
 from cadlib.object.transformed import Transformed
 from cadlib.object.primitives import Sphere, Cube, Cylinder
 from cadlib.transform.primitives.translate import Translate
+from cadlib.geometry.vector import X, Y, Z
 from tests.unit_test import TestCase
 
 class TestOperators(TestCase):
     def test_union(self):
         a = Sphere(2)
         b = Cube([10, 10, 10])
-        c = Cylinder(5, 5)
+        c = Cylinder(Z, 5, 5)
         d = Cube(20)
 
         self.assertEqual(   a +  b                 , Union([a, b      ]))
@@ -25,7 +26,7 @@ class TestOperators(TestCase):
     def test_intersection(self):
         a = Sphere(2)
         b = Cube([10, 10, 10])
-        c = Cylinder(5, 5)
+        c = Cylinder(Z, 5, 5)
         d = Cube(20)
 
         self.assertEqual(    a  *  b               , Intersection([a, b      ]))
@@ -40,7 +41,7 @@ class TestOperators(TestCase):
     def test_difference(self):
         a = Sphere(2)
         b = Cube([10, 10, 10])
-        c = Cylinder(5, 5)
+        c = Cylinder(Z, 5, 5)
         d = Cube(20)
 
         self.assertEqual(    a  -  b               , Difference([a, b      ]))

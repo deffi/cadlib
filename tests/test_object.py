@@ -33,7 +33,7 @@ class TestObject(TestCase):
         self.assertNotEqual     (Sphere(11), Sphere(22)) # Different objects
 
         # Parameters can be specified in different ways, leading to equal objects if they have the same SCAD
-        # representation.
+        # representation. TODO that's no longer decided by the SCAD representation
         self.assertEqual(Cube(11), Cube([11, 11, 11]))
 
         # Objects of different class are not equal

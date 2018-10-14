@@ -38,6 +38,7 @@ class Vector:
             if not isinstance(value, Number):
                 raise TypeError("Vectors must consist of numeric values")
 
+        # TODO convert all to float
         self._values = list(values)
 
     @classmethod

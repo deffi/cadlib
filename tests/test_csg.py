@@ -3,13 +3,14 @@ from cadlib.csg.intersection import Intersection
 from cadlib.csg.difference import Difference
 from cadlib.csg.union import Union
 from cadlib.scad.scad import ScadObject
+from cadlib.geometry.vector import X, Y, Z
 from tests.unit_test import TestCase
 
 class TestCsg(TestCase):
     def test_construction(self):
         sphere   = Sphere(11)
         cube     = Cube([11, 22, 33])
-        cylinder = Cylinder(11, 22)
+        cylinder = Cylinder(Z, 11, 22)
 
         # Empty
         Union([])
@@ -31,7 +32,7 @@ class TestCsg(TestCase):
     def test_equality(self):
         sphere   = Sphere(11)
         cube     = Cube([11, 22, 33])
-        cylinder = Cylinder(11, 22)
+        cylinder = Cylinder(Z, 11, 22)
 
         # A CSG objects is equal to itself
         self.assertEqualToItself(Union       ([]))
@@ -67,7 +68,7 @@ class TestCsg(TestCase):
     def test_to_scad(self):
         sphere   = Sphere(2)
         cube     = Cube([10, 10, 10])
-        cylinder = Cylinder(5, 5)
+        cylinder = Cylinder(Z, 5, 5)
 
         self.assertEqual(Union([sphere, cube, cylinder]).to_scad(), ScadObject("union", None, None, [
             sphere  .to_scad(),

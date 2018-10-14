@@ -3,14 +3,14 @@
   <component name="ChangeListManager">
     <list default="true" id="67564dee-94b0-4c52-b3b9-8cc932601e80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/object/object.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/object.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/transform_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/transform/generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/transform_primitives.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/transform_shortcuts.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/transform/shortcuts.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/util/__init__.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cadlib/geometry/vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/geometry/vector.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/cylinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/cylinder.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cadlib/scad/scad.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/scad/scad.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/doc/todo.txt" beforeDir="false" afterPath="$PROJECT_DIR$/doc/todo.txt" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_transform_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_transform_generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_transform_shortcuts.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_transform_shortcuts.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_csg.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_csg.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/test_object_operators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_object_operators.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/unit_test.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/unit_test.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -32,28 +32,28 @@
       <usages-collector id="statistics.file.extensions.open">
         <counts>
           <entry key="md" value="1" />
-          <entry key="py" value="70" />
-          <entry key="txt" value="1" />
+          <entry key="py" value="104" />
+          <entry key="txt" value="8" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.open">
         <counts>
           <entry key="Markdown" value="1" />
-          <entry key="PLAIN_TEXT" value="1" />
-          <entry key="Python" value="70" />
+          <entry key="PLAIN_TEXT" value="8" />
+          <entry key="Python" value="104" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
-          <entry key="dummy" value="20" />
-          <entry key="py" value="729" />
-          <entry key="txt" value="29" />
+          <entry key="dummy" value="33" />
+          <entry key="py" value="5774" />
+          <entry key="txt" value="383" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
-          <entry key="PLAIN_TEXT" value="49" />
-          <entry key="Python" value="729" />
+          <entry key="PLAIN_TEXT" value="416" />
+          <entry key="Python" value="5774" />
         </counts>
       </usages-collector>
     </session>
@@ -64,12 +64,28 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/cadlib/transform/generators.py">
+        <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/cylinder.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="768">
-              <caret line="137" column="27" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
+            <state relative-caret-position="16">
+              <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
               <folding>
-                <element signature="e#0#26#0" expanded="true" />
+                <marker date="1539513471292" expanded="true" signature="1958:1963" ph="..." />
+                <marker date="1539513471292" expanded="true" signature="2165:2174" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/test_cylinder.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="422">
+              <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+              <folding>
+                <element signature="e#0#11#0" expanded="true" />
+                <marker date="1539513712078" expanded="true" signature="209:884" ph="..." />
+                <marker date="1539513712078" expanded="true" signature="242:251" ph="..." />
+                <marker date="1539513712078" expanded="true" signature="1882:1891" ph="..." />
               </folding>
             </state>
           </provider>
@@ -78,8 +94,8 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/doc/todo.txt">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="206">
-              <caret line="44" column="14" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="14" />
+            <state relative-caret-position="185">
+              <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -98,7 +114,18 @@
       <find>transformed</find>
       <find>to_vector</find>
       <find>tp.</find>
+      <find>both</find>
+      <find>number</find>
+      <find>nothingraised</find>
+      <find>zero</find>
+      <find>length</find>
+      <find>scadobjec</find>
+      <find>todo</find>
+      <find>cylinder</find>
     </findStrings>
+    <replaceStrings>
+      <replace />
+    </replaceStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -107,12 +134,9 @@
     <option name="CHANGED_PATHS">
       <list>
         <option value="$PROJECT_DIR$/meh.py" />
-        <option value="$PROJECT_DIR$/tests/test_csg.py" />
         <option value="$PROJECT_DIR$/tests/unittest.py" />
         <option value="$PROJECT_DIR$/tests/test_matrix.py" />
-        <option value="$PROJECT_DIR$/tests/test_object.py" />
         <option value="$PROJECT_DIR$/tests/test_scad_object.py" />
-        <option value="$PROJECT_DIR$/tests/test_object_operators.py" />
         <option value="$PROJECT_DIR$/tests/test_transform.py" />
         <option value="$PROJECT_DIR$/tests/test_transform_generators.py" />
         <option value="$PROJECT_DIR$/tests/test_transform_shortcuts.py" />
@@ -129,15 +153,23 @@
         <option value="$PROJECT_DIR$/cadlib/transform/chained.py" />
         <option value="$PROJECT_DIR$/cadlib/transform/transform_shortcuts.py" />
         <option value="$PROJECT_DIR$/cadlib/geometry/__init__.py" />
-        <option value="$PROJECT_DIR$/cadlib/geometry/vector.py" />
         <option value="$PROJECT_DIR$/cadlib/util/number.py" />
         <option value="$PROJECT_DIR$/tests/test_transform_primitives.py" />
         <option value="$PROJECT_DIR$/cadlib/transform/primitives/__init__.py" />
         <option value="$PROJECT_DIR$/cadlib/transform/transform_primitives.py" />
-        <option value="$PROJECT_DIR$/tests/unit_test.py" />
         <option value="$PROJECT_DIR$/cadlib/transform/transform_generators.py" />
         <option value="$PROJECT_DIR$/cadlib/util/__init__.py" />
         <option value="$PROJECT_DIR$/cadlib/transform/generators.py" />
+        <option value="$PROJECT_DIR$/tests/test_object.py" />
+        <option value="$PROJECT_DIR$/tests/test_object_operators.py" />
+        <option value="$PROJECT_DIR$/tests/test_csg.py" />
+        <option value="$PROJECT_DIR$/tests/test_object_primitives.py" />
+        <option value="$PROJECT_DIR$/cadlib/geometry/vector.py" />
+        <option value="$PROJECT_DIR$/cadlib/scad/scad.py" />
+        <option value="$PROJECT_DIR$/cadlib/transform/primitives/rotate_axis_agle.py" />
+        <option value="$PROJECT_DIR$/tests/unit_test.py" />
+        <option value="$PROJECT_DIR$/cadlib/object/primitives/cylinder.py" />
+        <option value="$PROJECT_DIR$/tests/test_cylinder.py" />
         <option value="$PROJECT_DIR$/doc/todo.txt" />
       </list>
     </option>
@@ -172,26 +204,19 @@
               <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="geometry" type="462c0819:PsiDirectoryNode" />
+              <item name="object" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="transform" type="462c0819:PsiDirectoryNode" />
-            </path>
-            <path>
-              <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
-              <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="transform" type="462c0819:PsiDirectoryNode" />
+              <item name="object" type="462c0819:PsiDirectoryNode" />
               <item name="primitives" type="462c0819:PsiDirectoryNode" />
             </path>
             <path>
               <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="cadlib" type="462c0819:PsiDirectoryNode" />
-              <item name="util" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -201,8 +226,8 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;vector&#9;null&#9;null&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
-    <property name="settings.editor.selected.configurable" value="project.propVCSSupport.Confirmation" />
+    <property name="SearchEverywhereHistoryKey" value="sphere&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/sphere.py&#10;todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;scado&#9;null&#9;null&#10;rotate&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_axis_agle.py&#10;object&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/object.py&#10;test_scad&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;scad&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/scad/scad.py&#10;unit_te&#9;FILE&#9;file://C:/martin/src/cadlib/tests/unit_test.py&#10;scadob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;vector&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;vecto&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;nothingraised&#9;null&#9;null&#10;cube&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cube.py&#10;test_ob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_object.py&#10;ge&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/generators.py&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
+    <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -216,8 +241,8 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Python tests.Unittests in tests">
-    <configuration name="meh" type="PythonConfigurationType" factoryName="Python" temporary="true">
+  <component name="RunManager" selected="Python tests.Unittests for test_cylinder.TestCylinder.test_to_scad_code">
+    <configuration name="vector" type="PythonConfigurationType" factoryName="Python" temporary="true">
       <module name="cadlib" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
@@ -225,11 +250,11 @@
         <env name="PYTHONUNBUFFERED" value="1" />
       </envs>
       <option name="SDK_HOME" value="" />
-      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/cadlib/geometry" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/meh.py" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/cadlib/geometry/vector.py" />
       <option name="PARAMETERS" value="" />
       <option name="SHOW_COMMAND_LINE" value="false" />
       <option name="EMULATE_TERMINAL" value="false" />
@@ -238,25 +263,46 @@
       <option name="INPUT_FILE" value="" />
       <method v="2" />
     </configuration>
-    <configuration name="test_csg" type="PythonConfigurationType" factoryName="Python" temporary="true">
+    <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
       <module name="cadlib" />
       <option name="INTERPRETER_OPTIONS" value="" />
       <option name="PARENT_ENVS" value="true" />
-      <envs>
-        <env name="PYTHONUNBUFFERED" value="1" />
-      </envs>
       <option name="SDK_HOME" value="" />
       <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
       <option name="IS_MODULE_SDK" value="true" />
       <option name="ADD_CONTENT_ROOTS" value="true" />
       <option name="ADD_SOURCE_ROOTS" value="true" />
-      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/tests/test_csg.py" />
-      <option name="PARAMETERS" value="" />
-      <option name="SHOW_COMMAND_LINE" value="false" />
-      <option name="EMULATE_TERMINAL" value="false" />
-      <option name="MODULE_MODE" value="false" />
-      <option name="REDIRECT_INPUT" value="false" />
-      <option name="INPUT_FILE" value="" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_cylinder.TestCylinder.test_to_scad&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="cadlib" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;test_cylinder.TestCylinder.test_to_scad_code&quot;" />
+      <option name="_new_targetType" value="&quot;PYTHON&quot;" />
+      <method v="2" />
+    </configuration>
+    <configuration name="Unittests in test_cylinder.py" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
+      <module name="cadlib" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/tests" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="_new_additionalArguments" value="&quot;&quot;" />
+      <option name="_new_target" value="&quot;$PROJECT_DIR$/tests/test_cylinder.py&quot;" />
+      <option name="_new_targetType" value="&quot;PATH&quot;" />
       <method v="2" />
     </configuration>
     <configuration name="Unittests in tests" type="tests" factoryName="Unittests" temporary="true" nameIsGenerated="true">
@@ -274,15 +320,19 @@
       <method v="2" />
     </configuration>
     <list>
-      <item itemvalue="Python.meh" />
       <item itemvalue="Python tests.Unittests in tests" />
-      <item itemvalue="Python.test_csg" />
+      <item itemvalue="Python tests.Unittests in test_cylinder.py" />
+      <item itemvalue="Python.vector" />
+      <item itemvalue="Python tests.Unittests for test_cylinder.TestCylinder.test_to_scad" />
+      <item itemvalue="Python tests.Unittests for test_cylinder.TestCylinder.test_to_scad_code" />
     </list>
     <recent_temporary>
       <list>
+        <item itemvalue="Python tests.Unittests for test_cylinder.TestCylinder.test_to_scad_code" />
+        <item itemvalue="Python tests.Unittests in test_cylinder.py" />
+        <item itemvalue="Python tests.Unittests for test_cylinder.TestCylinder.test_to_scad" />
+        <item itemvalue="Python.vector" />
         <item itemvalue="Python tests.Unittests in tests" />
-        <item itemvalue="Python.test_csg" />
-        <item itemvalue="Python.meh" />
       </list>
     </recent_temporary>
   </component>
@@ -300,35 +350,35 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 11m 21s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 32m 27s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 11m 30s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 33m 07s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 12m 13s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 36m 25s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 12m 52s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 36m 56s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 13m 32s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 37m 51s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 16m 48s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 38m 12s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 17m 21s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 40m 14s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 19m 34s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 40m 17s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 20m 04s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 41m 37s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.13 at 21h 20m 10s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
+    <history-entry file="Unittests_for_test_cylinder_TestCylinder_test_to_scad_code - 2018.10.14 at 12h 41m 52s.xml">
+      <configuration name="Unittests for test_cylinder.TestCylinder.test_to_scad_code" configurationId="tests" />
     </history-entry>
   </component>
   <component name="TodoView">
@@ -344,23 +394,23 @@
     <frame x="-7" y="-7" width="1550" height="934" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5947955" visible="true" weight="0.24983476" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.5947955" visible="true" weight="0.19798657" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.40520447" side_tool="true" weight="0.24983476" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
-      <window_info anchor="bottom" id="Run" order="2" weight="0.24064837" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.27057356" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
-      <window_info active="true" anchor="bottom" id="TODO" order="6" visible="true" weight="0.32917705" />
+      <window_info anchor="bottom" id="TODO" order="6" weight="0.32917705" />
       <window_info anchor="bottom" id="Version Control" order="7" show_stripe_button="false" />
       <window_info anchor="bottom" id="Terminal" order="8" />
       <window_info anchor="bottom" id="Event Log" order="9" side_tool="true" />
       <window_info anchor="bottom" id="Python Console" order="10" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
-      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" visible="true" weight="0.24966443" />
     </layout>
   </component>
   <component name="VcsContentAnnotationSettings">
@@ -389,20 +439,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" column="16" selection-start-line="1" selection-end-line="2" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="12" selection-start-line="3" selection-start-column="12" selection-end-line="3" selection-end-column="12" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_scad_object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" selection-start-line="1" selection-end-line="1" />
         </state>
       </provider>
     </entry>
@@ -437,13 +473,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="16">
           <caret line="1" lean-forward="true" selection-start-line="1" selection-end-line="1" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_object_operators.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="12" selection-start-line="1" selection-start-column="12" selection-end-line="1" selection-end-column="12" />
         </state>
       </provider>
     </entry>
@@ -490,9 +519,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/object/__init__.py">
-      <provider selected="true" editor-type-id="text-editor" />
-    </entry>
     <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/__init__.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -513,23 +539,6 @@
           <folding>
             <element signature="e#0#39#0" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/object/object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2224">
-          <caret line="139" lean-forward="true" selection-start-line="139" selection-end-line="139" />
-          <folding>
-            <element signature="e#0#33#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/test_csg.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="48">
-          <caret line="3" column="34" lean-forward="true" selection-start-line="3" selection-start-column="34" selection-end-line="3" selection-end-column="34" />
         </state>
       </provider>
     </entry>
@@ -570,16 +579,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/geometry/vector.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="96">
-          <caret line="6" selection-start-line="6" selection-end-line="6" />
-          <folding>
-            <element signature="e#0#11#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_transform_primitives.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="334">
@@ -607,16 +606,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/unit_test.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="352">
-          <caret line="22" lean-forward="true" selection-start-line="22" selection-end-line="22" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/cadlib/transform/transform_primitives.py">
       <provider selected="true" editor-type-id="text-editor" />
     </entry>
@@ -634,20 +623,156 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/transform/generators.py">
+    <entry file="file://$PROJECT_DIR$/cadlib/util/table.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/cube.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="768">
-          <caret line="137" column="27" selection-start-line="137" selection-start-column="27" selection-end-line="137" selection-end-column="27" />
+        <state>
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="430">
+          <caret line="35" column="48" selection-start-line="35" selection-start-column="48" selection-end-line="35" selection-end-column="48" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_csg.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="414">
+          <caret line="90" column="81" selection-start-line="90" selection-start-column="73" selection-end-line="90" selection-end-column="81" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_object_operators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="186">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
+          <folding>
+            <element signature="e#0#48#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/geometry/vector.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="225" lean-forward="true" selection-start-line="225" selection-end-line="225" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_scad_object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="448">
+          <caret line="186" lean-forward="true" selection-start-line="186" selection-end-line="186" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/object.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="111" lean-forward="true" selection-start-line="111" selection-end-line="111" />
+          <folding>
+            <element signature="e#0#33#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/scad/scad.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="304">
+          <caret line="69" column="37" lean-forward="true" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/transform/primitives/rotate_axis_agle.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="416">
+          <caret line="26" selection-start-line="26" selection-end-line="26" />
+          <folding>
+            <element signature="e#0#37#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/unit_test.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="320">
+          <caret line="20" column="67" lean-forward="true" selection-start-line="20" selection-start-column="67" selection-end-line="20" selection-end-column="67" />
+          <folding>
+            <element signature="e#0#49#0" expanded="true" />
+            <marker date="1539512584278" expanded="true" signature="618:719" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/transform/generators.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="122">
+          <caret line="13" column="4" selection-start-line="13" selection-start-column="4" selection-end-line="13" selection-end-column="4" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/cylinder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="16">
+          <caret line="1" column="33" selection-start-line="1" selection-start-column="33" selection-end-line="1" selection-end-column="33" />
+          <folding>
+            <marker date="1539513471292" expanded="true" signature="1958:1963" ph="..." />
+            <marker date="1539513471292" expanded="true" signature="2165:2174" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/test_cylinder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="422">
+          <caret line="97" lean-forward="true" selection-start-line="97" selection-end-line="97" />
+          <folding>
+            <element signature="e#0#11#0" expanded="true" />
+            <marker date="1539513712078" expanded="true" signature="209:884" ph="..." />
+            <marker date="1539513712078" expanded="true" signature="242:251" ph="..." />
+            <marker date="1539513712078" expanded="true" signature="1882:1891" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/doc/todo.txt">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="206">
-          <caret line="44" column="14" selection-start-line="44" selection-start-column="14" selection-end-line="44" selection-end-column="14" />
+        <state relative-caret-position="185">
+          <caret line="35" column="34" selection-start-line="35" selection-start-column="34" selection-end-line="35" selection-end-column="34" />
         </state>
       </provider>
     </entry>
