@@ -1,4 +1,4 @@
-from cadlib.geometry.vector import Vector
+from cadlib.geometry.vector import Vector, to_vector
 from cadlib.geometry.matrix import Matrix
 from tests.unit_test import TestCase
 
@@ -352,3 +352,28 @@ class TestVector(TestCase):
         with self.assertRaises(ValueError): Vector()       .normal()
         with self.assertRaises(ValueError): Vector(1)      .normal()
         with self.assertRaises(ValueError): Vector(0, 0, 0).normal()
+
+
+    #############
+    ## Helpers ##
+    #############
+
+    def test_to_vector(self):
+        # Regular call without length check
+        self.assertEqual(to_vector(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
+        self.assertEqual(to_vector(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
+        self.assertEqual(to_vector(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
+
+        # Empty
+        self.assertEqual(to_vector([], "dummy", None), Vector())
+
+        # Length check
+        self.assertEqual(                   to_vector([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
+        with self.assertRaises(ValueError): to_vector([1, 2, 3], "dummy", 4)                   # Failure
+
+        # Invalid values
+        with self.assertRaises(TypeError ): to_vector(None       , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector(1          , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector(""         , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): to_vector([1, 2, "3"], "dummy", None)

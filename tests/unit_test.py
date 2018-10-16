@@ -20,6 +20,9 @@ class TestCase(OriginalTestCase):
     def assertScadObject(self, thing, id, parameters, kw_parameters, children = None):
         self.assertEqual(thing.to_scad(), ScadObject(id, parameters, kw_parameters, children))
 
+    def assertScadObjectTarget(self, thing, target, id, parameters, kw_parameters, children = None):
+        self.assertEqual(thing.to_scad(target), ScadObject(id, parameters, kw_parameters, children))
+
     def assertScadCode(self, thing, code):
         if isinstance(thing, Transform):
             self.assertEqual(thing.to_scad(None).to_code(inline=True, simplify=True), code)

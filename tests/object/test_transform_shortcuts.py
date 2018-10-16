@@ -5,6 +5,8 @@ from cadlib.transform.primitives.rotate_ypr import RotateYpr
 from cadlib.transform.shortcuts import *
 from tests.unit_test import TestCase
 
+# TODO merge with test_object
+
 class TestTransform(TestCase):
     def test_translate_shortcuts(self):
         self.assertEqual(up     (1), Translate([ 0,  0,  1]))
