@@ -3,28 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="67564dee-94b0-4c52-b3b9-8cc932601e80" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/geometry/__init__.py" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/geometry/matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/util/matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/geometry/vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/util/vector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/cylinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/cylinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/plane.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/plane.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/slice.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/slice.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/transform/generators.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/primitives/rotate_axis_agle.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/transform/primitives/rotate_axis_agle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/transform/primitives/translate.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/transform/primitives/translate.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/util/__init__.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/util/__init__.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/util/number.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/util/number.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_cube.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_cube.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_cylinder.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_cylinder.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/tests/object/test_sphere.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_sphere.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_transformed.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_transformed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_csg.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/test_csg.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_matrix.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/util/test_matrix.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_number.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/util/test_number.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/test_vector.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/util/test_vector.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/transform/test_rotate_axis_angle.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_rotate_axis_angle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/transform/test_transform_generators.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_transform_generators.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,7 +28,7 @@
         <counts>
           <entry key="cfg" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="187" />
+          <entry key="py" value="190" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
@@ -56,20 +36,20 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="187" />
+          <entry key="Python" value="190" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="33" />
-          <entry key="py" value="8651" />
+          <entry key="py" value="8814" />
           <entry key="txt" value="878" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="911" />
-          <entry key="Python" value="8651" />
+          <entry key="Python" value="8814" />
         </counts>
       </usages-collector>
     </session>
@@ -79,13 +59,25 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/test_csg.py">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/object/test_sphere.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-21">
-              <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+            <state relative-caret-position="96">
+              <caret line="6" selection-start-line="6" selection-end-line="6" />
               <folding>
-                <element signature="e#0#59#0" expanded="true" />
+                <element signature="e#0#36#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="64">
+              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -118,11 +110,15 @@
       <find>geometry</find>
       <find>.geometry</find>
       <find>cadlib.geometry</find>
+      <find>TODO</find>
     </findStrings>
     <replaceStrings>
       <replace />
       <replace>cadlib.util</replace>
     </replaceStrings>
+    <dirStrings>
+      <dir>C:\martin\src\cadlib\tests</dir>
+    </dirStrings>
   </component>
   <component name="Git.Settings">
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
@@ -130,7 +126,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cadlib/csg/difference.py" />
         <option value="$PROJECT_DIR$/cadlib/csg/union.py" />
         <option value="$PROJECT_DIR$/cadlib/csg/csg.py" />
         <option value="$PROJECT_DIR$/cadlib/object/object.py" />
@@ -154,7 +149,6 @@
         <option value="$PROJECT_DIR$/doc/todo.txt" />
         <option value="$PROJECT_DIR$/tests/object/test_cylinder.py" />
         <option value="$PROJECT_DIR$/tests/test_object_operators.py" />
-        <option value="$PROJECT_DIR$/tests/object/test_sphere.py" />
         <option value="$PROJECT_DIR$/tests/object/test_cube.py" />
         <option value="$PROJECT_DIR$/tests/object/test_object.py" />
         <option value="$PROJECT_DIR$/tests/object/test_transformed.py" />
@@ -181,6 +175,8 @@
         <option value="$PROJECT_DIR$/tests/util/__init__.py" />
         <option value="$PROJECT_DIR$/cadlib/util/__init__.py" />
         <option value="$PROJECT_DIR$/tests/util/test_util.py" />
+        <option value="$PROJECT_DIR$/tests/object/test_sphere.py" />
+        <option value="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" />
       </list>
     </option>
   </component>
@@ -223,7 +219,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="scale&#9;null&#9;null&#10;test_cube&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_cube.py&#10;test_scad&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;object&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/object.py&#10;test_trans&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_transform_primitives.py&#10;todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;sphere&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/sphere.py&#10;scado&#9;null&#9;null&#10;rotate&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_axis_agle.py&#10;scad&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/scad/scad.py&#10;unit_te&#9;FILE&#9;file://C:/martin/src/cadlib/tests/unit_test.py&#10;scadob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;vector&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;vecto&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;nothingraised&#9;null&#9;null&#10;cube&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cube.py&#10;test_ob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_object.py&#10;ge&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/generators.py&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
+    <property name="SearchEverywhereHistoryKey" value="cylind&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cylinder.py&#10;sphere&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/sphere.py&#10;scale&#9;null&#9;null&#10;test_cube&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_cube.py&#10;test_scad&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;object&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/object.py&#10;test_trans&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_transform_primitives.py&#10;todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;scado&#9;null&#9;null&#10;rotate&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_axis_agle.py&#10;scad&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/scad/scad.py&#10;unit_te&#9;FILE&#9;file://C:/martin/src/cadlib/tests/unit_test.py&#10;scadob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;vector&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;vecto&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;nothingraised&#9;null&#9;null&#10;cube&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cube.py&#10;test_ob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_object.py&#10;ge&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/generators.py&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
@@ -355,18 +351,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 20m 52s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 21m 02s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 21m 12s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 21m 58s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 28m 24s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
@@ -385,6 +369,18 @@
     <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 31m 22s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 35m 23s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 41m 03s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 41m 07s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 41m 08s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
   </component>
   <component name="TodoView">
     <todo-panel id="selected-file">
@@ -399,12 +395,12 @@
     <frame x="-7" y="-7" width="1550" height="934" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info active="true" content_ui="combo" id="Project" order="0" sideWeight="0.65360504" visible="true" weight="0.18968935" />
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.65360504" visible="true" weight="0.18968935" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.346395" side_tool="true" weight="0.18968935" />
       <window_info anchor="bottom" id="Message" order="0" />
       <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
-      <window_info anchor="bottom" id="Run" order="2" visible="true" weight="0.20448878" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20448878" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -432,15 +428,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="304">
           <caret line="69" column="37" lean-forward="true" selection-start-line="69" selection-start-column="37" selection-end-line="69" selection-end-column="37" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state>
-          <folding>
-            <element signature="e#0#39#0" expanded="true" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -508,16 +495,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_object_operators.py" />
-    <entry file="file://$PROJECT_DIR$/tests/object/test_sphere.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="160">
-          <caret line="10" selection-start-line="10" selection-end-line="10" />
-          <folding>
-            <element signature="e#16#52#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/object/test_cylinder.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="272">
@@ -745,17 +722,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/cylinder.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="16">
-          <caret line="1" column="16" selection-start-line="1" selection-start-column="16" selection-end-line="1" selection-end-column="16" />
-          <folding>
-            <marker date="1539800503193" expanded="true" signature="1954:1959" ph="..." />
-            <marker date="1539800503193" expanded="true" signature="2161:2170" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/doc/todo.txt">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="48">
@@ -823,10 +789,42 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/test_csg.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-21">
-          <caret line="61" lean-forward="true" selection-start-line="61" selection-end-line="61" />
+        <state relative-caret-position="539">
+          <caret line="92" lean-forward="true" selection-start-line="92" selection-end-line="92" />
           <folding>
             <element signature="e#0#59#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/cylinder.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="311">
+          <caret line="47" selection-start-line="47" selection-end-line="47" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+            <marker date="1539800503193" expanded="true" signature="1954:1959" ph="..." />
+            <marker date="1539800503193" expanded="true" signature="2161:2170" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/object/test_sphere.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="96">
+          <caret line="6" selection-start-line="6" selection-end-line="6" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
           </folding>
         </state>
       </provider>

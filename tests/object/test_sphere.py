@@ -1,14 +1,14 @@
 from tests.unit_test import TestCase
 from cadlib.object.primitives import Sphere
-# from cadlib.util.vector import X, Y, Z
-# from cadlib.scad.scad import ScadObject
+
 
 class TestSphere(TestCase):
     def test_construction(self):
         # Radius/diameter
-        with self.assertNothingRaised(): sphere = Sphere(11)
-        # TODO diameter
-#
+        with self.assertNothingRaised(): sphere = Sphere(1)
+        with self.assertNothingRaised(): sphere = Sphere(r = 1)
+        with self.assertNothingRaised(): sphere = Sphere(d = 2)
+
     def test_equality(self):
         # Same object
         self.assertEqualToItself(Sphere(11))
@@ -20,7 +20,8 @@ class TestSphere(TestCase):
         self.assertNotEqual (Sphere(11), Sphere(22))
 
         # Equal objects from different specifications
-        # TODO
+        self.assertEqual(Sphere(1)  , Sphere(r=1))
+        self.assertEqual(Sphere(d=2), Sphere(r=1))
 
     def test_to_scad(self):
         # Primitives
