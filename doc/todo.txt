@@ -3,7 +3,6 @@ Library:
 
 Geometry:
   * [Medium] Vector: static is_valid (to replace isinstance (Vector, list, tuple))
-  * [Medium] Vector: is_zero
   * [Medium] Vector: is_colinear
   * [Low]    Matrix: Add @classmethods .from_rows (forwards to constructor) and .from_columns (accept list-of-list and vectors)
   * [Low]    Allow creating square matrices from a simple list of values
@@ -33,24 +32,22 @@ Object:
 Primitives:
   * [Medium] More primitives: cone
   * [Medium] Plane: through point
-  * [Medium] Sphere: optionally specify diameter
 
 CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
-  * [High]   Scale:
+  * [High]   Scale: shorter notation for scaling along a single axis
                * scale(X * 2) == scale([2, 1, 1]) (not [2, 0, 0]!)
              Better:
                * scale(xyz = [...]) as before
                * scale(axis, factor)
-               * Separate classes for RotateXyz and RotateAxisFactor
-                   * RotateXyz should not accept a vector, similar to RotateXyz
+               * Separate classes for ScaleXyz and ScaleAxisFactor
+                   * ScaleXyz should not accept a vector, similar to RotateXyz
                      and RotateYpr
-                 And rotate() frontend
+                 And scale() frontend
   * [Medium] mirror(along which axis and which point/offset)
   * [Medium] RotateFromTo?
-  * [Medium] Scaling along a vector
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
