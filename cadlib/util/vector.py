@@ -60,7 +60,6 @@ class Vector:
     def dimensions(self):
         return len(self._values)
 
-    # TODO Unit test
     @property
     def is_zero(self):
         return all(x is 0 for x in self._values)
