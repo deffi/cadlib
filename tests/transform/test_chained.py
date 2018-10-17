@@ -59,9 +59,7 @@ class TestChained(TestCase):
         s = Scale    ([1, 2, -1])
         t = Translate([30, 20, 10])
 
-        # A chained transform (of None) maps to a non-branching tree.
-        # TODO that's actually two tests: multiplication and to_scald
-        self.assertEqual((r * s * t).to_scad(None),
+        self.assertEqual(Chained([r, s, t]).to_scad(None),
             ScadObject("rotate", [[60, 30, 15]], None, [
                 ScadObject("scale", [[1, 2, -1]], None, [
                     ScadObject("translate", [[30, 20, 10]], None, None)

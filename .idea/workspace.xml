@@ -2,10 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67564dee-94b0-4c52-b3b9-8cc932601e80" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_transformed.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_transformed.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/transform/test_rotate_axis_angle.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_rotate_axis_angle.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/transform/test_rotate_ypr.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_rotate_ypr.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/transform/test_chained.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_chained.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -29,7 +26,7 @@
         <counts>
           <entry key="cfg" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="213" />
+          <entry key="py" value="215" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
@@ -37,20 +34,20 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="213" />
+          <entry key="Python" value="215" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="33" />
-          <entry key="py" value="10659" />
+          <entry key="py" value="10682" />
           <entry key="txt" value="878" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="911" />
-          <entry key="Python" value="10659" />
+          <entry key="Python" value="10682" />
         </counts>
       </usages-collector>
     </session>
@@ -61,12 +58,27 @@
   <component name="FileEditorManager">
     <leaf>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/tests/object/test_transformed.py">
+        <entry file="file://$PROJECT_DIR$/tests/transform/test_chained.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="127">
-              <caret line="28" selection-start-line="28" selection-end-line="28" />
+            <state relative-caret-position="332">
+              <caret line="61" selection-start-line="61" selection-end-line="61" />
               <folding>
                 <element signature="e#0#36#0" expanded="true" />
+                <marker date="1539805430960" expanded="true" signature="485:494" ph="..." />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="176">
+              <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+              <folding>
+                <element signature="e#0#59#0" expanded="true" />
+                <marker date="1539802684719" expanded="true" signature="387:391" ph="..." />
+                <marker date="1539802684719" expanded="true" signature="417:426" ph="..." />
               </folding>
             </state>
           </provider>
@@ -139,7 +151,6 @@
         <option value="$PROJECT_DIR$/tests/object/__init__.py" />
         <option value="$PROJECT_DIR$/tests/transform/__init__.py" />
         <option value="$PROJECT_DIR$/tests/unit_test.py" />
-        <option value="$PROJECT_DIR$/tests/transform/test_chained.py" />
         <option value="$PROJECT_DIR$/tests/transform/test_rotate_xyz.py" />
         <option value="$PROJECT_DIR$/tests/transform/test_translate.py" />
         <option value="$PROJECT_DIR$/tests/geometry.py" />
@@ -167,6 +178,7 @@
         <option value="$PROJECT_DIR$/tests/transform/test_rotate_axis_angle.py" />
         <option value="$PROJECT_DIR$/tests/transform/test_rotate_ypr.py" />
         <option value="$PROJECT_DIR$/tests/object/test_transformed.py" />
+        <option value="$PROJECT_DIR$/tests/transform/test_chained.py" />
       </list>
     </option>
   </component>
@@ -227,7 +239,7 @@
     </panes>
   </component>
   <component name="PropertiesComponent">
-    <property name="SearchEverywhereHistoryKey" value="test_transf&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_transform.py&#10;chained&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_chained.py&#10;test_object&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_object.py&#10;transform_gen&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_transform_generators.py&#10;transform_sho&#9;null&#9;null&#10;test_scale&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_scale.py&#10;test_sph&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_sphere.py&#10;test_transla&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_translate.py&#10;rotat&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_ypr.py&#10;scale&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/scale.py&#10;cylind&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cylinder.py&#10;sphere&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/sphere.py&#10;test_cube&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_cube.py&#10;test_scad&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;object&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/object.py&#10;test_trans&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_transform_primitives.py&#10;todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;scado&#9;null&#9;null&#10;rotate&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_axis_agle.py&#10;scad&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/scad/scad.py&#10;unit_te&#9;FILE&#9;file://C:/martin/src/cadlib/tests/unit_test.py&#10;scadob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;vector&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;vecto&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;nothingraised&#9;null&#9;null&#10;cube&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cube.py&#10;test_ob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_object.py&#10;ge&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/generators.py&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
+    <property name="SearchEverywhereHistoryKey" value="test_tran&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_transform.py&#10;test_transf&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_transform.py&#10;chained&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_chained.py&#10;test_object&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_object.py&#10;transform_gen&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_transform_generators.py&#10;transform_sho&#9;null&#9;null&#10;test_scale&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_scale.py&#10;test_sph&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_sphere.py&#10;test_transla&#9;FILE&#9;file://C:/martin/src/cadlib/tests/transform/test_translate.py&#10;rotat&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_ypr.py&#10;scale&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/scale.py&#10;cylind&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cylinder.py&#10;sphere&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/sphere.py&#10;test_cube&#9;FILE&#9;file://C:/martin/src/cadlib/tests/object/test_cube.py&#10;test_scad&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;object&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/object.py&#10;test_trans&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_transform_primitives.py&#10;todo&#9;FILE&#9;file://C:/martin/src/cadlib/doc/todo.txt&#10;scado&#9;null&#9;null&#10;rotate&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/primitives/rotate_axis_agle.py&#10;scad&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/scad/scad.py&#10;unit_te&#9;FILE&#9;file://C:/martin/src/cadlib/tests/unit_test.py&#10;scadob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_scad_object.py&#10;vector&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;vecto&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/geometry/vector.py&#10;nothingraised&#9;null&#9;null&#10;cube&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/object/primitives/cube.py&#10;test_ob&#9;FILE&#9;file://C:/martin/src/cadlib/tests/test_object.py&#10;ge&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/generators.py&#10;chain&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/chained.py&#10;tra&#9;FILE&#9;file://C:/martin/src/cadlib/cadlib/transform/transform.py" />
     <property name="settings.editor.selected.configurable" value="preferences.sourceCode" />
   </component>
   <component name="RecentsManager">
@@ -359,12 +371,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 27m 26s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 28m 05s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 28m 55s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
@@ -387,6 +393,12 @@
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 35m 00s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 37m 03s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 21h 42m 36s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
   </component>
@@ -789,29 +801,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/transform/test_chained.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="176">
-          <caret line="11" selection-start-line="11" selection-end-line="11" />
-          <folding>
-            <element signature="e#0#36#0" expanded="true" />
-            <marker date="1539722621095" expanded="true" signature="485:494" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="480">
-          <caret line="52" lean-forward="true" selection-start-line="52" selection-end-line="52" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <marker date="1539802684719" expanded="true" signature="387:391" ph="..." />
-            <marker date="1539802684719" expanded="true" signature="417:426" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/transform/test_rotate_ypr.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="444">
@@ -824,10 +813,33 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/tests/object/test_transformed.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="127">
-          <caret line="28" selection-start-line="28" selection-end-line="28" />
+        <state relative-caret-position="367">
+          <caret line="43" column="24" selection-start-line="43" selection-start-column="24" selection-end-line="43" selection-end-column="24" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="176">
+          <caret line="33" lean-forward="true" selection-start-line="33" selection-end-line="33" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <marker date="1539802684719" expanded="true" signature="387:391" ph="..." />
+            <marker date="1539802684719" expanded="true" signature="417:426" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/transform/test_chained.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="332">
+          <caret line="61" selection-start-line="61" selection-end-line="61" />
+          <folding>
+            <element signature="e#0#36#0" expanded="true" />
+            <marker date="1539805430960" expanded="true" signature="485:494" ph="..." />
           </folding>
         </state>
       </provider>
