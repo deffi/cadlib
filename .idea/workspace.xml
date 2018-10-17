@@ -2,9 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="67564dee-94b0-4c52-b3b9-8cc932601e80" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" beforeDir="false" afterPath="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tests/object/test_sphere.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_sphere.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/object/test_object.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/object/test_object.py" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/object/test_transform_shortcuts.py" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/tests/transform/test_transform.py" beforeDir="false" afterPath="$PROJECT_DIR$/tests/transform/test_transform.py" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,7 +28,7 @@
         <counts>
           <entry key="cfg" value="1" />
           <entry key="md" value="1" />
-          <entry key="py" value="190" />
+          <entry key="py" value="193" />
           <entry key="txt" value="10" />
         </counts>
       </usages-collector>
@@ -36,20 +36,20 @@
         <counts>
           <entry key="Markdown" value="1" />
           <entry key="PLAIN_TEXT" value="11" />
-          <entry key="Python" value="190" />
+          <entry key="Python" value="193" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.extensions.edit">
         <counts>
           <entry key="dummy" value="33" />
-          <entry key="py" value="8814" />
+          <entry key="py" value="9175" />
           <entry key="txt" value="878" />
         </counts>
       </usages-collector>
       <usages-collector id="statistics.file.types.edit">
         <counts>
           <entry key="PLAIN_TEXT" value="911" />
-          <entry key="Python" value="8814" />
+          <entry key="Python" value="9175" />
         </counts>
       </usages-collector>
     </session>
@@ -59,25 +59,15 @@
   </component>
   <component name="FileEditorManager">
     <leaf>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/tests/object/test_sphere.py">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="96">
-              <caret line="6" selection-start-line="6" selection-end-line="6" />
-              <folding>
-                <element signature="e#0#36#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
       <file pinned="false" current-in-tab="true">
-        <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+        <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="64">
-              <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+            <state relative-caret-position="444">
+              <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
               <folding>
-                <element signature="e#0#39#0" expanded="true" />
+                <element signature="e#0#59#0" expanded="true" />
+                <marker date="1539802684719" expanded="true" signature="387:391" ph="..." />
+                <marker date="1539802684719" expanded="true" signature="417:426" ph="..." />
               </folding>
             </state>
           </provider>
@@ -126,8 +116,6 @@
   <component name="IdeDocumentHistory">
     <option name="CHANGED_PATHS">
       <list>
-        <option value="$PROJECT_DIR$/cadlib/csg/union.py" />
-        <option value="$PROJECT_DIR$/cadlib/csg/csg.py" />
         <option value="$PROJECT_DIR$/cadlib/object/object.py" />
         <option value="$PROJECT_DIR$/cadlib/object/primitives.py" />
         <option value="$PROJECT_DIR$/cadlib/object/primitives/__init__.py" />
@@ -150,7 +138,6 @@
         <option value="$PROJECT_DIR$/tests/object/test_cylinder.py" />
         <option value="$PROJECT_DIR$/tests/test_object_operators.py" />
         <option value="$PROJECT_DIR$/tests/object/test_cube.py" />
-        <option value="$PROJECT_DIR$/tests/object/test_object.py" />
         <option value="$PROJECT_DIR$/tests/object/test_transformed.py" />
         <option value="$PROJECT_DIR$/tests/object/__init__.py" />
         <option value="$PROJECT_DIR$/tests/transform/__init__.py" />
@@ -177,6 +164,9 @@
         <option value="$PROJECT_DIR$/tests/util/test_util.py" />
         <option value="$PROJECT_DIR$/tests/object/test_sphere.py" />
         <option value="$PROJECT_DIR$/cadlib/object/primitives/sphere.py" />
+        <option value="$PROJECT_DIR$/tests/object/test_object.py" />
+        <option value="$PROJECT_DIR$/tests/object/test_transform_shortcuts.py" />
+        <option value="$PROJECT_DIR$/tests/transform/test_transform.py" />
       </list>
     </option>
   </component>
@@ -210,6 +200,18 @@
               <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
               <item name="cadlib" type="462c0819:PsiDirectoryNode" />
               <item name="tests" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cadlib" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="object" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="cadlib" type="b2602c69:ProjectViewProjectNode" />
+              <item name="cadlib" type="462c0819:PsiDirectoryNode" />
+              <item name="tests" type="462c0819:PsiDirectoryNode" />
+              <item name="transform" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
           <select />
@@ -351,21 +353,6 @@
     <servers />
   </component>
   <component name="TestHistory">
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 28m 24s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 28m 51s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 29m 17s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 29m 31s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
-    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 29m 55s.xml">
-      <configuration name="Unittests in tests" configurationId="tests" />
-    </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 31m 22s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
@@ -379,6 +366,21 @@
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
     <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 41m 08s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 43m 29s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 52m 02s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 55m 54s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 57m 32s.xml">
+      <configuration name="Unittests in tests" configurationId="tests" />
+    </history-entry>
+    <history-entry file="Unittests_in_tests - 2018.10.17 at 20h 58m 05s.xml">
       <configuration name="Unittests in tests" configurationId="tests" />
     </history-entry>
   </component>
@@ -399,8 +401,8 @@
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Favorites" order="2" sideWeight="0.346395" side_tool="true" weight="0.18968935" />
       <window_info anchor="bottom" id="Message" order="0" />
-      <window_info anchor="bottom" id="Find" order="1" weight="0.32917705" />
-      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.20448878" />
+      <window_info anchor="bottom" id="Find" order="1" weight="0.22693267" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" visible="true" weight="0.26309228" />
       <window_info anchor="bottom" id="Debug" order="3" weight="0.4" />
       <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
@@ -609,18 +611,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="298">
-          <caret line="53" column="25" lean-forward="true" selection-start-line="53" selection-start-column="25" selection-end-line="53" selection-end-column="25" />
-          <folding>
-            <element signature="e#0#59#0" expanded="true" />
-            <marker date="1539723693845" expanded="true" signature="348:352" ph="..." />
-            <marker date="1539723693845" expanded="true" signature="378:387" ph="..." />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/util/test_number.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-6">
@@ -652,16 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/tests/object/test_transform_shortcuts.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="272">
-          <caret line="29" lean-forward="true" selection-start-line="29" selection-end-line="29" />
-          <folding>
-            <element signature="e#0#43#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/tests/transform/test_transform_generators.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="80">
@@ -675,18 +655,6 @@
           <caret line="14" column="82" selection-start-line="14" selection-start-column="82" selection-end-line="14" selection-end-column="82" />
           <folding>
             <element signature="e#0#36#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/tests/object/test_object.py">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1232">
-          <caret line="12" selection-start-line="12" selection-end-line="12" />
-          <folding>
-            <element signature="e#0#49#0" expanded="true" />
-            <marker date="1539800443187" expanded="true" signature="556:560" ph="..." />
-            <marker date="1539800443187" expanded="true" signature="1051:1055" ph="..." />
           </folding>
         </state>
       </provider>
@@ -809,6 +777,16 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="64">
+          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/tests/object/test_sphere.py">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="96">
@@ -819,12 +797,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/cadlib/object/primitives/sphere.py">
+    <entry file="file://$PROJECT_DIR$/tests/object/test_object.py">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="64">
-          <caret line="4" lean-forward="true" selection-start-line="4" selection-end-line="4" />
+        <state relative-caret-position="140">
+          <caret line="43" lean-forward="true" selection-start-line="43" selection-end-line="43" />
           <folding>
-            <element signature="e#0#39#0" expanded="true" />
+            <element signature="e#0#49#0" expanded="true" />
+            <marker date="1539802557945" expanded="true" signature="682:686" ph="..." />
+            <marker date="1539802557945" expanded="true" signature="5346:5350" ph="..." />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/object/test_transform_shortcuts.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/tests/transform/test_transform.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="444">
+          <caret line="85" lean-forward="true" selection-start-line="85" selection-end-line="85" />
+          <folding>
+            <element signature="e#0#59#0" expanded="true" />
+            <marker date="1539802684719" expanded="true" signature="387:391" ph="..." />
+            <marker date="1539802684719" expanded="true" signature="417:426" ph="..." />
           </folding>
         </state>
       </provider>
