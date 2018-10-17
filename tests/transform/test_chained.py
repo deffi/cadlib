@@ -48,11 +48,6 @@ class TestChained(TestCase):
             Chained([RotateXyz(60, 30, 15), RotateXyz(60, 30, 15), Translate([60, 30, 15])]),
             Chained([RotateXyz(60, 30, 15), RotateXyz(60, 30, 15), Translate([60, 30, 16])])) # Unequal children
 
-        # Equal objects from different specifications
-
-        pass
-
-
     def test_to_scad(self):
         # Create some transform
         r = RotateXyz(60, 30, 15)
