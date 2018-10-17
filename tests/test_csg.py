@@ -3,7 +3,7 @@ from cadlib.csg.intersection import Intersection
 from cadlib.csg.difference import Difference
 from cadlib.csg.union import Union
 from cadlib.scad.scad import ScadObject
-from cadlib.geometry.vector import X, Y, Z
+from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 
 class TestCsg(TestCase):

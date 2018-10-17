@@ -1,4 +1,4 @@
-from cadlib.geometry import to_vector
+from cadlib.util import to_vector
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
 from cadlib.util.number import to_number

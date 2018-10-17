@@ -1,4 +1,4 @@
-from cadlib.geometry.matrix import Matrix
+from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
 
 class TestMatrix(TestCase):

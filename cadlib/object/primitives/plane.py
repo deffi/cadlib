@@ -1,5 +1,5 @@
 from cadlib import infinity as inf
-from cadlib.geometry import Z
+from cadlib.util import Z
 from cadlib.object.object import Object
 from cadlib.object.primitives.cube import Cube
 

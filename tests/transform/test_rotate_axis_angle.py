@@ -1,6 +1,6 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
-from cadlib.geometry import Vector, to_vector
+from cadlib.util import Vector, to_vector
 
 class TestRotateAxisAngle(TestCase):
     def test_construction(self):

@@ -2,7 +2,7 @@
 #
 from tests.unit_test import TestCase
 from cadlib.object.primitives import Cube
-# from cadlib.geometry.vector import X, Y, Z
+# from cadlib.util.vector import X, Y, Z
 # from cadlib.scad.scad import ScadObject
 #
 class TestSphere(TestCase):

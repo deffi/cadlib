@@ -1,6 +1,6 @@
 from numbers import Number
 
-from cadlib.geometry.vector import Vector
+from cadlib.util.vector import Vector
 
 def to_list_of_numbers(value, label = None, required_length = None):
     if required_length is not None and len(value) != required_length:

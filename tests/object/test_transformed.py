@@ -1,7 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.object.transformed import Transformed
 from cadlib.transform.chained import Chained
-# from cadlib.geometry.vector import X, Y, Z
+# from cadlib.util.vector import X, Y, Z
 from cadlib.scad.scad import ScadObject
 from cadlib.object.primitives.cube import Cube
 from cadlib.object.primitives.sphere import Sphere

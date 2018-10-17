@@ -1,5 +1,5 @@
 import unittest
-from cadlib.geometry.vector import Vector
+from cadlib.util.vector import Vector
 from cadlib.util.number import to_number, to_list_of_numbers
 
 class TestNumber(unittest.TestCase):

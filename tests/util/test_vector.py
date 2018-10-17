@@ -1,5 +1,5 @@
-from cadlib.geometry.vector import Vector, to_vector
-from cadlib.geometry.matrix import Matrix
+from cadlib.util.vector import Vector, to_vector
+from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
 
 class TestVector(TestCase):

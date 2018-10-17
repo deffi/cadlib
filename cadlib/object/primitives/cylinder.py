@@ -1,5 +1,5 @@
 from numbers import Number
-from cadlib.geometry import Vector, to_vector, X, Y, Z
+from cadlib.util import Vector, to_vector, X, Y, Z
 
 from cadlib.object.object import Object
 from cadlib.scad.scad import ScadObject

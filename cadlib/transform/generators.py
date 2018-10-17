@@ -6,7 +6,7 @@ import cadlib.transform.primitives.rotate_xyz
 import cadlib.transform.primitives.rotate_ypr
 import cadlib.transform.primitives.scale
 import cadlib.transform.primitives.translate
-from cadlib.geometry import Vector, to_vector
+from cadlib.util import Vector, to_vector
 from cadlib.util import both
 
 __all__ = ['rotate', 'scale', 'translate']

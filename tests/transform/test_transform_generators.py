@@ -5,7 +5,7 @@ from cadlib.transform.primitives.scale import Scale
 from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
-from cadlib.geometry import Vector, X, Y, Z
+from cadlib.util import Vector, X, Y, Z
 
 class TestTransformGenerators(TestCase):
     def test_rotate(self):

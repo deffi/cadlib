@@ -1,7 +1,7 @@
 import math
 from numbers import Number
 from cadlib.util.table import Table
-from cadlib.geometry import Matrix
+from cadlib.util import Matrix
 
 
 def to_vector(value, label = None, required_length = None):
@@ -159,7 +159,7 @@ class Vector:
     ##############
 
     def angle(self, other):
-        from cadlib.geometry import degree
+        from cadlib.util import degree
 
         # While mathematically correct, this performs poorly due to rounding errors:
         #     Vector(2, 3.4).angle(Vector(2, 3.4)) is only equal to 0.0 within 5 decimal places

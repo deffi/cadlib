@@ -4,7 +4,7 @@ from cadlib.transform.chained import Chained
 from cadlib.transform.primitives.translate import Translate
 from cadlib.transform.primitives.scale import Scale
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
-from cadlib.geometry.vector import X, Y, Z
+from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 from cadlib.csg.intersection import Intersection
 from cadlib.csg.difference import Difference
