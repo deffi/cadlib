@@ -26,18 +26,19 @@ class TestTransformed(TestCase):
         with self.assertRaises(TypeError): Transformed(None, cube)
 
     def test_equality(self):
-        # TODO use only one type of transform and object
-        r1 = RotateXyz(60, 30, 15)
-        r2 = RotateXyz(60, 30, 15)
-        t  = Translate([60, 30, 15])
-        cube1 = Cube(11)
-        cube2 = Cube(11)
-        sphere = Sphere(11)
-        self.assertEqual   (Transformed(r1, cube1), Transformed(r1, cube2))  # Equal objects
-        self.assertEqual   (Transformed(r1, cube1), Transformed(r2, cube1))  # Equal transform
-        self.assertNotEqual(Transformed(r1, cube1), cube1)                   # Transformed / original
-        self.assertNotEqual(Transformed(r1, cube1), Transformed(t, cube1))   # Different transform
-        self.assertNotEqual(Transformed(r1, cube1), Transformed(r1, sphere)) # Different objects
+        scale1a = Scale(1)
+        scale1b = Scale(1)
+        scale2  = Scale(2)
+
+        cube1a = Cube(1)
+        cube1b = Cube(1)
+        cube2  = Cube(2)
+
+        self.assertEqual   (Transformed(scale1a, cube1a), Transformed(scale1a, cube1b)) # Equal objects
+        self.assertEqual   (Transformed(scale1a, cube1a), Transformed(scale1b, cube1a)) # Equal transform
+        self.assertNotEqual(Transformed(scale1a, cube1a), cube1a)                       # Transformed / original
+        self.assertNotEqual(Transformed(scale1a, cube1a), Transformed(scale2 , cube1a)) # Different transform
+        self.assertNotEqual(Transformed(scale1a, cube1a), Transformed(scale1a, cube2 )) # Different objects
 
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)
