@@ -1,5 +1,6 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.scad.scad import ScadObject
 
 class TestRotateYpr(TestCase):
     def test_construction(self):
@@ -19,18 +20,41 @@ class TestRotateYpr(TestCase):
         # Different objects
         self.assertNotEqual(RotateYpr(10, 20, 30), RotateYpr(10, 20, 40)) # Different values
 
-        # Equal objects from different specifications
-
-        pass
-
-
     def test_to_scad(self):
-        # TODO test to_scad instead
-        self.assertScadCode(RotateYpr(1, 2, 3), "rotate([0, 0, 1]) rotate([2, 0, 0]) rotate([0, 3, 0]);")
-        self.assertScadCode(RotateYpr(0, 2, 3), "rotate([2, 0, 0]) rotate([0, 3, 0]);")
-        self.assertScadCode(RotateYpr(1, 0, 3), "rotate([0, 0, 1]) rotate([0, 3, 0]);")
-        self.assertScadCode(RotateYpr(1, 2, 0), "rotate([0, 0, 1]) rotate([2, 0, 0]);")
-        self.assertScadCode(RotateYpr(1, 0, 0), "rotate([0, 0, 1]);")
-        self.assertScadCode(RotateYpr(0, 2, 0), "rotate([2, 0, 0]);")
-        self.assertScadCode(RotateYpr(0, 0, 3), "rotate([0, 3, 0]);")
-        self.assertScadCode(RotateYpr(0, 0, 0), "rotate([0, 0, 0]);")
+        # Since OpenSCAD does not have YPR rotations, they have to translated to
+        # corresponding XYZ rotations.
+
+        # A zero YPR transform is a zero XYZ transform.
+        self.assertEqual(RotateYpr(0, 0, 0).to_scad(None),
+            ScadObject("rotate", [[0, 0, 0]], None, None))
+
+        # A single-axis YPR rotation can be expressed as a single-axis YPR
+        # rotation.
+        # Yaw - Z axis
+        self.assertEqual(RotateYpr(1, 0, 0).to_scad(None),
+            ScadObject("rotate", [[0, 0, 1]], None, None))
+        # Pitch - X axis
+        self.assertEqual(RotateYpr(0, 2, 0).to_scad(None),
+            ScadObject("rotate", [[2, 0, 0]], None, None))
+        # Roll - Y axis
+        self.assertEqual(RotateYpr(0, 0, 3).to_scad(None),
+            ScadObject("rotate", [[0, 3, 0]], None, None))
+
+        # A dual-axis YPR rotation must be expressed as a chain of two single-
+        # axis XYZ rotations.
+        self.assertEqual(RotateYpr(0, 2, 3).to_scad(None),
+            ScadObject("rotate", [[2, 0, 0]], None, [
+            ScadObject("rotate", [[0, 3, 0]], None, None)]))
+        self.assertEqual(RotateYpr(1, 0, 3).to_scad(None),
+            ScadObject("rotate", [[0, 0, 1]], None, [
+            ScadObject("rotate", [[0, 3, 0]], None, None)]))
+        self.assertEqual(RotateYpr(1, 2, 0).to_scad(None),
+            ScadObject("rotate", [[0, 0, 1]], None, [
+            ScadObject("rotate", [[2, 0, 0]], None, None)]))
+
+        # A tripel-axis YPR rotation must be expressed as a chain of three
+        # single-axis XYZ rotations.
+        self.assertEqual(RotateYpr(1, 2, 3).to_scad(None),
+            ScadObject("rotate", [[0, 0, 1]], None, [
+            ScadObject("rotate", [[2, 0, 0]], None, [
+            ScadObject("rotate", [[0, 3, 0]], None, None)])]))

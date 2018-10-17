@@ -25,5 +25,5 @@ class TestRotateAxisAngle(TestCase):
         self.assertEqual(RotateAxisAngle([1, 2, 3], 45), RotateAxisAngle(Vector(1, 2, 3), 45)) # list vs. Vector
 
     def test_to_scad(self):
-        # TODO test SCAD object instead
-        self.assertScadCode(RotateAxisAngle([1, 2, 3], 45), "rotate(a = 45, v = [1, 2, 3]);")
+        r = RotateAxisAngle([1, 2, 3], 45)
+        self.assertScadObjectTarget(r, None, "rotate", None, [('a', 45), ('v', [1, 2, 3])], None)
