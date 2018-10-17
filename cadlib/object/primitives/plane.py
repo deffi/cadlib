@@ -1,3 +1,4 @@
+from cadlib.util.vector import to_vector
 from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object.object import Object
@@ -5,8 +6,11 @@ from cadlib.object.primitives.cube import Cube
 
 
 class Plane(Object):
-    # TODO unit test
     def __init__(self, normal, offset):
+        normal = to_vector(normal, 3)
+        if normal.is_zero:
+            raise ValueError("Normal vector is zero")
+
         self._normal = normal
         self._offset = offset
 

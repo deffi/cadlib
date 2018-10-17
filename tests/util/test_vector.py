@@ -48,6 +48,16 @@ class TestVector(TestCase):
         self.assertEqual(len(Vector(1)      ), 1)
         self.assertEqual(len(Vector(1, 2, 3)), 3)
 
+    def test_is_zero(self):
+        self.assertTrue(Vector()       .is_zero)
+        self.assertTrue(Vector(0)      .is_zero)
+        self.assertTrue(Vector(0, 0)   .is_zero)
+        self.assertTrue(Vector(0, 0, 0).is_zero)
+
+        self.assertFalse(Vector(1)      .is_zero)
+        self.assertFalse(Vector(1, 0)   .is_zero)
+        self.assertFalse(Vector(1, 0, 0).is_zero)
+
     def test_values(self):
         self.assertEqual(Vector(1, 2, 3).values, [1, 2, 3])
 
