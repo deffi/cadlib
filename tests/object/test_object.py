@@ -35,6 +35,8 @@ class TestObject(TestCase):
         self.assertEqual(cube.transform(r)       .scale(sv)   .transform(t) , t * s * r * cube)
         self.assertEqual(cube.rotate   (xyz = rv).transform(s).translate(tv), t * s * r * cube)
         self.assertEqual(cube.transform(s * r)   .transform(t)              , t * s * r * cube)
+        self.assertEqual(cube.scale([1, 2, 3]), Scale([1, 2, 3]) * cube)
+        self.assertEqual(cube.scale(2)        , Scale([2, 2, 2]) * cube)
 
         # Error
         with self.assertRaises(TypeError): cube.transform(cube)
