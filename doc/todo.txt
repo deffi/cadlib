@@ -27,7 +27,7 @@ Object:
   * [Medium] center flag (and use in examples where appropriate)
              Probably better: .center() which transforms to the center
              Probably even better: use the anchor mechanism
-  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])
+  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])?
   * [Low]    Shape (2-dimensional object) and associated primitives
   * [Low]    Investigate part/hole
                * Are we supposed to do Pipe+Hole or Pipe-Hole?
@@ -97,3 +97,10 @@ Model:
 
 Tests:
   * [Low]    Primitives (object and transform): test negative numbers
+
+Management:
+  * [Medium] Better readme file and project description
+               * It's more of a CAD library that can render to SCAD than an SCAD
+                 front-end
+               * There are other libraries that do the same
+               * Unique features: re-usable transforms, anchors, saves typing
