@@ -398,6 +398,35 @@ class TestVector(TestCase):
         self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  4)))
         self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  0)))
 
+    def test_closest_axis(self):
+        # Axis vectors (2D)
+        self.assertEqual(Vector( 1,  0).closest_axis(), Vector( 1,  0))
+        self.assertEqual(Vector( 0,  1).closest_axis(), Vector( 0,  1))
+        self.assertEqual(Vector(-1,  0).closest_axis(), Vector(-1,  0))
+        self.assertEqual(Vector( 0, -1).closest_axis(), Vector( 0, -1))
+
+        # Arbitrary vectors (2D)
+        self.assertEqual(Vector( 1,   2).closest_axis(), Vector(0,  1))
+        self.assertEqual(Vector(-1,   2).closest_axis(), Vector(0,  1))
+        self.assertEqual(Vector( 1,  -2).closest_axis(), Vector(0, -1))
+        self.assertEqual(Vector(-1,  -2).closest_axis(), Vector(0, -1))
+
+        # Vectors along axis (3D)
+        self.assertEqual(Vector(1, 0, 0).closest_axis(), X)
+        self.assertEqual(Vector(0, 2, 0).closest_axis(), Y)
+        self.assertEqual(Vector(0, 0, 3).closest_axis(), Z)
+        self.assertEqual(Vector(-1,  0,  0).closest_axis(), -X)
+        self.assertEqual(Vector( 0, -2,  0).closest_axis(), -Y)
+        self.assertEqual(Vector( 0,  0, -3).closest_axis(), -Z)
+
+        # Arbitrary vectors (3D)
+        self.assertEqual(Vector(1, 2, 3).closest_axis(), Z)
+        self.assertEqual(Vector(1, 3, 2).closest_axis(), Y)
+        self.assertEqual(Vector(2, 1, 3).closest_axis(), Z)
+        self.assertEqual(Vector(2, 3, 1).closest_axis(), Y)
+        self.assertEqual(Vector(3, 1, 2).closest_axis(), X)
+        self.assertEqual(Vector(3, 2, 1).closest_axis(), X)
+
 
     #############
     ## Helpers ##
