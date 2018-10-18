@@ -70,6 +70,7 @@ class Vector:
     def __getitem__(self, index):
         return self._values[index]
 
+
     ################
     ## Comparison ##
     ################
@@ -208,6 +209,8 @@ class Vector:
         # Create a vector from the values
         return Vector(*values)
 
+    def collinear(self, other):
+        return self.dot(other) ** 2 == self.length_squared * other.length_squared
 
     #########
     ## I/O ##

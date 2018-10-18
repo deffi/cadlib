@@ -3,7 +3,6 @@ Library:
 
 Geometry:
   * [Medium] Vector: static is_valid (to replace isinstance (Vector, list, tuple))
-  * [Medium] Vector: is_colinear
   * [Low]    Matrix: Add @classmethods .from_rows (forwards to constructor) and .from_columns (accept list-of-list and vectors)
   * [Low]    Allow creating square matrices from a simple list of values
 

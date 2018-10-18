@@ -1,4 +1,4 @@
-from cadlib.util.vector import Vector, to_vector
+from cadlib.util.vector import Vector, to_vector, X, Y, Z
 from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
 
@@ -362,6 +362,41 @@ class TestVector(TestCase):
         with self.assertRaises(ValueError): Vector()       .normal()
         with self.assertRaises(ValueError): Vector(1)      .normal()
         with self.assertRaises(ValueError): Vector(0, 0, 0).normal()
+
+    def test_collinear(self):
+        # Same vector
+        self.assertTrue(X.collinear(X))
+        self.assertTrue(Y.collinear(Y))
+        self.assertTrue(Z.collinear(Z))
+
+        # Reverse direction
+        self.assertTrue(X.collinear(-X))
+        self.assertTrue(Y.collinear(-Y))
+        self.assertTrue(Z.collinear(-Z))
+
+        # Scaled
+        self.assertTrue(X.collinear(2 * X))
+        self.assertTrue(Y.collinear(2 * Y))
+        self.assertTrue(Z.collinear(2 * Z))
+
+        # Orthogonal
+        self.assertFalse(X.collinear(Y))
+        self.assertFalse(Y.collinear(Z))
+        self.assertFalse(Z.collinear(X))
+
+        # Arbitrary collinear
+        self.assertTrue(Vector(1, 2, 3).collinear(Vector( 1,  2,  3)))
+        self.assertTrue(Vector(1, 2, 3).collinear(Vector(-1, -2, -3)))
+        self.assertTrue(Vector(1, 2, 3).collinear(Vector( 2,  4,  6)))
+        self.assertTrue(Vector(1, 2, 3).collinear(Vector(-2, -4, -6)))
+
+        # With zero
+        self.assertTrue(Vector(1, 2, 0).collinear(Vector( 1,  2,  0)))
+        self.assertTrue(Vector(1, 2, 0).collinear(Vector( 2,  4,  0)))
+
+        # Arbitrary non-collinear
+        self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  4)))
+        self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  0)))
 
 
     #############
