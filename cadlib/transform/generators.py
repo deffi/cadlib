@@ -4,7 +4,7 @@ from warnings import warn
 import cadlib.transform.primitives.rotate_axis_agle
 import cadlib.transform.primitives.rotate_xyz
 import cadlib.transform.primitives.rotate_ypr
-import cadlib.transform.primitives.scale
+import cadlib.transform.primitives.scale_xyz
 import cadlib.transform.primitives.translate
 from cadlib.util import Vector, to_vector
 from cadlib.util import both
@@ -132,7 +132,7 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         raise ValueError("Invalid call signature")
 
 def scale(xyz):
-    return cadlib.transform.primitives.scale.Scale(xyz)
+    return cadlib.transform.primitives.scale_xyz.ScaleXyz(xyz)
 
 def translate(vector):
     return cadlib.transform.primitives.translate.Translate(vector)

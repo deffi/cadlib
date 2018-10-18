@@ -5,7 +5,7 @@ from cadlib.transform.chained import Chained
 from cadlib.scad.scad import ScadObject
 from cadlib.object.primitives.cube import Cube
 from cadlib.object.primitives.sphere import Sphere
-from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.translate import Translate
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 
@@ -26,9 +26,9 @@ class TestTransformed(TestCase):
         with self.assertRaises(TypeError): Transformed(None, cube)
 
     def test_equality(self):
-        scale1a = Scale(1)
-        scale1b = Scale(1)
-        scale2  = Scale(2)
+        scale1a = ScaleXyz(1)
+        scale1b = ScaleXyz(1)
+        scale2  = ScaleXyz(2)
 
         cube1a = Cube(1)
         cube1b = Cube(1)
@@ -42,7 +42,7 @@ class TestTransformed(TestCase):
 
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)
-        s = Scale([1, 2, -1])
+        s = ScaleXyz([1, 2, -1])
         cube = Cube(11)
 
         # Simple transform

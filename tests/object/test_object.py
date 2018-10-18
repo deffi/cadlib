@@ -2,7 +2,7 @@ from cadlib.object.transformed import Transformed
 from cadlib.object.primitives import Sphere, Cube, Cylinder
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives.translate import Translate
-from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.util.vector import Z
 from tests.unit_test import TestCase
@@ -27,7 +27,7 @@ class TestObject(TestCase):
 
         # Transforms
         r = RotateXyz(*rv)
-        s = Scale    (sv)
+        s = ScaleXyz    (sv)
         t = Translate(tv)
 
         # Long shortcuts
@@ -35,8 +35,8 @@ class TestObject(TestCase):
         self.assertEqual(cube.transform(r)       .scale(sv)   .transform(t) , t * s * r * cube)
         self.assertEqual(cube.rotate   (xyz = rv).transform(s).translate(tv), t * s * r * cube)
         self.assertEqual(cube.transform(s * r)   .transform(t)              , t * s * r * cube)
-        self.assertEqual(cube.scale([1, 2, 3]), Scale([1, 2, 3]) * cube)
-        self.assertEqual(cube.scale(2)        , Scale([2, 2, 2]) * cube)
+        self.assertEqual(cube.scale([1, 2, 3]), ScaleXyz([1, 2, 3]) * cube)
+        self.assertEqual(cube.scale(2), ScaleXyz([2, 2, 2]) * cube)
 
         # Error
         with self.assertRaises(TypeError): cube.transform(cube)
@@ -124,7 +124,7 @@ class TestObject(TestCase):
         # Multiplication is used for both intersection (Object * Object) and transform (Transform * Object)
         a = Sphere(2)
         b = Cube(3)
-        s = Scale([1, 2, -1])
+        s = ScaleXyz([1, 2, -1])
         t = Translate([0, 0, 0])
 
         self.assertEqual( t * (a  * b), Transformed(t, Intersection([a, b])))

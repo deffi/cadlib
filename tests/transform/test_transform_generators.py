@@ -1,7 +1,7 @@
 from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.transform.primitives.rotate_ypr import RotateYpr
-from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
@@ -127,9 +127,9 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(TypeError): rotate(0, X)  # Would have been correct if switched
 
     def test_scale(self):
-        self.assertEqual(scale(Vector(1, 2, 3)), Scale([1, 2, 3]))
-        self.assertEqual(scale(      [1, 2, 3]), Scale([1, 2, 3]))
-        self.assertEqual(scale(2              ), Scale([2, 2, 2]))
+        self.assertEqual(scale(Vector(1, 2, 3)), ScaleXyz([1, 2, 3]))
+        self.assertEqual(scale(      [1, 2, 3]), ScaleXyz([1, 2, 3]))
+        self.assertEqual(scale(2              ), ScaleXyz([2, 2, 2]))
 
     def test_translate(self):
         self.assertEqual(translate(Vector(1, 2, 3)), Translate(Vector(1, 2, 3)))

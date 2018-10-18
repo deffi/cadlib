@@ -46,9 +46,9 @@ Transform:
                    * ScaleXyz should not accept a vector, similar to RotateXyz
                      and RotateYpr
                  And scale() frontend
-  * [Medium] mirror(along which axis and which point/offset)
   * [Medium] RotateFromTo?
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
+  * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
   * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.

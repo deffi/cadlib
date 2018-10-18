@@ -1,6 +1,6 @@
 from tests.unit_test import TestCase
 from cadlib.transform.chained import Chained
-from cadlib.transform.primitives.scale import Scale
+from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.transform.primitives.translate import Translate
 from cadlib.scad.scad import ScadObject
@@ -8,9 +8,9 @@ from cadlib.scad.scad import ScadObject
 class TestChained(TestCase):
     def test_construction(self):
         # Parameters
-        t1 = Scale([1, 1, 1])
-        t2 = Scale([2, 2, 2])
-        t3 = Scale([3, 3, 3])
+        t1 = ScaleXyz([1, 1, 1])
+        t2 = ScaleXyz([2, 2, 2])
+        t3 = ScaleXyz([3, 3, 3])
 
         # Valid
         with self.assertNothingRaised(): chained0 = Chained([])                       # No children
@@ -25,7 +25,7 @@ class TestChained(TestCase):
 
     def test_equality(self):
         r = RotateXyz( 60, 30, 15 )
-        s = Scale([1, 2, -1])
+        s = ScaleXyz([1, 2, -1])
         t = Translate([60, 30, 15])
         c = Chained([r, s, t])
 
@@ -38,8 +38,8 @@ class TestChained(TestCase):
             Chained([r, s, t]),
             Chained([r, s, t])) # Identical children
         self.assertEqual(
-            Chained([RotateXyz( 60, 30, 15 ), Scale([60, 30, 15]), Translate([60, 30, 15])]),
-            Chained([RotateXyz( 60, 30, 15 ), Scale([60, 30, 15]), Translate([60, 30, 15])])) # Equal children
+            Chained([RotateXyz( 60, 30, 15 ), ScaleXyz([60, 30, 15]), Translate([60, 30, 15])]),
+            Chained([RotateXyz( 60, 30, 15 ), ScaleXyz([60, 30, 15]), Translate([60, 30, 15])])) # Equal children
 
         # Different objects
         self.assertNotEqual(Chained([r, s, t]), Chained([r, s]   )) # Different number of children
@@ -51,7 +51,7 @@ class TestChained(TestCase):
     def test_to_scad(self):
         # Create some transform
         r = RotateXyz(60, 30, 15)
-        s = Scale    ([1, 2, -1])
+        s = ScaleXyz    ([1, 2, -1])
         t = Translate([30, 20, 10])
 
         self.assertEqual(Chained([r, s, t]).to_scad(None),
