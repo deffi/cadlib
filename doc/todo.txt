@@ -1,3 +1,9 @@
+Next:
+  * Add xyz and axis/factor to scale() frontend
+  * test scale() frontend
+  * test object.scale
+  * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
+
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
@@ -7,6 +13,8 @@ Geometry:
   * [Low]    Allow creating square matrices from a simple list of values
 
 Object:
+  * [Medium] At least call the "ridiculous" transforms, and add manual tests
+             That's Plane, Slice, and ScaleAxisFactor
   * [Medium] Assembly objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
              returns self
@@ -36,16 +44,12 @@ CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
-  * [High]   Scale: shorter notation for scaling along a single axis
-               * scale(X * 2) == scale([2, 1, 1]) (not [2, 0, 0]!)
-             Better:
-               * scale(xyz = [...]) as before
-               * scale(axis, factor)
-               * Separate classes for ScaleXyz and ScaleAxisFactor
-                   * ScaleXyz should not accept a vector, similar to RotateXyz
-                     and RotateYpr
-                 And scale() frontend
-  * [Medium] RotateFromTo?
+  * [High]   Add xyz and axis/factor to scale() frontend
+  * [High]   ScaleXyz should not accept a vector, similar to RotateXyz and
+             RotateYpr
+  * [Medium] Scale around (instead of along) axis?
+  * [Medium] RotateFromTo? And use in ScaleAxisFactor.to_scad instead of
+             generator
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
@@ -54,7 +58,8 @@ Transform:
   * [Low]    Clean up transform_generators.rotate, maybe use a generic dispatch mechanism
   * [Low]    IdentityTransform (for testing, we should probably have an empty SCAD object first)
   * [Low]    Scale: negative values should be translated to mirror for OpenSCAD
-             (OpenSCAD does not allow negative scales)
+             (OpenSCAD does not allow negative scales), or do not allow negative
+             scale factors
 
 CSG:
   * [Medium] Make it so that a-(b+c) == a-b-c. Two options:
