@@ -131,8 +131,61 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
     else:
         raise ValueError("Invalid call signature")
 
-def scale(xyz):
-    return cadlib.transform.primitives.scale_xyz.ScaleXyz(xyz)
+def scale(xyz_or_axis = None, factor = None, xyz = None, axis = None):
+    # Signatures (canonical forms):
+    #   * scale(axis = X, factor = 2)
+    #   * scale([2, 1, 1])
+    # Signatures (convenience forms):
+    #   * scale(X, 2)
+    #   * scale([2, 1, 1])
+    #
+    # Canonical forms:
+    #     xyz_or_axis  factor   xyz  axis
+    #               -     num     -   vec  # Axis/factor
+    #               -       -  list     -  # XYZ
+    #               -       -   num     -  # Isotropic XYZ
+    # Convenience forms (-: must be None, *: overwritten)
+    #             vec     num     -     *  # Axis/factor (implicit or explicit)
+    #            list       -     *     -  # XYZ
+    #             num       -     *     -  # Isotropic XYZ
+    #
+    # "Vector type" is Vector, list, or tuple
+    #
+    # Make sure that there are no conflicts between convenience parameters and canonical parameters
+    if both(xyz_or_axis, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
+    if both(xyz_or_axis, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
+
+    # Transform the convenience forms to canonical form
+    if xyz_or_axis is not None:
+        if not isinstance(xyz_or_axis, (Vector, list, tuple, Number)):
+            raise TypeError("xyz_or_axis must be a vector type")
+
+        if factor is None:
+            xyz = xyz_or_axis
+        else:
+            axis = xyz_or_axis
+
+    # Check the parameters that must appear in pairs
+    if axis is not None and factor is None: raise ValueError("factor" " is required when " "axis" " is given")
+
+    # Handle the different cases
+    if axis is not None:
+        # Check that no other specification is given
+        if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
+
+        return cadlib.transform.primitives.scale_axis_factor.ScaleAxisFactor(axis, factor)
+
+    elif xyz is not None:
+        # Check that no other specification is given
+        if axis   is not None: raise ValueError("axis"   " cannot be specified together with xyz")
+        if factor is not None: raise ValueError("factor" " cannot be specified together with xyz")
+
+        return cadlib.transform.primitives.scale_xyz.ScaleXyz(xyz)
+
+    else:
+        raise ValueError("Invalid call signature")
+
+
 
 def translate(vector):
     return cadlib.transform.primitives.translate.Translate(vector)

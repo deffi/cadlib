@@ -1,8 +1,6 @@
 Next:
-  * Add xyz and axis/factor to scale() frontend
-  * test scale() frontend
-  * test object.scale
   * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
+  * ScaleXyz should raise TypeError when constructed with a string, not ValueError
 
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
@@ -44,7 +42,6 @@ CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
-  * [High]   Add xyz and axis/factor to scale() frontend
   * [High]   ScaleXyz should not accept a vector, similar to RotateXyz and
              RotateYpr
   * [Medium] Scale around (instead of along) axis?

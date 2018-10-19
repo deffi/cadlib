@@ -2,6 +2,7 @@ from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.transform.primitives.rotate_ypr import RotateYpr
 from cadlib.transform.primitives.scale_xyz import ScaleXyz
+from cadlib.transform.primitives.scale_axis_factor import ScaleAxisFactor
 from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
@@ -88,10 +89,10 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(ValueError): rotate(xyz = [1, 2, 3], ypr = [1, 2, 3])
 
         # Canonical forms - incomplete specification
-        with self.assertRaises(ValueError): rotate(axis = X)
-        with self.assertRaises(ValueError): rotate(angle = 45)
-        with self.assertRaises(ValueError): rotate(frm = X)
-        with self.assertRaises(ValueError): rotate(to = Y)
+        with self.assertRaises(ValueError): rotate(axis = X)    # Missing angle
+        with self.assertRaises(ValueError): rotate(angle = 45)  # Missing axis
+        with self.assertRaises(ValueError): rotate(frm = X)     # Missing to
+        with self.assertRaises(ValueError): rotate(to = Y)      # Missing from
 
         # Canonical forms - invalid types
         with self.assertRaises(TypeError): rotate(axis = 0        , angle = 45)
@@ -127,9 +128,67 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(TypeError): rotate(0, X)  # Would have been correct if switched
 
     def test_scale(self):
+        # Canonical axis/factor
+        self.assertEqual(scale(axis = Vector(1, 2, 3), factor = 4), ScaleAxisFactor(Vector(1, 2, 3), 4))
+        self.assertEqual(scale(axis =       [1, 2, 3], factor = 4), ScaleAxisFactor(      [1, 2, 3], 4))
+
+        # Canonical XYZ
+        self.assertEqual(scale(xyz = Vector(1, 2, 3)), ScaleXyz([1, 2, 3]))
+        self.assertEqual(scale(xyz =       [1, 2, 3]), ScaleXyz([1, 2, 3]))
+
+        # Canonical isotropic XYZ
+        self.assertEqual(scale(xyz = 2), ScaleXyz([2, 2, 2]))
+
+
+        # Convenience axis/factor (implicit)
+        self.assertEqual(scale(Vector(1, 2, 3), 4), ScaleAxisFactor(Vector(1, 2, 3), 4))
+        self.assertEqual(scale(      [1, 2, 3], 4), ScaleAxisFactor(      [1, 2, 3], 4))
+
+        # Convenience axis/factor (explicit)
+        self.assertEqual(scale(Vector(1, 2, 3), factor = 4), ScaleAxisFactor(Vector(1, 2, 3), 4))
+        self.assertEqual(scale(      [1, 2, 3], factor = 4), ScaleAxisFactor(      [1, 2, 3], 4))
+
+        # Convenience XYZ
         self.assertEqual(scale(Vector(1, 2, 3)), ScaleXyz([1, 2, 3]))
         self.assertEqual(scale(      [1, 2, 3]), ScaleXyz([1, 2, 3]))
-        self.assertEqual(scale(2              ), ScaleXyz([2, 2, 2]))
+
+        # Convenience isotropic XYZ
+        self.assertEqual(scale(2), ScaleXyz([2, 2, 2]))
+
+    def test_scale_invalid(self):
+        # Nothing at all
+        with self.assertRaises(ValueError): scale()
+
+        # Canonical forms - multiple specifications
+        with self.assertRaises(ValueError): scale(xyz = [1, 1, 1], factor = 2)
+        with self.assertRaises(ValueError): scale(xyz = [1, 1, 1], axis = X)
+
+        # Canonical forms - incomplete specification
+        with self.assertRaises(ValueError): scale(axis = X)  # Missing factor
+
+        # Canonical forms - invalid types
+        with self.assertNothingRaised():   scale(axis = X, factor = 2)
+        with self.assertRaises(TypeError): scale(axis = 1, factor = 2)
+        with self.assertRaises(TypeError): scale(axis = 0, factor = 2)
+        with self.assertRaises(TypeError): scale(axis = X, factor = "")
+        with self.assertRaises(ValueError): scale(xyz = "") # TODO should be a TypeError
+
+        # Convenience forms, duplicate specification
+        with self.assertRaises(ValueError): scale(X, 2, axis = X)
+        with self.assertRaises(ValueError): scale(X,    xyz = X)
+
+        # Convenience forms, multiple specifications
+        with self.assertRaises(ValueError): scale(X, 2, xyz = X)
+        with self.assertRaises(ValueError): scale(2,    xyz = X)
+
+        # Convenience forms - incomplete specification
+        # No such thing here because an incomplete axis/factor will be a valid XYZ
+
+        # Convenience forms - invalid type
+        with self.assertRaises(TypeError): scale("")    # First argument must be a vector or a number
+        with self.assertRaises(TypeError): scale(X, "") # Invalid second argument
+        with self.assertRaises(TypeError): scale(X, X)  # Invalid second argument
+        with self.assertRaises(TypeError): scale(0, X)  # Would have been correct if switched
 
     def test_translate(self):
         self.assertEqual(translate(Vector(1, 2, 3)), Translate(Vector(1, 2, 3)))
