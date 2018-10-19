@@ -9,8 +9,7 @@ class TestScaleXyz(TestCase):
 
         # Invalid
         with self.assertRaises(TypeError): ScaleXyz([1, 2, "3"])
-        # TODO this should be a TypeError
-        with self.assertRaises(ValueError): ScaleXyz("3")
+        with self.assertRaises(TypeError): ScaleXyz("3")
 
     def test_equality(self):
         # Same object

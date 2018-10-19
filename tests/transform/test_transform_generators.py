@@ -171,7 +171,7 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(TypeError): scale(axis = 1, factor = 2)
         with self.assertRaises(TypeError): scale(axis = 0, factor = 2)
         with self.assertRaises(TypeError): scale(axis = X, factor = "")
-        with self.assertRaises(ValueError): scale(xyz = "") # TODO should be a TypeError
+        with self.assertRaises(TypeError): scale(xyz = "")
 
         # Convenience forms, duplicate specification
         with self.assertRaises(ValueError): scale(X, 2, axis = X)

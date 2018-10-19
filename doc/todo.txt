@@ -1,6 +1,6 @@
 Next:
   * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
-  * ScaleXyz should raise TypeError when constructed with a string, not ValueError
+  * Tests: pass empty vectors, must fail
 
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
