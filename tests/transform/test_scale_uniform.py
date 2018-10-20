@@ -5,6 +5,7 @@ class TestScaleUniform(TestCase):
     def test_construction(self):
         # Valid
         ScaleUniform(2)
+        ScaleUniform(0)  # Valid, though useless
 
         # Invalid
         with self.assertRaises(TypeError): ScaleUniform([1, 2, 3])

@@ -9,13 +9,13 @@ class TestScaleAxisFactor(TestCase):
         # Valid
         ScaleAxisFactor(      [1, 2, 3], 4)
         ScaleAxisFactor(Vector(1, 2, 3), 4)
-        # TODO zero factor is OK, if useless
+        ScaleAxisFactor(      [1, 2, 3], 0)  # Valid, though useless
 
         # Invalid
-        # TODO zero vector
-        with self.assertRaises(TypeError): ScaleAxisFactor([1, 2, "3"],  4)
-        with self.assertRaises(TypeError): ScaleAxisFactor([1, 2,  3 ], "4")
-        with self.assertRaises(TypeError): ScaleAxisFactor(1          , "4")
+        with self.assertRaises(ValueError): ScaleAxisFactor([0, 0,  0 ],  4 )
+        with self.assertRaises(TypeError ): ScaleAxisFactor([1, 2, "3"],  4 )
+        with self.assertRaises(TypeError ): ScaleAxisFactor([1, 2,  3 ], "4")
+        with self.assertRaises(TypeError ): ScaleAxisFactor(1          , "4")
 
     def test_equality(self):
         # Same object
