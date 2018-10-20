@@ -5,10 +5,14 @@ from cadlib.util import Vector
 class TestRotateAxisAngle(TestCase):
     def test_construction(self):
         # Valid
+        RotateAxisAngle(      [1, 2, 3], 45)
         RotateAxisAngle(Vector(1, 2, 3), 45)
 
         # Invalid
-        with self.assertRaises(ValueError): RotateAxisAngle(Vector(0, 0, 0), 45)
+        with self.assertRaises(ValueError): RotateAxisAngle([0, 0,  0 ], 45 )
+        with self.assertRaises(TypeError ): RotateAxisAngle([1, 2, "3"],  4 )
+        with self.assertRaises(TypeError ): RotateAxisAngle([1, 2,  3 ], "4")
+        with self.assertRaises(TypeError ): RotateAxisAngle(1          , "4")
 
     def test_equality(self):
         # Same object
