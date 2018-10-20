@@ -37,6 +37,7 @@ class ScaleAxisFactor(Transform):
 
         # Special case: if the axis is aligned with one of the coordinate axes,
         # the scale can be expressed as an XYZ scale along that axis.
+        # TODO skip special cases by checking if closest_axis is equal to axis?
         if self._axis.collinear(X):
             return ScadObject("scale", [[self._factor, 1, 1]], None, children)
         if self._axis.collinear(Y):

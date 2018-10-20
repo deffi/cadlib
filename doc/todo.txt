@@ -1,6 +1,7 @@
 Next:
   * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
-  * Tests: pass empty vectors, must fail
+  * Tests: pass empty or wrong-size vectors, must fail (all transforms, cube,
+    others?)
 
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
@@ -25,7 +26,8 @@ Object:
   * [Medium] center flag (and use in examples where appropriate)
              Probably better: .center() which transforms to the center
              Probably even better: use the anchor mechanism
-  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])?
+  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])? rotate_xyz
+             does it like this and the argument is not (strictly) a vector
   * [Low]    Shape (2-dimensional object) and associated primitives
   * [Low]    Investigate part/hole
                * Are we supposed to do Pipe+Hole or Pipe-Hole?
@@ -42,9 +44,13 @@ CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
+  * [High]   ScaleUniform (don't use ScaleXyz for this)
+             And update scale generator
   * [High]   ScaleXyz should not accept a vector, similar to RotateXyz and
              RotateYpr
   * [Medium] Scale around (instead of along) axis?
+             Maybe: scale(axis, along, around)
+             Or, idea: scale(factor, around = (point or line))
   * [Medium] RotateFromTo? And use in ScaleAxisFactor.to_scad instead of
              generator
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
@@ -95,9 +101,12 @@ Model:
 Tests:
   * [Low]    Primitives (object and transform): test negative numbers
 
-Management:
+Documentation:
   * [Medium] Better readme file and project description
                * It's more of a CAD library that can render to SCAD than an SCAD
                  front-end
                * There are other libraries that do the same
                * Unique features: re-usable transforms, anchors, saves typing
+  * [Medium] Translate takes a vector, but ScaleXyz and RotateXyz take single
+             values. That's because it's not a vector. But you'll probably want
+             to use the generator functions anyway.
