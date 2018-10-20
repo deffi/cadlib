@@ -6,6 +6,7 @@ from cadlib.scad.scad import ScadObject
 from cadlib.object.primitives.cube import Cube
 from cadlib.object.primitives.sphere import Sphere
 from cadlib.transform.primitives.scale_xyz import ScaleXyz
+from cadlib.transform.primitives.scale_uniform import ScaleUniform
 from cadlib.transform.primitives.translate import Translate
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 
@@ -26,9 +27,9 @@ class TestTransformed(TestCase):
         with self.assertRaises(TypeError): Transformed(None, cube)
 
     def test_equality(self):
-        scale1a = ScaleXyz(1)
-        scale1b = ScaleXyz(1)
-        scale2  = ScaleXyz(2)
+        scale1a = ScaleUniform(1)
+        scale1b = ScaleUniform(1)
+        scale2  = ScaleUniform(2)
 
         cube1a = Cube(1)
         cube1b = Cube(1)

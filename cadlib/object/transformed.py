@@ -22,6 +22,9 @@ class Transformed(Object):
     def __str__(self):
         return "Transformed object"
 
+    def __repr__(self):
+        return f"Transformed({self._transform!r}, {self._object!r})"
+
     def __rmul__(self, other):
         if isinstance(other, Transform):
             # Transformation of an already-transformed object. Instead of transforming the object twice, we merge the

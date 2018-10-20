@@ -3,6 +3,7 @@ from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.transform.primitives.rotate_ypr import RotateYpr
 from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.scale_axis_factor import ScaleAxisFactor
+from cadlib.transform.primitives.scale_uniform import ScaleUniform
 from cadlib.transform.primitives.translate import Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
@@ -136,8 +137,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(scale(xyz = Vector(1, 2, 3)), ScaleXyz([1, 2, 3]))
         self.assertEqual(scale(xyz =       [1, 2, 3]), ScaleXyz([1, 2, 3]))
 
-        # Canonical isotropic XYZ
-        self.assertEqual(scale(xyz = 2), ScaleXyz([2, 2, 2]))
+        # Canonical uniform
+        self.assertEqual(scale(factor = 2), ScaleUniform(2))
 
 
         # Convenience axis/factor (implicit)
@@ -152,8 +153,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(scale(Vector(1, 2, 3)), ScaleXyz([1, 2, 3]))
         self.assertEqual(scale(      [1, 2, 3]), ScaleXyz([1, 2, 3]))
 
-        # Convenience isotropic XYZ
-        self.assertEqual(scale(2), ScaleXyz([2, 2, 2]))
+        # Convenience uniform
+        self.assertEqual(scale(2), ScaleUniform(2))
 
     def test_scale_invalid(self):
         # Nothing at all
@@ -172,6 +173,7 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(TypeError): scale(axis = 0, factor = 2)
         with self.assertRaises(TypeError): scale(axis = X, factor = "")
         with self.assertRaises(TypeError): scale(xyz = "")
+        with self.assertRaises(TypeError): scale(xyz = 2)
 
         # Convenience forms, duplicate specification
         with self.assertRaises(ValueError): scale(X, 2, axis = X)

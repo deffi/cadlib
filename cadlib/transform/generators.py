@@ -131,39 +131,45 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
     else:
         raise ValueError("Invalid call signature")
 
-def scale(xyz_or_axis = None, factor = None, xyz = None, axis = None):
+def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     # Signatures (canonical forms):
+    #   * scale(xyz = [2, 1, 1])
+    #   * scale(factor = 2)
     #   * scale(axis = X, factor = 2)
-    #   * scale([2, 1, 1])
     # Signatures (convenience forms):
-    #   * scale(X, 2)
     #   * scale([2, 1, 1])
+    #   * scale(2)
+    #   * scale(X, 2)
     #
     # Canonical forms:
-    #     xyz_or_axis  factor   xyz  axis
-    #               -     num     -   vec  # Axis/factor
-    #               -       -  list     -  # XYZ
-    #               -       -   num     -  # Isotropic XYZ
+    #     xyz_or_axis_or_factor  factor   xyz  axis
+    #                         -       -  list     -  # XYZ
+    #                         -     num     -   vec  # Axis/factor
+    #                         -     num     -     -  # Uniform
     # Convenience forms (-: must be None, *: overwritten)
-    #             vec     num     -     *  # Axis/factor (implicit or explicit)
-    #            list       -     *     -  # XYZ
-    #             num       -     *     -  # Isotropic XYZ
+    #                       vec     num     -     *  # Axis/factor (implicit or explicit)
+    #                      list       -     *     -  # XYZ
+    #                       num       *     -     -  # Isotropic XYZ
     #
     # "Vector type" is Vector, list, or tuple
     #
     # Make sure that there are no conflicts between convenience parameters and canonical parameters
-    if both(xyz_or_axis, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
-    if both(xyz_or_axis, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
+    if both(xyz_or_axis_or_factor, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
+    if both(xyz_or_axis_or_factor, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
+
+    # TODO factor and xyz?
 
     # Transform the convenience forms to canonical form
-    if xyz_or_axis is not None:
-        if not isinstance(xyz_or_axis, (Vector, list, tuple, Number)):
-            raise TypeError("xyz_or_axis must be a vector type")
+    if xyz_or_axis_or_factor is not None:
+        if not isinstance(xyz_or_axis_or_factor, (Vector, list, tuple, Number)):
+            raise TypeError("xyz_or_axis_or_factor must be a vector type or a number")
 
-        if factor is None:
-            xyz = xyz_or_axis
+        if factor is not None:
+            axis = xyz_or_axis_or_factor
+        elif isinstance(xyz_or_axis_or_factor, Number):
+            factor = xyz_or_axis_or_factor
         else:
-            axis = xyz_or_axis
+            xyz = xyz_or_axis_or_factor
 
     # Check the parameters that must appear in pairs
     if axis is not None and factor is None: raise ValueError("factor" " is required when " "axis" " is given")
@@ -181,6 +187,9 @@ def scale(xyz_or_axis = None, factor = None, xyz = None, axis = None):
         if factor is not None: raise ValueError("factor" " cannot be specified together with xyz")
 
         return cadlib.transform.primitives.scale_xyz.ScaleXyz(xyz)
+
+    elif factor is not None:
+        return cadlib.transform.primitives.scale_uniform.ScaleUniform(factor)
 
     else:
         raise ValueError("Invalid call signature")

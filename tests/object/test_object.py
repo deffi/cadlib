@@ -3,6 +3,7 @@ from cadlib.object.primitives import Sphere, Cube, Cylinder
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives.translate import Translate
 from cadlib.transform.primitives.scale_xyz import ScaleXyz
+from cadlib.transform.primitives.scale_uniform import ScaleUniform
 from cadlib.transform.primitives.scale_axis_factor import ScaleAxisFactor
 from cadlib.transform.primitives.rotate_xyz import RotateXyz
 from cadlib.util.vector import Z
@@ -37,7 +38,7 @@ class TestObject(TestCase):
         self.assertEqual(cube.rotate   (xyz = rv).transform(s).translate(tv), t * s * r * cube)
         self.assertEqual(cube.transform(s * r)   .transform(t)              , t * s * r * cube)
         self.assertEqual(cube.scale([1, 2, 3]), ScaleXyz([1, 2, 3]) * cube)
-        self.assertEqual(cube.scale(2), ScaleXyz([2, 2, 2]) * cube)
+        self.assertEqual(cube.scale(2), ScaleUniform(2) * cube)
         self.assertEqual(cube.scale([1, 2, 3], 4), ScaleAxisFactor([1, 2, 3], 4) * cube)
 
         # Error

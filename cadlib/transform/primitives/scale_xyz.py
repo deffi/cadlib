@@ -6,10 +6,7 @@ from cadlib.util.number import to_list_of_numbers
 
 class ScaleXyz(Transform):
     def __init__(self, xyz):
-        if isinstance(xyz, Number):
-            self._xyz = [xyz, xyz, xyz]
-        else:
-            self._xyz = to_list_of_numbers(xyz, "xyz", 3)
+        self._xyz = to_list_of_numbers(xyz, "xyz", 3)
 
     def __eq__(self, other):
         return isinstance(other, ScaleXyz) and other._xyz == self._xyz
