@@ -54,6 +54,13 @@ class TestMatrix(TestCase):
         self.assertEqual(Matrix.identity(2), Matrix([1, 0], [0, 1]))
         self.assertEqual(Matrix.identity(3), Matrix([1, 0, 0], [0, 1, 0], [0, 0,1]))
 
+    def test_from_rows(self):
+        self.assertEqual(Matrix.from_rows([1, 2, 3], [4, 5, 6]), Matrix([1, 2, 3], [4, 5, 6]))
+
+    def test_from_columns(self):
+        self.assertEqual(Matrix.from_columns([1, 2, 3], [4, 5, 6]), Matrix([1, 4], [2, 5], [3, 6]))
+
+
 
     ################
     ## Properties ##

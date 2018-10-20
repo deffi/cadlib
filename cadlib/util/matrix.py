@@ -33,6 +33,14 @@ class Matrix:
         self._column_count = column_count
 
     @classmethod
+    def from_rows(cls, *rows):
+        return cls(*rows)
+
+    @classmethod
+    def from_columns(cls, *columns):
+        return cls(*zip(*columns))
+
+    @classmethod
     def identity(cls, size):
         rows = []
         for i in range(size):

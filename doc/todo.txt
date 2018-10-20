@@ -2,8 +2,6 @@ Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
 Geometry:
-  * [Medium] Vector: static is_valid (to replace isinstance (Vector, list, tuple))
-  * [Low]    Matrix: Add @classmethods .from_rows (forwards to constructor) and .from_columns (accept list-of-list and vectors)
   * [Low]    Allow creating square matrices from a simple list of values
 
 Object:
@@ -33,6 +31,7 @@ Object:
 
 Primitives:
   * [Medium] More primitives: cone
+  * [Medium] More primitives? See OpenSCAD documentation
   * [Medium] Plane: through point
 
 CSG:
