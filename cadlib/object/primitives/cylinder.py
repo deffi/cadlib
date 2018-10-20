@@ -28,6 +28,9 @@ class Cylinder(Object):
         # length_or_base must be a vector or a number
         if isinstance (length_or_cap, Number):
             # Number - direction/length
+            if direction_or_base.is_zero:
+                raise ValueError("direction must be non-zero")
+
             self._base = Vector(0, 0, 0)
             self._cap  = direction_or_base.normalized() * length_or_cap
         elif isinstance(length_or_cap, (Vector, list, tuple)):

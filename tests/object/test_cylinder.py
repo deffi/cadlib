@@ -1,7 +1,7 @@
 import math
 
 from cadlib.object.primitives import Cylinder
-from cadlib.util.vector import X, Y, Z
+from cadlib.util.vector import Vector, X, Y, Z
 from cadlib.scad.scad import ScadObject
 from tests.unit_test import TestCase
 
@@ -13,9 +13,10 @@ class TestCylinder(TestCase):
         with self.assertNothingRaised(): Cylinder(X, 5, d = 2)
 
         # Base/cap
-        with self.assertNothingRaised(): Cylinder(X, Y, 1)
-        with self.assertNothingRaised(): Cylinder(X, Y, r = 1)
-        with self.assertNothingRaised(): Cylinder(X, Y, d = 2)
+        with self.assertNothingRaised(): Cylinder(X              , Y, 1)
+        with self.assertNothingRaised(): Cylinder(X              , Y, r = 1)
+        with self.assertNothingRaised(): Cylinder(X              , Y, d = 2)
+        with self.assertNothingRaised(): Cylinder(Vector(0, 0, 0), Y, d = 2) # Zero vector is allowed as base
 
         # Zero/cap
         with self.assertNothingRaised(): Cylinder(0, Y, 1)
@@ -23,10 +24,11 @@ class TestCylinder(TestCase):
         with self.assertNothingRaised(): Cylinder(0, Y, d = 2)
 
         # Invalid
-        with self.assertRaises(ValueError): Cylinder(5, 5)       # First is not a vector
-        with self.assertRaises(ValueError): Cylinder(X, "")      # Second is not a vector or number
-        with self.assertRaises(ValueError): Cylinder(X, 5)       # Radius missing
-        with self.assertRaises(ValueError): Cylinder(X, 5, 1, 1) # Radius and diameter
+        with self.assertRaises(ValueError): Cylinder(5              , 5)       # First is not a vector
+        with self.assertRaises(ValueError): Cylinder(X              , "")      # Second is not a vector or number
+        with self.assertRaises(ValueError): Cylinder(X              , 5)       # Radius missing
+        with self.assertRaises(ValueError): Cylinder(X              , 5, 1, 1) # Radius and diameter
+        with self.assertRaises(ValueError): Cylinder(Vector(0, 0, 0), 5)       # Zero vector is not allowed as direction
 
     def test_equality(self):
         # Same object

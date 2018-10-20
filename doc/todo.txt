@@ -1,4 +1,5 @@
 Library:
+  * [Medium] Module-level symbols, e. g. from cadlib.object import Cube
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
 Object:
@@ -25,6 +26,7 @@ Object:
                * Is Hole * Object defined?
   * [Medium] Can we do [cube, sphere, cylinder].sum()?
   * [Medium] Primitives' __repr__ is not a repr
+  * [Medium] __repr__ for everything
 
 Primitives:
   * [Medium] More primitives: cone
@@ -35,6 +37,7 @@ Transform:
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
+             But we need the around parameter to specify a scale origin?
   * [Medium] RotateFromTo? And use in ScaleAxisFactor.to_scad instead of
              generator
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
@@ -85,7 +88,6 @@ Model:
                * Allow in Matrix/Vector
 
 Tests:
-  * [Medium] Cylinder: direction zero vector
   * [Low]    Primitives (object and transform): test negative numbers
   * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
              and object primitives)
