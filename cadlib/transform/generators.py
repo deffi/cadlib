@@ -87,9 +87,8 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with frm")
         if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with frm")
 
-        # TODO use length check?
-        frm = Vector.convert(frm)
-        to  = Vector.convert(to)
+        frm = Vector.convert(frm, "frm", 3)
+        to  = Vector.convert(to , "to" , 3)
 
         if frm.length_squared == 0: raise ValueError("frm" " cannot be the zero vector")
         if to .length_squared == 0: raise ValueError("to"  " cannot be the zero vector")
