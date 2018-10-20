@@ -398,6 +398,35 @@ class TestVector(TestCase):
         self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  4)))
         self.assertFalse(Vector(1, 2, 3).collinear(Vector( 1,  2,  0)))
 
+    def test_snap_to_axis(self):
+        # Axis vectors (2D)
+        self.assertEqual(Vector( 1,  0).snap_to_axis(), Vector( 1,  0))
+        self.assertEqual(Vector( 0,  1).snap_to_axis(), Vector( 0,  1))
+        self.assertEqual(Vector(-1,  0).snap_to_axis(), Vector(-1,  0))
+        self.assertEqual(Vector( 0, -1).snap_to_axis(), Vector( 0, -1))
+
+        # Arbitrary vectors (2D)
+        self.assertEqual(Vector( 1,   2).snap_to_axis(), Vector(0,  2))
+        self.assertEqual(Vector(-1,   2).snap_to_axis(), Vector(0,  2))
+        self.assertEqual(Vector( 1,  -2).snap_to_axis(), Vector(0, -2))
+        self.assertEqual(Vector(-1,  -2).snap_to_axis(), Vector(0, -2))
+
+        # Vectors along axis (3D)
+        self.assertEqual(Vector(1, 0, 0).snap_to_axis(), 1 * X)
+        self.assertEqual(Vector(0, 2, 0).snap_to_axis(), 2 * Y)
+        self.assertEqual(Vector(0, 0, 3).snap_to_axis(), 3 * Z)
+        self.assertEqual(Vector(-1,  0,  0).snap_to_axis(), -1 * X)
+        self.assertEqual(Vector( 0, -2,  0).snap_to_axis(), -2 * Y)
+        self.assertEqual(Vector( 0,  0, -3).snap_to_axis(), -3 * Z)
+
+        # Arbitrary vectors (3D)
+        self.assertEqual(Vector(1, 2, 3).snap_to_axis(), 3 * Z)
+        self.assertEqual(Vector(1, 3, 2).snap_to_axis(), 3 * Y)
+        self.assertEqual(Vector(2, 1, 3).snap_to_axis(), 3 * Z)
+        self.assertEqual(Vector(2, 3, 1).snap_to_axis(), 3 * Y)
+        self.assertEqual(Vector(3, 1, 2).snap_to_axis(), 3 * X)
+        self.assertEqual(Vector(3, 2, 1).snap_to_axis(), 3 * X)
+
     def test_closest_axis(self):
         # Axis vectors (2D)
         self.assertEqual(Vector( 1,  0).closest_axis(), Vector( 1,  0))

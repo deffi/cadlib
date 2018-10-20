@@ -211,6 +211,12 @@ class Vector:
     def collinear(self, other):
         return self.dot(other) ** 2 == self.length_squared * other.length_squared
 
+    def snap_to_axis(self):
+        _, index = max((abs(v), i) for i, v in enumerate(self._values))
+        result_values = [0] * len(self)
+        result_values[index] = self._values[index]
+        return Vector(*result_values)
+
     def closest_axis(self):
         _, index = max((abs(v), i) for i, v in enumerate(self._values))
         result_values = [0] * len(self)
