@@ -157,8 +157,6 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     if both(xyz_or_axis_or_factor, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
     if both(xyz_or_axis_or_factor, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
 
-    # TODO factor and xyz?
-
     # Transform the convenience forms to canonical form
     if xyz_or_axis_or_factor is not None:
         if not isinstance(xyz_or_axis_or_factor, (Vector, list, tuple, Number)):
