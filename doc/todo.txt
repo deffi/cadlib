@@ -1,9 +1,6 @@
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
-Geometry:
-  * [Low]    Allow creating square matrices from a simple list of values
-
 Object:
   * [Medium] At least call the "ridiculous" transforms, and add manual tests
              That's Plane, Slice, and ScaleAxisFactor
