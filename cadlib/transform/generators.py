@@ -186,7 +186,7 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
         if axis   is not None: raise ValueError("axis"   " cannot be specified together with xyz")
         if factor is not None: raise ValueError("factor" " cannot be specified together with xyz")
 
-        return cadlib.transform.primitives.scale_xyz.ScaleXyz(xyz)
+        return cadlib.transform.primitives.scale_xyz.ScaleXyz(*xyz)
 
     elif factor is not None:
         return cadlib.transform.primitives.scale_uniform.ScaleUniform(factor)

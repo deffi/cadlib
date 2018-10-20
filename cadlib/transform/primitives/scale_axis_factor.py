@@ -48,7 +48,7 @@ class ScaleAxisFactor(Transform):
         # General case
         transform_axis = self._axis.closest_axis()
         equivalent = rotate(frm = self._axis, to = transform_axis)
-        equivalent = ScaleXyz((transform_axis * self._factor).values) * equivalent
+        equivalent = ScaleXyz(*(transform_axis * self._factor).values) * equivalent
         equivalent = rotate(frm = transform_axis, to = self._axis) * equivalent
 
         return equivalent.to_scad(target)

@@ -43,7 +43,7 @@ class TestTransformed(TestCase):
 
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)
-        s = ScaleXyz([1, 2, -1])
+        s = ScaleXyz(1, 2, -1)
         cube = Cube(11)
 
         # Simple transform

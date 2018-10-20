@@ -2,11 +2,14 @@ from numbers import Number
 
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
-from cadlib.util.number import to_list_of_numbers
+from cadlib.util.number import to_number
 
 class ScaleXyz(Transform):
-    def __init__(self, xyz):
-        self._xyz = to_list_of_numbers(xyz, "xyz", 3)
+    def __init__(self, x, y, z):
+        x = to_number(x, None, "x", [])
+        y = to_number(y, None, "y", [])
+        z = to_number(z, None, "z", [])
+        self._xyz = [x, y, z]
 
     def __eq__(self, other):
         return isinstance(other, ScaleXyz) and other._xyz == self._xyz

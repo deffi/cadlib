@@ -1,8 +1,3 @@
-Next:
-  * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
-  * Tests: pass empty or wrong-size vectors, must fail (all transforms, cube,
-    others?)
-
 Library:
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
@@ -44,8 +39,6 @@ CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
-  * [High]   ScaleXyz should not accept a vector, similar to RotateXyz and
-             RotateYpr
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
@@ -98,6 +91,8 @@ Model:
 
 Tests:
   * [Low]    Primitives (object and transform): test negative numbers
+  * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
+             and object primitives)
 
 Documentation:
   * [Medium] Better readme file and project description

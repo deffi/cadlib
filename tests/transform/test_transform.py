@@ -10,7 +10,7 @@ class TestTransform(TestCase):
     def test_inequality(self):
         # Different-type transformations are not equal (even if the values are identical)
         transforms = [
-            ScaleXyz    ([1, 2, 3]),
+            ScaleXyz (1, 2, 3),
             Translate([1, 2, 3]),
             RotateXyz(1, 2, 3),
             RotateYpr(1, 2, 3),
@@ -24,7 +24,7 @@ class TestTransform(TestCase):
     def test_multiplication(self):
         # Create some transform
         r = RotateXyz(60, 30, 15)
-        s = ScaleXyz    ([1, 2, -1])
+        s = ScaleXyz (1, 2, -1)
         t = Translate([30, 20, 10])
 
         # 2-chained
