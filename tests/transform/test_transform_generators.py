@@ -103,6 +103,9 @@ class TestTransformGenerators(TestCase):
         with self.assertRaises(TypeError): rotate(xyz = 0)
         with self.assertRaises(TypeError): rotate(ypr = 0)
 
+        # Canonical forms - invalid values
+        with self.assertRaises(ValueError): rotate(frm = [1, 2], to = [2, 1])
+
         # Convenience forms, duplicate specification
         with self.assertRaises(ValueError): rotate(X, 45, axis = X)
         with self.assertRaises(ValueError): rotate(X, 45, angle = 45)
