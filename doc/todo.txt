@@ -31,9 +31,6 @@ Primitives:
   * [Medium] More primitives? See OpenSCAD documentation
   * [Medium] Plane: through point
 
-CSG:
-  * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
-
 Transform:
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)

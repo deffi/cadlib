@@ -11,6 +11,7 @@ class TestCsg(TestCase):
         sphere   = Sphere(11)
         cube     = Cube([11, 22, 33])
         cylinder = Cylinder(Z, 11, 22)
+        object_list = [sphere, cube, cylinder]
 
         # Empty
         Union([])
@@ -18,9 +19,14 @@ class TestCsg(TestCase):
         Difference([])
 
         # With objects
-        Union       ([sphere, cube, cylinder])
-        Intersection([sphere, cube, cylinder])
-        Difference  ([sphere, cube, cylinder])
+        self.assertEqual(Union       (object_list).children, object_list)
+        self.assertEqual(Intersection(object_list).children, object_list)
+        self.assertEqual(Difference  (object_list).children, object_list)
+
+        # With generator
+        self.assertEqual(Union       (o for o in object_list), Union       (object_list))
+        self.assertEqual(Intersection(o for o in object_list), Intersection(object_list))
+        self.assertEqual(Difference  (o for o in object_list), Difference  (object_list))
 
         # With invalid objects
         with self.assertRaises(TypeError): Union(None)           # None instead of empty list
