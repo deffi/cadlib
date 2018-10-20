@@ -1,5 +1,5 @@
 from numbers import Number
-from cadlib.util import Vector, to_vector, X, Y, Z
+from cadlib.util import Vector, X, Y, Z
 
 from cadlib.object.object import Object
 from cadlib.scad.scad import ScadObject
@@ -18,7 +18,7 @@ class Cylinder(Object):
         # direction_or_base must be a vector type, or 0 as a shortcut for (0, 0, 0)
         if isinstance(direction_or_base, (Vector, list, tuple)):
             # Vector type
-            direction_or_base = to_vector(direction_or_base, "direction_or_base", 3)
+            direction_or_base = Vector.convert(direction_or_base, "direction_or_base", 3)
         elif direction_or_base is 0:
             # Zero
             direction_or_base = Vector(0, 0, 0)
@@ -33,7 +33,7 @@ class Cylinder(Object):
         elif isinstance(length_or_cap, (Vector, list, tuple)):
             # Vector type - base/cap
             self._base = direction_or_base
-            self._cap  = to_vector(length_or_cap, "length_or_cap", 3)
+            self._cap  = Vector.convert(length_or_cap, "length_or_cap", 3)
         else:
             raise ValueError("length_or_cap must be a vector type or a number")
 

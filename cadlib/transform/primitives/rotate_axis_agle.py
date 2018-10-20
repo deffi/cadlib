@@ -1,4 +1,4 @@
-from cadlib.util import to_vector
+from cadlib.util import Vector
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
 from cadlib.util.number import to_number
@@ -6,7 +6,7 @@ from cadlib.util.number import to_number
 
 class RotateAxisAngle(Transform):
     def __init__(self, axis, angle = None):
-        axis = to_vector(axis, "axis", 3)
+        axis = Vector.convert(axis, "axis", 3)
         if axis.length == 0:
             raise ValueError("axis may not be zero-length")
 

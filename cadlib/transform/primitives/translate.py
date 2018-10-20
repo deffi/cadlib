@@ -1,11 +1,11 @@
-from cadlib.util import to_vector
+from cadlib.util import Vector
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
 
 
 class Translate(Transform):
     def __init__(self, vector):
-        self._vector = to_vector(vector, "vector", 3)
+        self._vector = Vector.convert(vector, "vector", 3)
 
     def __eq__(self, other):
         return isinstance(other, Translate) and other._vector == self._vector

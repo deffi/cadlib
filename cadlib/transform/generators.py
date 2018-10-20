@@ -6,7 +6,7 @@ import cadlib.transform.primitives.rotate_xyz
 import cadlib.transform.primitives.rotate_ypr
 import cadlib.transform.primitives.scale_xyz
 import cadlib.transform.primitives.translate
-from cadlib.util import Vector, to_vector
+from cadlib.util import Vector
 from cadlib.util import both
 
 __all__ = ['rotate', 'scale', 'translate']
@@ -87,8 +87,9 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with frm")
         if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with frm")
 
-        frm = to_vector(frm)
-        to  = to_vector(to)
+        # TODO use length check?
+        frm = Vector.convert(frm)
+        to  = Vector.convert(to)
 
         if frm.length_squared == 0: raise ValueError("frm" " cannot be the zero vector")
         if to .length_squared == 0: raise ValueError("to"  " cannot be the zero vector")

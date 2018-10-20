@@ -1,4 +1,4 @@
-from cadlib.util.vector import Vector, to_vector, X, Y, Z
+from cadlib.util.vector import Vector, X, Y, Z
 from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
 
@@ -432,22 +432,22 @@ class TestVector(TestCase):
     ## Helpers ##
     #############
 
-    def test_to_vector(self):
+    def test_convert(self):
         # Regular call without length check
-        self.assertEqual(to_vector(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
-        self.assertEqual(to_vector(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
-        self.assertEqual(to_vector(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
+        self.assertEqual(Vector.convert(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
+        self.assertEqual(Vector.convert(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
+        self.assertEqual(Vector.convert(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
 
         # Empty
-        self.assertEqual(to_vector([], "dummy", None), Vector())
+        self.assertEqual(Vector.convert([], "dummy", None), Vector())
 
         # Length check
-        self.assertEqual(                   to_vector([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
-        with self.assertRaises(ValueError): to_vector([1, 2, 3], "dummy", 4)                   # Failure
+        self.assertEqual(                   Vector.convert([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
+        with self.assertRaises(ValueError): Vector.convert([1, 2, 3], "dummy", 4)                   # Failure
 
         # Invalid values
-        with self.assertRaises(TypeError ): to_vector(None       , "dummy", None)
-        with self.assertRaises(TypeError ): to_vector(1          , "dummy", None)
-        with self.assertRaises(TypeError ): to_vector(""         , "dummy", None)
-        with self.assertRaises(TypeError ): to_vector("123"      , "dummy", None)
-        with self.assertRaises(TypeError ): to_vector([1, 2, "3"], "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert(None       , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert(1          , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert(""         , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert([1, 2, "3"], "dummy", None)

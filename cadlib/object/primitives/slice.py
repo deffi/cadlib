@@ -1,4 +1,4 @@
-from cadlib.util.vector import to_vector
+from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object.object import Object
@@ -7,7 +7,7 @@ from cadlib.object.primitives.cube import Cube
 
 class Slice(Object):
     def __init__(self, normal, offset1, offset2):
-        normal = to_vector(normal, 3)
+        normal = Vector.convert(normal, 3)
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 

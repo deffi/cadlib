@@ -1,7 +1,7 @@
 import math
 
 from .matrix import Matrix
-from .vector import Vector, to_vector
+from .vector import Vector
 
 degree = math.pi / 180
 
