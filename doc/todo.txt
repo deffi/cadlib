@@ -1,4 +1,5 @@
 Next:
+  * Use scale_uniform in scale() generator
   * ScaleXyz should not accept a vector, similar to RotateXyz and RotateYpr
   * Tests: pass empty or wrong-size vectors, must fail (all transforms, cube,
     others?)
@@ -44,8 +45,7 @@ CSG:
   * [Medium] Union/... aus Iterable erstellen (Union(o for o in objects))
 
 Transform:
-  * [High]   ScaleUniform (don't use ScaleXyz for this)
-             And update scale generator
+  * [High]   Update scale generator to use ScaleUniform
   * [High]   ScaleXyz should not accept a vector, similar to RotateXyz and
              RotateYpr
   * [Medium] Scale around (instead of along) axis?
