@@ -2,7 +2,7 @@ from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object.object import Object
-from cadlib.object.primitives.cube import Cube
+from cadlib.object.primitives import Cube
 
 
 class Slice(Object):

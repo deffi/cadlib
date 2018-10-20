@@ -3,8 +3,7 @@ from cadlib.object.transformed import Transformed
 from cadlib.transform.chained import Chained
 # from cadlib.util.vector import X, Y, Z
 from cadlib.scad.scad import ScadObject
-from cadlib.object.primitives.cube import Cube
-from cadlib.object.primitives.sphere import Sphere
+from cadlib.object.primitives import Cube
 from cadlib.transform.primitives.scale_xyz import ScaleXyz
 from cadlib.transform.primitives.scale_uniform import ScaleUniform
 from cadlib.transform.primitives.translate import Translate
