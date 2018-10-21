@@ -62,7 +62,7 @@ class Vector:
 
     @property
     def is_zero(self):
-        return all(x is 0 for x in self._values)
+        return all(x == 0 for x in self._values)
 
     def __len__(self):
         return len(self._values)

@@ -54,6 +54,8 @@ class TestVector(TestCase):
         self.assertTrue(Vector(0, 0)   .is_zero)
         self.assertTrue(Vector(0, 0, 0).is_zero)
 
+        self.assertTrue(Vector(0.0).is_zero)
+
         self.assertFalse(Vector(1)      .is_zero)
         self.assertFalse(Vector(1, 0)   .is_zero)
         self.assertFalse(Vector(1, 0, 0).is_zero)
