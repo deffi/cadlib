@@ -2,7 +2,7 @@ from tests.unit_test import TestCase
 from cadlib.object.primitives import Plane
 from cadlib.util.vector import Vector
 from cadlib.util.vector import X, Y, Z
-# # from cadlib.scad.scad import ScadObject
+
 
 class TestPlane(TestCase):
     def test_construction(self):

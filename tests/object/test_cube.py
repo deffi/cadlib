@@ -1,10 +1,7 @@
-# import math
-#
 from tests.unit_test import TestCase
 from cadlib.object.primitives import Cube
-# from cadlib.util.vector import X, Y, Z
-# from cadlib.scad.scad import ScadObject
-#
+
+
 class TestSphere(TestCase):
     def test_construction(self):
         # Single size
