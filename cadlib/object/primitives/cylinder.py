@@ -3,8 +3,7 @@ from cadlib.util import Vector, X, Y, Z
 
 from cadlib.object.object import Object
 from cadlib.scad.scad import ScadObject
-from cadlib.transform.generators import rotate, translate
-
+from cadlib.transform.primitives import RotateFromTo, Translate
 from cadlib.util import both
 
 class Cylinder(Object):
@@ -68,10 +67,10 @@ class Cylinder(Object):
 
         # Rotate to the correct orientation (skip if it is along the Z axis)
         if direction != Z:
-            cylinder = rotate(frm = Z, to = direction, ignore_ambiguity = True).to_scad(cylinder)
+            cylinder = RotateFromTo(frm = Z, to = direction, ignore_ambiguity = True).to_scad(cylinder)
 
         # Move to the correct position (skip if the base is at the origin)
         if self._base != Vector(0, 0, 0):
-            cylinder = translate(self._base).to_scad(cylinder)
+            cylinder = Translate(self._base).to_scad(cylinder)
 
         return cylinder

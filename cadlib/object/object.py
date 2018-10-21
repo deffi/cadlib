@@ -1,7 +1,6 @@
 from cadlib.util.tree import Node
 from cadlib.transform.transform import Transform
-from cadlib.transform.generators import rotate, scale, translate
-from cadlib.transform import shortcuts
+from cadlib.transform import shortcuts, generators
 
 
 # Note that, while Union is a subclass of Object, the special case of adding an
@@ -110,9 +109,9 @@ class Object:
     ## Postfix transform ##
     #######################
 
-    def rotate   (self, *args, **kwargs): return rotate   (*args, **kwargs) * self
-    def scale    (self, *args, **kwargs): return scale    (*args, **kwargs) * self
-    def translate(self, *args, **kwargs): return translate(*args, **kwargs) * self
+    def rotate   (self, *args, **kwargs): return generators.rotate   (*args, **kwargs) * self
+    def scale    (self, *args, **kwargs): return generators.scale    (*args, **kwargs) * self
+    def translate(self, *args, **kwargs): return generators.translate(*args, **kwargs) * self
 
     def transform(self, transform):
         if not isinstance(transform, Transform):

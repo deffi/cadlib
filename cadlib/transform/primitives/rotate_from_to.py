@@ -4,7 +4,6 @@ from cadlib.util import Vector
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
 from cadlib.transform.primitives import RotateXyz, RotateAxisAngle
-from cadlib.util.number import to_number
 
 
 class RotateFromTo(Transform):
