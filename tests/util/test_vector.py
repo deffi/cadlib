@@ -458,6 +458,11 @@ class TestVector(TestCase):
         self.assertEqual(Vector(3, 1, 2).closest_axis(), X)
         self.assertEqual(Vector(3, 2, 1).closest_axis(), X)
 
+    def test_replace(self):
+        self.assertEqual(Vector(1, 2, 3).replace(0, 1), Vector(1, 2, 3))
+        self.assertEqual(Vector(0, 0, 3).replace(0, 1), Vector(1, 1, 3))
+        self.assertEqual(Vector(1, 2, 3).replace(1, 0).replace(2, 0), Vector(0, 0, 3))
+
 
     #############
     ## Helpers ##

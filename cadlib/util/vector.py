@@ -224,10 +224,10 @@ class Vector:
         result_values[index] = math.copysign(1, self._values[index])
         return Vector(*result_values)
 
-    # TODO test
     def replace(self, value, replacement):
         values = [replacement if v == value else v for v in self._values]
         return Vector(*values)
+
 
     #########
     ## I/O ##
