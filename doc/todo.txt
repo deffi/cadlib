@@ -1,7 +1,5 @@
-Library:
-  * [Medium] from cadlib import * short import all shortcuts, and only those
-
 Object:
+  * [Medium] Add object generators
   * [Medium] At least call the "ridiculous" transforms, and add manual tests
              That's Plane, Slice, and ScaleAxisFactor
   * [Medium] Assembly objects
@@ -35,6 +33,7 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
+  * [Medium] Merge shortcuts into generators
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
@@ -56,6 +55,7 @@ CSG:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
                * When subtracting a union, extract its children (must also be done for Object - Union)
+  * [Medium] Add csg generators
   * [Low]    Can we make Union and Intersection independent of the order, so that a+b == b+a?
                * We could use a set instead of a list, or we could convert the list to a set for comparison. This would
                  require a hash method

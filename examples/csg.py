@@ -1,5 +1,4 @@
-from cadlib.object.primitives import Cube, Sphere
-from cadlib.scad import render_to_file
+from cadlib.simple import *
 
 sphere_r = 1
 cube_size = 1.6

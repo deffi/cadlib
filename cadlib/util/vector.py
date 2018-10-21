@@ -237,7 +237,6 @@ class Vector:
     def format(self):
         return Table([[v] for v in self._values]).format(alignment="r")
 
-
 X = Vector(1, 0, 0)
 Y = Vector(0, 1, 0)
 Z = Vector(0, 0, 1)

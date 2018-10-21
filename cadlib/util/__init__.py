@@ -5,6 +5,7 @@ from .vector import Vector
 
 degree = math.pi / 180
 
+# TODO we already have these in Vector
 X = Vector(1, 0, 0)
 Y = Vector(0, 1, 0)
 Z = Vector(0, 0, 1)
