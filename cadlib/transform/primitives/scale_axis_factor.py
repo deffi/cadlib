@@ -44,10 +44,10 @@ class ScaleAxisFactor(Transform):
             return ScadObject("scale", [[1, 1, self._factor]], None, children)
 
         # General case
-        # TODO as single multiplication
         transform_axis = self._axis.closest_axis()
-        equivalent = RotateFromTo(self._axis, transform_axis)
-        equivalent = ScaleXyz(*(transform_axis * self._factor).values) * equivalent
-        equivalent = RotateFromTo(transform_axis, self._axis) * equivalent
 
-        return equivalent.to_scad(target)
+        forward_rotation = RotateFromTo(self._axis, transform_axis)
+        scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
+        back_rotation = RotateFromTo(transform_axis, self._axis)
+
+        return (back_rotation * scale * forward_rotation).to_scad(target)

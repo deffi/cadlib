@@ -60,6 +60,6 @@ class TestScaleAxisFactor(TestCase):
         angle = math.atan(1/2) / degree
         self.assertEqual(ScaleAxisFactor([2, 1, 0], 3).to_scad(None),
                 ScadObject("rotate", None, [('a', angle), ('v', [0.0, 0.0, 1.0])], [
-                    ScadObject("scale", [[3, 0, 0]], None, [
+                    ScadObject("scale", [[3, 1, 1]], None, [
                         ScadObject("rotate", None, [('a', angle), ('v', [0.0, 0.0, -1.0])], None)
                     ])]))

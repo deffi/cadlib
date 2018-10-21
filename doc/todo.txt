@@ -40,6 +40,7 @@ Transform:
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
   * [Medium] ScaleXyz and ScaleUniform: warn if one axis is 0
   * [Medium] Cube, Cylinder: warn if length is 0
+  * [Medium] Inverse transforms
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
