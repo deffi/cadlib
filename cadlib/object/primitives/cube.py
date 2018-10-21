@@ -1,6 +1,6 @@
 from numbers import Number
 
-from cadlib.object.object import Object
+from cadlib.object import Object
 from cadlib.scad.scad import ScadObject
 
 

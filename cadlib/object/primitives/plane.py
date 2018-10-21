@@ -1,7 +1,7 @@
 from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
-from cadlib.object.object import Object
+from cadlib.object import Object
 from cadlib.object.primitives import Cube
 
 

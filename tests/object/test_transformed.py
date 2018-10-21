@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.object.transformed import Transformed
+from cadlib.object import Transformed
 from cadlib.transform.chained import Chained
 from cadlib.scad.scad import ScadObject
 from cadlib.object.primitives import Cube

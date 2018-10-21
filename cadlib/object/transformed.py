@@ -1,4 +1,4 @@
-from cadlib.object.object import Object
+from cadlib.object import Object
 from cadlib.transform.transform import Transform
 from cadlib.util.tree import Node
 

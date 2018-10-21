@@ -95,7 +95,7 @@ class Object:
             return NotImplemented
 
     def __rmul__(self, other):
-        from cadlib.object.transformed import Transformed
+        from cadlib.object import Transformed
         if isinstance(other, Transform):
             # Transform * Object - create Transformed Object
             return Transformed(other, self)

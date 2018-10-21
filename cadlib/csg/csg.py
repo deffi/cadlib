@@ -1,5 +1,5 @@
 from cadlib.util.tree import Node
-from cadlib.object.object import Object
+from cadlib.object import Object
 
 
 class Csg(Object):
