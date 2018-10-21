@@ -35,16 +35,16 @@ class Vector:
 
     @classmethod
     def convert(cls, value, label = None, required_length = None):
-        # TODO call with single int - error on len()
+        if not isinstance(value, (Vector, list, tuple)):
+            raise TypeError("Invalid vector for {}: {}".format(label, value))
+
         if required_length is not None and len(value) != required_length:
             raise ValueError("Invalid length for {}, must be {}".format(label, required_length))
 
         if isinstance(value, Vector):
             return value
-        elif isinstance(value, (list, tuple)):
-            return Vector(*value)
         else:
-            raise TypeError("Invalid vector for {}: {}".format(label, value))
+            return Vector(*value)
 
 
     ################
