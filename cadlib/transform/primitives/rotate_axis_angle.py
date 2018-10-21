@@ -3,7 +3,6 @@ from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
 from cadlib.util.number import to_number
 
-
 class RotateAxisAngle(Transform):
     def __init__(self, axis, angle = None):
         axis = Vector.convert(axis, "axis", 3)
@@ -25,3 +24,4 @@ class RotateAxisAngle(Transform):
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("rotate", None, [("a", self._angle), ("v", list(self._axis))], children)
+    

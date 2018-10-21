@@ -1,7 +1,7 @@
 # Where a vector is appropriate, a list of 3 numbers will also be accepted. Note that, in particular, this does not
 # apply to ScaleXyz, RotateXyz and RotateRpy, whose arguments are not vectors.
 
-from .rotate_axis_agle import RotateAxisAngle
+from .rotate_axis_angle import RotateAxisAngle
 from .rotate_xyz import RotateXyz
 from .rotate_ypr import RotateYpr
 from .rotate_from_to import RotateFromTo
