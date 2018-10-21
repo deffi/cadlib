@@ -1,17 +1,13 @@
 from cadlib.object.transformed import Transformed
 from cadlib.object.primitives import Sphere, Cube, Cylinder
 from cadlib.transform.chained import Chained
-from cadlib.transform.primitives.translate import Translate
-from cadlib.transform.primitives.scale_xyz import ScaleXyz
-from cadlib.transform.primitives.scale_uniform import ScaleUniform
-from cadlib.transform.primitives.scale_axis_factor import ScaleAxisFactor
-from cadlib.transform.primitives.rotate_xyz import RotateXyz
+from cadlib.transform.primitives import Translate, ScaleXyz, ScaleUniform, ScaleAxisFactor, RotateXyz
 from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 from cadlib.csg.intersection import Intersection
 from cadlib.csg.difference import Difference
 from cadlib.csg.union import Union
-from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives import RotateYpr
 
 
 class TestObject(TestCase):

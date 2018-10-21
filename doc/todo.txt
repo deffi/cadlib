@@ -1,4 +1,6 @@
 Library:
+  * [Medium] check all (import|from).*primitives\.
+  * [Medium] transform.primitives.__init__: import all primitives
   * [Medium] Module-level symbols, e. g. from cadlib.object import Cube
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
@@ -32,6 +34,7 @@ Primitives:
   * [Medium] More primitives: cone
   * [Medium] More primitives? See OpenSCAD documentation
   * [Medium] Plane: through point
+  * [Medium] Don't use generators in transform primitives or object primitives
 
 Transform:
   * [Medium] Scale around (instead of along) axis?

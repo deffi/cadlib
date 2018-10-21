@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives import RotateYpr
 from cadlib.scad.scad import ScadObject
 
 class TestRotateYpr(TestCase):

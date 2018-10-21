@@ -1,10 +1,4 @@
-from cadlib.transform.primitives.rotate_axis_agle import RotateAxisAngle
-from cadlib.transform.primitives.rotate_xyz import RotateXyz
-from cadlib.transform.primitives.rotate_ypr import RotateYpr
-from cadlib.transform.primitives.scale_xyz import ScaleXyz
-from cadlib.transform.primitives.scale_axis_factor import ScaleAxisFactor
-from cadlib.transform.primitives.scale_uniform import ScaleUniform
-from cadlib.transform.primitives.translate import Translate
+from cadlib.transform.primitives import RotateAxisAngle, RotateYpr, RotateXyz, ScaleXyz, ScaleAxisFactor, ScaleUniform, Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
 from cadlib.util import Vector, X, Y, Z

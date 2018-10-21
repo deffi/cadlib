@@ -1,11 +1,8 @@
 from numbers import Number
 from warnings import warn
 
-import cadlib.transform.primitives.rotate_axis_agle
-import cadlib.transform.primitives.rotate_xyz
-import cadlib.transform.primitives.rotate_ypr
-import cadlib.transform.primitives.scale_xyz
-import cadlib.transform.primitives.translate
+from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, \
+    ScaleXyz, ScaleUniform, ScaleAxisFactor, Translate
 from cadlib.util import Vector
 from cadlib.util import both
 
@@ -79,7 +76,7 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
         if ypr is not None: raise ValueError("ypr" " cannot be specified together with axis")
 
-        return cadlib.transform.primitives.rotate_axis_agle.RotateAxisAngle(axis, angle)
+        return RotateAxisAngle(axis, angle)
 
     elif frm is not None:
         # Check that no other specification is given
@@ -99,17 +96,17 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
             # positive) or rotation by 180 around ambiguous axis (opposite directions, dot product negative).
             if frm.dot(to) > 0:
                 # Rotation has no effect - return an identity transform
-                return cadlib.transform.primitives.rotate_xyz.RotateXyz(0, 0, 0)
+                return RotateXyz(0, 0, 0)
             else:
                 # Rotation is ambiguous
                 if not ignore_ambiguity:
                     warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
                          .format(frm.values, to.values), RuntimeWarning, 2)
-                return cadlib.transform.primitives.rotate_axis_agle.RotateAxisAngle(frm.normal().normalized(), 180)
+                return RotateAxisAngle(frm.normal().normalized(), 180)
         else:
             # Regular case
             angle = frm.angle(to)
-            return cadlib.transform.primitives.rotate_axis_agle.RotateAxisAngle(axis.normalized(), angle)
+            return RotateAxisAngle(axis.normalized(), angle)
 
 
     elif xyz is not None:
@@ -118,7 +115,7 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
         if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with axis")
 
-        return cadlib.transform.primitives.rotate_xyz.RotateXyz(*xyz)
+        return RotateXyz(*xyz)
 
     elif ypr is not None:
         # Check that no other specification is given
@@ -126,7 +123,7 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
         if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with axis")
 
-        return cadlib.transform.primitives.rotate_ypr.RotateYpr(*ypr)
+        return RotateYpr(*ypr)
 
     else:
         raise ValueError("Invalid call signature")
@@ -177,17 +174,17 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
         # Check that no other specification is given
         if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
 
-        return cadlib.transform.primitives.scale_axis_factor.ScaleAxisFactor(axis, factor)
+        return ScaleAxisFactor(axis, factor)
 
     elif xyz is not None:
         # Check that no other specification is given
         if axis   is not None: raise ValueError("axis"   " cannot be specified together with xyz")
         if factor is not None: raise ValueError("factor" " cannot be specified together with xyz")
 
-        return cadlib.transform.primitives.scale_xyz.ScaleXyz(*xyz)
+        return ScaleXyz(*xyz)
 
     elif factor is not None:
-        return cadlib.transform.primitives.scale_uniform.ScaleUniform(factor)
+        return ScaleUniform(factor)
 
     else:
         raise ValueError("Invalid call signature")
@@ -195,4 +192,4 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
 
 
 def translate(vector):
-    return cadlib.transform.primitives.translate.Translate(vector)
+    return Translate(vector)

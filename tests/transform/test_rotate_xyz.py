@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.transform.primitives.rotate_xyz import RotateXyz
+from cadlib.transform.primitives import RotateXyz
 
 class TestRotateXyz(TestCase):
     def test_construction(self):

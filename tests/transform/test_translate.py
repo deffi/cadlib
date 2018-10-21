@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.transform.primitives.translate import Translate
+from cadlib.transform.primitives import Translate
 
 class TestTranslate(TestCase):
     def test_construction(self):

@@ -1,7 +1,4 @@
-from cadlib.transform.primitives.translate import Translate
-from cadlib.transform.primitives.scale_xyz import ScaleXyz
-from cadlib.transform.primitives.rotate_xyz import RotateXyz
-from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives import Translate, ScaleXyz, RotateXyz, RotateYpr
 from cadlib.transform.chained import Chained
 from tests.unit_test import TestCase
 from cadlib.transform import shortcuts

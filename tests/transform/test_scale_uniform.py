@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.transform.primitives.scale_uniform import ScaleUniform
+from cadlib.transform.primitives import ScaleUniform
 
 class TestScaleUniform(TestCase):
     def test_construction(self):

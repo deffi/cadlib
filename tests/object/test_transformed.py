@@ -1,13 +1,9 @@
 from tests.unit_test import TestCase
 from cadlib.object.transformed import Transformed
 from cadlib.transform.chained import Chained
-# from cadlib.util.vector import X, Y, Z
 from cadlib.scad.scad import ScadObject
 from cadlib.object.primitives import Cube
-from cadlib.transform.primitives.scale_xyz import ScaleXyz
-from cadlib.transform.primitives.scale_uniform import ScaleUniform
-from cadlib.transform.primitives.translate import Translate
-from cadlib.transform.primitives.rotate_xyz import RotateXyz
+from cadlib.transform.primitives import ScaleXyz, ScaleUniform, Translate, RotateXyz
 
 class TestTransformed(TestCase):
     def test_construction(self):

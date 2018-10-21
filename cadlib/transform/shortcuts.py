@@ -1,5 +1,4 @@
-from cadlib.transform.primitives.translate import Translate
-from cadlib.transform.primitives.rotate_ypr import RotateYpr
+from cadlib.transform.primitives import Translate, RotateYpr
 
 __all__ = [
     'right', 'left', 'forward', 'back', 'up', 'down',

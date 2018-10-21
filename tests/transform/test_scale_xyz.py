@@ -1,5 +1,5 @@
 from tests.unit_test import TestCase
-from cadlib.transform.primitives.scale_xyz import ScaleXyz
+from cadlib.transform.primitives import ScaleXyz
 from cadlib.util.vector import Vector
 
 class TestScaleXyz(TestCase):
