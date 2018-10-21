@@ -1,7 +1,5 @@
 from cadlib.object.primitives import Sphere, Cube, Cylinder
-from cadlib.csg.intersection import Intersection
-from cadlib.csg.difference import Difference
-from cadlib.csg.union import Union
+from cadlib.csg import Intersection, Difference, Union
 from cadlib.scad.scad import ScadObject
 from cadlib.util.vector import Z
 from tests.unit_test import TestCase

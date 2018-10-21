@@ -2,7 +2,6 @@ from cadlib.util.tree import Node
 from cadlib.transform.transform import Transform
 from cadlib.transform import shortcuts, generators
 
-
 # Note that, while Union is a subclass of Object, the special case of adding an
 # Object and a Union (in either order) or adding two Unions is handled
 # differently from adding two generic Objects: rather than nested Unions, a
@@ -44,7 +43,7 @@ class Object:
     ################
 
     def __add__(self, other):
-        from cadlib.csg.union import Union
+        from cadlib.csg import Union
         if isinstance(other, Union):
             # Object + Union - defer to Union.__radd__ (see note above)
             return NotImplemented
@@ -66,13 +65,13 @@ class Object:
             Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3))
             Difference(1, 2) - Object(3) => Difference(Difference(1, 2), 3)
         """
+        from cadlib.csg import Difference
+
         if isinstance(other, Object):
-            from cadlib.csg.difference import Difference
             return Difference([self, other])
         else:
             return NotImplemented
 
-        from cadlib.csg.difference import Difference
         if isinstance(other, Difference):
             # Object - Difference - defer to Difference.__rsub__ (see note above)
             return NotImplemented

@@ -4,9 +4,7 @@ from cadlib.transform.chained import Chained
 from cadlib.transform.primitives import Translate, ScaleXyz, ScaleUniform, ScaleAxisFactor, RotateXyz
 from cadlib.util.vector import Z
 from tests.unit_test import TestCase
-from cadlib.csg.intersection import Intersection
-from cadlib.csg.difference import Difference
-from cadlib.csg.union import Union
+from cadlib.csg import Intersection, Difference, Union
 from cadlib.transform.primitives import RotateYpr
 
 

@@ -1,4 +1,4 @@
-from cadlib.csg.csg import Csg
+from cadlib.csg import Csg
 from cadlib.object.object import Object
 from cadlib.scad.scad import ScadObject
 
