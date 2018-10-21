@@ -1,6 +1,7 @@
-from object.primitives import *
-from csg.csg import *
-from scad.scad import render_to_file
+from cadlib.object.primitives import Sphere, Slice
+from cadlib.csg import Union
+from cadlib.scad import render_to_file
+from cadlib.util.vector import Z
 
 sphere   = Sphere(1)
 
