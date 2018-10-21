@@ -1,6 +1,7 @@
+import math
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import ScaleAxisFactor
-from cadlib.util import Vector
+from cadlib.util import Vector, degree
 from cadlib.scad import ScadObject
 from cadlib.util.vector import X, Y, Z
 
@@ -52,7 +53,13 @@ class TestScaleAxisFactor(TestCase):
         self.assertEqual(ScaleAxisFactor(Vector(1, 1, 0), 1).to_scad(None),
             ScadObject("scale", [[1, 1, 1]], None, None))
 
-        # Now the general case is just too ridiculous to test, but we should
-        # expect it to execute without raising an exception.
-        ScaleAxisFactor(Vector(1, 2,  3), 4).to_scad(None)
-        ScaleAxisFactor(Vector(1, 2, -3), 4).to_scad(None)
+        # General case, with the scale axis in the Y/Z plane. The scale axis is
+        # rotated to the X axis.
+        # Note that we're comparing floating point numbers here - rounding
+        # errors might become an issue.
+        angle = math.atan(1/2) / degree
+        self.assertEqual(ScaleAxisFactor([2, 1, 0], 3).to_scad(None),
+                ScadObject("rotate", None, [('a', angle), ('v', [0.0, 0.0, 1.0])], [
+                    ScadObject("scale", [[3, 0, 0]], None, [
+                        ScadObject("rotate", None, [('a', angle), ('v', [0.0, 0.0, -1.0])], None)
+                    ])]))

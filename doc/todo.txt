@@ -1,7 +1,6 @@
 Object:
   * [Medium] Add object generators
-  * [Medium] At least call the "ridiculous" transforms, and add manual tests
-             That's Plane, Slice, and ScaleAxisFactor
+  * [Medium] Add manual tests for Plane, Slice, and ScaleAxisFactor
   * [Medium] Assembly objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
              returns self

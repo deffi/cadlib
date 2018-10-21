@@ -2,6 +2,8 @@ from tests.unit_test import TestCase
 from cadlib.object.primitives import Slice
 from cadlib.util.vector import Vector
 from cadlib.util.vector import X, Y, Z
+from cadlib.scad import ScadObject
+from cadlib import infinity
 
 class TestSlice(TestCase):
     def test_construction(self):
@@ -30,5 +32,12 @@ class TestSlice(TestCase):
         self.assertEqual(Slice(X, 4, 5), Slice([1, 0, 0], 4, 5))  # Different normal
 
     def test_to_scad(self):
-        # Now that's just too ridiculous to test
-        pass
+        # General case, with the normal vector in the Y/Z plane
+        self.assertEqual(Slice([0, 1, 1], 2, 2.5).to_scad(),
+            ScadObject("rotate", None, [('a', 45.0), ('v', [-1.0, 0.0, 0.0])], [
+                ScadObject("translate", [[0, 0, 2]], None, [
+                    ScadObject("translate", [[-infinity/2, -infinity/2, 0]], None, [
+                        ScadObject("cube", [[infinity, infinity, 0.5]], None, None)
+                    ])
+                ])
+            ]))

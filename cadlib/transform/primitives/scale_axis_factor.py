@@ -44,6 +44,7 @@ class ScaleAxisFactor(Transform):
             return ScadObject("scale", [[1, 1, self._factor]], None, children)
 
         # General case
+        # TODO as single multiplication
         transform_axis = self._axis.closest_axis()
         equivalent = RotateFromTo(self._axis, transform_axis)
         equivalent = ScaleXyz(*(transform_axis * self._factor).values) * equivalent
