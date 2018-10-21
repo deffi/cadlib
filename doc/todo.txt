@@ -19,12 +19,14 @@ Object:
              Probably even better: use the anchor mechanism
   * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])? rotate_xyz
              does it like this and the argument is not (strictly) a vector
+             We probably want a generator that accepts both.
   * [Low]    Shape (2-dimensional object) and associated primitives
   * [Low]    Investigate part/hole
                * Are we supposed to do Pipe+Hole or Pipe-Hole?
                * Can we do Block - (Pipe +- Hole)?
                * Is Hole * Object defined?
-  * [Medium] Can we do [cube, sphere, cylinder].sum()?
+  * [Medium] Can we do sum([cube, sphere, cylinder])?
+             We probably need an empty union (empty_union + object = object)
   * [Medium] Primitives' __repr__ is not a repr
   * [Medium] __repr__ for everything
 
@@ -45,8 +47,7 @@ Transform:
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
   * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.
-  * [Low]    Clean up transform_generators.rotate, maybe use a generic dispatch mechanism
-  * [Low]    IdentityTransform (for testing, we should probably have an empty SCAD object first)
+  * [Low]    Clean up complex generators, maybe use a generic dispatch mechanism
   * [Low]    Scale: negative values should be translated to mirror for OpenSCAD
              (OpenSCAD does not allow negative scales), or do not allow negative
              scale factors

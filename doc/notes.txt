@@ -1,6 +1,7 @@
 We want to be able to re-use Transform objects without cloning; this implies that the Transform object cannot store a
 reference to the object being transformed or to the next Transform in a chain. Therefore, transformation chains are
-represented by a Chained Transform and a transformed object is represented by a Transformed Object.
+represented by a Chained Transform and a transformed object is represented by a Transformed Object. Also, Objects and
+Transforms are immutable.
 
 Supported operations:
   * Transform * Transform => Chained (Transform)
