@@ -1,1 +1,1 @@
-from .scad_object import ScadObject
+from .scad_object import ScadObject, render_to_file
