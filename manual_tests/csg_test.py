@@ -1,3 +1,6 @@
+from cadlib.object.primitives import Cube, Cylinder, Sphere
+from cadlib.util.vector import Z
+
 def test_case(name, object):
     print(name)
     print("    Cadlib tree:")
@@ -5,11 +8,8 @@ def test_case(name, object):
     print("    OpenSCAD tree:")
     print(object.to_scad().to_tree().format(top_indent="        "))
 
-
-from object.primitives import Cube, Cylinder, Sphere
-
 o1 = Cube([10, 10, 10])
-o2 = Cylinder(5, 5)
+o2 = Cylinder(Z, 5, 5)
 o3 = Sphere(2)
 
 test_case("2-intersection", o1 * o2)

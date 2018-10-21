@@ -1,3 +1,4 @@
+from cadlib.transform.primitives import RotateXyz, ScaleXyz, Translate
 def test_case(name, transform):
     print(name)
     print("    Cadlib tree:")
@@ -6,8 +7,8 @@ def test_case(name, transform):
     print(transform.to_scad(None).to_tree().format(top_indent="        "))
 
 
-rotate    = Rotate([90, 0, 45])
-scale     = Scale([1, 1, 2])
+rotate    = RotateXyz(90, 0, 45)
+scale     = ScaleXyz(1, 1, 2)
 translate = Translate([10, 10, 2])
 
 test_case("One", rotate)

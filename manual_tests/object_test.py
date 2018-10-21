@@ -1,3 +1,7 @@
+from cadlib.transform.primitives import RotateXyz, ScaleXyz, Translate
+from cadlib.object.primitives import Cube
+
+
 def test_case(name, object):
     print(name)
     print("    Cadlib tree:")
@@ -6,13 +10,10 @@ def test_case(name, object):
     print(object.to_scad().to_tree().format(top_indent="        "))
 
 
-from transform.transform import Rotate, Scale, Translate
-from object.primitives import Cube
-
 cube = Cube([5, 5, 2])
 
-rotate = Rotate([90, 0, 45])
-scale = Scale([1, 1, 2])
+rotate = RotateXyz(90, 0, 45)
+scale = ScaleXyz(1, 1, 2)
 translate = Translate([10, 10, 2])
 
 test_case("Simple object", cube)
