@@ -190,9 +190,9 @@ class Vector:
 
     def normal(self):
         # Invalid operation for empty, one-dimensional, and zero-length vectors
-        if len(self) == 0:           raise ValueError("Empty vectors don't have normals")
-        if len(self) == 1:           raise ValueError("One-dimensional vectors don't have normals")
-        if self.length_squared == 0: raise ValueError("Zero vectors don't have normals")
+        if len(self) == 0: raise ValueError("Empty vectors don't have normals")
+        if len(self) == 1: raise ValueError("One-dimensional vectors don't have normals")
+        if self.is_zero  : raise ValueError("Zero vectors don't have normals")
 
         # Algorithm: find any two values, at least one of which is not zero. Swap them and invert one of them. Set all
         # other values to zero. Note that it is permissible for the inverted value to be zero.

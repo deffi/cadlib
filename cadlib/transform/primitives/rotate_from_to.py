@@ -11,10 +11,9 @@ class RotateFromTo(Transform):
         frm = Vector.convert(frm, "frm", 3)
         to  = Vector.convert(to , "to" , 3)
 
-        # TODO use isZero (everwhere; see also lengthSquared)
-        if frm.length == 0:
+        if frm.is_zero:
             raise ValueError("frm may not be zero-length")
-        if to.length == 0:
+        if to.is_zero:
             raise ValueError("frm may not be zero-length")
 
         self._frm = frm
@@ -32,7 +31,7 @@ class RotateFromTo(Transform):
 
     def to_scad(self, target):
         axis = self._frm.cross(self._to)
-        if axis.length == 0:
+        if axis.is_zero:
             # Special case: the vectors are colinear. This means either no rotation (same direction, dot product
             # positive) or rotation by 180 around ambiguous axis (opposite directions, dot product negative).
             if self._frm.dot(self._to) > 0:

@@ -7,7 +7,7 @@ from cadlib.util.number import to_number
 class RotateAxisAngle(Transform):
     def __init__(self, axis, angle = None):
         axis = Vector.convert(axis, "axis", 3)
-        if axis.length == 0:
+        if axis.is_zero:
             raise ValueError("axis may not be zero-length")
 
         self._axis  = axis
