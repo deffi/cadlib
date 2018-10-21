@@ -1,5 +1,4 @@
 Library:
-  * [Medium] Module-level symbols, e. g. from cadlib.object import Cube
   * [Medium] from cadlib import * short import all shortcuts, and only those
 
 Object:
