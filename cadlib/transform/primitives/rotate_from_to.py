@@ -3,7 +3,6 @@ from warnings import warn
 from cadlib.util import Vector
 from cadlib.scad.scad import ScadObject
 from cadlib.transform.transform import Transform
-from cadlib.transform.primitives import RotateXyz, RotateAxisAngle
 
 
 class RotateFromTo(Transform):
@@ -16,9 +15,13 @@ class RotateFromTo(Transform):
         if to.is_zero:
             raise ValueError("frm may not be zero-length")
 
+        if not ignore_ambiguity:
+            if frm.collinear(to) and frm.dot(to) < 0:
+                warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
+                     .format(frm.values, to.values), RuntimeWarning, 2)
+
         self._frm = frm
         self._to  = to
-        self._ignore_ambiguity = ignore_ambiguity
 
     def __eq__(self, other):
         if isinstance(other, RotateFromTo):
@@ -30,25 +33,28 @@ class RotateFromTo(Transform):
         return "Rotate from {} to {}".format(self._frm, self._to)
 
     def to_scad(self, target):
-        axis = self._frm.cross(self._to)
-        if axis.is_zero:
-            # Special case: the vectors are colinear. This means either no rotation (same direction, dot product
-            # positive) or rotation by 180 around ambiguous axis (opposite directions, dot product negative).
+        if self._frm.collinear(self._to):
+            # Special case: the vectors are collinear
             if self._frm.dot(self._to) > 0:
-                # Rotation has no effect - return an identity transform
-                return RotateXyz(0, 0, 0).to_scad(target) # TODO meh
+                # Same direction. No rotation.
+                axis  = None
+                angle = None
             else:
-                # Rotation is ambiguous
-                # TODO do this in the constructor
-                if not self._ignore_ambiguity:
-                    warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
-                         .format(self._frm.values, self._to.values), RuntimeWarning, 2)
-                return RotateAxisAngle(self._frm.normal().normalized(), 180).to_scad(target) # TODO meh
+                # Opposite directions. Rotation by 180 degrees, axis is
+                # ambiguous.
+                axis  = self._frm.normal()  # Arbitrary
+                angle = 180
         else:
             # Regular case
+            axis  = self._frm.cross(self._to)
             angle = self._frm.angle(self._to)
-            return RotateAxisAngle(axis.normalized(), angle).to_scad(target) # TODO meh
 
 
-        children = [target] if target is not None else []
-        return ScadObject("rotate", None, [("a", self._angle), ("v", list(self._axis))], children)
+        if axis is None:
+            # No rotation
+            return target
+        else:
+            # Yes rotation
+            axis = axis.normalized()
+            children = [target] if target is not None else []
+            return ScadObject("rotate", None, [("a", angle), ("v", axis.values)], children)

@@ -1,6 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateFromTo
-from cadlib.util import Vector
+from cadlib.util import Vector, X, Y, Z
+from cadlib.object.primitives import Cube
 
 class TestRotateFromTo(TestCase):
     def test_construction(self):
@@ -9,12 +10,20 @@ class TestRotateFromTo(TestCase):
         RotateFromTo(Vector(1, 2, 3), Vector(4, 5, 6))
 
         # Invalid
-        with self.assertRaises(ValueError): RotateFromTo([0, 0, 0], [4, 5, 6])
-        with self.assertRaises(ValueError): RotateFromTo([1, 2, 3], [0, 0, 0])
         with self.assertRaises(TypeError ): RotateFromTo([1, 2, 3], 45 )
         with self.assertRaises(TypeError ): RotateFromTo(45, [1, 2, 3])
         with self.assertRaises(TypeError ): RotateFromTo([1, 2, "3"], [4, 5,  6])
         with self.assertRaises(TypeError ): RotateFromTo([1, 2,  3 ], [4, 5, "6"])
+
+        # Zero vectors
+        o = Vector.zero(3)
+        with self.assertRaises(ValueError): RotateFromTo(X, o)
+        with self.assertRaises(ValueError): RotateFromTo(X, o)
+        with self.assertRaises(ValueError): RotateFromTo(o, o)
+
+        # Opposite direction (ambiguous rotation)
+        with self.assertWarns(RuntimeWarning): RotateFromTo([1, 0, 0], [-1,  0,  0])
+        with self.assertWarns(RuntimeWarning): RotateFromTo([1, 2, 3], [-2, -4, -6])
 
     def test_equality(self):
         # Same object
@@ -27,45 +36,37 @@ class TestRotateFromTo(TestCase):
         self.assertNotEqual(RotateFromTo([1, 2, 3], [4, 5, 6]), RotateFromTo([1, 2, 3], [4, 5, 7])) # Different from
         self.assertNotEqual(RotateFromTo([1, 2, 3], [4, 5, 6]), RotateFromTo([1, 2, 7], [4, 5, 6])) # Different to
 
+        # Equal objects from different specifications
+        self.assertEqual(RotateFromTo(Vector(1, 2, 3), [4, 5, 6]), RotateFromTo([1, 2, 3], [4, 5, 6]))
+        self.assertEqual(RotateFromTo([1, 2, 3], Vector(4, 5, 6)), RotateFromTo([1, 2, 3], [4, 5, 6]))
+
     def test_to_scad(self):
-        pass
-        # TODO variouse cases
-        # r = RotateFromTo([1, 2, 3], 45)
-        # self.assertScadObjectTarget(r, None, "rotate", None, [('a', 45), ('v', [1, 2, 3])], None)
-        # Canonical from/to
-        # From test_transform_generators:
-        # self.assertEqual(rotate(frm = X        , to = Y        ), RotateAxisAngle(Z, 90)) # Vectors
-        # self.assertEqual(rotate(frm = [1, 0, 0], to = [0, 1, 0]), RotateAxisAngle(Z, 90)) # Lists
-        # self.assertEqual(rotate(frm = X        , to = Y * 2    ), RotateAxisAngle(Z, 90)) # Independent of vector length
-        # # Unit axis to unit axis
-        # self.assertEqual(rotate(frm = X, to = Y), RotateAxisAngle( Z, 90))
-        # self.assertEqual(rotate(frm = Y, to = Z), RotateAxisAngle( X, 90))
-        # self.assertEqual(rotate(frm = Z, to = X), RotateAxisAngle( Y, 90))
-        # self.assertEqual(rotate(frm = Y, to = X), RotateAxisAngle(-Z, 90))
-        # self.assertEqual(rotate(frm = Z, to = Y), RotateAxisAngle(-X, 90))
-        # self.assertEqual(rotate(frm = X, to = Z), RotateAxisAngle(-Y, 90))
-        # # Different signs for X/Y axes
-        # self.assertEqual(rotate(frm =  X, to =  Y), RotateAxisAngle( Z, 90))
-        # self.assertEqual(rotate(frm =  X, to = -Y), RotateAxisAngle(-Z, 90))
-        # self.assertEqual(rotate(frm = -X, to =  Y), RotateAxisAngle(-Z, 90))
-        # self.assertEqual(rotate(frm = -X, to = -Y), RotateAxisAngle( Z, 90))
-        # self.assertEqual(rotate(frm =  Y, to =  X), RotateAxisAngle(-Z, 90))
-        # self.assertEqual(rotate(frm =  Y, to = -X), RotateAxisAngle( Z, 90))
-        # self.assertEqual(rotate(frm = -Y, to =  X), RotateAxisAngle( Z, 90))
-        # self.assertEqual(rotate(frm = -Y, to = -X), RotateAxisAngle(-Z, 90))
-        # # Using lists
-        # self.assertEqual(rotate(frm = [1, 0, 0], to = [0, 1, 0]), RotateAxisAngle(Z, 90))
-        # self.assertEqual(rotate(frm = [1, 0, 0], to = [1, 1, 0]), RotateAxisAngle(Z, 45))
-        # # Same direction (no effect) - note different  type
-        # self.assertEqual(rotate(frm = [1, 0, 0], to = [1, 0, 0]), RotateXyz(0, 0, 0))
-        # self.assertEqual(rotate(frm = [1, 2, 3], to = [2, 4, 6]), RotateXyz(0, 0, 0))
-        # # Opposite direction (ambiguous rotation)
-        # with self.assertWarns(RuntimeWarning):
-        #     self.assertEqual(rotate(frm = [1, 0, 0], to = [-1,  0,  0])._angle, 180)
-        # with self.assertWarns(RuntimeWarning):
-        #     self.assertEqual(rotate(frm = [1, 2, 3], to = [-2, -4, -6])._angle, 180)
-        # # Zero vectors
-        # O = Vector.zero(3)
-        # with self.assertRaises(ValueError): rotate(frm = X, to = O)
-        # with self.assertRaises(ValueError): rotate(frm = X, to = O)
-        # with self.assertRaises(ValueError): rotate(frm = O, to = O)
+        # Unit axis to unit axis
+        self.assertScadObjectTarget(RotateFromTo(X, Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
+        self.assertScadObjectTarget(RotateFromTo(Y, Z), None, "rotate", None, [("a", 90), ("v", [ 1,  0,  0])], None)
+        self.assertScadObjectTarget(RotateFromTo(Z, X), None, "rotate", None, [("a", 90), ("v", [ 0,  1,  0])], None)
+        self.assertScadObjectTarget(RotateFromTo(Y, X), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
+        self.assertScadObjectTarget(RotateFromTo(Z, Y), None, "rotate", None, [("a", 90), ("v", [-1,  0,  0])], None)
+        self.assertScadObjectTarget(RotateFromTo(X, Z), None, "rotate", None, [("a", 90), ("v", [ 0, -1,  0])], None)
+
+        # Unit axis to unit axis with different length
+        self.assertScadObjectTarget(RotateFromTo(X, 2 * Y), None, "rotate", None, [("a", 90), ("v", [0, 0, 1])], None)
+
+        # Different signs for X/Y axes
+        self.assertScadObjectTarget(RotateFromTo( X,  Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
+        self.assertScadObjectTarget(RotateFromTo( X, -Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
+        self.assertScadObjectTarget(RotateFromTo(-X,  Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
+        self.assertScadObjectTarget(RotateFromTo(-X, -Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
+        self.assertScadObjectTarget(RotateFromTo( Y,  X), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
+        self.assertScadObjectTarget(RotateFromTo( Y, -X), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
+        self.assertScadObjectTarget(RotateFromTo(-Y,  X), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
+        self.assertScadObjectTarget(RotateFromTo(-Y, -X), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
+
+        # Same direction (no effect) - no transform
+        cube = Cube(2)
+        self.assertEqual(RotateFromTo(X        , X        ).to_scad(cube), cube)
+        self.assertEqual(RotateFromTo([1, 2, 3], [2, 4, 6]).to_scad(cube), cube)
+
+        # Opposite direction (ambiguous rotation)
+        self.assertIn(("a", 180), RotateFromTo(X        , -X          , ignore_ambiguity=True).to_scad(None)._kw_parameters)
+        self.assertIn(("a", 180), RotateFromTo([1, 2, 3], [-2, -4, -6], ignore_ambiguity=True).to_scad(None)._kw_parameters)
