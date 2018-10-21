@@ -1,7 +1,7 @@
 from numbers import Number
 from warnings import warn
 
-from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, \
+from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, RotateFromTo, \
     ScaleXyz, ScaleUniform, ScaleAxisFactor, Translate
 from cadlib.util import Vector
 from cadlib.util import both
@@ -84,30 +84,7 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with frm")
         if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with frm")
 
-        frm = Vector.convert(frm, "frm", 3)
-        to  = Vector.convert(to , "to" , 3)
-
-        if frm.length_squared == 0: raise ValueError("frm" " cannot be the zero vector")
-        if to .length_squared == 0: raise ValueError("to"  " cannot be the zero vector")
-
-        axis = frm.cross(to)
-        if axis.length == 0:
-            # Special case: the vectors are colinear. This means either no rotation (same direction, dot product
-            # positive) or rotation by 180 around ambiguous axis (opposite directions, dot product negative).
-            if frm.dot(to) > 0:
-                # Rotation has no effect - return an identity transform
-                return RotateXyz(0, 0, 0)
-            else:
-                # Rotation is ambiguous
-                if not ignore_ambiguity:
-                    warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
-                         .format(frm.values, to.values), RuntimeWarning, 2)
-                return RotateAxisAngle(frm.normal().normalized(), 180)
-        else:
-            # Regular case
-            angle = frm.angle(to)
-            return RotateAxisAngle(axis.normalized(), angle)
-
+        return RotateFromTo(frm, to, ignore_ambiguity)
 
     elif xyz is not None:
         # Check that no other specification is given

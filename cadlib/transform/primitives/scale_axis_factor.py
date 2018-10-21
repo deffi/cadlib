@@ -4,7 +4,7 @@ from cadlib.util.number import to_number
 from cadlib.util import Vector
 from cadlib.util.vector import X, Y, Z
 from cadlib.transform.primitives.scale_xyz import ScaleXyz # TODO import directly from primitives
-from cadlib.transform import generators # TODO get rid
+from cadlib.transform.primitives import RotateFromTo
 
 class ScaleAxisFactor(Transform):
     def __init__(self, axis, factor):
@@ -45,10 +45,9 @@ class ScaleAxisFactor(Transform):
             return ScadObject("scale", [[1, 1, self._factor]], None, children)
 
         # General case
-        # TODO use a RotateFromTo
         transform_axis = self._axis.closest_axis()
-        equivalent = generators.rotate(frm = self._axis, to = transform_axis)
+        equivalent = RotateFromTo(self._axis, transform_axis)
         equivalent = ScaleXyz(*(transform_axis * self._factor).values) * equivalent
-        equivalent = generators.rotate(frm = transform_axis, to = self._axis) * equivalent
+        equivalent = RotateFromTo(transform_axis, self._axis) * equivalent
 
         return equivalent.to_scad(target)

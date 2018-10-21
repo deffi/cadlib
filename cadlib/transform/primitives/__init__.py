@@ -4,6 +4,7 @@
 from .rotate_axis_agle import RotateAxisAngle
 from .rotate_xyz import RotateXyz
 from .rotate_ypr import RotateYpr
+from .rotate_from_to import RotateFromTo
 
 from .scale_axis_factor import ScaleAxisFactor
 from .scale_uniform import ScaleUniform

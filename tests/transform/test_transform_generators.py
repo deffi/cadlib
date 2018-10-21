@@ -1,4 +1,5 @@
-from cadlib.transform.primitives import RotateAxisAngle, RotateYpr, RotateXyz, ScaleXyz, ScaleAxisFactor, ScaleUniform, Translate
+from cadlib.transform.primitives import RotateAxisAngle, RotateYpr, RotateXyz, RotateFromTo, \
+    ScaleXyz, ScaleAxisFactor, ScaleUniform, Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
 from cadlib.util import Vector, X, Y, Z
@@ -10,41 +11,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(rotate(axis =       [1, 2, 3], angle = 45), RotateAxisAngle(Vector(1, 2, 3), 45)) # List
 
         # Canonical from/to
-        self.assertEqual(rotate(frm = X        , to = Y        ), RotateAxisAngle(Z, 90)) # Vectors
-        self.assertEqual(rotate(frm = [1, 0, 0], to = [0, 1, 0]), RotateAxisAngle(Z, 90)) # Lists
-        self.assertEqual(rotate(frm = X        , to = Y * 2    ), RotateAxisAngle(Z, 90)) # Independent of vector length
-        # Unit axis to unit axis
-        self.assertEqual(rotate(frm = X, to = Y), RotateAxisAngle( Z, 90))
-        self.assertEqual(rotate(frm = Y, to = Z), RotateAxisAngle( X, 90))
-        self.assertEqual(rotate(frm = Z, to = X), RotateAxisAngle( Y, 90))
-        self.assertEqual(rotate(frm = Y, to = X), RotateAxisAngle(-Z, 90))
-        self.assertEqual(rotate(frm = Z, to = Y), RotateAxisAngle(-X, 90))
-        self.assertEqual(rotate(frm = X, to = Z), RotateAxisAngle(-Y, 90))
-        # Different signs for X/Y axes
-        self.assertEqual(rotate(frm =  X, to =  Y), RotateAxisAngle( Z, 90))
-        self.assertEqual(rotate(frm =  X, to = -Y), RotateAxisAngle(-Z, 90))
-        self.assertEqual(rotate(frm = -X, to =  Y), RotateAxisAngle(-Z, 90))
-        self.assertEqual(rotate(frm = -X, to = -Y), RotateAxisAngle( Z, 90))
-        self.assertEqual(rotate(frm =  Y, to =  X), RotateAxisAngle(-Z, 90))
-        self.assertEqual(rotate(frm =  Y, to = -X), RotateAxisAngle( Z, 90))
-        self.assertEqual(rotate(frm = -Y, to =  X), RotateAxisAngle( Z, 90))
-        self.assertEqual(rotate(frm = -Y, to = -X), RotateAxisAngle(-Z, 90))
-        # Using lists
-        self.assertEqual(rotate(frm = [1, 0, 0], to = [0, 1, 0]), RotateAxisAngle(Z, 90))
-        self.assertEqual(rotate(frm = [1, 0, 0], to = [1, 1, 0]), RotateAxisAngle(Z, 45))
-        # Same direction (no effect) - note different  type
-        self.assertEqual(rotate(frm = [1, 0, 0], to = [1, 0, 0]), RotateXyz(0, 0, 0))
-        self.assertEqual(rotate(frm = [1, 2, 3], to = [2, 4, 6]), RotateXyz(0, 0, 0))
-        # Opposite direction (ambiguous rotation)
-        with self.assertWarns(RuntimeWarning):
-            self.assertEqual(rotate(frm = [1, 0, 0], to = [-1,  0,  0])._angle, 180)
-        with self.assertWarns(RuntimeWarning):
-            self.assertEqual(rotate(frm = [1, 2, 3], to = [-2, -4, -6])._angle, 180)
-        # Zero vectors
-        O = Vector.zero(3)
-        with self.assertRaises(ValueError): rotate(frm = X, to = O)
-        with self.assertRaises(ValueError): rotate(frm = X, to = O)
-        with self.assertRaises(ValueError): rotate(frm = O, to = O)
+        self.assertEqual(rotate(frm = Vector(1, 2, 3), to = Vector(4, 5, 6)), RotateFromTo(Vector(1, 2, 3), Vector(4, 5, 6))) # Vectors
+        self.assertEqual(rotate(frm =       [1, 2, 3], to =       [4, 5, 6]), RotateFromTo(Vector(1, 2, 3), Vector(4, 5, 6))) # Lists
 
         # Canonical XYZ
         self.assertEqual(rotate(xyz = [45, 0, 30]), RotateXyz(45, 0, 30))
@@ -61,12 +29,12 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(rotate(      [1, 2, 3], angle = 45), RotateAxisAngle(Vector(1, 2, 3), 45)) # List
 
         # Convenience from/to (implicit)
-        self.assertEqual(rotate(X        , Y        ), RotateAxisAngle(Z, 90)) # Vectors
-        self.assertEqual(rotate([1, 0, 0], [0, 1, 0]), RotateAxisAngle(Z, 90)) # Lists
+        self.assertEqual(rotate(X        , Y        ), RotateFromTo(X, Y)) # Vectors
+        self.assertEqual(rotate([1, 0, 0], [0, 1, 0]), RotateFromTo(X, Y)) # Lists
 
         # Convenience from/to (explicit)
-        self.assertEqual(rotate(X        , to = Y        ), RotateAxisAngle(Z, 90)) # Vectors
-        self.assertEqual(rotate([1, 0, 0], to = [0, 1, 0]), RotateAxisAngle(Z, 90)) # Lists
+        self.assertEqual(rotate(X        , to = Y        ), RotateFromTo(X, Y)) # Vectors
+        self.assertEqual(rotate([1, 0, 0], to = [0, 1, 0]), RotateFromTo(X, Y)) # Lists
 
     def test_rotate_invalid(self):
         # Nothing at all

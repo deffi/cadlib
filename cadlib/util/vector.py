@@ -35,6 +35,7 @@ class Vector:
 
     @classmethod
     def convert(cls, value, label = None, required_length = None):
+        # TODO call with single int - error on len()
         if required_length is not None and len(value) != required_length:
             raise ValueError("Invalid length for {}, must be {}".format(label, required_length))
 
