@@ -1,6 +1,5 @@
 from cadlib.util.tree import Node
-from cadlib.transform.transform import Transform
-from cadlib.transform import shortcuts, generators
+from cadlib.transform import Transform, shortcuts, generators
 
 # Note that, while Union is a subclass of Object, the special case of adding an
 # Object and a Union (in either order) or adding two Unions is handled

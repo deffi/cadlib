@@ -1,5 +1,5 @@
 from unittest import TestCase as OriginalTestCase
-from cadlib.transform.transform import Transform
+from cadlib.transform import Transform
 from contextlib import contextmanager
 from cadlib.scad import ScadObject
 

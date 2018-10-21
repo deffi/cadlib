@@ -2,7 +2,7 @@ from warnings import warn
 
 from cadlib.util import Vector
 from cadlib.scad import ScadObject
-from cadlib.transform.transform import Transform
+from cadlib.transform import Transform
 
 
 class RotateFromTo(Transform):

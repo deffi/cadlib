@@ -1,5 +1,5 @@
 from cadlib.object import Object
-from cadlib.transform.transform import Transform
+from cadlib.transform import Transform
 from cadlib.util.tree import Node
 
 

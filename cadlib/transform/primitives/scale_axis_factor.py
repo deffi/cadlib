@@ -1,5 +1,5 @@
 from cadlib.scad import ScadObject
-from cadlib.transform.transform import Transform
+from cadlib.transform import Transform
 from cadlib.util.number import to_number
 from cadlib.util import Vector
 from cadlib.util.vector import X, Y, Z
