@@ -24,4 +24,3 @@ class RotateAxisAngle(Transform):
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("rotate", None, [("a", self._angle), ("v", list(self._axis))], children)
-    

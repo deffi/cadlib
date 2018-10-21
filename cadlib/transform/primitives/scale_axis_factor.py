@@ -3,8 +3,7 @@ from cadlib.transform.transform import Transform
 from cadlib.util.number import to_number
 from cadlib.util import Vector
 from cadlib.util.vector import X, Y, Z
-from cadlib.transform.primitives.scale_xyz import ScaleXyz # TODO import directly from primitives
-from cadlib.transform.primitives import RotateFromTo
+from cadlib.transform.primitives import ScaleXyz, RotateFromTo
 
 class ScaleAxisFactor(Transform):
     def __init__(self, axis, factor):

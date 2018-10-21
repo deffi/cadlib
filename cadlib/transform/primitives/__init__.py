@@ -2,12 +2,12 @@
 # apply to ScaleXyz, RotateXyz and RotateRpy, whose arguments are not vectors.
 
 from .rotate_axis_angle import RotateAxisAngle
-from .rotate_xyz import RotateXyz
-from .rotate_ypr import RotateYpr
-from .rotate_from_to import RotateFromTo
+from .rotate_xyz        import RotateXyz
+from .rotate_ypr        import RotateYpr
+from .rotate_from_to    import RotateFromTo
 
+from .scale_xyz         import ScaleXyz
 from .scale_axis_factor import ScaleAxisFactor
-from .scale_uniform import ScaleUniform
-from .scale_xyz import ScaleXyz
+from .scale_uniform     import ScaleUniform
 
 from .translate import Translate
