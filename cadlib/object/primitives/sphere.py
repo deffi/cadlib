@@ -1,5 +1,5 @@
 from cadlib.object import Object
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 from cadlib.util import both
 
 

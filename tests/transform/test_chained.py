@@ -1,7 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives import ScaleXyz, RotateXyz, Translate
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 
 class TestChained(TestCase):
     def test_construction(self):

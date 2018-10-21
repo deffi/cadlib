@@ -1,7 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import ScaleAxisFactor
 from cadlib.util import Vector
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 from cadlib.util.vector import X, Y, Z
 
 class TestScaleAxisFactor(TestCase):

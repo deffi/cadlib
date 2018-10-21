@@ -1,7 +1,7 @@
 from unittest import TestCase as OriginalTestCase
 from cadlib.transform.transform import Transform
 from contextlib import contextmanager
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 
 class TestCase(OriginalTestCase):
     def assertEqualToItself(self, x):

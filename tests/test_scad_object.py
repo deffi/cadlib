@@ -1,4 +1,4 @@
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 from tests.unit_test import TestCase
 
 class TestScadObject(TestCase):

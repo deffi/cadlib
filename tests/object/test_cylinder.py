@@ -2,7 +2,7 @@ import math
 
 from cadlib.object.primitives import Cylinder
 from cadlib.util.vector import Vector, X, Y, Z
-from cadlib.scad.scad import ScadObject
+from cadlib.scad import ScadObject
 from tests.unit_test import TestCase
 
 class TestCylinder(TestCase):
