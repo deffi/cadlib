@@ -229,10 +229,13 @@ class Vector:
     #########
 
     def __str__(self):
-        return Table([[v] for v in self._values]).format(alignment="r")
+        return "<" + ", ".join(map(str, self._values)) + ">"
 
     def __repr__(self):
         return "Vector({})".format(", ".join(str(value) for value in self._values))
+
+    def format(self):
+        return Table([[v] for v in self._values]).format(alignment="r")
 
 
 X = Vector(1, 0, 0)
