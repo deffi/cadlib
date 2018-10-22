@@ -13,6 +13,10 @@ class Csg(Object):
 
         self._children = children
 
+    @classmethod
+    def empty(cls):
+        return cls([])
+
     @property
     def children(self):
         return self._children

@@ -22,8 +22,6 @@ Object:
                * Are we supposed to do Pipe+Hole or Pipe-Hole?
                * Can we do Block - (Pipe +- Hole)?
                * Is Hole * Object defined?
-  * [Medium] Can we do sum([cube, sphere, cylinder])?
-             We probably need an empty union (empty_union + object = object)
 
 Primitives:
   * [Medium] More primitives: cone

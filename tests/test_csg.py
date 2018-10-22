@@ -16,6 +16,11 @@ class TestCsg(TestCase):
         Intersection([])
         Difference([])
 
+        # Explicitly empty CSG
+        self.assertEqual(Union       .empty(), Union       ([]))
+        self.assertEqual(Intersection.empty(), Intersection([]))
+        self.assertEqual(Difference  .empty(), Difference  ([]))
+
         # With objects
         self.assertEqual(Union       (object_list).children, object_list)
         self.assertEqual(Intersection(object_list).children, object_list)
@@ -95,3 +100,12 @@ class TestCsg(TestCase):
             ScadObject("intersection", None, None, [ sphere  .to_scad(), cylinder.to_scad() ]),
             ScadObject("difference"  , None, None, [ cube    .to_scad(), sphere  .to_scad() ]),
         ]))
+
+    def test_sum(self):
+        sphere   = Sphere(2)
+        cube     = Cube([10, 10, 10])
+        cylinder = Cylinder(Z, 5, 5)
+
+        objects = [sphere, cube, cylinder]
+
+        self.assertEqual(sum(objects, Union.empty()), Union(objects))
