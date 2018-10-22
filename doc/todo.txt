@@ -65,7 +65,7 @@ Scad:
   * [Low]    There should be an empty ScadObject that we can pass into and return from Object.to_scad; this would remove
              special case handling, e.g. RotateYpr.to_scad if target==None and ypr==(0, 0, 0)
   * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
-  * [Medium] Ausgegebenen Code kommentieren (z. B. examples/plane)
+  * [Medium] Comment generated code (e. g. RotateFromTo)
   * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
              constants
   * [Low]    Modifiers: %background, #debug, !root, *disable
