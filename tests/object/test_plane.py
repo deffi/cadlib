@@ -40,3 +40,6 @@ class TestPlane(TestCase):
                     ])
                 ])
             ]))
+
+    def test_repr(self):
+        self.assertRepr(Plane(X, 2), "Plane(Vector(1, 0, 0), 2)")

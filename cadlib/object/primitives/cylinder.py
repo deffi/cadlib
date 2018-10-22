@@ -56,7 +56,7 @@ class Cylinder(Object):
             and other._radius == self._radius
 
     def __repr__(self):
-        return "Cylinder with base {} and cap {}".format(self._base.values, self._cap.values)
+        return f"Cylinder({self._base!r}, {self._cap!r}, r={self._radius!r}"
 
     def to_scad(self):
         length = (self._cap - self._base).length

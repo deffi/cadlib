@@ -19,6 +19,10 @@ class RotateXyz(Transform):
     def __str__(self):
         return "Rotate by {} degrees around x, y, and z".format(self._xyz)
 
+    def __repr__(self):
+        x, y, z = self._xyz
+        return f"RotateXyz({x!r}, {y!r}, {z!r})"
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("rotate", [list(self._xyz)], None, children)

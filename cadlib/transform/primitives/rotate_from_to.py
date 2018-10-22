@@ -32,6 +32,9 @@ class RotateFromTo(Transform):
     def __str__(self):
         return "Rotate from {} to {}".format(self._frm, self._to)
 
+    def __repr__(self):
+        return f"RotateFromTo({self._frm!r}, {self._to!r})"
+
     def to_scad(self, target):
         if self._frm.collinear(self._to):
             # Special case: the vectors are collinear

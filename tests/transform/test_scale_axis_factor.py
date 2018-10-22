@@ -63,3 +63,6 @@ class TestScaleAxisFactor(TestCase):
                     ScadObject("scale", [[3, 1, 1]], None, [
                         ScadObject("rotate", None, [('a', angle), ('v', [0.0, 0.0, -1.0])], None)
                     ])]))
+
+    def test_repr(self):
+        self.assertRepr(ScaleAxisFactor(X, 2), "ScaleAxisFactor(Vector(1, 0, 0), 2)")

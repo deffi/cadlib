@@ -2,6 +2,7 @@ from unittest import TestCase as OriginalTestCase
 from cadlib.transform import Transform
 from contextlib import contextmanager
 from cadlib.scad import ScadObject
+from cadlib.object import Object
 
 class TestCase(OriginalTestCase):
     def assertEqualToItself(self, x):
@@ -28,3 +29,6 @@ class TestCase(OriginalTestCase):
             self.assertEqual(thing.to_scad(None).to_code(inline=True, simplify=True), code)
         else:
             self.assertEqual(thing.to_scad().to_code(inline=True, simplify=True), code)
+
+    def assertRepr(self, thing, expected):
+        self.assertEqual(repr(thing), expected)

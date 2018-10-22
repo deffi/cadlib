@@ -19,6 +19,10 @@ class RotateYpr(Transform):
     def __str__(self):
         return "Yaw-pitch-roll by by {} degrees".format(self._ypr)
 
+    def __repr__(self):
+        y, p, r = self._ypr
+        return f"RotateYpr({y!r}, {p!r}, {r!r})"
+
     def to_scad(self, target):
         # yaw-pitch-roll in local coordinates corresponds to roll-pitch-yaw in global coordinates.
         yaw, pitch, roll = self._ypr

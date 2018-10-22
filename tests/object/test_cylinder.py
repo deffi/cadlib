@@ -98,3 +98,7 @@ class TestCylinder(TestCase):
             ScadObject("translate", [[5, 0, 0]], [], [
                 ScadObject("rotate", [], [('a', 45.0), ('v', [0.0, -1.0, 0.0])], [
                     cylinder_scad])]))
+
+    def test_repr(self):
+        self.assertRepr(Cylinder(0, 5*X,   1), "Cylinder(Vector(0, 0, 0), Vector(5, 0, 0), r=1")
+        self.assertRepr(Cylinder(X, 5  , d=2), "Cylinder(Vector(0, 0, 0), Vector(5.0, 0.0, 0.0), r=1.0")

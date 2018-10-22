@@ -1,3 +1,5 @@
+Next:
+
 Object:
   * [Medium] Add object generators
   * [Medium] Assembly objects
@@ -22,8 +24,6 @@ Object:
                * Is Hole * Object defined?
   * [Medium] Can we do sum([cube, sphere, cylinder])?
              We probably need an empty union (empty_union + object = object)
-  * [Medium] Primitives' __repr__ is not a repr
-  * [Medium] __repr__ for everything
 
 Primitives:
   * [Medium] More primitives: cone
@@ -88,6 +88,14 @@ Tests:
   * [Low]    Primitives (object and transform): test negative numbers
   * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
              and object primitives)
+
+Util:
+  * [Low]    Matrix should probably accept lists (row-wise) and Vectors
+             (column-wise), and then there should be more explicit from_rows and
+             from_columns
+
+General:
+  * [Low]    __str__
 
 Documentation:
   * [Medium] Better readme file and project description

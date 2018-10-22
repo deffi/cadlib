@@ -14,6 +14,10 @@ class ScaleXyz(Transform):
     def __eq__(self, other):
         return isinstance(other, ScaleXyz) and other._xyz == self._xyz
 
+    def __repr__(self):
+        x, y, z = self._xyz
+        return f"ScaleXyz({x!r}, {y!r}, {z!r})"
+
     def __str__(self):
         return "Scale by {}".format(self._xyz)
 

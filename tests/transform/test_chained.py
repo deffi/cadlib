@@ -1,6 +1,6 @@
 from tests.unit_test import TestCase
 from cadlib.transform.chained import Chained
-from cadlib.transform.primitives import ScaleXyz, RotateXyz, Translate
+from cadlib.transform.primitives import ScaleXyz, RotateXyz, Translate, ScaleUniform
 from cadlib.scad import ScadObject
 
 class TestChained(TestCase):
@@ -59,3 +59,7 @@ class TestChained(TestCase):
                 ])
             ])
         )
+
+    def test_repr(self):
+        self.assertRepr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
+            "Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)])")

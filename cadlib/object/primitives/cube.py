@@ -17,7 +17,7 @@ class Cube(Object):
         return isinstance(other, Cube) and other._size == self._size
 
     def __repr__(self):
-        return "Cube with size {}".format(self._size)
+        return f"Cube({self._size!r})"
 
     def to_scad(self):
         return ScadObject("cube", [self._size], None, None)

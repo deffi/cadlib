@@ -26,3 +26,7 @@ class TestSphere(TestCase):
     def test_to_scad(self):
         # Primitives
         self.assertScadObject(Sphere (11), "sphere", [11], None, None)
+
+    def test_repr(self):
+        self.assertRepr(Sphere(11), "Sphere(r=11)")
+        self.assertRepr(Sphere(d=44), "Sphere(r=22.0)")

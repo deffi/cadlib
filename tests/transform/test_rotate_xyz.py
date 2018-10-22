@@ -28,3 +28,6 @@ class TestRotateXyz(TestCase):
         r = RotateXyz(60, 30, 15)
 
         self.assertScadObjectTarget(r, None, "rotate", [[60, 30, 15]], None, None)
+
+    def test_repr(self):
+        self.assertRepr(RotateXyz(1, 2, 3), "RotateXyz(1, 2, 3)")

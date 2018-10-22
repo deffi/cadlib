@@ -24,3 +24,6 @@ class TestTranslate(TestCase):
         t = Translate([30, 20, 10])
 
         self.assertScadObjectTarget(t, None, "translate", [[30, 20, 10]], None, None)
+
+    def test_repr(self):
+        self.assertRepr(Translate([10, 20, 30]), "Translate(Vector(10, 20, 30))")

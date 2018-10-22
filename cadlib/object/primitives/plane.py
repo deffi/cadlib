@@ -18,7 +18,7 @@ class Plane(Object):
         return isinstance(other, Plane) and other._normal == self._normal and other._offset == self._offset
 
     def __repr__(self):
-        return "Plane with normal {}, offset {}".format(self._normal, self._offset)
+        return f"Plane({self._normal!r}, {self._offset!r})"
 
     def to_scad(self):
         return Cube([inf, inf, inf]) \

@@ -58,3 +58,6 @@ class TestRotateYpr(TestCase):
             ScadObject("rotate", [[0, 0, 1]], None, [
             ScadObject("rotate", [[2, 0, 0]], None, [
             ScadObject("rotate", [[0, 3, 0]], None, None)])]))
+
+    def test_repr(self):
+        self.assertRepr(RotateYpr(1, 2, 3), "RotateYpr(1, 2, 3)")

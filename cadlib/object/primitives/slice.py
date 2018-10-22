@@ -23,7 +23,7 @@ class Slice(Object):
            and other._offset2 == self._offset2
 
     def __repr__(self):
-        return "Slice with normal {}, offsets {}, {}".format(self._normal, self._offset1, self._offset2)
+        return(f"Slice({self._normal!r}, {self._offset1!r}, {self._offset2!r})")
 
     def to_scad(self):
         o1 = min(self._offset1, self._offset2)

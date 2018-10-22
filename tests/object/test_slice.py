@@ -41,3 +41,6 @@ class TestSlice(TestCase):
                     ])
                 ])
             ]))
+
+    def test_repr(self):
+        self.assertRepr(Slice(X, 2, 3), "Slice(Vector(1, 0, 0), 2, 3)")

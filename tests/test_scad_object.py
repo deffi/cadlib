@@ -184,3 +184,7 @@ class TestScadObject(TestCase):
         # Simplify
         self.assertEqual(chain2.to_code(inline = True                 ), "intersection() { union() { cube([1, 2, 3]); } }")
         self.assertEqual(chain2.to_code(inline = True, simplify = True), "intersection() union() cube([1, 2, 3]);")
+
+    def test_repr(self):
+        self.assertRepr(ScadObject("foo", [1, 2], [('a', 3), ('b', 4)], [ScadObject("c1", [], [], []), ScadObject("c2", None, None, None)]),
+            "ScadObject('foo', [1, 2], [('a', 3), ('b', 4)], [ScadObject('c1', [], [], []), ScadObject('c2', [], [], [])])")

@@ -29,3 +29,6 @@ class TestScaleXyz(TestCase):
         s = ScaleXyz(1, 2, -1)
 
         self.assertScadObjectTarget(s, None, "scale", [[1, 2, -1]], None, None)
+
+    def test_repr(self):
+        self.assertRepr(ScaleXyz(1, 2, 3), "ScaleXyz(1, 2, 3)")

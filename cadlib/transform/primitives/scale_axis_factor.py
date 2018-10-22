@@ -22,6 +22,9 @@ class ScaleAxisFactor(Transform):
     def __str__(self):
         return "Scale along {} by {}".format(self._axis, self._factor)
 
+    def __repr__(self):
+        return f"ScaleAxisFactor({self._axis!r}, {self._factor!r})"
+
     def to_scad(self, target):
         # Since OpenSCAD does not have axis/factor scaling, it has to be
         # translated to corresponding XYZ scales, potentially combined with
@@ -51,3 +54,4 @@ class ScaleAxisFactor(Transform):
         back_rotation = RotateFromTo(transform_axis, self._axis)
 
         return (back_rotation * scale * forward_rotation).to_scad(target)
+

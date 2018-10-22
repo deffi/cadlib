@@ -70,3 +70,6 @@ class TestRotateFromTo(TestCase):
         # Opposite direction (ambiguous rotation)
         self.assertIn(("a", 180), RotateFromTo(X        , -X          , ignore_ambiguity=True).to_scad(None)._kw_parameters)
         self.assertIn(("a", 180), RotateFromTo([1, 2, 3], [-2, -4, -6], ignore_ambiguity=True).to_scad(None)._kw_parameters)
+
+    def test_repr(self):
+        self.assertRepr(RotateFromTo(X, Y), "RotateFromTo(Vector(1, 0, 0), Vector(0, 1, 0))")

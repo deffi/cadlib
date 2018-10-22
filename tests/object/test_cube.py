@@ -30,3 +30,7 @@ class TestSphere(TestCase):
     def test_to_scad(self):
         self.assertScadObject(Cube(11          ), "cube", [[11, 11, 11]], None, None)
         self.assertScadObject(Cube([11, 22, 33]), "cube", [[11, 22, 33]], None, None)
+
+    def test_repr(self):
+        self.assertRepr(Cube([11, 22, 33]), "Cube([11, 22, 33])")
+        self.assertRepr(Cube(44)          , "Cube([44, 44, 44])")

@@ -25,3 +25,6 @@ class TestScaleUniform(TestCase):
         s = ScaleUniform(2)
 
         self.assertScadObjectTarget(s, None, "scale", [[2, 2, 2]], None, None)
+
+    def test_repr(self):
+        self.assertRepr(ScaleUniform(2), "ScaleUniform(2)")

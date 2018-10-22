@@ -12,6 +12,9 @@ class ScaleUniform(Transform):
     def __str__(self):
         return "Uniform scale by {}".format(self._factor)
 
+    def __repr__(self):
+        return f"ScaleUniform({self._factor!r})"
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         f = self._factor

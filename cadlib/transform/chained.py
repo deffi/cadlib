@@ -17,6 +17,10 @@ class Chained(Transform):
     def __str__(self):
         return "Chained transform ({} transform)".format(len(self._transforms))
 
+    def __repr__(self):
+        transform_representations = (repr(tf) for tf in self._transforms)
+        return f"Chained([{', '.join(transform_representations)}])"
+
     def _transform_list(self):
         return self._transforms
 

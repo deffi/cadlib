@@ -19,7 +19,7 @@ class Sphere(Object):
         return isinstance(other, Sphere) and other._radius == self._radius
 
     def __repr__(self):
-        return "Sphere with radius {}".format(self._radius)
+        return f"Sphere(r={self._radius!r})"
 
     def to_scad(self):
         return ScadObject("sphere", [self._radius], None, None)

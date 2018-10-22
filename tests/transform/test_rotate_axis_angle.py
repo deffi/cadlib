@@ -31,3 +31,6 @@ class TestRotateAxisAngle(TestCase):
     def test_to_scad(self):
         r = RotateAxisAngle([1, 2, 3], 45)
         self.assertScadObjectTarget(r, None, "rotate", None, [('a', 45), ('v', [1, 2, 3])], None)
+
+    def test_repr(self):
+        self.assertRepr(RotateAxisAngle([1, 0, 0], 45), "RotateAxisAngle(Vector(1, 0, 0), 45)")
