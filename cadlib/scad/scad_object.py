@@ -22,7 +22,7 @@ class ScadObject():
     Note that Vector is not supported as a type to enforce consistent value types. Use list instead.
     """
 
-    def __init__(self, id, parameters, kw_parameters, children):
+    def __init__(self, id, parameters, kw_parameters, children, comment = None):
         # Default values
         parameters    = parameters    or []
         kw_parameters = kw_parameters or []
@@ -48,6 +48,7 @@ class ScadObject():
         self._parameters    = parameters
         self._kw_parameters = kw_parameters
         self._children      = children
+        self._comment       = comment
 
     def __eq__(self, other):
         if not isinstance(other, ScadObject): return False
@@ -55,10 +56,23 @@ class ScadObject():
         if other._parameters    != self._parameters   : return False
         if other._kw_parameters != self._kw_parameters: return False
         if other._children      != self._children     : return False
+        if other._comment       != self._comment      : return False
         return True
 
     def __repr__(self):
-        return "ScadObject({}, {}, {}, {})".format(repr(self._id), repr(self._parameters), repr(self._kw_parameters), repr(self._children))
+        if self._comment is None:
+            return "ScadObject({}, {}, {}, {})".format(
+                repr(self._id),
+                repr(self._parameters),
+                repr(self._kw_parameters),
+                repr(self._children))
+        else:
+            return "ScadObject({}, {}, {}, {}, {})".format(
+                repr(self._id),
+                repr(self._parameters),
+                repr(self._kw_parameters),
+                repr(self._children),
+                repr(self._comment))
 
     def to_tree(self):
         children_nodes = [child.to_tree() for child in self._children]
@@ -97,8 +111,12 @@ class ScadObject():
 
         return "{}({})".format(self._id, ", ".join(all_parameters))
 
-    def _lines(self, indent, top_indent = "", simplify = False):
+    def _lines(self, indent, top_indent, simplify, include_comments):
         result = []
+
+        if include_comments and self._comment is not None:
+            for line in self._comment.split("\n"):
+                result.append(top_indent + "// " + line)
 
         # Head line and start of block
         head_line = self._head()
@@ -115,7 +133,7 @@ class ScadObject():
 
         # Children
         for child in self._children:
-            for line in child._lines(indent, "", simplify):
+            for line in child._lines(indent, "", simplify, include_comments):
                 result.append(top_indent + indent + line)
 
         # End of block
@@ -126,6 +144,7 @@ class ScadObject():
 
     def to_code(self, indent = "    ", top_indent = "", inline = False, simplify = False):
         if inline:
-            return " ".join(self._lines("", "", simplify))
+            # Inline code does not contain comments
+            return " ".join(self._lines("", "", simplify, False))
         else:
-            return "\n".join(self._lines(indent, top_indent, simplify))
+            return "\n".join(self._lines(indent, top_indent, simplify, True))

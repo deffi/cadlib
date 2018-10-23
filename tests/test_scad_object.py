@@ -181,6 +181,23 @@ class TestScadObject(TestCase):
         # Inline
         self.assertEqual(union.to_code(inline = True), "union() { sphere(0.6); cylinder(4, r = 0.5); }")
 
+        # With comments
+        sphere_with_comment = ScadObject("sphere", [1], None, None, "A sphere!")
+        union_with_comment  = ScadObject("union", None, None, [sphere_with_comment], "A union!\nIt can contain multiple objects.")
+        self.assertEqual(sphere_with_comment.to_code(" ", "  "), "\n".join([
+            "  // A sphere!",
+            "  sphere(1);",
+        ]))
+        self.assertEqual(union_with_comment.to_code(" ", "  "), "\n".join([
+            "  // A union!",
+            "  // It can contain multiple objects.",
+            "  union() {",
+            "   // A sphere!",
+            "   sphere(1);",
+            "  }"
+        ]))
+        self.assertEqual(sphere_with_comment.to_code(inline = True), "sphere(1);")
+
         # Simplify
         self.assertEqual(chain2.to_code(inline = True                 ), "intersection() { union() { cube([1, 2, 3]); } }")
         self.assertEqual(chain2.to_code(inline = True, simplify = True), "intersection() union() cube([1, 2, 3]);")
