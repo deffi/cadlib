@@ -91,6 +91,9 @@ class TestScadObject(TestCase):
         self.assertNotEqual(
             ScadObject("Cylinder", None, [("h", 11), ("r",  2)], None),
             ScadObject("Cylinder", None, [("r",  3), ("h", 11)], None)) # Different keyword parameter order
+        self.assertNotEqual(
+            ScadObject("Cylinder", [11], [("r", 2)], None, "foo"),
+            ScadObject("Cylinder", [11], [("r", 2)], None, "bar")) # Different comments
 
         # With children
         self.assertEqual(
@@ -108,6 +111,43 @@ class TestScadObject(TestCase):
         self.assertNotEqual(
             ScadObject("Dummy", [], None, [ScadObject("Child1", None, None, None)]),
             ScadObject("Dummy", [], None, [ScadObject("Child2", None, None, None)])) # Different children
+
+    def test_comment(self):
+        o = ScadObject("dummy", [], [], [], "one")
+
+        # Pre-check
+        self.assertEqual(o, ScadObject("dummy", [], [], [], "one"))
+
+        # Replace
+        self.assertEqual(o.replace_comment("foo"), ScadObject("dummy", [], [], [], "foo"))
+
+        # Clear
+        self.assertEqual(o.clear_comment(), ScadObject("dummy", [], [], [], None))
+
+        # Add with default separator
+        self.assertEqual(o.comment(prepend = "zero"), ScadObject("dummy", [], [], [], "zero\none"))
+        self.assertEqual(o.comment(append  = "two" ), ScadObject("dummy", [], [], [], "one\ntwo"))
+        self.assertEqual(o.comment(prepend = "zero", append  = "two"), ScadObject("dummy", [], [], [], "zero\none\ntwo"))
+
+        # Add with non-default separator
+        self.assertEqual(o.comment(prepend = "zero", sep = ""), ScadObject("dummy", [], [], [], "zeroone"))
+        self.assertEqual(o.comment(append  = "two" , sep = ""), ScadObject("dummy", [], [], [], "onetwo"))
+        self.assertEqual(o.comment(prepend = "zero", append  = "two", sep = ""), ScadObject("dummy", [], [], [], "zeroonetwo"))
+
+        # Add (convenience form)
+        self.assertEqual(o.comment("zero"), ScadObject("dummy", [], [], [], "zero\none"))
+
+        # Post-check - it's immutable
+        self.assertEqual(o, ScadObject("dummy", [], [], [], "one"))
+
+        # If there is no comment in the first place...
+        o = ScadObject("dummy", [], [], [], None)
+
+        # ...we can still prepend and append stuff
+        self.assertEqual(o.comment(prepend = "zero"), ScadObject("dummy", [], [], [], "zero"))
+        self.assertEqual(o.comment(append  = "two" ), ScadObject("dummy", [], [], [], "two"))
+        self.assertEqual(o.comment(prepend = "zero", append = "two"), ScadObject("dummy", [], [], [], "zero\ntwo"))
+
 
     def test_value_rendering(self):
         # Also tests a bit of to_code

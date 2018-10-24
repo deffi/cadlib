@@ -50,6 +50,19 @@ class ScadObject():
         self._children      = children
         self._comment       = comment
 
+    def replace_comment(self, comment):
+        return ScadObject(self._id, self._parameters, self._kw_parameters, self._children, comment)
+
+    def clear_comment(self):
+        return self.replace_comment(None)
+
+    def comment(self, prepend = None, append = None, sep = "\n"):
+        parts = (part for part in [prepend, self._comment, append] if part is not None)
+        comment = sep.join(parts)
+        return self.replace_comment(comment)
+
+
+
     def __eq__(self, other):
         if not isinstance(other, ScadObject): return False
         if other._id            != self._id           : return False
