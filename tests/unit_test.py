@@ -9,15 +9,7 @@ class TestCase(OriginalTestCase):
         super().__init__(*args, **kwargs)
 
         # TODO test
-        self._ignore_scad_comments = False
-
-    @property
-    def ignore_scad_comments(self):
-        return self._ignore_scad_comments
-
-    @ignore_scad_comments.setter
-    def ignore_scad_comments(self, value):
-        self._ignore_scad_comments = value
+        self.ignore_scad_comments = False
 
     def assertEqualToItself(self, x):
         self.assertEqual(x, x)
@@ -34,14 +26,14 @@ class TestCase(OriginalTestCase):
 
     def assertScadObject(self, thing, id, parameters, kw_parameters, children = None):
         actual = thing.to_scad()
-        if self._ignore_scad_comments:
+        if self.ignore_scad_comments:
             actual = actual.clear_comment(recursive = True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 
     def assertScadObjectTarget(self, thing, target, id, parameters, kw_parameters, children = None):
         actual = thing.to_scad(target)
-        if self._ignore_scad_comments:
+        if self.ignore_scad_comments:
             actual = actual.clear_comment(recursive = True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
@@ -53,7 +45,7 @@ class TestCase(OriginalTestCase):
             self.assertEqual(thing.to_scad().to_code(inline=True, simplify=True), code)
 
     def assertEqual(self, first, second, msg=None):
-        if self._ignore_scad_comments:
+        if self.ignore_scad_comments:
             if isinstance(first, ScadObject):
                 first = first.clear_comment(recursive=True)
             if isinstance(second, ScadObject):
