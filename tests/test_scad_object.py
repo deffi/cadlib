@@ -148,6 +148,15 @@ class TestScadObject(TestCase):
         self.assertEqual(o.comment(append  = "two" ), ScadObject("dummy", [], [], [], "two"))
         self.assertEqual(o.comment(prepend = "zero", append = "two"), ScadObject("dummy", [], [], [], "zero\ntwo"))
 
+    def test_clear_comment(self):
+        both  = ScadObject("a", [], [], [ScadObject("b", [], [], [], "b")], "a")
+        inner = ScadObject("a", [], [], [ScadObject("b", [], [], [], "b")])
+        none  = ScadObject("a", [], [], [ScadObject("b", [], [], [])])
+
+        self.assertEqual   (both.clear_comment(), inner)
+        self.assertNotEqual(both.clear_comment(), none)
+        self.assertEqual   (both.clear_comment(recursive=True), none)
+
 
     def test_value_rendering(self):
         # Also tests a bit of to_code

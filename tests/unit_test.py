@@ -19,12 +19,12 @@ class TestCase(OriginalTestCase):
 
 
     def assertScadObject(self, thing, id, parameters, kw_parameters, children = None):
-        actual = thing.to_scad().clear_comment()
+        actual = thing.to_scad().clear_comment(recursive=True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 
     def assertScadObjectTarget(self, thing, target, id, parameters, kw_parameters, children = None):
-        actual = thing.to_scad(target).clear_comment()
+        actual = thing.to_scad(target).clear_comment(recursive=True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 

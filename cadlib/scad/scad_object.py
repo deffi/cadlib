@@ -53,8 +53,12 @@ class ScadObject():
     def replace_comment(self, comment):
         return ScadObject(self._id, self._parameters, self._kw_parameters, self._children, comment)
 
-    def clear_comment(self):
-        return self.replace_comment(None)
+    def clear_comment(self, recursive = False):
+        children = self._children
+        if recursive:
+            children = [child.clear_comment(True) for child in self._children]
+
+        return ScadObject(self._id, self._parameters, self._kw_parameters, children, None)
 
     def comment(self, prepend = None, append = None, sep = "\n"):
         parts = (part for part in [prepend, self._comment, append] if part is not None)
