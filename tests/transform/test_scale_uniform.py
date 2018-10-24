@@ -22,6 +22,8 @@ class TestScaleUniform(TestCase):
         self.assertNotEqual(ScaleUniform(2), ScaleUniform(3))
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         s = ScaleUniform(2)
 
         self.assertScadObjectTarget(s, None, "scale", [[2, 2, 2]], None, None)
