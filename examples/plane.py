@@ -10,6 +10,6 @@ objects = [
     sphere * Plane([2, -0.5, 1], -5),  # Negative offset
 ]
 
-assembly = Union([object.right(30*i) for i, object in enumerate(objects)])
+assembly = union([object.right(30*i) for i, object in enumerate(objects)])
 
 render_to_file(assembly, "plane.scad", fn=24)

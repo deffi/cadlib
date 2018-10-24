@@ -25,4 +25,4 @@ class Plane(Object):
             .translate([-inf / 2, -inf / 2, -inf]) \
             .up(self._offset) \
             .rotate(frm = Z, to = self._normal, ignore_ambiguity = True) \
-            .to_scad()
+            .to_scad().comment(repr(self))

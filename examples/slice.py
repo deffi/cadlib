@@ -8,6 +8,6 @@ objects = [
     sphere * Slice([3, 2, -1], -5.0, 5.0),  # Arbitrary vector
 ]
 
-assembly = Union([object.right(30*i) for i, object in enumerate(objects)])
+assembly = union([object.right(30*i) for i, object in enumerate(objects)])
 
 render_to_file(assembly, "slice.scad", fn=24)

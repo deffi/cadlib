@@ -1,5 +1,4 @@
 Next:
-  * Comment objects: Slice, Plane
 
 Object:
   * [Medium] Assembly objects
