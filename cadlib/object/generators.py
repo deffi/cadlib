@@ -5,6 +5,10 @@ __all__ = ['cube', 'cylinder', 'plane', 'slice', 'sphere']
 
 
 def cube(size_or_x, y = None, z = None):
+    # Signatures (convenience forms only):
+    #   * cube([1, 2, 3])
+    #   * cube(1, 2, 3)
+
     if both(y, z):
         return Cube([size_or_x, y, z])
     elif neither(y, z):
