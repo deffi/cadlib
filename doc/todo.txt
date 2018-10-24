@@ -55,6 +55,9 @@ CSG:
                * We could manually compare the list elements, but that would be in O(n^2)
 
 Scad:
+  * [Medium] Better comments for SCAD objects:
+               * Show canonical form for generator instead of object representation
+               * Simplify vectors (X, 2*X, -X, -2*X)
   * [Low]    Remove union when implicit (e. g. in translate, or from the second one in difference)
   * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
              tests for part/hole
