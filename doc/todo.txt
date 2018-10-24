@@ -98,3 +98,4 @@ Documentation:
   * [Medium] Translate takes a vector, but ScaleXyz and RotateXyz take single
              values. That's because it's not a vector. But you'll probably want
              to use the generator functions anyway.
+  * [Medium] Docstrings
