@@ -13,9 +13,6 @@ Object:
   * [Medium] center flag (and use in examples where appropriate)
              Probably better: .center() which transforms to the center
              Probably even better: use the anchor mechanism
-  * [Medium] Do we want Cube(x, y, z) instead of Cube([x, y, z])? rotate_xyz
-             does it like this and the argument is not (strictly) a vector
-             We probably want a generator that accepts both.
   * [Low]    Shape (2-dimensional object) and associated primitives
   * [Low]    Investigate part/hole
                * Are we supposed to do Pipe+Hole or Pipe-Hole?

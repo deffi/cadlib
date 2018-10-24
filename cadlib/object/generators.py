@@ -1,10 +1,16 @@
 from cadlib.object.primitives import Cube, Cylinder, Plane, Slice, Sphere
+from cadlib.util import both, neither
 
 __all__ = ['cube', 'cylinder', 'plane', 'slice', 'sphere']
 
 
-def cube(size):
-    return Cube(size)
+def cube(size_or_x, y = None, z = None):
+    if both(y, z):
+        return Cube([size_or_x, y, z])
+    elif neither(y, z):
+        return Cube(size_or_x)
+    else:
+        raise ValueError("y and z can only be specified together")
 
 
 def cylinder(direction_or_base, length_or_cap, r = None, d = None):

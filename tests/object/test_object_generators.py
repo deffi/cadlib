@@ -7,6 +7,10 @@ class TestObjectGenerators(TestCase):
     def test_csg_generators(self):
         self.assertEqual(cube(1), Cube(1))
         self.assertEqual(cube([1, 2, 3]), Cube([1, 2, 3]))
+        self.assertEqual(cube(1, 2, 3), Cube([1, 2, 3]))
+        with self.assertRaises(ValueError): cube(1, 2)
+        with self.assertRaises(ValueError): cube(1, 2, None)
+        with self.assertRaises(ValueError): cube(1, None, 2)
 
         self.assertEqual(cylinder(X, Y, r = 2), Cylinder(X, Y, r = 2))
         self.assertEqual(cylinder(X, 1, d = 3), Cylinder(X, 1, d = 3))
