@@ -91,7 +91,6 @@ General:
   * [Low]    __str__
 
 Library:
-  * [High]   from simple import * - cube is a module, not the generator
 
 Documentation:
   * [Medium] Better readme file and project description

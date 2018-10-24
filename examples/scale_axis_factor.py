@@ -2,7 +2,7 @@ from cadlib.simple import *
 
 # TODO rename to scale_example and add all relevant scale types
 
-cube = Cube(20)
+cube = cube(20)
 tf1 = scale(axis=[3, 2, 1], factor=2)
 tf2 = scale(axis=[3, 0, 0], factor=2)
 tf3 = scale(2)
