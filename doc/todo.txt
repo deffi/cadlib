@@ -25,7 +25,6 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
-  * [Medium] Merge shortcuts into generators
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
