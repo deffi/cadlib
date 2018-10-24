@@ -52,7 +52,6 @@ CSG:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
                * When subtracting a union, extract its children (must also be done for Object - Union)
-  * [Medium] Add csg generators
   * [Low]    Can we make Union and Intersection independent of the order, so that a+b == b+a?
                * We could use a set instead of a list, or we could convert the list to a set for comparison. This would
                  require a hash method

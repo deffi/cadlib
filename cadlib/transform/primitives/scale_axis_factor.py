@@ -54,4 +54,3 @@ class ScaleAxisFactor(Transform):
         back_rotation = RotateFromTo(transform_axis, self._axis)
 
         return (back_rotation * scale * forward_rotation).to_scad(target)
-
