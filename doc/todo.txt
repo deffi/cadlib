@@ -1,4 +1,5 @@
 Next:
+  * Comment objects: Slice, Plane
 
 Object:
   * [Medium] Assembly objects
@@ -25,6 +26,7 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
+  * [Medium] arrange objects in a grid (from list, or factory)
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
@@ -43,6 +45,7 @@ Transform:
              scale factors
 
 CSG:
+  * [Medium] union generator without arguments
   * [Low]    Make it so that a-(b+c) == a-b-c. Two options:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
@@ -59,7 +62,6 @@ Scad:
   * [Low]    There should be an empty ScadObject that we can pass into and return from Object.to_scad; this would remove
              special case handling, e.g. RotateYpr.to_scad if target==None and ypr==(0, 0, 0)
   * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
-  * [Medium] Comment generated code (e. g. RotateFromTo)
   * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
              constants
   * [Low]    Modifiers: %background, #debug, !root, *disable
@@ -88,6 +90,9 @@ Util:
 
 General:
   * [Low]    __str__
+
+Library:
+  * [High]   from simple import * - cube is a module, not the generator
 
 Documentation:
   * [Medium] Better readme file and project description

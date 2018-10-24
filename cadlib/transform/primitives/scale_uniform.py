@@ -18,4 +18,4 @@ class ScaleUniform(Transform):
     def to_scad(self, target):
         children = [target] if target is not None else []
         f = self._factor
-        return ScadObject("scale", [[f, f, f]], None, children)
+        return ScadObject("scale", [[f, f, f]], None, children, repr(self))

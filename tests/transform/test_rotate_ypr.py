@@ -21,6 +21,8 @@ class TestRotateYpr(TestCase):
         self.assertNotEqual(RotateYpr(10, 20, 30), RotateYpr(10, 20, 40)) # Different values
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # Since OpenSCAD does not have YPR rotations, they have to translated to
         # corresponding XYZ rotations.
 

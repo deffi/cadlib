@@ -32,6 +32,8 @@ class TestSlice(TestCase):
         self.assertEqual(Slice(X, 4, 5), Slice([1, 0, 0], 4, 5))  # Different normal
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # General case, with the normal vector in the Y/Z plane
         self.assertEqual(Slice([0, 1, 1], 2, 2.5).to_scad(),
             ScadObject("rotate", None, [('a', 45.0), ('v', [-1.0, 0.0, 0.0])], [

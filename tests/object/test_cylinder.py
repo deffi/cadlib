@@ -47,6 +47,8 @@ class TestCylinder(TestCase):
         self.assertEqual (Cylinder(X, 5, 1), Cylinder(0, X*5, 1))
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # Along Z axis
         self.assertScadObject(Cylinder(Z, 5,   1  ), "cylinder", [5], [('r', 1)])
         self.assertScadObject(Cylinder(Z, 5,   d=2), "cylinder", [5], [('r', 1)])

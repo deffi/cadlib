@@ -60,4 +60,5 @@ class RotateFromTo(Transform):
             # Yes rotation
             axis = axis.normalized()
             children = [target] if target is not None else []
-            return ScadObject("rotate", None, [("a", angle), ("v", axis.values)], children)
+            comment = repr(self)
+            return ScadObject("rotate", None, [("a", angle), ("v", axis.values)], children, comment)

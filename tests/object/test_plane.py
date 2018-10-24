@@ -31,6 +31,8 @@ class TestPlane(TestCase):
         self.assertEqual(Plane(X, 0), Plane([1, 0, 0], 0))  # Different normal
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # General case, with the normal vector in the Y/Z plane
         self.assertEqual(Plane([0, 1, 1], 2).to_scad(),
             ScadObject("rotate", None, [('a', 45.0), ('v', [-1.0, 0.0, 0.0])], [

@@ -33,6 +33,8 @@ class TestScaleAxisFactor(TestCase):
         self.assertEqual(ScaleAxisFactor(Vector(1, 2, 3), 4), ScaleAxisFactor([1, 2, 3], 4))
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # Special case: axis aligned with one of the coordinate axes
         # X
         self.assertEqual(ScaleAxisFactor(X, 2).to_scad(None),

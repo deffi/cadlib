@@ -41,6 +41,8 @@ class TestRotateFromTo(TestCase):
         self.assertEqual(RotateFromTo([1, 2, 3], Vector(4, 5, 6)), RotateFromTo([1, 2, 3], [4, 5, 6]))
 
     def test_to_scad(self):
+        self.ignore_scad_comments = True
+
         # Unit axis to unit axis
         self.assertScadObjectTarget(RotateFromTo(X, Y), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
         self.assertScadObjectTarget(RotateFromTo(Y, Z), None, "rotate", None, [("a", 90), ("v", [ 1,  0,  0])], None)

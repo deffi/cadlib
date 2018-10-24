@@ -29,13 +29,13 @@ class RotateYpr(Transform):
 
         # Start with the target and apply the transform
         result = target;
-        if roll  != 0: result = ScadObject("rotate", [[0    , roll, 0  ]], None, [result] if result is not None else []);
-        if pitch != 0: result = ScadObject("rotate", [[pitch, 0   , 0  ]], None, [result] if result is not None else []);
-        if yaw   != 0: result = ScadObject("rotate", [[0    , 0   , yaw]], None, [result] if result is not None else []);
+        if roll  != 0: result = ScadObject("rotate", [[0    , roll, 0  ]], None, [result] if result is not None else [], "Roll");
+        if pitch != 0: result = ScadObject("rotate", [[pitch, 0   , 0  ]], None, [result] if result is not None else [], "Pitch");
+        if yaw   != 0: result = ScadObject("rotate", [[0    , 0   , yaw]], None, [result] if result is not None else [], "Yaw");
 
         # The result can be None if (a) the target was None, and (b) no transform were applied. Since this method is
         # not supposed to return None, return a null rotation.
         if result is None:
             result = ScadObject("rotate", [[0, 0, 0]], None, None);
 
-        return result
+        return result.comment(repr(self))

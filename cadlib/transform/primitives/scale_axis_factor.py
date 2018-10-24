@@ -31,20 +31,21 @@ class ScaleAxisFactor(Transform):
         # rotations.
 
         children = [target] if target is not None else []
+        comment = repr(self)
 
         # Special case: if the factor is 1, the scale can be expressed as the
         # unit scale
         if self._factor == 1:
-            return ScadObject("scale", [[1, 1, 1]], None, children)
+            return ScadObject("scale", [[1, 1, 1]], None, children, comment)
 
         # Special case: if the axis is aligned with one of the coordinate axes,
         # the scale can be expressed as an XYZ scale along that axis.
         if self._axis.collinear(X):
-            return ScadObject("scale", [[self._factor, 1, 1]], None, children)
+            return ScadObject("scale", [[self._factor, 1, 1]], None, children, comment)
         if self._axis.collinear(Y):
-            return ScadObject("scale", [[1, self._factor, 1]], None, children)
+            return ScadObject("scale", [[1, self._factor, 1]], None, children, comment)
         if self._axis.collinear(Z):
-            return ScadObject("scale", [[1, 1, self._factor]], None, children)
+            return ScadObject("scale", [[1, 1, self._factor]], None, children, comment)
 
         # General case
         transform_axis = self._axis.closest_axis()
@@ -53,4 +54,4 @@ class ScaleAxisFactor(Transform):
         scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
         back_rotation = RotateFromTo(transform_axis, self._axis)
 
-        return (back_rotation * scale * forward_rotation).to_scad(target)
+        return (back_rotation * scale * forward_rotation).to_scad(target).comment(comment)
