@@ -23,6 +23,12 @@ class TestCylinder(TestCase):
         with self.assertNothingRaised(): Cylinder(0, Y, r = 1)
         with self.assertNothingRaised(): Cylinder(0, Y, d = 2)
 
+        # Zero size
+        with self.assertWarnsRegex(UserWarning, r'length is 0')         : Cylinder(X, 0, 1)
+        with self.assertWarnsRegex(UserWarning, r'cap is equal to base'): Cylinder(X, X, 1)
+        with self.assertWarnsRegex(UserWarning, r'radius is 0')         : Cylinder(X, 1, 0)
+        with self.assertWarnsRegex(UserWarning, r'diameter is 0')       : Cylinder(X, 1, d=0)
+
         # Invalid
         with self.assertRaises(ValueError): Cylinder(5              , 5)       # First is not a vector
         with self.assertRaises(ValueError): Cylinder(X              , "")      # Second is not a vector or number

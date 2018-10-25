@@ -9,6 +9,11 @@ class TestSphere(TestCase):
         with self.assertNothingRaised(): sphere = Sphere(r = 1)
         with self.assertNothingRaised(): sphere = Sphere(d = 2)
 
+        # Zero size
+        with self.assertWarnsRegex(UserWarning, r'radius is 0')  : Sphere(0)
+        with self.assertWarnsRegex(UserWarning, r'diameter is 0'): Sphere(d=0)
+
+
     def test_equality(self):
         # Same object
         self.assertEqualToItself(Sphere(11))

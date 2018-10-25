@@ -5,10 +5,19 @@ from cadlib.object.primitives import Cube
 class TestSphere(TestCase):
     def test_construction(self):
         # Single size
-        cube1 = Cube(11)
+        Cube(11)
 
         # Different sides
-        cube2 = Cube([11, 22, 33])
+        Cube([11, 22, 33])
+
+        # Zero size
+        with self.assertWarnsRegex(UserWarning, r'size is 0'): Cube(0)
+        with self.assertWarnsRegex(UserWarning, r'x size is 0'): Cube([0, 2, 3])
+        with self.assertWarnsRegex(UserWarning, r'y size is 0'): Cube([1, 0, 3])
+        with self.assertWarnsRegex(UserWarning, r'z size is 0'): Cube([1, 2, 0])
+        with self.assertWarnsRegex(UserWarning, r'x size is 0'): Cube([0, 0, 0])
+        with self.assertWarnsRegex(UserWarning, r'y size is 0'): Cube([0, 0, 0])
+        with self.assertWarnsRegex(UserWarning, r'z size is 0'): Cube([0, 0, 0])
 
         # Invalid
         with self.assertRaises(ValueError): Cube([])  # Empty size

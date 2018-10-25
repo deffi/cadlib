@@ -7,9 +7,14 @@ from cadlib import infinity
 
 class TestSlice(TestCase):
     def test_construction(self):
-        # Single size
+        # Valid
+        with self.assertNothingRaised(): Slice(Vector(1, 2, 3), 0, 5)
+        with self.assertNothingRaised(): Slice(Vector(1, 2, 3), 5, 0)
         with self.assertNothingRaised(): Slice(Vector(1, 2, 3), 4, 5)
         with self.assertNothingRaised(): Slice(      [1, 2, 3], 4, 5)
+
+        # Zero size
+        with self.assertWarnsRegex(UserWarning, r'offsets are equal'): Slice(X, 4, 4)
 
         # Invalid
         with self.assertRaises(ValueError): Slice(Vector(0, 0, 0), 4, 5) # Zero normal

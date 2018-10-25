@@ -1,3 +1,5 @@
+from warnings import warn
+
 from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
@@ -10,6 +12,10 @@ class Slice(Object):
         normal = Vector.convert(normal, 3)
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
+
+        # TODO convert to numbers
+
+        if offset1 == offset2: warn("offsets are equal")
 
         self._normal = normal
         self._offset1 = offset1

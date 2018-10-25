@@ -1,6 +1,7 @@
 from numbers import Number
-from cadlib.util import Vector, X, Y, Z
+from warnings import warn
 
+from cadlib.util import Vector, X, Y, Z
 from cadlib.object import Object
 from cadlib.scad import ScadObject
 from cadlib.transform.primitives import RotateFromTo, Translate
@@ -18,7 +19,7 @@ class Cylinder(Object):
         if isinstance(direction_or_base, (Vector, list, tuple)):
             # Vector type
             direction_or_base = Vector.convert(direction_or_base, "direction_or_base", 3)
-        elif direction_or_base is 0:
+        elif direction_or_base == 0:
             # Zero
             direction_or_base = Vector(0, 0, 0)
         else:
@@ -30,12 +31,17 @@ class Cylinder(Object):
             if direction_or_base.is_zero:
                 raise ValueError("direction must be non-zero")
 
+            if length_or_cap == 0: warn("length is 0")
+
             self._base = Vector(0, 0, 0)
             self._cap  = direction_or_base.normalized() * length_or_cap
         elif isinstance(length_or_cap, (Vector, list, tuple)):
             # Vector type - base/cap
             self._base = direction_or_base
             self._cap  = Vector.convert(length_or_cap, "length_or_cap", 3)
+
+            if self._base == self._cap: warn("cap is equal to base")
+
         else:
             raise ValueError("length_or_cap must be a vector type or a number")
 
@@ -43,8 +49,10 @@ class Cylinder(Object):
         if both(r, d):
             raise ValueError("radius and diameter cannot be specified together")
         elif r is not None:
+            if r == 0: warn("radius is 0")
             self._radius = r
         elif d is not None:
+            if d == 0: warn("diameter is 0")
             self._radius = d / 2
         else:
             raise ValueError("radius or diameter must be specified")

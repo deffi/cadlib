@@ -31,7 +31,7 @@ Transform:
              Or, idea: scale(factor, around = (point or line))
              But we need the around parameter to specify a scale origin?
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
-  * [Medium] Cube, Cylinder: warn if length is 0
+  * [Medium] RotateFromTo: UserWarning instead of RuntimeWarning?
   * [Medium] Inverse transforms
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
