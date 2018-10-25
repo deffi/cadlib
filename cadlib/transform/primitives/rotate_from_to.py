@@ -18,7 +18,7 @@ class RotateFromTo(Transform):
         if not ignore_ambiguity:
             if frm.collinear(to) and frm.dot(to) < 0:
                 warn("Rotation from {} to {} is ambiguous because the vectors are colinear and opposite"
-                     .format(frm.values, to.values), RuntimeWarning, 2)
+                     .format(frm.values, to.values), UserWarning, 2)
 
         self._frm = frm
         self._to  = to

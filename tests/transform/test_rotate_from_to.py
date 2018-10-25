@@ -22,8 +22,8 @@ class TestRotateFromTo(TestCase):
         with self.assertRaises(ValueError): RotateFromTo(o, o)
 
         # Opposite direction (ambiguous rotation)
-        with self.assertWarns(RuntimeWarning): RotateFromTo([1, 0, 0], [-1,  0,  0])
-        with self.assertWarns(RuntimeWarning): RotateFromTo([1, 2, 3], [-2, -4, -6])
+        with self.assertWarns(UserWarning): RotateFromTo([1, 0, 0], [-1,  0,  0])
+        with self.assertWarns(UserWarning): RotateFromTo([1, 2, 3], [-2, -4, -6])
 
     def test_equality(self):
         # Same object
