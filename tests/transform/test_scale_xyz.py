@@ -32,7 +32,7 @@ class TestScaleXyz(TestCase):
         self.assertNotEqual(ScaleXyz(60, 30, 15), ScaleXyz(60, 30, 16))
 
     def test_inverse(self):
-        self.assertEqual(ScaleXyz(1, 2, 4).inverse(), ScaleXyz(1, 0.5, 0.25))
+        self.assertInverse(ScaleXyz(1, 2, 4), ScaleXyz(1, 0.5, 0.25))
 
     def test_to_scad(self):
         s = ScaleXyz(1, 2, -1)

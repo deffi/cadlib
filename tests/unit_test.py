@@ -55,3 +55,8 @@ class TestCase(OriginalTestCase):
 
     def assertRepr(self, thing, expected):
         self.assertEqual(repr(thing), expected)
+
+    def assertInverse(self, a, b, symmetric = True):
+        self.assertEqual(a.inverse(), b)
+        if symmetric:
+            self.assertEqual(b.inverse(), a)

@@ -55,8 +55,7 @@ class TestChained(TestCase):
         tf1 = ScaleXyz(1, 2, -1) * Translate([1, 2, 3])
         tf2 = Translate([-1, -2, -3]) * ScaleXyz(1, 0.5, -1)
 
-        self.assertEqual(tf1.inverse(), tf2)
-        self.assertEqual(tf2.inverse(), tf1)
+        self.assertInverse(tf1, tf2)
 
     def test_to_scad(self):
         # Create some transform

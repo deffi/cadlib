@@ -35,7 +35,7 @@ class TestScaleAxisFactor(TestCase):
         self.assertEqual(ScaleAxisFactor(Vector(1, 2, 3), 4), ScaleAxisFactor([1, 2, 3], 4))
 
     def test_inverse(self):
-        self.assertEqual(ScaleAxisFactor(X, 2).inverse(), ScaleAxisFactor(X, 0.5))
+        self.assertInverse(ScaleAxisFactor(X, 2), ScaleAxisFactor(X, 0.5))
 
     def test_to_scad(self):
         self.ignore_scad_comments = True

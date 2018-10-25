@@ -29,7 +29,7 @@ class TestRotateAxisAngle(TestCase):
         self.assertEqual(RotateAxisAngle([1, 2, 3], 45), RotateAxisAngle(Vector(1, 2, 3), 45)) # list vs. Vector
 
     def test_inverse(self):
-        self.assertEqual(RotateAxisAngle(X, 45).inverse(), RotateAxisAngle(-X, 45))
+        self.assertInverse(RotateAxisAngle(X, 45), RotateAxisAngle(-X, 45))
 
     def test_to_scad(self):
         r = RotateAxisAngle([1, 2, 3], 45)
