@@ -7,6 +7,12 @@ class TestScaleXyz(TestCase):
         # Valid
         ScaleXyz(1, 2, 3)
 
+        # Valid, but with warning
+        with self.assertWarns(UserWarning): ScaleXyz(0, 2, 3)
+        with self.assertWarns(UserWarning): ScaleXyz(1, 0, 3)
+        with self.assertWarns(UserWarning): ScaleXyz(1, 2, 0)
+        with self.assertWarns(UserWarning): ScaleXyz(0, 0, 0)
+
         # Invalid
         with self.assertRaises(TypeError): ScaleXyz(1, 2, "3")
         with self.assertRaises(TypeError): ScaleXyz(2)

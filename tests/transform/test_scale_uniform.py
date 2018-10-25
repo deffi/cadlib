@@ -5,7 +5,9 @@ class TestScaleUniform(TestCase):
     def test_construction(self):
         # Valid
         ScaleUniform(2)
-        ScaleUniform(0)  # Valid, though useless
+
+        # Valid, but with warning
+        with self.assertWarns(UserWarning): ScaleUniform(0)
 
         # Invalid
         with self.assertRaises(TypeError): ScaleUniform([1, 2, 3])

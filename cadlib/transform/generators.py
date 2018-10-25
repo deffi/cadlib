@@ -1,5 +1,4 @@
 from numbers import Number
-from warnings import warn
 
 from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, RotateFromTo, \
     ScaleXyz, ScaleUniform, ScaleAxisFactor, Translate

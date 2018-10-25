@@ -10,7 +10,9 @@ class TestScaleAxisFactor(TestCase):
         # Valid
         ScaleAxisFactor(      [1, 2, 3], 4)
         ScaleAxisFactor(Vector(1, 2, 3), 4)
-        ScaleAxisFactor(      [1, 2, 3], 0)  # Valid, though useless
+
+        # Valid, but with warning
+        with self.assertWarns(UserWarning): ScaleAxisFactor([1, 2, 3], 0)  # Valid, though useless
 
         # Invalid
         with self.assertRaises(ValueError): ScaleAxisFactor([0, 0,  0 ],  4 )

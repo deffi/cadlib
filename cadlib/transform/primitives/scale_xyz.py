@@ -1,4 +1,4 @@
-from numbers import Number
+from warnings import warn
 
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
@@ -9,6 +9,11 @@ class ScaleXyz(Transform):
         x = to_number(x, None, "x", [])
         y = to_number(y, None, "y", [])
         z = to_number(z, None, "z", [])
+
+        if x == 0: warn("x is 0")
+        if y == 0: warn("y is 0")
+        if z == 0: warn("z is 0")
+
         self._xyz = [x, y, z]
 
     def __eq__(self, other):

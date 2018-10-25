@@ -1,3 +1,5 @@
+from warnings import warn
+
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
 from cadlib.util.number import to_number
@@ -5,6 +7,9 @@ from cadlib.util.number import to_number
 class ScaleUniform(Transform):
     def __init__(self, factor):
         self._factor = to_number(factor, 1, "factor")
+
+        if self._factor == 0: warn("factor is 0")
+
 
     def __eq__(self, other):
         return isinstance(other, ScaleUniform) and other._factor == self._factor

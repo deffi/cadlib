@@ -1,3 +1,5 @@
+from warnings import warn
+
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
 from cadlib.util.number import to_number
@@ -13,6 +15,9 @@ class ScaleAxisFactor(Transform):
 
         self._axis   = axis
         self._factor = to_number(factor, self._axis.length, "factor")
+
+        if self._factor == 0: warn("factor is 0")
+
 
     def __eq__(self, other):
         return isinstance(other, ScaleAxisFactor) \

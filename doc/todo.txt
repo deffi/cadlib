@@ -31,7 +31,6 @@ Transform:
              Or, idea: scale(factor, around = (point or line))
              But we need the around parameter to specify a scale origin?
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
-  * [Medium] ScaleXyz and ScaleUniform: warn if one axis is 0
   * [Medium] Cube, Cylinder: warn if length is 0
   * [Medium] Inverse transforms
   * [Low]    mirror(along which axis and which point/offset)
@@ -56,8 +55,9 @@ CSG:
 
 Scad:
   * [Medium] Better comments for SCAD objects:
-               * Show canonical form for generator instead of object representation
-               * Simplify vectors (X, 2*X, -X, -2*X)
+               * Show canonical form for generator or textual description ("Rotate from ... to ...")
+                 instead of object representation
+               * Simplify vectors (X, 2*X, -X, -2*X), and show as <x, y, z> otherwise
   * [Low]    Remove union when implicit (e. g. in translate, or from the second one in difference)
   * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
              tests for part/hole
