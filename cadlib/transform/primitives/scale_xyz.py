@@ -26,6 +26,10 @@ class ScaleXyz(Transform):
     def __str__(self):
         return "Scale by {}".format(self._xyz)
 
+    def inverse(self):
+        x, y, z = self._xyz
+        return ScaleXyz(1/x, 1/y, 1/z)
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("scale", [self._xyz], None, children)

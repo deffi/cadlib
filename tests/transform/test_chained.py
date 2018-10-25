@@ -16,6 +16,9 @@ class TestChained(TestCase):
         with self.assertNothingRaised(): chained2 = Chained([t1, t1, t1])             # Repeated child
         with self.assertNothingRaised(): chained3 = Chained([chained1, t1, chained2]) # Chained child
 
+        # From generator
+        self.assertEqual(Chained(tf for tf in [t1, t2, t3]), Chained([t1, t2, t3]))
+
         # Invalid
         with self.assertRaises(TypeError): Chained(None)
         with self.assertRaises(TypeError): Chained([None])
@@ -30,8 +33,10 @@ class TestChained(TestCase):
 
         # Same object
         self.assertEqualToItself(c)
+        self.assertEqualToItself(Chained([]))
 
         # Equal objects
+        self.assertEqual(Chained([]), Chained([]))
         self.assertEqual(
             Chained([r, s, t]),
             Chained([r, s, t])) # Identical children
@@ -45,6 +50,13 @@ class TestChained(TestCase):
         self.assertNotEqual(
             Chained([RotateXyz(60, 30, 15), RotateXyz(60, 30, 15), Translate([60, 30, 15])]),
             Chained([RotateXyz(60, 30, 15), RotateXyz(60, 30, 15), Translate([60, 30, 16])])) # Unequal children
+
+    def test_inverse(self):
+        tf1 = ScaleXyz(1, 2, -1) * Translate([1, 2, 3])
+        tf2 = Translate([-1, -2, -3]) * ScaleXyz(1, 0.5, -1)
+
+        self.assertEqual(tf1.inverse(), tf2)
+        self.assertEqual(tf2.inverse(), tf1)
 
     def test_to_scad(self):
         # Create some transform

@@ -31,7 +31,7 @@ Transform:
              Or, idea: scale(factor, around = (point or line))
              But we need the around parameter to specify a scale origin?
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
-  * [Medium] Inverse transforms
+  * [Low]    Non-chained inverse of RotateYpr and RotateXyz
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
   * [Low]    .to_matrix
@@ -80,6 +80,7 @@ Model:
                * Allow in Matrix/Vector
 
 Tests:
+  * [Medium] Verify inverse of RotateXyz and RotateYpr with matrix
   * [Low]    Primitives (object and transform): test negative numbers
   * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
              and object primitives)

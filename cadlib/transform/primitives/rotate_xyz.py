@@ -23,6 +23,10 @@ class RotateXyz(Transform):
         x, y, z = self._xyz
         return f"RotateXyz({x!r}, {y!r}, {z!r})"
 
+    def inverse(self):
+        x, y, z = self._xyz
+        return RotateXyz(0, 0, -z) * RotateXyz(0, -y, 0) * RotateXyz(-x, 0, 0)
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("rotate", [list(self._xyz)], None, children)

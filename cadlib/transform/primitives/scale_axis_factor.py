@@ -30,6 +30,9 @@ class ScaleAxisFactor(Transform):
     def __repr__(self):
         return f"ScaleAxisFactor({self._axis!r}, {self._factor!r})"
 
+    def inverse(self):
+        return ScaleAxisFactor(self._axis, 1 / self._factor)
+
     def to_scad(self, target):
         # Since OpenSCAD does not have axis/factor scaling, it has to be
         # translated to corresponding XYZ scales, potentially combined with

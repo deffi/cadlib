@@ -19,6 +19,8 @@ class TestTranslate(TestCase):
         # Different objects
         self.assertNotEqual(Translate([60, 30, 15]), Translate([60, 30, 16]))
 
+    def test_inverse(self):
+        self.assertEqual(Translate([1, 2, -3]).inverse(), Translate([-1, -2, 3]))
 
     def test_to_scad(self):
         t = Translate([30, 20, 10])

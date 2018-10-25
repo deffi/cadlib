@@ -23,6 +23,9 @@ class TestRotateXyz(TestCase):
 
         pass
 
+    def test_inverse(self):
+        self.assertEqual(RotateXyz(10, 20, 30).inverse(),
+            RotateXyz(0, 0, -30) * RotateXyz(0, -20, 0) * RotateXyz(-10, 0, 0))
 
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)

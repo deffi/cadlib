@@ -20,6 +20,10 @@ class TestRotateYpr(TestCase):
         # Different objects
         self.assertNotEqual(RotateYpr(10, 20, 30), RotateYpr(10, 20, 40)) # Different values
 
+    def test_inverse(self):
+        self.assertEqual(RotateYpr(10, 20, 30).inverse(),
+            RotateYpr(0, 0, -30) * RotateYpr(0, -20, 0) * RotateYpr(-10, 0, 0))
+
     def test_to_scad(self):
         self.ignore_scad_comments = True
 

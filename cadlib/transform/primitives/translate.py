@@ -16,6 +16,9 @@ class Translate(Transform):
     def __repr__(self):
         return f"Translate({self._vector!r})"
 
+    def inverse(self):
+        return Translate(-self._vector)
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("translate", [list(self._vector)], None, children)

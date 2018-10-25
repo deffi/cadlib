@@ -20,6 +20,9 @@ class ScaleUniform(Transform):
     def __repr__(self):
         return f"ScaleUniform({self._factor!r})"
 
+    def inverse(self):
+        return ScaleUniform(1 / self._factor)
+
     def to_scad(self, target):
         children = [target] if target is not None else []
         f = self._factor

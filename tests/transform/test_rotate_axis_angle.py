@@ -1,6 +1,6 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateAxisAngle
-from cadlib.util import Vector
+from cadlib.util import Vector, X
 
 class TestRotateAxisAngle(TestCase):
     def test_construction(self):
@@ -27,6 +27,9 @@ class TestRotateAxisAngle(TestCase):
 
         # Equal objects from different specifications
         self.assertEqual(RotateAxisAngle([1, 2, 3], 45), RotateAxisAngle(Vector(1, 2, 3), 45)) # list vs. Vector
+
+    def test_inverse(self):
+        self.assertEqual(RotateAxisAngle(X, 45).inverse(), RotateAxisAngle(-X, 45))
 
     def test_to_scad(self):
         r = RotateAxisAngle([1, 2, 3], 45)

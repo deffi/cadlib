@@ -40,6 +40,9 @@ class TestRotateFromTo(TestCase):
         self.assertEqual(RotateFromTo(Vector(1, 2, 3), [4, 5, 6]), RotateFromTo([1, 2, 3], [4, 5, 6]))
         self.assertEqual(RotateFromTo([1, 2, 3], Vector(4, 5, 6)), RotateFromTo([1, 2, 3], [4, 5, 6]))
 
+    def test_inverse(self):
+        self.assertEqual(RotateFromTo(X, Y).inverse(), RotateFromTo(Y, X))
+
     def test_to_scad(self):
         self.ignore_scad_comments = True
 

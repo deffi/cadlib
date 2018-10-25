@@ -4,6 +4,8 @@ from cadlib.util.tree import Node
 
 class Chained(Transform):
     def __init__(self, transforms):
+        transforms = list(transforms)
+
         # Check parameters
         for transform in transforms:
             if not isinstance(transform, Transform):
@@ -26,6 +28,11 @@ class Chained(Transform):
 
     def to_tree(self):
         return Node(self, [tf.to_tree() for tf in self._transforms])
+
+    def inverse(self):
+        transforms = reversed(self._transforms)
+        transforms = (tf.inverse() for tf in transforms)
+        return Chained(transforms)
 
     def to_scad(self, target):
         result = target
