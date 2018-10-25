@@ -14,3 +14,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(union       (object_list), Union       (object_list))
         self.assertEqual(difference  (object_list), Difference  (object_list))
         self.assertEqual(intersection(object_list), Intersection(object_list))
+
+    def test_empty(self):
+        self.assertEqual(union       (), Union       ([]))
+        self.assertEqual(difference  (), Difference  ([]))
+        self.assertEqual(intersection(), Intersection([]))

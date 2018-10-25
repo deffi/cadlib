@@ -42,7 +42,6 @@ Transform:
              scale factors
 
 CSG:
-  * [Medium] union generator without arguments
   * [Low]    Make it so that a-(b+c) == a-b-c. Two options:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
