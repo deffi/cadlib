@@ -1,4 +1,4 @@
-from cadlib.transform.primitives import Translate
+from cadlib.transform.primitives import Translate, RotateYpr
 from tests.unit_test import TestCase
 from cadlib.transform import shortcuts
 
@@ -13,9 +13,9 @@ class TestTransformShortcuts(TestCase):
         self.assertEqual(shortcuts.back   (6), Translate([ 0, -6,  0]))
 
     def test_rotate_shortcuts(self):
-        self.assertScadCode(shortcuts.yaw_left  (1), "rotate([0, 0, 1]);")
-        self.assertScadCode(shortcuts.yaw_right (2), "rotate([0, 0, -2]);")
-        self.assertScadCode(shortcuts.pitch_up  (3), "rotate([3, 0, 0]);")
-        self.assertScadCode(shortcuts.pitch_down(4), "rotate([-4, 0, 0]);")
-        self.assertScadCode(shortcuts.roll_right(5), "rotate([0, 5, 0]);")
-        self.assertScadCode(shortcuts.roll_left (6), "rotate([0, -6, 0]);")
+        self.assertEqual(shortcuts.yaw_left  (1), RotateYpr( 1,  0,  0))
+        self.assertEqual(shortcuts.yaw_right (2), RotateYpr(-2,  0,  0))
+        self.assertEqual(shortcuts.pitch_up  (3), RotateYpr( 0,  3,  0))
+        self.assertEqual(shortcuts.pitch_down(4), RotateYpr( 0, -4,  0))
+        self.assertEqual(shortcuts.roll_right(5), RotateYpr( 0,  0,  5))
+        self.assertEqual(shortcuts.roll_left (6), RotateYpr( 0,  0, -6))
