@@ -63,7 +63,7 @@ class TestVector(TestCase):
     def test_values(self):
         self.assertEqual(Vector(1, 2, 3).values, [1, 2, 3])
 
-    def test_valuse_immutability(self):
+    def test_values_immutability(self):
         v = Vector(1, 2, 3)
 
         self.assertEqual(v.values, [1, 2, 3])
