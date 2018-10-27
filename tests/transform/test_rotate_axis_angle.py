@@ -1,6 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateAxisAngle
 from cadlib.util import Vector, X, Y, Z
+from cadlib.util.geometry import affine_matrix
 
 class TestRotateAxisAngle(TestCase):
     def test_construction(self):
@@ -39,16 +40,6 @@ class TestRotateAxisAngle(TestCase):
         self.assertRepr(RotateAxisAngle([1, 0, 0], 45), "RotateAxisAngle(Vector(1, 0, 0), 45)")
 
     def test_to_matrix(self):
-        self.assertAlmostEqual(RotateAxisAngle(X, 90).to_matrix().row_values, [
-            [1, 0,  0, 0],
-            [0, 0, -1, 0],
-            [0, 1,  0, 0],
-            [0, 0,  0, 1],
-        ])
-        # TODO with non-unit axes
-        # self.assertEqual(RotateAxisAngle(X + Y + Z, 90).to_matrix().row_values, [
-        #     [0, 0, 1, 0],
-        #     [1, 0, 0, 0],
-        #     [0, 1, 0, 0],
-        #     [0, 0, 0, 1],
-        # ])
+        self.assertAlmostEqual(RotateAxisAngle(X        , 90 ).to_matrix(), affine_matrix(X, Z, -Y))
+        self.assertAlmostEqual(RotateAxisAngle(X + Y    , 180).to_matrix(), affine_matrix(Y, X, -Z))
+        self.assertAlmostEqual(RotateAxisAngle(X + Y + Z, 120).to_matrix(), affine_matrix(Y, Z,  X))

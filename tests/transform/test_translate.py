@@ -1,5 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import Translate
+from cadlib.util.geometry import affine_matrix
+from cadlib.util import X, Y, Z
 
 class TestTranslate(TestCase):
     def test_construction(self):
@@ -31,9 +33,4 @@ class TestTranslate(TestCase):
         self.assertRepr(Translate([10, 20, 30]), "Translate(Vector(10, 20, 30))")
 
     def test_to_matrix(self):
-        self.assertEqual(Translate([1, 2, 3]).to_matrix().row_values, [
-            [1, 0, 0, 1],
-            [0, 1, 0, 2],
-            [0, 0, 1, 3],
-            [0, 0, 0, 1],
-        ])
+        self.assertAlmostEqual(Translate([1, 2, 3]).to_matrix(), affine_matrix(X, Y, Z, [1, 2, 3]))
