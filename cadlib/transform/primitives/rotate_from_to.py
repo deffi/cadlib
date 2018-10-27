@@ -3,7 +3,7 @@ from warnings import warn
 from cadlib.util import Vector, Matrix
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
-
+from cadlib.transform.primitives import RotateAxisAngle
 
 class RotateFromTo(Transform):
     def __init__(self, frm, to, ignore_ambiguity = False):
@@ -38,7 +38,7 @@ class RotateFromTo(Transform):
     def inverse(self):
         return RotateFromTo(self._to, self._frm)
 
-    def to_scad(self, target):
+    def _to_axis_angle(self):
         if self._frm.collinear(self._to):
             # Special case: the vectors are collinear
             if self._frm.dot(self._to) > 0:
@@ -55,40 +55,24 @@ class RotateFromTo(Transform):
             axis  = self._frm.cross(self._to)
             angle = self._frm.angle(self._to)
 
+        return axis, angle
+
+    def to_scad(self, target):
+        axis, angle = self._to_axis_angle()
 
         if axis is None:
             # No rotation
             return target
         else:
             # Yes rotation
-            # TODO use RotateAxisAngle?
-            axis = axis.normalized()
-            children = [target] if target is not None else []
-            comment = repr(self)
-            return ScadObject("rotate", None, [("a", angle), ("v", axis.values)], children, comment)
+            return RotateAxisAngle(axis.normalized(), angle).to_scad(target).comment(repr(self))
 
     def to_matrix(self):
-        # TODO duplication or simplify
-        if self._frm.collinear(self._to):
-            # Special case: the vectors are collinear
-            if self._frm.dot(self._to) > 0:
-                # Same direction. No rotation.
-                axis  = None
-                angle = None
-            else:
-                # Opposite directions. Rotation by 180 degrees, axis is
-                # ambiguous.
-                axis  = self._frm.normal()  # Arbitrary
-                angle = 180
-        else:
-            # Regular case
-            axis  = self._frm.cross(self._to)
-            angle = self._frm.angle(self._to)
+        axis, angle = self._to_axis_angle()
 
         if axis is None:
             # No rotation
             return Matrix.identity(4)
         else:
             # Yes rotation
-            from cadlib.transform.primitives.rotate_axis_angle import RotateAxisAngle
             return RotateAxisAngle(axis, angle).to_matrix()
