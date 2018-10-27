@@ -40,6 +40,7 @@ Transform:
   * [Low]    Scale: negative values should be translated to mirror for OpenSCAD
              (OpenSCAD does not allow negative scales), or do not allow negative
              scale factors
+  * [Low]    Exponentiation for transforms
 
 CSG:
   * [Low]    Make it so that a-(b+c) == a-b-c. Two options:
