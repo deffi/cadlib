@@ -6,9 +6,9 @@ from cadlib.util import degree
 
 class RotateYpr(Transform):
     def __init__(self, yaw, pitch, roll):
-        yaw   = to_number(yaw  , None, "yaw  ", [])
+        yaw   = to_number(yaw  , None, "yaw"  , [])
         pitch = to_number(pitch, None, "pitch", [])
-        roll  = to_number(roll , None, "roll ", [])
+        roll  = to_number(roll , None, "roll" , [])
         self._ypr = [yaw, pitch, roll]
 
     def __eq__(self, other):
@@ -49,5 +49,4 @@ class RotateYpr(Transform):
 
     def to_matrix(self):
         yaw, pitch, roll = self._ypr
-        # TODO opposite order? unit tests will tell
         return rotation_matrix(2, yaw*degree) * rotation_matrix(0, pitch*degree) * rotation_matrix(1, roll*degree)
