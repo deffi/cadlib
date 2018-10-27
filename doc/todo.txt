@@ -1,4 +1,7 @@
 Next:
+  * All to_scad methods must return a valid ScadObject under all circumstances.
+    Make sure that they do. Enable the disabled test for RotateYpr where there
+    is no transform and no target.
 
 Object:
   * [Medium] Assembly objects
@@ -25,6 +28,9 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
+  * [High]   All to_scad methods must return a valid ScadObject under all
+             circumstances. Make sure that they do. Enable the disabled test for
+             RotateYpr where there is no transform and no target.
   * [Medium] transform generator: axis_angle (direction/magnitude)
   * [Medium] arrange objects in a grid (from list, or factory)
   * [Medium] Scale around (instead of along) axis?
@@ -41,6 +47,9 @@ Transform:
              (OpenSCAD does not allow negative scales), or do not allow negative
              scale factors
   * [Low]    Exponentiation for transforms
+  * [Low]    Empty-chained * object should be object, not chained
+  * [Low]    RotateYpr(0, 0, 0) results in no transform, but RotateXyz results
+             in rotate([0, 0, 0]). This should be consistent.
 
 CSG:
   * [Low]    Make it so that a-(b+c) == a-b-c. Two options:
@@ -51,9 +60,11 @@ CSG:
                * We could use a set instead of a list, or we could convert the list to a set for comparison. This would
                  require a hash method
                * We could manually compare the list elements, but that would be in O(n^2)
+  * [Low]    Empty-union + object should be object, not union
 
 Scad:
-  * [High]   Is the interpretation of the axis/angle rotation direction accurate?
+  * [High]   Test empty empty ScadObject (ScadObject (None, None, None, None)),
+             also as child and with children (?).
   * [Medium] Better comments for SCAD objects:
                * Show canonical form for generator or textual description ("Rotate from ... to ...")
                  instead of object representation
@@ -63,11 +74,17 @@ Scad:
              tests for part/hole
   * [Low]    There should be an empty ScadObject that we can pass into and return from Object.to_scad; this would remove
              special case handling, e.g. RotateYpr.to_scad if target==None and ypr==(0, 0, 0)
+             On the other hand, target is probably not supposed to be None anyway. And for other purposes,
+             we have the empty union as empty ScadObject
   * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
   * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
              constants
   * [Low]    Modifiers: %background, #debug, !root, *disable
   * [Low]    Colors (RGBA)
+  * [Low]    In the scad representation of a RotateYpr, the individual rotations
+             should have comments "Yaw", "Pitch", and "Roll". Since the
+             RotateYpr is converted to an equivalent Chained, this will probably
+             require comments for Objects.
 
 Model:
   * [Low]    Name for transforms and objects - show in tree representation and as comment in SCAD code
