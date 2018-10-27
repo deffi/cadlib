@@ -54,8 +54,9 @@ class TestChained(TestCase):
     def test_inverse(self):
         tf1 = ScaleXyz(1, 2, -1) * Translate([1, 2, 3])
         tf2 = Translate([-1, -2, -3]) * ScaleXyz(1, 0.5, -1)
-
         self.assertInverse(tf1, tf2)
+
+        self.assertInverse(Chained([]), Chained([]))
 
     def test_to_scad(self):
         # Create some transform
@@ -70,6 +71,10 @@ class TestChained(TestCase):
                 ])
             ])
         )
+
+        # Empty
+        dummy = ScadObject("dummy", None, None, None)
+        self.assertEqual(Chained([]).to_scad(dummy), dummy)
 
     def test_repr(self):
         self.assertRepr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
@@ -94,3 +99,6 @@ class TestChained(TestCase):
             [0,  0, 1,  3],
             [0,  0, 0,  1],
         ])
+
+        # Empty
+        self.assertIdentity(Chained([]).to_matrix())

@@ -75,6 +75,11 @@ class TestObject(TestCase):
         self.assertEqual(    a  + (b  + (c  + d)), Union([a, b, c, d]))
         self.assertEqual(   (a  +  b) + (c  + d) , Union([a, b, c, d]))
 
+        # Empty union
+        self.assertEqual(Union([]) + Union([]), Union([]))
+        self.assertEqual(Union([]) + a, Union([a]))
+        self.assertEqual(a + Union([]), Union([a]))
+
     def test_multiplication(self):
         a = Sphere(2)
         b = Cube([10, 10, 10])

@@ -11,6 +11,8 @@ class TestUnion(TestCase):
         cylinder = Cylinder(Z, 11, 22)
         objects = [sphere, cube, cylinder]
 
+        Union(objects)
+
         self.assertEqual(Union.empty(), Union([]))
 
     def test_equality(self):
@@ -42,6 +44,9 @@ class TestUnion(TestCase):
                 cube    .to_scad(),
                 cylinder.to_scad(),
         ]))
+
+        # Empty
+        self.assertEqual(Union([]).to_scad(), ScadObject("union", None, None, None))
 
     def test_sum(self):
         sphere   = Sphere(2)

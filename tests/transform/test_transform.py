@@ -43,6 +43,11 @@ class TestTransform(TestCase):
         rs = r * s
         self.assertEqual(          rs * rs         , Chained([r, s, r, s]))
 
+        # Empty chained
+        self.assertEqual(Chained([]) * Chained([]), Chained([]))
+        self.assertEqual(Chained([]) * r, Chained([r]))
+        self.assertEqual(r * Chained([]), Chained([r]))
+
     def test_multiplication_with_invalid(self):
         t = Translate([30, 20, 10])
 

@@ -77,3 +77,10 @@ class TestCase(OriginalTestCase):
         self.assertEqual(matrix.row_count, matrix.column_count)
         self.assertAlmostEqual(matrix * matrix.transpose(), matrix.identity(matrix.row_count))
         self.assertAlmostEqual(matrix.transpose() * matrix, matrix.identity(matrix.row_count))
+
+    def assertSquare(self, matrix):
+        self.assertEqual(matrix.row_count, matrix.column_count)
+
+    def assertIdentity(self, matrix):
+        self.assertSquare(matrix)
+        self.assertAlmostEqual(matrix, Matrix.identity(matrix.row_count))
