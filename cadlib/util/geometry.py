@@ -1,7 +1,7 @@
 from cadlib.util import Matrix
 import math
 
-# TODO test
+
 def affine_matrix(x, y, z, t = None):
     t = t or [0, 0, 0]
     return Matrix(rows = [
@@ -11,7 +11,7 @@ def affine_matrix(x, y, z, t = None):
         [0   , 0   , 0   , 1],
     ])
 
-# TODO test
+
 def rotation_matrix(axis_index, angle):
     i1 = (axis_index + 1) % 3
     i2 = (axis_index + 2) % 3

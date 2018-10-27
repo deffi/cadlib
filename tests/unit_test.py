@@ -82,3 +82,8 @@ class TestCase(OriginalTestCase):
                 self.assertAlmostEqual(a, b)
         else:
             super().assertAlmostEqual(first, second, places, msg, delta)
+
+    def assertOrthogonal(self, matrix):
+        self.assertEqual(matrix.row_count, matrix.column_count)
+        self.assertAlmostEqual(matrix * matrix.transpose(), matrix.identity(matrix.row_count))
+        self.assertAlmostEqual(matrix.transpose() * matrix, matrix.identity(matrix.row_count))
