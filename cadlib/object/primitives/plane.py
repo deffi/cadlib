@@ -3,6 +3,7 @@ from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
 from cadlib.object.primitives import Cube
+from cadlib.util.number import to_number
 
 
 class Plane(Object):
@@ -10,6 +11,8 @@ class Plane(Object):
         normal = Vector.convert(normal, 3)
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
+
+        offset = to_number(offset, None, "offset1", [])
 
         self._normal = normal
         self._offset = offset

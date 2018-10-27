@@ -13,6 +13,7 @@ class TestPlane(TestCase):
 
         # Invalid
         with self.assertRaises(ValueError): Plane(Vector(0, 0, 0), 0)  # Zero normal
+        with self.assertRaises(TypeError): Plane(Vector(1, 2, 3), "0")  # Wrong offset type
         with self.assertRaises(TypeError): Plane(Vector(1, 2, 3))  # Offset missing
         with self.assertRaises(TypeError): Plane(1, 0)  # Wrong type
 

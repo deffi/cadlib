@@ -5,6 +5,7 @@ from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
 from cadlib.object.primitives import Cube
+from cadlib.util.number import to_number
 
 
 class Slice(Object):
@@ -13,7 +14,8 @@ class Slice(Object):
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 
-        # TODO convert to numbers
+        offset1 = to_number(offset1, None, "offset1", [])
+        offset2 = to_number(offset2, None, "offset1", [])
 
         if offset1 == offset2: warn("offsets are equal")
 

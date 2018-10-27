@@ -18,6 +18,8 @@ class TestSlice(TestCase):
 
         # Invalid
         with self.assertRaises(ValueError): Slice(Vector(0, 0, 0), 4, 5) # Zero normal
+        with self.assertRaises(TypeError) : Slice(Vector(1, 2, 3), "0", 5)
+        with self.assertRaises(TypeError) : Slice(Vector(1, 2, 3), 0, "5")
         with self.assertRaises(TypeError) : Slice(Vector(1, 2, 3))       # Offsets missing
         with self.assertRaises(TypeError) : Slice(Vector(1, 2, 3), 4)    # Offset missing
         with self.assertRaises(TypeError) : Slice(1, 4, 5)               # Wrong type
