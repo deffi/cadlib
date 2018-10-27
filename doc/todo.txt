@@ -84,6 +84,10 @@ Tests:
   * [Low]    Primitives (object and transform): test negative numbers
   * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
              and object primitives)
+  * [Low]    The almost equal failure message should show the whole list or
+             Matrix, not just the value that caused the failure
+  * [Low]    assertNotAlwaysEqual with special-value handling
+  * [Low]    assertNotEqual with special-value handling
 
 Util:
 
