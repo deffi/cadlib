@@ -62,6 +62,9 @@ class TestCase(OriginalTestCase):
         if symmetric:
             self.assertEqual(b.inverse(), a)
 
+        self.assertAlmostEqual(a.to_matrix() * b.to_matrix(), Matrix.identity(4))
+        self.assertAlmostEqual(b.to_matrix() * a.to_matrix(), Matrix.identity(4))
+
     def assertAlmostEqual(self, first, second, places=None, msg=None, delta=None):
         # TODO enable and test
         # TODO remove by adding Matrix.abs?
