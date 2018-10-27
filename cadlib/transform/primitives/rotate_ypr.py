@@ -32,6 +32,8 @@ class RotateYpr(Transform):
         # yaw-pitch-roll in local coordinates corresponds to roll-pitch-yaw in global coordinates.
         yaw, pitch, roll = self._ypr
 
+        # TODO in order to properly verify this, we should convert it to an
+        # equivalent XYZ chain and then use that in both to_scad and to_matrix
         # Start with the target and apply the transform
         result = target;
         if roll  != 0: result = ScadObject("rotate", [[0    , roll, 0  ]], None, [result] if result is not None else [], "Roll");
