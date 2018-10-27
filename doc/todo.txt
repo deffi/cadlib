@@ -85,9 +85,6 @@ Tests:
              and object primitives)
 
 Util:
-  * [Low]    Matrix should probably accept lists (row-wise) and Vectors
-             (column-wise), and then there should be more explicit from_rows and
-             from_columns
 
 General:
   * [Low]    __str__

@@ -6,39 +6,55 @@ class Matrix:
     ## Initialization ##
     ####################
 
-    def __init__(self, *rows):
-        if len(rows) == 0:
-            row_count = 0
-            column_count = 0
-        else:
-            row_count = len(rows)
-            column_count = len(rows[0])
+    def __init__(self, rows = None, columns = None):
+        self._row_count    = 0
+        self._column_count = 0
+        self._rows = []
 
-            for row in rows:
-                # Make sure that the row isn't empty (special error message).
-                if len(row) == 0:
-                    raise ValueError("Rows can't be empty.")
+        if rows is not None and columns is not None:
+            raise ValueError("rows and columns cannot be specified together")
 
-                # Make sure that the row's length matches the first row's length.
-                if len(row) != column_count:
-                    raise ValueError("All rows must have the same size.")
+        elif rows is not None:
+            rows = list(rows)
+            if len(rows) > 0:
+                self._row_count    = len(rows)
+                self._column_count = len(rows[0])
 
-                # Make sure that all values are numeric
-                for value in row:
-                    if not isinstance(value, Number):
-                        raise TypeError("Matrices must consist of numeric values")
+                # Check the rows
+                for row in rows:
+                    if len(row) == 0                 : raise ValueError("rows can't be empty")
+                    if len(row) != self._column_count: raise ValueError("rows must have the same size")
 
-        self._rows = [list(row) for row in rows]
-        self._row_count = row_count
-        self._column_count = column_count
+                # Convert to list of lists
+                self._rows = [list(row) for row in rows]
+
+        elif columns is not None:
+            columns = list(columns)
+            if len(columns) > 0:
+                self._column_count = len(columns)
+                self._row_count    = len(columns[0])
+
+                # Check the columns
+                for column in columns:
+                    if len(column) == 0              : raise ValueError("columns can't be empty")
+                    if len(column) != self._row_count: raise ValueError("columns must have the same size")
+
+                # Convert to list of lists
+                self._rows = [list(row) for row in zip(*columns)]
+
+        for row in self._rows:
+            # Make sure that all values are numeric
+            for value in row:
+                if not isinstance(value, Number):
+                    raise TypeError("Matrices must consist of numeric values")
 
     @classmethod
     def from_rows(cls, *rows):
-        return cls(*rows)
+        return cls(rows = rows)
 
     @classmethod
     def from_columns(cls, *columns):
-        return cls(*zip(*columns))
+        return cls(columns = columns)
 
     @classmethod
     def identity(cls, size):
@@ -48,12 +64,12 @@ class Matrix:
             row[i] = 1
             rows.append(row)
 
-        return cls(*rows)
+        return cls(rows = rows)
 
     @classmethod
     def zero(cls, size):
         rows = [[0] * size for i in range(size)]
-        return cls(*rows)
+        return cls(rows = rows)
 
 
     ################
@@ -107,14 +123,14 @@ class Matrix:
     ################
 
     def transpose(self):
-        return Matrix(*list(zip(*self._rows)))
+        return Matrix(columns = self._rows)
 
     def __add__(self, other):
         if isinstance(other, Matrix):
             if other.dimensions != self.dimensions:
                 raise ValueError("Dimensions don't match")
             else:
-                return Matrix(*[[x1 + x2 for x1, x2 in zip(r1, r2)] for r1, r2 in zip(self._rows, other._rows)])
+                return Matrix.from_rows(*[[x1 + x2 for x1, x2 in zip(r1, r2)] for r1, r2 in zip(self._rows, other._rows)])
         else:
             return NotImplemented
 
@@ -129,7 +145,7 @@ class Matrix:
 
     def __mul__(self, other):
         if isinstance(other, Number):
-            return Matrix(*[[x * other for x in row] for row in self._rows])
+            return Matrix(rows = [[x * other for x in row] for row in self._rows])
 
         elif isinstance(other, Matrix):
             if self.column_count != other.row_count:
@@ -137,7 +153,7 @@ class Matrix:
 
             rows = [[sum(x1 * x2 for x1, x2 in zip(row, column)) for column in zip(*other._rows)] for row in self._rows]
 
-            return Matrix(*rows)
+            return Matrix(rows = rows)
 
         else:
             return NotImplemented
@@ -157,7 +173,7 @@ class Matrix:
 
     def __truediv__(self, other):
         if isinstance(other, Number):
-            return Matrix(*[[x / other for x in row] for row in self._rows])
+            return Matrix(rows = [[x / other for x in row] for row in self._rows])
         else:
             return NotImplemented
 
@@ -170,7 +186,8 @@ class Matrix:
         return Table(self._rows).format(alignment="r")
 
     def __repr__(self):
-        return "Matrix({})".format(", ".join((str(row) for row in self._rows)))
+        #return "Matrix(rows={})".format(", ".join((str(row) for row in self._rows)))
+        return f"Matrix(rows={self.row_values})"
 
 
 if __name__ == "__main__":

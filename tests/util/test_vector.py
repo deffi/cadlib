@@ -180,7 +180,7 @@ class TestVector(TestCase):
         self.assertEqual(Matrix.zero(3) * Vector(1, 2, 3), Vector(0, 0, 0))
 
         # (Square) Matrix * Vector
-        m = Matrix(
+        m = Matrix.from_rows(
             [1, 1, 1],
             [0, 1, 1],
             [0, 0, 1])
@@ -189,7 +189,7 @@ class TestVector(TestCase):
         with self.assertRaises(ValueError): m * Vector(1, 2, 3, 4)
 
         # (Non-square) Matrix * Vector
-        m = Matrix(
+        m = Matrix.from_rows(
             [1, 1, 1],
             [0, 2, 2],
             [0, 3, 0],
