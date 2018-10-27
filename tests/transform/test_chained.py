@@ -74,3 +74,23 @@ class TestChained(TestCase):
     def test_repr(self):
         self.assertRepr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
             "Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)])")
+
+    def test_to_matrix(self):
+        t = Translate([1, 2, 3])
+        r = RotateXyz(0, 0, 90)
+
+        # First rotate, then translate
+        self.assertAlmostEqual(Chained([t, r]).to_matrix().row_values, [
+            [0, -1, 0, 1],
+            [1, 0, 0, 2],
+            [0, 0, 1, 3],
+            [0, 0, 0, 1],
+        ])
+
+        # First translate, then rotate
+        self.assertAlmostEqual(Chained([r, t]).to_matrix().row_values, [
+            [0, -1, 0, -2],
+            [1,  0, 0,  1],
+            [0,  0, 1,  3],
+            [0,  0, 0,  1],
+        ])

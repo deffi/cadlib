@@ -41,7 +41,6 @@ class Chained(Transform):
         return result
 
     def to_matrix(self):
-        # TODO test
         result = Matrix.identity(4)
         for transform in self._transforms:
             result = result * transform.to_matrix()
