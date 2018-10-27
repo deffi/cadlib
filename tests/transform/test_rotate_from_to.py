@@ -95,4 +95,7 @@ class TestRotateFromTo(TestCase):
         self.assertAlmostEqual(RotateFromTo(-X,  Z).to_matrix(), affine_matrix(-Z, Y,  X))
         self.assertAlmostEqual(RotateFromTo(-X, -Z).to_matrix(), affine_matrix( Z, Y, -X))
 
-        # TODO with non-unit axes
+        # Non-unit axis
+        self.assertAlmostEqual(RotateFromTo(2*X,   Y).to_matrix(), affine_matrix(Y, -X, Z))
+        self.assertAlmostEqual(RotateFromTo(2*X, 2*Y).to_matrix(), affine_matrix(Y, -X, Z))
+        self.assertAlmostEqual(RotateFromTo(X-Y, X+Y).to_matrix(), affine_matrix(Y, -X, Z))
