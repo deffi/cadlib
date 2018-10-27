@@ -1,5 +1,6 @@
 from cadlib.scad import ScadObject
-from cadlib.transform import Transform
+from cadlib.transform import Transform, Chained
+from cadlib.transform.primitives import RotateXyz
 from cadlib.util.number import to_number
 from cadlib.util.geometry import rotation_matrix
 from cadlib.util import degree
@@ -28,25 +29,23 @@ class RotateYpr(Transform):
         y, p, r = self._ypr
         return RotateYpr(0, 0, -r) * RotateYpr(0, -p, 0) * RotateYpr(-y, 0, 0)
 
-    def to_scad(self, target):
-        # yaw-pitch-roll in local coordinates corresponds to roll-pitch-yaw in global coordinates.
+    def _equivalent(self):
         yaw, pitch, roll = self._ypr
 
-        # TODO in order to properly verify this, we should convert it to an
-        # equivalent XYZ chain and then use that in both to_scad and to_matrix
-        # Start with the target and apply the transform
-        result = target;
-        if roll  != 0: result = ScadObject("rotate", [[0    , roll, 0  ]], None, [result] if result is not None else [], "Roll");
-        if pitch != 0: result = ScadObject("rotate", [[pitch, 0   , 0  ]], None, [result] if result is not None else [], "Pitch");
-        if yaw   != 0: result = ScadObject("rotate", [[0    , 0   , yaw]], None, [result] if result is not None else [], "Yaw");
+        # yaw-pitch-roll in local coordinates corresponds to roll-pitch-yaw in
+        # global coordinates.
+        transforms = []
+        if yaw   != 0: transforms.append(RotateXyz(0    , 0   , yaw))
+        # TODO combine pitch and roll
+        if pitch != 0: transforms.append(RotateXyz(pitch, 0   , 0  ))
+        if roll  != 0: transforms.append(RotateXyz(0    , roll, 0  ))
+        return Chained(transforms)
 
-        # The result can be None if (a) the target was None, and (b) no transform were applied. Since this method is
-        # not supposed to return None, return a null rotation.
-        if result is None:
-            result = ScadObject("rotate", [[0, 0, 0]], None, None);
-
-        return result.comment(repr(self))
+    def to_scad(self, target):
+        return self._equivalent().to_scad(target).comment(repr(self))
 
     def to_matrix(self):
-        yaw, pitch, roll = self._ypr
-        return rotation_matrix(2, yaw*degree) * rotation_matrix(0, pitch*degree) * rotation_matrix(1, roll*degree)
+        # Alternative - direct generation:
+        # return rotation_matrix(2, yaw*degree) * rotation_matrix(0, pitch*degree) * rotation_matrix(1, roll*degree)
+
+        return self._equivalent().to_matrix()
