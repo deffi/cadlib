@@ -1,7 +1,8 @@
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
 from cadlib.util.number import to_number
-
+from cadlib.util.geometry import rotation_matrix
+from cadlib.util import degree
 
 class RotateXyz(Transform):
     def __init__(self, x, y, z):
@@ -30,3 +31,7 @@ class RotateXyz(Transform):
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("rotate", [list(self._xyz)], None, children)
+
+    def to_matrix(self):
+        x, y, z = self._xyz
+        return rotation_matrix(2, z*degree) * rotation_matrix(1, y*degree) * rotation_matrix(0, x*degree)

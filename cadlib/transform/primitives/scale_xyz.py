@@ -1,5 +1,6 @@
 from warnings import warn
 
+from cadlib.util import Matrix
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
 from cadlib.util.number import to_number
@@ -33,3 +34,12 @@ class ScaleXyz(Transform):
     def to_scad(self, target):
         children = [target] if target is not None else []
         return ScadObject("scale", [self._xyz], None, children)
+
+    def to_matrix(self):
+        x, y, z = self._xyz
+        return Matrix.from_rows(
+            [x, 0, 0, 0],
+            [0, y, 0, 0],
+            [0, 0, z, 0],
+            [0, 0, 0, 1],
+        )

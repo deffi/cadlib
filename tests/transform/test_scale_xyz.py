@@ -41,3 +41,11 @@ class TestScaleXyz(TestCase):
 
     def test_repr(self):
         self.assertRepr(ScaleXyz(1, 2, 3), "ScaleXyz(1, 2, 3)")
+
+    def test_to_matrix(self):
+        self.assertEqual(ScaleXyz(1, 2, 3).to_matrix().row_values, [
+            [1, 0, 0, 0],
+            [0, 2, 0, 0],
+            [0, 0, 3, 0],
+            [0, 0, 0, 1],
+        ])

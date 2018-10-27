@@ -33,3 +33,6 @@ class Transform:
 
     def to_scad(self, target):
         raise NotImplementedError("to_scad not implemented in {}".format(type(self)))
+
+    def to_matrix(self):
+        raise NotImplementedError("to_matrix not implemented in {}".format(type(self)))

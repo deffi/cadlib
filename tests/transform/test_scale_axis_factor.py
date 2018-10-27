@@ -73,3 +73,17 @@ class TestScaleAxisFactor(TestCase):
 
     def test_repr(self):
         self.assertRepr(ScaleAxisFactor(X, 2), "ScaleAxisFactor(Vector(1, 0, 0), 2)")
+
+    def test_to_matrix(self):
+        self.assertAlmostEqual(ScaleAxisFactor(X, 2).to_matrix().row_values, [
+            [2, 0, 0, 0],
+            [0, 1, 0, 0],
+            [0, 0, 1, 0],
+            [0, 0, 0, 1],
+        ])
+        self.assertAlmostEqual(ScaleAxisFactor(X+Y, 2).to_matrix().row_values, [
+            [1.5, 0.5, 0, 0],
+            [0.5, 1.5, 0, 0],
+            [0  , 0  , 1, 0],
+            [0  , 0  , 0, 1],
+        ])

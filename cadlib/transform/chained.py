@@ -1,6 +1,6 @@
 from cadlib.transform.transform import Transform
 from cadlib.util.tree import Node
-
+from cadlib.util import Matrix
 
 class Chained(Transform):
     def __init__(self, transforms):
@@ -38,4 +38,11 @@ class Chained(Transform):
         result = target
         for transform in self._transforms[::-1]:
             result = transform.to_scad(result)
+        return result
+
+    def to_matrix(self):
+        # TODO test
+        result = Matrix.identity(4)
+        for transform in self._transforms:
+            result = result * transform.to_matrix()
         return result

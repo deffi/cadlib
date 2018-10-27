@@ -1,6 +1,8 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateYpr
 from cadlib.scad import ScadObject
+from cadlib.util.geometry import affine_matrix
+from cadlib.util import X, Y, Z
 
 class TestRotateYpr(TestCase):
     def test_construction(self):
@@ -68,3 +70,25 @@ class TestRotateYpr(TestCase):
 
     def test_repr(self):
         self.assertRepr(RotateYpr(1, 2, 3), "RotateYpr(1, 2, 3)")
+
+    def test_to_matrix(self):
+        # No rotation
+        self.assertAlmostEqual(RotateYpr( 0 , 0,  0).to_matrix(), affine_matrix(X, Y, Z))
+
+        # 90 degrees around a single axis
+        self.assertAlmostEqual(RotateYpr(90,  0,  0).to_matrix(), affine_matrix( Y, -X,  Z)) # Yaw left
+        self.assertAlmostEqual(RotateYpr( 0, 90,  0).to_matrix(), affine_matrix( X,  Z, -Y)) # Pitch up
+        self.assertAlmostEqual(RotateYpr( 0,  0, 90).to_matrix(), affine_matrix(-Z,  Y,  X)) # Roll right
+
+        # 180 degrees around a single axis
+        self.assertAlmostEqual(RotateYpr(180,   0,   0).to_matrix(), affine_matrix(-X, -Y,  Z)) # Yaw
+        self.assertAlmostEqual(RotateYpr(  0, 180,   0).to_matrix(), affine_matrix( X, -Y, -Z)) # Pitch
+        self.assertAlmostEqual(RotateYpr(  0,   0, 180).to_matrix(), affine_matrix(-X,  Y, -Z)) # Roll
+
+        # 90 degrees each around two axes
+        self.assertAlmostEqual(RotateYpr(90, 90,  0).to_matrix(), affine_matrix( Y,  Z, X)) # Yaw left, pitch up
+        self.assertAlmostEqual(RotateYpr(90,  0, 90).to_matrix(), affine_matrix(-Z, -X, Y)) # Yaw left, roll right
+        self.assertAlmostEqual(RotateYpr( 0, 90, 90).to_matrix(), affine_matrix( Y,  Z, X)) # Pitch up, roll right
+
+        # 90 degrees each around all three axes
+        self.assertAlmostEqual(RotateYpr(90, 90, 90).to_matrix(), affine_matrix(-X, Z, Y)) # Yaw left, pitch up, roll right

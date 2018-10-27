@@ -1,6 +1,6 @@
 from warnings import warn
 
-from cadlib.util import Vector
+from cadlib.util import Vector, Matrix
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
 
@@ -61,7 +61,34 @@ class RotateFromTo(Transform):
             return target
         else:
             # Yes rotation
+            # TODO use RotateAxisAngle?
             axis = axis.normalized()
             children = [target] if target is not None else []
             comment = repr(self)
             return ScadObject("rotate", None, [("a", angle), ("v", axis.values)], children, comment)
+
+    def to_matrix(self):
+        # TODO duplication or simplify
+        if self._frm.collinear(self._to):
+            # Special case: the vectors are collinear
+            if self._frm.dot(self._to) > 0:
+                # Same direction. No rotation.
+                axis  = None
+                angle = None
+            else:
+                # Opposite directions. Rotation by 180 degrees, axis is
+                # ambiguous.
+                axis  = self._frm.normal()  # Arbitrary
+                angle = 180
+        else:
+            # Regular case
+            axis  = self._frm.cross(self._to)
+            angle = self._frm.angle(self._to)
+
+        if axis is None:
+            # No rotation
+            return Matrix.identity(4)
+        else:
+            # Yes rotation
+            from cadlib.transform.primitives.rotate_axis_angle import RotateAxisAngle
+            return RotateAxisAngle(axis, angle).to_matrix()

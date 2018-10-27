@@ -34,7 +34,6 @@ Transform:
   * [Low]    Non-chained inverse of RotateYpr and RotateXyz
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform
-  * [Low]    .to_matrix
   * [Low]    Merge .up(1).right(2) into a single Translate([2, 0, 1])? Dito for YPR.
   * [Low]    Clean up complex generators, maybe use a generic dispatch mechanism
   * [Low]    Scale: negative values should be translated to mirror for OpenSCAD

@@ -2,6 +2,7 @@ from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateFromTo
 from cadlib.util import Vector, X, Y, Z
 from cadlib.object.primitives import Cube
+from cadlib.util.geometry import affine_matrix
 
 class TestRotateFromTo(TestCase):
     def test_construction(self):
@@ -78,3 +79,20 @@ class TestRotateFromTo(TestCase):
 
     def test_repr(self):
         self.assertRepr(RotateFromTo(X, Y), "RotateFromTo(Vector(1, 0, 0), Vector(0, 1, 0))")
+
+    def test_to_matrix(self):
+        # No rotation
+        self.assertAlmostEqual(RotateFromTo(X, X).to_matrix(), affine_matrix(X, Y, Z))
+
+        # One axis onto another
+        self.assertAlmostEqual(RotateFromTo(X, Y).to_matrix(), affine_matrix(Y, -X, Z))
+        self.assertAlmostEqual(RotateFromTo(Y, Z).to_matrix(), affine_matrix(X, Z, -Y))
+        self.assertAlmostEqual(RotateFromTo(Z, X).to_matrix(), affine_matrix(-Z, Y, X))
+
+        # More of the same
+        self.assertAlmostEqual(RotateFromTo( X,  Z).to_matrix(), affine_matrix( Z, Y, -X))
+        self.assertAlmostEqual(RotateFromTo( X, -Z).to_matrix(), affine_matrix(-Z, Y,  X))
+        self.assertAlmostEqual(RotateFromTo(-X,  Z).to_matrix(), affine_matrix(-Z, Y,  X))
+        self.assertAlmostEqual(RotateFromTo(-X, -Z).to_matrix(), affine_matrix( Z, Y, -X))
+
+        # TODO with non-unit axes

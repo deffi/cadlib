@@ -3,6 +3,7 @@ from cadlib.transform import Transform
 from contextlib import contextmanager
 from cadlib.scad import ScadObject
 from cadlib.object import Object
+from cadlib.util import Matrix
 
 class TestCase(OriginalTestCase):
     def __init__(self, *args, **kwargs):
@@ -60,3 +61,21 @@ class TestCase(OriginalTestCase):
         self.assertEqual(a.inverse(), b)
         if symmetric:
             self.assertEqual(b.inverse(), a)
+
+    def assertAlmostEqual(self, first, second, places=None, msg=None, delta=None):
+        # TODO enable and test
+        # TODO remove by adding Matrix.abs?
+        # TODO better message
+        if isinstance(first, Matrix) and isinstance(second, Matrix):
+            self.assertEqual(first.dimensions, second.dimensions)
+            for r in range(first.row_count):
+                for c in range(first.column_count):
+                    super().assertAlmostEqual(first[r, c], second[r, c], places, msg, delta)
+        elif isinstance(first, list) and isinstance(second, list):
+            # TODO test
+            # TODO better message
+            self.assertEqual(len(first), len(second))
+            for a, b in zip(first, second):
+                self.assertAlmostEqual(a, b)
+        else:
+            super().assertAlmostEqual(first, second, places, msg, delta)
