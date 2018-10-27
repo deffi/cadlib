@@ -25,6 +25,7 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
+  * [Medium] transform generator: axis_angle (direction/magnitude)
   * [Medium] arrange objects in a grid (from list, or factory)
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
@@ -51,6 +52,7 @@ CSG:
                * We could manually compare the list elements, but that would be in O(n^2)
 
 Scad:
+  * [High]   Is the interpretation of the axis/angle rotation direction accurate?
   * [Medium] Better comments for SCAD objects:
                * Show canonical form for generator or textual description ("Rotate from ... to ...")
                  instead of object representation
@@ -78,7 +80,6 @@ Model:
                * Allow in Matrix/Vector
 
 Tests:
-  * [Medium] Verify inverse of RotateXyz and RotateYpr with matrix
   * [Low]    Primitives (object and transform): test negative numbers
   * [Low]    Pass empty or wrong-size vectors, must fail (transform primitives
              and object primitives)
