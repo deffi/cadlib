@@ -9,7 +9,6 @@ class TestCase(OriginalTestCase):
     def __init__(self, *args, **kwargs):
         super().__init__(*args, **kwargs)
 
-        # TODO test
         self.ignore_scad_comments = False
 
     def assertEqualToItself(self, x):
@@ -27,15 +26,11 @@ class TestCase(OriginalTestCase):
 
     def assertScadObject(self, thing, id, parameters, kw_parameters, children = None):
         actual = thing.to_scad()
-        if self.ignore_scad_comments:
-            actual = actual.clear_comment(recursive = True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 
     def assertScadObjectTarget(self, thing, target, id, parameters, kw_parameters, children = None):
         actual = thing.to_scad(target)
-        if self.ignore_scad_comments:
-            actual = actual.clear_comment(recursive = True)
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 

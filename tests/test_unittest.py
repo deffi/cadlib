@@ -1,4 +1,6 @@
 from tests.unit_test import TestCase
+from cadlib.object.primitives.sphere import Sphere
+from cadlib.scad import ScadObject
 
 class Foo(Exception):
     pass
@@ -31,3 +33,20 @@ class TestUnitTest(TestCase):
         with self.assertRaises(Foo):
             with self.assertNothingRaised():
                 raise Foo
+
+    def test_ignore_scad_comments(self):
+        scad1 = ScadObject("scad", None, None, None).comment("comment 1")
+        scad2 = ScadObject("scad", None, None, None).comment("comment 2")
+
+        # Ordinarily, the objects are considered different
+        with self.assertRaises(AssertionError):
+            self.assertEqual(scad1, scad2)
+
+        # When ignoring comments, the objects are considered equal
+        self.ignore_scad_comments = True
+        self.assertEqual(scad1, scad2)
+
+        # Ordinarily, the objects are considered different
+        self.ignore_scad_comments = False
+        with self.assertRaises(AssertionError):
+            self.assertEqual(scad1, scad2)
