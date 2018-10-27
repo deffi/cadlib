@@ -33,6 +33,15 @@ class ScaleAxisFactor(Transform):
     def inverse(self):
         return ScaleAxisFactor(self._axis, 1 / self._factor)
 
+    def _equivalent(self):
+        transform_axis = self._axis.closest_axis()
+
+        forward_rotation = RotateFromTo(self._axis, transform_axis)
+        scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
+        back_rotation = RotateFromTo(transform_axis, self._axis)
+
+        return back_rotation * scale * forward_rotation
+
     def to_scad(self, target):
         # Since OpenSCAD does not have axis/factor scaling, it has to be
         # translated to corresponding XYZ scales, potentially combined with
@@ -56,20 +65,8 @@ class ScaleAxisFactor(Transform):
             return ScadObject("scale", [[1, 1, self._factor]], None, children, comment)
 
         # General case
-        transform_axis = self._axis.closest_axis()
-
-        forward_rotation = RotateFromTo(self._axis, transform_axis)
-        scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
-        back_rotation = RotateFromTo(transform_axis, self._axis)
-
-        return (back_rotation * scale * forward_rotation).to_scad(target).comment(comment)
+        return self._equivalent().to_scad(target).comment(comment)
 
     def to_matrix(self):
-        # Always general case (TODO duplication)
-        transform_axis = self._axis.closest_axis()
-
-        forward_rotation = RotateFromTo(self._axis, transform_axis)
-        scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
-        back_rotation = RotateFromTo(transform_axis, self._axis)
-
-        return (back_rotation * scale * forward_rotation).to_matrix()
+        # No special-case handling here, the result would be identical
+        return self._equivalent().to_matrix()
