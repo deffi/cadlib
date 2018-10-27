@@ -129,6 +129,10 @@ class TestScadObject(TestCase):
         self.assertEqual(o.comment(append  = "two" ), ScadObject("dummy", [], [], [], "one\ntwo"))
         self.assertEqual(o.comment(prepend = "zero", append  = "two"), ScadObject("dummy", [], [], [], "zero\none\ntwo"))
 
+        # Adding None as a comment does not change it
+        self.assertEqual(o.comment(prepend = None), ScadObject("dummy", [], [], [], "one"))
+        self.assertEqual(o.comment(append  = None), ScadObject("dummy", [], [], [], "one"))
+
         # Add with non-default separator
         self.assertEqual(o.comment(prepend = "zero", sep = ""), ScadObject("dummy", [], [], [], "zeroone"))
         self.assertEqual(o.comment(append  = "two" , sep = ""), ScadObject("dummy", [], [], [], "onetwo"))
