@@ -245,7 +245,3 @@ class Vector:
 X = Vector(1, 0, 0)
 Y = Vector(0, 1, 0)
 Z = Vector(0, 0, 1)
-
-if __name__ == "__main__":
-    print(Vector())
-    print(Vector(1, 2, 3))

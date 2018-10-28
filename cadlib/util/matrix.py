@@ -188,8 +188,3 @@ class Matrix:
     def __repr__(self):
         #return "Matrix(rows={})".format(", ".join((str(row) for row in self._rows)))
         return f"Matrix(rows={self.row_values})"
-
-
-if __name__ == "__main__":
-    print(Matrix())
-    print(Matrix([1, 0, 0, 0], [0, 22, 0, 0], [0, 0, 333, 0], [0, 0, 0, 1]))
