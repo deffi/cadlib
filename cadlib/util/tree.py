@@ -9,6 +9,15 @@ class Node:
         self._data     = data
         self._children = children
 
+    def __repr__(self):
+        return f"Node({self._data}, {self._children})"
+
+    def __eq__(self, other):
+
+        return isinstance(other, Node) \
+                and self._data     == other._data \
+                and self._children == other._children
+
     def lines(self, indent = None, top_indent = ""):
         '''Indent: indent string per level, or None for pretty-printing'''
         result = []

@@ -6,6 +6,7 @@ from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 from cadlib.csg import Intersection, Difference, Union
 from cadlib.transform.primitives import RotateYpr
+from cadlib.util.tree import Node
 
 
 class TestObject(TestCase):
@@ -145,3 +146,25 @@ class TestObject(TestCase):
             with self.assertRaises(TypeError): invalid + a
             with self.assertRaises(TypeError): invalid - a
             with self.assertRaises(TypeError): invalid * a
+
+    def test_to_tree(self):
+        a = Sphere(2)
+        b = Cube(3)
+        s = ScaleXyz(1, 2, -1)
+        t = Translate([0, 0, 0])
+
+        part = a + s*t*b
+
+        actual = part.to_tree()
+        expected = Node(part, [
+            Node(a),
+            Node(s*t*b, [
+                Node(s*t, [
+                    Node(s),
+                    Node(t),
+                ]),
+                Node(b),
+            ]),
+        ])
+
+        self.assertEqual(actual, expected)
