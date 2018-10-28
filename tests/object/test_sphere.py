@@ -13,6 +13,10 @@ class TestSphere(TestCase):
         with self.assertWarnsRegex(UserWarning, r'radius is 0')  : Sphere(0)
         with self.assertWarnsRegex(UserWarning, r'diameter is 0'): Sphere(d=0)
 
+        # Erroneous
+        with self.assertRaises(ValueError): Sphere()
+        with self.assertRaises(ValueError): Sphere(r=1.0, d=2.0)
+
 
     def test_equality(self):
         # Same object
