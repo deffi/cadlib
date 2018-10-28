@@ -240,6 +240,7 @@ class Vector:
         return "Vector({})".format(", ".join(str(value) for value in self._values))
 
     def format(self):
+        """Formats the vector for human consumption"""
         return Table([[v] for v in self._values]).format(alignment="r")
 
 X = Vector(1, 0, 0)

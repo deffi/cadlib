@@ -182,9 +182,9 @@ class Matrix:
     ## I/O ##
     #########
 
-    def __str__(self):
-        return Table(self._rows).format(alignment="r")
-
     def __repr__(self):
         #return "Matrix(rows={})".format(", ".join((str(row) for row in self._rows)))
         return f"Matrix(rows={self.row_values})"
+
+    def format(self):
+        return Table(self._rows).format(alignment="r")

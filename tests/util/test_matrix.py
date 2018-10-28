@@ -200,8 +200,15 @@ class TestMatrix(TestCase):
     #########
 
     def test_repr(self):
-        r = "Matrix(rows=[[1, 2, 3], [4, 5, 0]])"
-        self.assertEqual(repr(eval(r)), r)
+        m = "Matrix(rows=[[1, 2, 3], [4, 5, 0]])"
+        self.assertEqual(repr(eval(m)), m)
+
+    def test_format(self):
+        m = Matrix(rows=[[1, 2, 3], [-4, 5, 666]])
+        self.assertLines(m.format(), [
+            " 1 2   3",
+            "-4 5 666",
+        ])
 
 
     ################

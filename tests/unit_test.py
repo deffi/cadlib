@@ -89,3 +89,9 @@ class TestCase(OriginalTestCase):
     def assertIdentity(self, matrix):
         self.assertSquare(matrix)
         self.assertAlmostEqual(matrix, Matrix.identity(matrix.row_count))
+
+    def assertLines(self, value, lines):
+        linebreak = "\n"
+        # Surround the value with additional line breaks to increase legibility
+        # in the output
+        self.assertEqual(linebreak + value + linebreak, linebreak + linebreak.join(lines) + linebreak)

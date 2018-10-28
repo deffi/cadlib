@@ -107,6 +107,15 @@ class TestVector(TestCase):
         v = Vector(1, 2, 3)
         self.assertRepr(v, "Vector(1, 2, 3)")
 
+    def test_format(self):
+        v = Vector(1, 2222, 33)
+        self.assertLines(v.format(), [
+            "   1",
+            "2222",
+            "  33",
+        ])
+
+
 
     ################
     ## Arithmetic ##
