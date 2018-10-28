@@ -63,10 +63,10 @@ class RotateFromTo(Transform):
             # No rotation. Generate a zero XYZ transform instead of simply
             # returning the target. This improves code clarity and also ensures
             # that a valid ScadObject is returned even if target is None.
-            return RotateXyz(0, 0, 0).to_scad(target).comment(repr(self))
+            return RotateXyz(0, 0, 0).to_scad(target).comment(str(self))
         else:
             # Yes rotation
-            return RotateAxisAngle(axis.normalized(), angle).to_scad(target).comment(repr(self))
+            return RotateAxisAngle(axis.normalized(), angle).to_scad(target).comment(str(self))
 
     def to_matrix(self):
         axis, angle = self._to_axis_angle()

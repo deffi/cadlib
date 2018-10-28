@@ -44,4 +44,4 @@ class Slice(Object):
             .translate([-inf / 2, -inf / 2, 0]) \
             .up(o1) \
             .rotate(frm = Z, to = self._normal, ignore_ambiguity = True) \
-            .to_scad().comment(repr(self))
+            .to_scad().comment(str(self))

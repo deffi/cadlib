@@ -55,10 +55,7 @@ CSG:
   * [Low]    Empty-union + object should be object, not union
 
 Scad:
-  * [Medium] Better comments for SCAD objects:
-               * Show canonical form for generator or textual description ("Rotate from ... to ...")
-                 instead of object representation
-               * Simplify vectors (X, 2*X, -X, -2*X), and show as <x, y, z> otherwise
+  * [Low]    In comments, simplify vectors (X, 2*X, -X, -2*X)
   * [Low]    Remove union when implicit (e. g. in translate, or from the second one in difference)
   * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
              tests for part/hole

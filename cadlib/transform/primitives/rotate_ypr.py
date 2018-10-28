@@ -5,6 +5,8 @@ from cadlib.util.number import to_number
 from cadlib.util.geometry import rotation_matrix
 from cadlib.util import degree
 
+
+
 class RotateYpr(Transform):
     def __init__(self, yaw, pitch, roll):
         yaw   = to_number(yaw  , None, "yaw"  , [])
@@ -59,7 +61,7 @@ class RotateYpr(Transform):
             # rotation for improved clarity of the generated code.
             equivalent = RotateXyz(0, 0, 0)
 
-        return equivalent.to_scad(target).comment(repr(self))
+        return equivalent.to_scad(target).comment(str(self))
 
     def to_matrix(self):
         # Alternative - direct generation:

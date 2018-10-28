@@ -48,7 +48,7 @@ class ScaleAxisFactor(Transform):
         # rotations.
 
         children = [target] if target is not None else []
-        comment = repr(self)
+        comment = str(self)
 
         # Special case: if the factor is 1, the scale can be expressed as the
         # unit scale
