@@ -28,8 +28,16 @@ class ScadObject():
         kw_parameters = kw_parameters or []
         children      = children      or []
 
-        # Make sure that the ID is a non-empty string
-        if not isinstance(id, str):
+        # Parameter check
+        if id is None:
+            # TODO We should reject everthing except None. But that means we
+            # cannot convert None values to [] because they are used to
+            # construct new ScadObjects, for example in comment().
+            if parameters != []:
+                raise ValueError("An empty ScadObject cannot have parameters")
+            if kw_parameters != []:
+                raise ValueError("An empty ScadObject cannot have keyword parameters")
+        elif not isinstance(id, str):
             raise TypeError("id must be a string")
         elif id == "":
             raise ValueError("id must be a non-empty string")
@@ -126,7 +134,10 @@ class ScadObject():
         all_parameters  = [              self.render_value(parameter) for parameter  in self._parameters   ]
         all_parameters += [key + " = " + self.render_value(value)     for key, value in self._kw_parameters]
 
-        return "{}({})".format(self._id, ", ".join(all_parameters))
+        if self._id is None:
+            return "";
+        else:
+            return "{}({})".format(self._id, ", ".join(all_parameters))
 
     def _lines(self, indent, top_indent, simplify, include_comments):
         result = []
@@ -143,7 +154,9 @@ class ScadObject():
         elif simplify and len(self._children) == 1:
             foot_line = None
         else:
-            head_line += " {"
+            if head_line != "":
+                head_line += " "
+            head_line += "{"
             foot_line = "}"
 
         result.append(top_indent + head_line)

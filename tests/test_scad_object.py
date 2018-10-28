@@ -13,16 +13,26 @@ class TestScadObject(TestCase):
         o3 = ScadObject("Union", None, None, [o2, o1]) # Two children
         o4 = ScadObject("Union", None, None, [o3, o2]) # One child has children, and o2 appears in the tree twice
 
+        # Empty without children
+        ScadObject(None, None, None, None)
+
+        # Empty with children
+        ScadObject(None, None, None, [o2, o1])
+
     def test_invalid_construction(self):
         dummy = ScadObject("Dummy", None, None, None)
 
         # Invalid name
         with self.assertNothingRaised():    ScadObject("Dummy", None, None, None) # Reference
-        with self.assertRaises(TypeError):  ScadObject(None   , None, None, None)
         with self.assertRaises(TypeError):  ScadObject(0      , None, None, None)
         with self.assertRaises(TypeError):  ScadObject([""]   , None, None, None)
         with self.assertRaises(TypeError):  ScadObject(("",)  , None, None, None)
         with self.assertRaises(ValueError): ScadObject(""     , None, None, None)
+
+        # Empty with parameters
+        with self.assertNothingRaised():    ScadObject(None   , None, None, None)  # Reference
+        with self.assertRaises(ValueError): ScadObject(None   , [11], None, None)
+        with self.assertRaises(ValueError): ScadObject(None   , None, [("r", 2)], None)
 
         # Invalid keyword parameters
         with self.assertNothingRaised():   ScadObject("Dummy", None, []           , None)
@@ -254,6 +264,43 @@ class TestScadObject(TestCase):
         # Simplify
         self.assertEqual(chain2.to_code(inline = True                 ), "intersection() { union() { cube([1, 2, 3]); } }")
         self.assertEqual(chain2.to_code(inline = True, simplify = True), "intersection() union() cube([1, 2, 3]);")
+
+
+    def test_to_code_empty(self):
+        sphere   = ScadObject("sphere"  , [0.6]       , None, None)
+        cube     = ScadObject("cube"    , [[1, 2, 3]] , None, None)
+
+        # Empty SCAD object
+        empty_comment = ScadObject(None, None, None, None)
+        self.assertEqual(empty_comment.to_code(), "\n".join([
+            ";",
+        ]))
+
+        # Empty SCAD object with comment
+        empty_comment = ScadObject(None, None, None, None).comment("Empty")
+        self.assertEqual(empty_comment.to_code(), "\n".join([
+            "// Empty",
+            ";",
+        ]))
+
+        # Empty SCAD object with children
+        empty_children = ScadObject(None, None, None, [sphere, cube])
+        self.assertEqual(empty_children.to_code(), "\n".join([
+            "{",
+            "    sphere(0.6);",
+            "    cube([1, 2, 3]);",
+            "}",
+        ]))
+
+        # Empty SCAD object with children and comment
+        empty_children_comment = ScadObject(None, None, None, [sphere, cube]).comment("Empty")
+        self.assertEqual(empty_children_comment.to_code(), "\n".join([
+            "// Empty",
+            "{",
+            "    sphere(0.6);",
+            "    cube([1, 2, 3]);",
+            "}",
+        ]))
 
     def test_repr(self):
         self.assertRepr(ScadObject("foo", [1, 2], [('a', 3), ('b', 4)], [ScadObject("c1", [], [], []), ScadObject("c2", None, None, None)]),
