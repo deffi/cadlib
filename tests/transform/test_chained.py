@@ -59,11 +59,12 @@ class TestChained(TestCase):
         self.assertInverse(Chained([]), Chained([]))
 
     def test_to_scad(self):
-        # Create some transform
+        # Create some transforms
         r = RotateXyz(60, 30, 15)
         s = ScaleXyz (1, 2, -1)
         t = Translate([30, 20, 10])
 
+        # Non-empty chained with None target
         self.assertEqual(Chained([r, s, t]).to_scad(None),
             ScadObject("rotate", [[60, 30, 15]], None, [
                 ScadObject("scale", [[1, 2, -1]], None, [
@@ -72,9 +73,12 @@ class TestChained(TestCase):
             ])
         )
 
-        # Empty
+        # Empty chained with valid target
         dummy = ScadObject("dummy", None, None, None)
         self.assertEqual(Chained([]).to_scad(dummy), dummy)
+
+        # Empty chained with None target
+        self.assertEqual(Chained([]).to_scad(None), ScadObject(None, None, None, None))
 
     def test_repr(self):
         self.assertRepr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
