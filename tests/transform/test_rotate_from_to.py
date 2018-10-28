@@ -68,10 +68,12 @@ class TestRotateFromTo(TestCase):
         self.assertScadObjectTarget(RotateFromTo(-Y,  X), None, "rotate", None, [("a", 90), ("v", [ 0,  0,  1])], None)
         self.assertScadObjectTarget(RotateFromTo(-Y, -X), None, "rotate", None, [("a", 90), ("v", [ 0,  0, -1])], None)
 
-        # Same direction (no effect) - no transform
-        cube = Cube(2)
-        self.assertEqual(RotateFromTo(X        , X        ).to_scad(cube), cube)
-        self.assertEqual(RotateFromTo([1, 2, 3], [2, 4, 6]).to_scad(cube), cube)
+        # Same direction (no effect). This generates a zero XYZ transform (not
+        # an empty ScadObject, which would also be possible).
+        cube = Cube(2).to_scad()
+        self.assertScadObjectTarget(RotateFromTo(X        , X        ), None, "rotate", [[0, 0, 0]], None, None)
+        self.assertScadObjectTarget(RotateFromTo(X        , X        ), cube, "rotate", [[0, 0, 0]], None, [cube])
+        self.assertScadObjectTarget(RotateFromTo([1, 2, 3], [2, 4, 6]), cube, "rotate", [[0, 0, 0]], None, [cube])
 
         # Opposite direction (ambiguous rotation)
         self.assertIn(("a", 180), RotateFromTo(X        , -X          , ignore_ambiguity=True).to_scad(None)._kw_parameters)

@@ -1,9 +1,8 @@
 from warnings import warn
 
 from cadlib.util import Vector, Matrix
-from cadlib.scad import ScadObject
 from cadlib.transform import Transform
-from cadlib.transform.primitives import RotateAxisAngle
+from cadlib.transform.primitives import RotateAxisAngle, RotateXyz
 
 class RotateFromTo(Transform):
     def __init__(self, frm, to, ignore_ambiguity = False):
@@ -61,8 +60,10 @@ class RotateFromTo(Transform):
         axis, angle = self._to_axis_angle()
 
         if axis is None:
-            # No rotation
-            return target
+            # No rotation. Generate a zero XYZ transform instead of simply
+            # returning the target. This improves code clarity and also ensures
+            # that a valid ScadObject is returned even if target is None.
+            return RotateXyz(0, 0, 0).to_scad(target).comment(repr(self))
         else:
             # Yes rotation
             return RotateAxisAngle(axis.normalized(), angle).to_scad(target).comment(repr(self))
