@@ -82,7 +82,7 @@ class TestRotateFromTo(TestCase):
     def test_repr(self):
         self.assertRepr(RotateFromTo(X, Y), "RotateFromTo(Vector(1, 0, 0), Vector(0, 1, 0))")
 
-    def test_repr(self):
+    def test_str(self):
         self.assertStr(RotateFromTo(X, Y), "Rotate from <1, 0, 0> to <0, 1, 0>")
 
     def test_to_matrix(self):

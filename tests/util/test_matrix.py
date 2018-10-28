@@ -319,7 +319,7 @@ class TestMatrix(TestCase):
         with self.assertRaises(ValueError): Matrix.from_rows([16, 17, 18], [19, 20, 21]) * \
                                             Matrix.from_rows([10, 11], [12, 13])
 
-    def mixed_arithmetic(self):
+    def test_mixed_arithmetic(self):
         m1 = Matrix.from_rows([1, 2, 3], [4, 5, 6])
         m2 = Matrix.from_rows([7, 8, 9], [-1, -2, 0])
         self.assertEqual(m1 + (-m2), m1 - m2)
