@@ -14,7 +14,7 @@ def render_to_file(object, file_name, fn = None):
     header = "\n".join(header_lines) + "\n\n"
     code = object.to_scad().to_code()
 
-    with open(file_name, "w") as file:
+    with open(file_name, "w", encoding = 'utf-8') as file:
         file.write(header + code)
 
 class ScadObject():
