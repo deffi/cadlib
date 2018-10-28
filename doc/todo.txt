@@ -40,8 +40,6 @@ Transform:
              scale factors
   * [Low]    Exponentiation for transforms
   * [Low]    Empty-chained * object should be object, not chained
-  * [Low]    RotateYpr(0, 0, 0) results in no transform, but RotateXyz results
-             in rotate([0, 0, 0]). This should be consistent.
 
 CSG:
   * [Low]    Make it so that a-(b+c) == a-b-c. Two options:

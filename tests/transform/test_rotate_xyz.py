@@ -31,8 +31,10 @@ class TestRotateXyz(TestCase):
             symmetric=False)
 
     def test_to_scad(self):
-        r = RotateXyz(60, 30, 15)
+        r = RotateXyz(0, 0, 0)
+        self.assertScadObjectTarget(r, None, "rotate", [[0, 0, 0]], None, None)
 
+        r = RotateXyz(60, 30, 15)
         self.assertScadObjectTarget(r, None, "rotate", [[60, 30, 15]], None, None)
 
     def test_repr(self):
