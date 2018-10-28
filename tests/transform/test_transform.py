@@ -1,15 +1,21 @@
-from cadlib.transform.primitives import Translate, ScaleXyz, RotateXyz, RotateYpr
+from cadlib.transform.primitives import RotateAxisAngle, RotateFromTo, RotateXyz, RotateYpr, ScaleAxisFactor, ScaleUniform, ScaleXyz, Translate
+
 from cadlib.transform.chained import Chained
 from tests.unit_test import TestCase
+from cadlib.util import X, Y, Z
 
 class TestTransform(TestCase):
     def test_inequality(self):
         # Different-type transformations are not equal (even if the values are identical)
         transforms = [
-            ScaleXyz (1, 2, 3),
-            Translate([1, 2, 3]),
-            RotateXyz(1, 2, 3),
-            RotateYpr(1, 2, 3),
+            RotateAxisAngle(X, 0),
+            RotateFromTo(X, X),
+            RotateXyz(0, 0, 0),
+            RotateYpr(0, 0, 0),
+            ScaleAxisFactor(X, 1),
+            ScaleUniform(1),
+            ScaleXyz (1, 1, 1),
+            Translate([0, 0, 0]),
         ]
 
         for t1 in transforms:
