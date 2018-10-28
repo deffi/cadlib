@@ -30,6 +30,9 @@ from cadlib.transform import Transform, shortcuts, generators
 # [1] https://docs.python.org/3/reference/datamodel.html
 
 class Object:
+    # Implementations must always return a valid ScadObject (except when they
+    # raise an exception), so that .comment can be called on the result
+    # unconditionally.
     def to_scad(self):
         raise NotImplementedError("In {}".format(type(self)))
 

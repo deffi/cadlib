@@ -1,8 +1,3 @@
-Next:
-  * All to_scad methods must return a valid ScadObject under all circumstances.
-    Make sure that they do. Enable the disabled test for RotateYpr where there
-    is no transform and no target.
-
 Object:
   * [Medium] Assembly objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
@@ -28,9 +23,6 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
-  * [High]   All to_scad methods must return a valid ScadObject under all
-             circumstances. Make sure that they do. Enable the disabled test for
-             RotateYpr where there is no transform and no target.
   * [Medium] transform generator: axis_angle (direction/magnitude)
   * [Medium] arrange objects in a grid (from list, or factory)
   * [Medium] Scale around (instead of along) axis?
@@ -63,8 +55,6 @@ CSG:
   * [Low]    Empty-union + object should be object, not union
 
 Scad:
-  * [High]   Test empty empty ScadObject (ScadObject (None, None, None, None)),
-             also as child and with children (?).
   * [Medium] Better comments for SCAD objects:
                * Show canonical form for generator or textual description ("Rotate from ... to ...")
                  instead of object representation
@@ -72,10 +62,6 @@ Scad:
   * [Low]    Remove union when implicit (e. g. in translate, or from the second one in difference)
   * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
              tests for part/hole
-  * [Low]    There should be an empty ScadObject that we can pass into and return from Object.to_scad; this would remove
-             special case handling, e.g. RotateYpr.to_scad if target==None and ypr==(0, 0, 0)
-             On the other hand, target is probably not supposed to be None anyway. And for other purposes,
-             we have the empty union as empty ScadObject
   * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
   * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
              constants
@@ -85,6 +71,11 @@ Scad:
              should have comments "Yaw", "Pitch", and "Roll". Since the
              RotateYpr is converted to an equivalent Chained, this will probably
              require comments for Objects.
+  * [Low]    ScadObject.__init__ should reject everthing except None for
+             parameters and keyword parameters if id is None. But that means the
+             parameters and keyword parameters have to be stored without
+             converting to [] because they are used to construct new
+             ScadObjects, for example in comment().
 
 Model:
   * [Low]    Name for transforms and objects - show in tree representation and as comment in SCAD code
@@ -118,7 +109,10 @@ Documentation:
                * It's more of a CAD library that can render to SCAD than an SCAD
                  front-end
                * There are other libraries that do the same
-               * Unique features: re-usable transforms, anchors, saves typing
+               * Unique features: re-usable transforms, anchors, saves typing,
+                 larger/smaller (to prevent coincident faces), SVG reading,
+                 commented output, symbolic variables
+                 Most features are TBD.
   * [Medium] Translate takes a vector, but ScaleXyz and RotateXyz take single
              values. That's because it's not a vector. But you'll probably want
              to use the generator functions anyway.

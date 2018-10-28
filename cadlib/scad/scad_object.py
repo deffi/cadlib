@@ -30,9 +30,6 @@ class ScadObject():
 
         # Parameter check
         if id is None:
-            # TODO We should reject everthing except None. But that means we
-            # cannot convert None values to [] because they are used to
-            # construct new ScadObjects, for example in comment().
             if parameters != []:
                 raise ValueError("An empty ScadObject cannot have parameters")
             if kw_parameters != []:
