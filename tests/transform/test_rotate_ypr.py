@@ -51,7 +51,8 @@ class TestRotateYpr(TestCase):
             ScadObject("rotate", [[0, 3, 0]], None, None))
 
         # A dual-axis YPR rotation must be expressed as a chain of two single-
-        # axis XYZ rotations.
+        # axis XYZ rotations (except in the case of yaw and pitch, which can be
+        # combined).
         self.assertEqual(RotateYpr(0, 2, 3).to_scad(None),
             ScadObject("rotate", [[2, 0, 0]], None, [
             ScadObject("rotate", [[0, 3, 0]], None, None)]))
@@ -59,15 +60,13 @@ class TestRotateYpr(TestCase):
             ScadObject("rotate", [[0, 0, 1]], None, [
             ScadObject("rotate", [[0, 3, 0]], None, None)]))
         self.assertEqual(RotateYpr(1, 2, 0).to_scad(None),
-            ScadObject("rotate", [[0, 0, 1]], None, [
-            ScadObject("rotate", [[2, 0, 0]], None, None)]))
+            ScadObject("rotate", [[2, 0, 1]], None, None))
 
-        # A tripel-axis YPR rotation must be expressed as a chain of three
-        # single-axis XYZ rotations.
+        # A tripel-axis YPR rotation must be expressed as a chain of two
+        # single-axis XYZ rotations (yaw and pitch can be combined).
         self.assertEqual(RotateYpr(1, 2, 3).to_scad(None),
-            ScadObject("rotate", [[0, 0, 1]], None, [
-            ScadObject("rotate", [[2, 0, 0]], None, [
-            ScadObject("rotate", [[0, 3, 0]], None, None)])]))
+            ScadObject("rotate", [[2, 0, 1]], None, [
+            ScadObject("rotate", [[0, 3, 0]], None, None)]))
 
     def test_repr(self):
         self.assertRepr(RotateYpr(1, 2, 3), "RotateYpr(1, 2, 3)")

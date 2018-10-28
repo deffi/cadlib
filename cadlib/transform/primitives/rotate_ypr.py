@@ -35,10 +35,8 @@ class RotateYpr(Transform):
         # yaw-pitch-roll in local coordinates corresponds to roll-pitch-yaw in
         # global coordinates.
         transforms = []
-        if yaw   != 0: transforms.append(RotateXyz(0    , 0   , yaw))
-        # TODO combine pitch and roll
-        if pitch != 0: transforms.append(RotateXyz(pitch, 0   , 0  ))
-        if roll  != 0: transforms.append(RotateXyz(0    , roll, 0  ))
+        if yaw != 0 or pitch != 0: transforms.append(RotateXyz(pitch, 0   , yaw))
+        if roll != 0             : transforms.append(RotateXyz(0    , roll, 0  ))
         return Chained(transforms)
 
     def to_scad(self, target):
