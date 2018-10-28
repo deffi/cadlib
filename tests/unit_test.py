@@ -34,11 +34,13 @@ class TestCase(OriginalTestCase):
         expected = ScadObject(id, parameters, kw_parameters, children)
         self.assertEqual(actual, expected)
 
-    def assertScadCode(self, thing, code):
-        if isinstance(thing, Transform):
-            self.assertEqual(thing.to_scad(None).to_code(inline=True, simplify=True), code)
-        else:
-            self.assertEqual(thing.to_scad().to_code(inline=True, simplify=True), code)
+    # Not used - we test Object -> ScadObject and ScadObject -> code, but not
+    # Object -> code
+    # def assertScadCode(self, thing, code, inline = False, simplify = False):
+    #     if isinstance(thing, Transform):
+    #         self.assertEqual(thing.to_scad(None).to_code(inline=inline, simplify=simplify), code)
+    #     else:
+    #         self.assertEqual(thing.to_scad().to_code(inline=inline, simplify=simplify), code)
 
     def assertEqual(self, first, second, msg=None):
         if self.ignore_scad_comments:

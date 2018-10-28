@@ -28,7 +28,3 @@ class TestUtil(unittest.TestCase):
 
         # Both None
         self.assertTrue(util.neither(None, None))
-
-
-if __name__ == '__main__':
-    unittest.main()
