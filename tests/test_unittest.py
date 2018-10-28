@@ -87,4 +87,3 @@ class TestUnitTest(TestCase):
         # Not if the dimensions are different
         with self.assertRaises(AssertionError):
             self.assertAlmostEqual(m1, m4)
-

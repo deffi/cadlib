@@ -25,7 +25,7 @@ class ScaleAxisFactor(Transform):
             and other._factor == self._factor
 
     def __str__(self):
-        return "Scale along {} by {}".format(self._axis, self._factor)
+        return f"Scale by {self._factor} along {self._axis}"
 
     def __repr__(self):
         return f"ScaleAxisFactor({self._axis!r}, {self._factor!r})"

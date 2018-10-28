@@ -1,5 +1,5 @@
 Object:
-  * [Medium] Assembly objects
+  * [Medium] Assembly (Part) objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
              returns self
   * [Medium] larger, smaller
@@ -23,13 +23,13 @@ Primitives:
   * [Medium] Plane: through point
 
 Transform:
-  * [Medium] transform generator: axis_angle (direction/magnitude)
   * [Medium] arrange objects in a grid (from list, or factory)
   * [Medium] Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
              But we need the around parameter to specify a scale origin?
   * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
+  * [Low]    transform generator: axis_angle (direction/magnitude)
   * [Low]    Non-chained inverse of RotateYpr and RotateXyz
   * [Low]    mirror(along which axis and which point/offset)
   * [Low]    class MatrixTransform

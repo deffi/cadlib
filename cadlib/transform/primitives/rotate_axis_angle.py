@@ -21,7 +21,7 @@ class RotateAxisAngle(Transform):
             return False
 
     def __str__(self):
-        return "Rotate by {} degrees around {}".format(self._angle, self._axis)
+        return "Rotate by {}° around {}".format(self._angle, self._axis)
 
     def __repr__(self):
         return f"RotateAxisAngle({self._axis!r}, {self._angle!r})"

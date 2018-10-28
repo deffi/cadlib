@@ -42,6 +42,17 @@ class TestScaleXyz(TestCase):
     def test_repr(self):
         self.assertRepr(ScaleXyz(1, 2, 3), "ScaleXyz(1, 2, 3)")
 
+    def test_str(self):
+        self.assertStr(ScaleXyz(1, 1, 1), "Scale by 1 along X, Y, and Z")
+        self.assertStr(ScaleXyz(2, 1, 1), "Scale by 2 along X")
+        self.assertStr(ScaleXyz(1, 3, 1), "Scale by 3 along Y")
+        self.assertStr(ScaleXyz(1, 1, 4), "Scale by 4 along Z")
+        self.assertStr(ScaleXyz(2, 3, 1), "Scale by 2 along X and 3 along Y")
+        self.assertStr(ScaleXyz(2, 1, 4), "Scale by 2 along X and 4 along Z")
+        self.assertStr(ScaleXyz(1, 3, 4), "Scale by 3 along Y and 4 along Z")
+        self.assertStr(ScaleXyz(2, 3, 4), "Scale by 2 along X, 3 along Y, and 4 along Z")
+
+
     def test_to_matrix(self):
         self.assertEqual(ScaleXyz(1, 2, 3).to_matrix().row_values, [
             [1, 0, 0, 0],

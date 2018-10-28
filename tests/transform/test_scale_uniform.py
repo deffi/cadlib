@@ -36,6 +36,9 @@ class TestScaleUniform(TestCase):
     def test_repr(self):
         self.assertRepr(ScaleUniform(2), "ScaleUniform(2)")
 
+    def test_str(self):
+        self.assertStr(ScaleUniform(2), "Scale by 2")
+
     def test_to_matrix(self):
         self.assertEqual(ScaleUniform(2).to_matrix().row_values, [
             [2, 0, 0, 0],

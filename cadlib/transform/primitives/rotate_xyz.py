@@ -18,7 +18,22 @@ class RotateXyz(Transform):
             return False
 
     def __str__(self):
-        return "Rotate by {} degrees around x, y, and z".format(self._xyz)
+        x, y, z = self._xyz
+
+        parts = []
+        if x != 0: parts.append(f"{x}° around X")
+        if y != 0: parts.append(f"{y}° around Y")
+        if z != 0: parts.append(f"{z}° around Z")
+
+        if len(parts) == 0:
+            return "Rotate by 0° around X, Y, and Z"
+        elif len(parts) == 1:
+            return f"Rotate by {', '.join(parts)}"
+        elif len(parts) == 2:
+            return f"Rotate by {' and '.join(parts)}"
+        else:
+            parts[-1] = "and " + parts[-1]
+            return f"Rotate by {', '.join(parts)}"
 
     def __repr__(self):
         x, y, z = self._xyz

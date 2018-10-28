@@ -19,7 +19,17 @@ class RotateYpr(Transform):
             return False
 
     def __str__(self):
-        return "Yaw-pitch-roll by by {} degrees".format(self._ypr)
+        y, p, r = self._ypr
+
+        parts = []
+        if y != 0: parts.append(f"yaw {y}°")
+        if p != 0: parts.append(f"pitch {p}°")
+        if r != 0: parts.append(f"roll {r}°")
+
+        if len(parts) == 0:
+            return "Yaw, pitch, and roll by 0°"
+        else:
+            return f"{', '.join(parts)}".capitalize()
 
     def __repr__(self):
         y, p, r = self._ypr

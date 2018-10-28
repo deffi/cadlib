@@ -32,5 +32,8 @@ class TestTranslate(TestCase):
     def test_repr(self):
         self.assertRepr(Translate([10, 20, 30]), "Translate(Vector(10, 20, 30))")
 
+    def test_str(self):
+        self.assertStr(Translate([10, 20, 30]), "Translate by <10, 20, 30>")
+
     def test_to_matrix(self):
         self.assertAlmostEqual(Translate([1, 2, 3]).to_matrix(), affine_matrix(X, Y, Z, [1, 2, 3]))

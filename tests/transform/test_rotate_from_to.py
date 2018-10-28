@@ -82,6 +82,9 @@ class TestRotateFromTo(TestCase):
     def test_repr(self):
         self.assertRepr(RotateFromTo(X, Y), "RotateFromTo(Vector(1, 0, 0), Vector(0, 1, 0))")
 
+    def test_repr(self):
+        self.assertStr(RotateFromTo(X, Y), "Rotate from <1, 0, 0> to <0, 1, 0>")
+
     def test_to_matrix(self):
         # No rotation
         self.assertAlmostEqual(RotateFromTo(X, X).to_matrix(), affine_matrix(X, Y, Z))

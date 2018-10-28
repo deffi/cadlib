@@ -38,6 +38,16 @@ class TestRotateXyz(TestCase):
     def test_repr(self):
         self.assertRepr(RotateXyz(1, 2, 3), "RotateXyz(1, 2, 3)")
 
+    def test_str(self):
+        self.assertStr(RotateXyz(0, 0, 0), "Rotate by 0° around X, Y, and Z")
+        self.assertStr(RotateXyz(1, 0, 0), "Rotate by 1° around X")
+        self.assertStr(RotateXyz(0, 2, 0), "Rotate by 2° around Y")
+        self.assertStr(RotateXyz(0, 0, 3), "Rotate by 3° around Z")
+        self.assertStr(RotateXyz(1, 2, 0), "Rotate by 1° around X and 2° around Y")
+        self.assertStr(RotateXyz(1, 0, 3), "Rotate by 1° around X and 3° around Z")
+        self.assertStr(RotateXyz(0, 2, 3), "Rotate by 2° around Y and 3° around Z")
+        self.assertStr(RotateXyz(1, 2, 3), "Rotate by 1° around X, 2° around Y, and 3° around Z")
+
     def test_to_matrix(self):
         # No rotation
         self.assertAlmostEqual(RotateXyz( 0 , 0,  0).to_matrix(), affine_matrix(X, Y, Z))

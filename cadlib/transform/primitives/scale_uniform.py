@@ -16,7 +16,7 @@ class ScaleUniform(Transform):
         return isinstance(other, ScaleUniform) and other._factor == self._factor
 
     def __str__(self):
-        return "Uniform scale by {}".format(self._factor)
+        return "Scale by {}".format(self._factor)
 
     def __repr__(self):
         return f"ScaleUniform({self._factor!r})"

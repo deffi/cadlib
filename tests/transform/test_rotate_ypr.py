@@ -71,6 +71,16 @@ class TestRotateYpr(TestCase):
     def test_repr(self):
         self.assertRepr(RotateYpr(1, 2, 3), "RotateYpr(1, 2, 3)")
 
+    def test_str(self):
+        self.assertStr(RotateYpr(0, 0, 0), "Yaw, pitch, and roll by 0°")
+        self.assertStr(RotateYpr(1, 0, 0), "Yaw 1°")
+        self.assertStr(RotateYpr(0, 2, 0), "Pitch 2°")
+        self.assertStr(RotateYpr(0, 0, 3), "Roll 3°")
+        self.assertStr(RotateYpr(1, 2, 0), "Yaw 1°, pitch 2°")
+        self.assertStr(RotateYpr(1, 0, 3), "Yaw 1°, roll 3°")
+        self.assertStr(RotateYpr(0, 2, 3), "Pitch 2°, roll 3°")
+        self.assertStr(RotateYpr(1, 2, 3), "Yaw 1°, pitch 2°, roll 3°")
+
     def test_to_matrix(self):
         # No rotation
         self.assertAlmostEqual(RotateYpr( 0 , 0,  0).to_matrix(), affine_matrix(X, Y, Z))

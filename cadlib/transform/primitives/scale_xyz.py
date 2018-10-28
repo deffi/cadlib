@@ -25,7 +25,22 @@ class ScaleXyz(Transform):
         return f"ScaleXyz({x!r}, {y!r}, {z!r})"
 
     def __str__(self):
-        return "Scale by {}".format(self._xyz)
+        x, y, z = self._xyz
+
+        parts = []
+        if x != 1: parts.append(f"{x} along X")
+        if y != 1: parts.append(f"{y} along Y")
+        if z != 1: parts.append(f"{z} along Z")
+
+        if len(parts) == 0:
+            return "Scale by 1 along X, Y, and Z"
+        elif len(parts) == 1:
+            return f"Scale by {', '.join(parts)}"
+        elif len(parts) == 2:
+            return f"Scale by {' and '.join(parts)}"
+        else:
+            parts[-1] = "and " + parts[-1]
+            return f"Scale by {', '.join(parts)}"
 
     def inverse(self):
         x, y, z = self._xyz

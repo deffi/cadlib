@@ -84,6 +84,14 @@ class TestChained(TestCase):
         self.assertRepr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
             "Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)])")
 
+    def test_str(self):
+        self.assertStr(Chained([]),
+            "0 chained transforms")
+        self.assertStr(Chained([ScaleUniform(1)]),
+            "1 chained transform")
+        self.assertStr(Chained([ScaleUniform(1), ScaleUniform(2), ScaleUniform(3)]),
+            "3 chained transforms")
+
     def test_to_matrix(self):
         t = Translate([1, 2, 3])
         r = RotateXyz(0, 0, 90)

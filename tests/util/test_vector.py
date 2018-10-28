@@ -99,10 +99,13 @@ class TestVector(TestCase):
     ## I/O ##
     #########
 
+    def test_str(self):
+        v = Vector(1, 2, 3)
+        self.assertEqual(str(v), "<1, 2, 3>")
+
     def test_repr(self):
         v = Vector(1, 2, 3)
-
-        self.assertEqual(repr(v), "Vector(1, 2, 3)")
+        self.assertRepr(v, "Vector(1, 2, 3)")
 
 
     ################
