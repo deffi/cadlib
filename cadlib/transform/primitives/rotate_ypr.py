@@ -40,7 +40,16 @@ class RotateYpr(Transform):
         return Chained(transforms)
 
     def to_scad(self, target):
-        return self._equivalent().to_scad(target).comment(repr(self))
+        equivalent = self._equivalent()
+
+        if equivalent == Chained([]):
+            # The equivalent transform is empty (this can happen if yaw, pitch,
+            # and roll are all 0). This would result in an empty ScadObject
+            # (with children if target is not None). Instead, generate an empty
+            # rotation for improved clarity of the generated code.
+            equivalent = RotateXyz(0, 0, 0)
+
+        return equivalent.to_scad(target).comment(repr(self))
 
     def to_matrix(self):
         # Alternative - direct generation:

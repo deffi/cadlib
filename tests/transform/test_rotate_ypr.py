@@ -33,10 +33,10 @@ class TestRotateYpr(TestCase):
         # Since OpenSCAD does not have YPR rotations, they have to translated to
         # corresponding XYZ rotations.
 
-        # A zero YPR transform is a zero XYZ transform.
-        # TODO must work
-        # self.assertEqual(RotateYpr(0, 0, 0).to_scad(None),
-        #     ScadObject("rotate", [[0, 0, 0]], None, None))
+        # A zero YPR transform is a zero XYZ transform (not an empty ScadObject,
+        # which would also be possible).
+        self.assertEqual(RotateYpr(0, 0, 0).to_scad(None),
+            ScadObject("rotate", [[0, 0, 0]], None, None))
 
         # A single-axis YPR rotation can be expressed as a single-axis YPR
         # rotation.
