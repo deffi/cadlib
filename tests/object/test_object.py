@@ -1,4 +1,4 @@
-from cadlib.object import Transformed
+from cadlib.object import Object, Transformed
 from cadlib.object.primitives import Sphere, Cube, Cylinder
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives import Translate, ScaleXyz, ScaleUniform, ScaleAxisFactor, RotateXyz
@@ -168,3 +168,7 @@ class TestObject(TestCase):
         ])
 
         self.assertEqual(actual, expected)
+
+    def test_not_implemented(self):
+        o = Object()
+        with self.assertRaises(NotImplementedError): o.to_scad()

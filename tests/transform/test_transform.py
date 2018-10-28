@@ -1,5 +1,5 @@
 from cadlib.transform.primitives import RotateAxisAngle, RotateFromTo, RotateXyz, RotateYpr, ScaleAxisFactor, ScaleUniform, ScaleXyz, Translate
-
+from cadlib.transform import Transform
 from cadlib.transform.chained import Chained
 from tests.unit_test import TestCase
 from cadlib.util import X, Y, Z
@@ -22,6 +22,12 @@ class TestTransform(TestCase):
             for t2 in transforms:
                 if t1 is not t2:
                     self.assertNotEqual(t1, t2)
+
+    def test_not_implemented(self):
+        tf = Transform()
+        with self.assertRaises(NotImplementedError): tf.inverse()
+        with self.assertRaises(NotImplementedError): tf.to_scad(None)
+        with self.assertRaises(NotImplementedError): tf.to_matrix()
 
     def test_multiplication(self):
         # Create some transform
