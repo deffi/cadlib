@@ -23,6 +23,9 @@ class Plane(Object):
     def __repr__(self):
         return f"Plane({self._normal!r}, {self._offset!r})"
 
+    def __str__(self):
+        return f"Plane with normal {self._normal} and offset {self._offset}"
+
     def to_scad(self):
         return Cube([inf, inf, inf]) \
             .translate([-inf / 2, -inf / 2, -inf]) \

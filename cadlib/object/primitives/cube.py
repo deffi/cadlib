@@ -25,5 +25,12 @@ class Cube(Object):
     def __repr__(self):
         return f"Cube({self._size!r})"
 
+    def __str__(self):
+        w, d, h = self._size
+        if w == d == h:
+            return f"Cube with size {w}"
+        else:
+            return f"Cuboid with width {w}, depth {d}, and height {h}"
+
     def to_scad(self):
         return ScadObject("cube", [self._size], None, None)

@@ -100,7 +100,6 @@ Tests:
 Util:
 
 General:
-  * [Low]    __str__
 
 Library:
 

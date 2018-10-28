@@ -33,6 +33,9 @@ class Slice(Object):
     def __repr__(self):
         return(f"Slice({self._normal!r}, {self._offset1!r}, {self._offset2!r})")
 
+    def __str__(self):
+        return f"Slice with normal {self._normal} from {self._offset1} to {self._offset2}"
+
     def to_scad(self):
         o1 = min(self._offset1, self._offset2)
         o2 = max(self._offset1, self._offset2)

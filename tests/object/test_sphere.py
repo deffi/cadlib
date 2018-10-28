@@ -35,3 +35,7 @@ class TestSphere(TestCase):
     def test_repr(self):
         self.assertRepr(Sphere(11), "Sphere(r=11)")
         self.assertRepr(Sphere(d=44), "Sphere(r=22.0)")
+
+    def test_str(self):
+        self.assertStr(Sphere(11), "Sphere with radius 11")
+        self.assertStr(Sphere(d=44), "Sphere with radius 22.0")

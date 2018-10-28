@@ -62,3 +62,9 @@ class TestTransformed(TestCase):
         cube = Cube(1)
 
         self.assertRepr(Transformed(t, cube), "Transformed(Translate(Vector(10, 20, 30)), Cube([1, 1, 1]))")
+
+    def test_str(self):
+        t = Translate([10, 20, 30])
+        cube = Cube(1)
+
+        self.assertStr(Transformed(t, cube), "Transformed object")

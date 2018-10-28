@@ -18,11 +18,7 @@ class Chained(Transform):
         return isinstance(other, Chained) and other._transforms == self._transforms
 
     def __str__(self):
-        n = len(self._transforms)
-        if n == 1:
-            return f"{n} chained transform".format(len(self._transforms))
-        else:
-            return f"{n} chained transforms".format(len(self._transforms))
+        return "Chained transform"
 
     def __repr__(self):
         transform_representations = (repr(tf) for tf in self._transforms)

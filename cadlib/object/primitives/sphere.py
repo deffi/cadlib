@@ -25,5 +25,8 @@ class Sphere(Object):
     def __repr__(self):
         return f"Sphere(r={self._radius!r})"
 
+    def __str__(self):
+        return f"Sphere with radius {self._radius}"
+
     def to_scad(self):
         return ScadObject("sphere", [self._radius], None, None)

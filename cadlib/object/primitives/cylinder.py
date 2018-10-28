@@ -66,6 +66,9 @@ class Cylinder(Object):
     def __repr__(self):
         return f"Cylinder({self._base!r}, {self._cap!r}, r={self._radius!r}"
 
+    def __str__(self):
+        return f"Cylinder with radius {self._radius} from {self._base} to {self._cap}"
+
     def to_scad(self):
         length = (self._cap - self._base).length
         direction = (self._cap - self._base).normalized()

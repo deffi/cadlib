@@ -46,3 +46,6 @@ class TestPlane(TestCase):
 
     def test_repr(self):
         self.assertRepr(Plane(X, 2), "Plane(Vector(1, 0, 0), 2)")
+
+    def test_str(self):
+        self.assertStr(Plane(X, 2), "Plane with normal <1, 0, 0> and offset 2")

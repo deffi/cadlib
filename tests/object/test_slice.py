@@ -53,3 +53,6 @@ class TestSlice(TestCase):
 
     def test_repr(self):
         self.assertRepr(Slice(X, 2, 3), "Slice(Vector(1, 0, 0), 2, 3)")
+
+    def test_str(self):
+        self.assertStr(Slice(X, 2, 3), "Slice with normal <1, 0, 0> from 2 to 3")

@@ -110,3 +110,7 @@ class TestCylinder(TestCase):
     def test_repr(self):
         self.assertRepr(Cylinder(0, 5*X,   1), "Cylinder(Vector(0, 0, 0), Vector(5, 0, 0), r=1")
         self.assertRepr(Cylinder(X, 5  , d=2), "Cylinder(Vector(0, 0, 0), Vector(5.0, 0.0, 0.0), r=1.0")
+
+    def test_str(self):
+        self.assertStr(Cylinder(0, 5*X,   1), "Cylinder with radius 1 from <0, 0, 0> to <5, 0, 0>")
+        self.assertStr(Cylinder(X, 5  , d=2), "Cylinder with radius 1.0 from <0, 0, 0> to <5.0, 0.0, 0.0>")

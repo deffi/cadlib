@@ -43,3 +43,7 @@ class TestSphere(TestCase):
     def test_repr(self):
         self.assertRepr(Cube([11, 22, 33]), "Cube([11, 22, 33])")
         self.assertRepr(Cube(44)          , "Cube([44, 44, 44])")
+
+    def test_str(self):
+        self.assertStr(Cube([11, 22, 33]), "Cuboid with width 11, depth 22, and height 33")
+        self.assertStr(Cube(44)          , "Cube with size 44")
