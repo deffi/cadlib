@@ -5,13 +5,8 @@ from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 
 class TestDifference(TestCase):
-    def test_construction(self):
-        sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
-        cylinder = Cylinder(Z, 11, 22)
-        objects = [sphere, cube, cylinder]
-
-        self.assertEqual(Difference.empty(), Difference([]))
+    def test_str(self):
+        self.assertStr(Difference([]), "Difference")
 
     def test_equality(self):
         sphere   = Sphere(11)
@@ -30,6 +25,9 @@ class TestDifference(TestCase):
         # Different objects
         self.assertNotEqual(Difference(objects       ), Difference([sphere, cube]))
         self.assertNotEqual(Difference([cube, sphere]), Difference([sphere, cube]))
+
+        # Equal objects from different specifications
+        self.assertEqual(Difference.empty(), Difference([]))
 
     def test_to_scad(self):
         sphere   = Sphere(2)

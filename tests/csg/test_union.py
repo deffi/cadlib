@@ -5,15 +5,8 @@ from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 
 class TestUnion(TestCase):
-    def test_construction(self):
-        sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
-        cylinder = Cylinder(Z, 11, 22)
-        objects = [sphere, cube, cylinder]
-
-        Union(objects)
-
-        self.assertEqual(Union.empty(), Union([]))
+    def test_str(self):
+        self.assertStr(Union([]), "Union")
 
     def test_equality(self):
         sphere   = Sphere(11)
@@ -32,6 +25,9 @@ class TestUnion(TestCase):
         # Different objects
         self.assertNotEqual(Union(objects       ), Union([sphere, cube]))
         self.assertNotEqual(Union([cube, sphere]), Union([sphere, cube]))
+
+        # Equal objects from different specifications
+        self.assertEqual(Union.empty(), Union([]))
 
     def test_to_scad(self):
         sphere   = Sphere(2)

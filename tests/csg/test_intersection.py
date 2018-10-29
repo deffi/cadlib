@@ -5,13 +5,8 @@ from cadlib.util.vector import Z
 from tests.unit_test import TestCase
 
 class TestIntersection(TestCase):
-    def test_construction(self):
-        sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
-        cylinder = Cylinder(Z, 11, 22)
-        objects = [sphere, cube, cylinder]
-
-        self.assertEqual(Intersection.empty(), Intersection([]))
+    def test_str(self):
+        self.assertStr(Intersection([]), "Intersection")
 
     def test_equality(self):
         sphere   = Sphere(11)
@@ -30,6 +25,9 @@ class TestIntersection(TestCase):
         # Different objects
         self.assertNotEqual(Intersection(objects       ), Intersection([sphere, cube]))
         self.assertNotEqual(Intersection([cube, sphere]), Intersection([sphere, cube]))
+
+        # Equal objects from different specifications
+        self.assertEqual(Intersection.empty(), Intersection([]))
 
     def test_to_scad(self):
         sphere   = Sphere(2)
