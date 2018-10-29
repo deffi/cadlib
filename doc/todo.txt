@@ -1,3 +1,8 @@
+Next:
+  * Why can union.__radd__ call super().__rmul__ but not super().__radd__?
+  * Why can Union.__radd__ and Intersection.__rmul__ be called with an Object,
+    but Difference.__rsub__ can not?
+
 Object:
   * [Medium] Assembly (Part) objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()

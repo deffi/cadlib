@@ -23,6 +23,7 @@ from cadlib.transform import Transform, shortcuts, generators
 # and may be a flaw in the language design.
 # As a workaround, Object.__add__ checks whether the "other" object is a Union
 # and returns NotImplemented in this case, in order to defer to Union.__radd__.
+# TODO test cases?
 #
 # The same issue applies to Intersection (with the __mul__ and __rmul__) methods
 # and Difference (with the __sub__ and __rsub__) methods.
