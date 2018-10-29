@@ -1,5 +1,9 @@
-from cadlib.scad import ScadObject
+from cadlib.scad import ScadObject, render_to_file
 from tests.unit_test import TestCase
+from cadlib.util.tree import Node
+from cadlib.object.primitives import Sphere, Cube, Cylinder
+from tempfile import mkstemp
+import os
 
 class TestScadObject(TestCase):
     def test_construction(self):
@@ -305,3 +309,42 @@ class TestScadObject(TestCase):
     def test_repr(self):
         self.assertRepr(ScadObject("foo", [1, 2], [('a', 3), ('b', 4)], [ScadObject("c1", [], [], []), ScadObject("c2", None, None, None)]),
             "ScadObject('foo', [1, 2], [('a', 3), ('b', 4)], [ScadObject('c1', [], [], []), ScadObject('c2', [], [], [])])")
+
+    def test_to_tree(self):
+        sphere   = ScadObject("sphere"  , [0.6]       , None, None)
+        cube     = ScadObject("cube"    , [[1, 2, 3]] , None, None)
+        cylinder = ScadObject("cylinder", [4], [("r", 0.5)], None)
+
+        union      = ScadObject("union"     , None, None, [sphere, cylinder])
+        difference = ScadObject("difference", None, None, [union, cube])
+
+        self.assertEqual(difference.to_tree(),
+            Node("difference()", [
+                Node("union()", [
+                    Node("sphere(0.6)"),
+                    Node("cylinder(4, r = 0.5)"),
+                ]),
+                Node("cube([1, 2, 3])"),
+            ]))
+
+    def test_render_to_file(self):
+        part = Sphere(0.6) + Cube([1, 2, 3]) - Cylinder([0, 0, 1], 4, r=0.5)
+
+        expected_file_name = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_expected.scad")
+        actual_file_name   = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_actual.scad")
+
+        self.assertTrue(os.path.isfile(expected_file_name))
+        self.assertFalse(os.path.exists(actual_file_name))
+
+        try:
+            render_to_file(part, actual_file_name, fn=60)
+            with open(actual_file_name) as actual_file:
+                actual = actual_file.read()
+            with open(expected_file_name) as expected_file:
+                expected = expected_file.read()
+
+            self.assertNotEqual(expected, "")
+            self.assertEqual(actual, expected)
+        finally:
+            if os.path.exists(actual_file_name):
+                os.unlink(actual_file_name)
