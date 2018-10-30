@@ -15,22 +15,11 @@ class Difference(Csg):
             # Difference - Difference - create nested Difference
             return Difference([self, other])
         elif isinstance(other, Object):
-            # Difference -Object - append to difference
+            # Difference - Object - append to difference
             return Difference(self._children + [other])
         else:
             # Difference - other - defer to superclass
             return super().__sub__(other)
-
-    def __rsub__(self, other):
-        if isinstance(other, Difference):
-            # Difference - Difference - create nested Difference
-            return Difference([other, self])
-        elif isinstance(other, Object):
-            # Object - Difference - create nested Difference
-            return Difference([other, self])
-        else:
-            # Other - Difference - defer to superclass
-            return super().__rsub__(other)
 
     def to_scad(self):
         children = [child.to_scad() for child in self._children]

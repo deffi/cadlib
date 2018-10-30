@@ -32,10 +32,12 @@ class Transformed(Object):
             #   (a) (transform2 * transform1) * object
             #   (b) transform2 * (transform1 * object)
             # Basically, we're turning case (b) into case (a).
+            # TODO that is basically what we described for Object+Object, including the deferring from Transform.__mul__.
+            # Discuss in Transform (short form, refer to Object)
             return Transformed(other * self._transform, self._object)
         else:
-            # Defer to the base class
-            return super().__rmul__(other)
+            # Other * Intersection - unknown (no __rmul__ in superclass)
+            return NotImplemented
 
     def to_tree(self):
         return Node(self, [self._transform.to_tree(), self._object.to_tree()])

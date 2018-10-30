@@ -11,14 +11,24 @@ class Transform:
             Chained(1, 2) * Transform(3) => Chained(1, 2, 3)
         Does not handle:
             Transform * Object # Defer to Object.__rmul__
+            TODO update
         """
         from cadlib.transform.chained import Chained
+        from cadlib.object import Object, Transformed
 
         if isinstance(other, Transform):
             # Transform * Transform - chain into single multi-element transform
+            # TODO get rid of _transform_list and handle this like Object.__add__
             return Chained(self._transform_list() + other._transform_list())
             # Transform * Transform - create nested transform
             # return Chained([self, other])
+        elif isinstance(other, Transformed):
+            # Defer to Transformed.__rmul__
+            return NotImplemented
+        elif isinstance(other, Object):
+            # Transform * Object - create Transformed Object
+            return Transformed(self, other)
+
         else:
             return NotImplemented
 

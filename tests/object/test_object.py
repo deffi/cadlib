@@ -102,6 +102,7 @@ class TestObject(TestCase):
         c = Cylinder(Z, 5, 5)
         d = Cube(20)
 
+        # TODO document: some of these should be special?
         self.assertEqual(    a  -  b             , Difference([a, b      ]))
         self.assertEqual(    c  -  c             , Difference([c, c      ]))
         self.assertEqual(   (a  -  b) - c        , Difference([a, b, c   ]))
@@ -135,17 +136,19 @@ class TestObject(TestCase):
         self.assertEqual((s *  t) * a , Transformed(Chained([s, t]), a))
         self.assertEqual( s * (t  * a), Transformed(Chained([s, t]), a))
 
-
     def test_invalid_operations(self):
         a = Sphere(2)
+        b = Cube([10, 10, 10])
+        t = Translate([0, 0, 0])
 
-        for invalid in [None, 0, 0.0, ""]:
-            with self.assertRaises(TypeError): a + invalid
-            with self.assertRaises(TypeError): a - invalid
-            with self.assertRaises(TypeError): a * invalid
-            with self.assertRaises(TypeError): invalid + a
-            with self.assertRaises(TypeError): invalid - a
-            with self.assertRaises(TypeError): invalid * a
+        for target in [a, t, t*a, a+b, a-b, a*b]:
+            for invalid in [None, 0, 0.0, ""]:
+                with self.assertRaises(TypeError): target + invalid
+                with self.assertRaises(TypeError): target - invalid
+                with self.assertRaises(TypeError): target * invalid
+                with self.assertRaises(TypeError): invalid + target
+                with self.assertRaises(TypeError): invalid - target
+                with self.assertRaises(TypeError): invalid * target
 
     def test_to_tree(self):
         a = Sphere(2)

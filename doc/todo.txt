@@ -1,7 +1,5 @@
 Next:
-  * Why can union.__radd__ call super().__rmul__ but not super().__radd__?
-  * Why can Union.__radd__ and Intersection.__rmul__ be called with an Object,
-    but Difference.__rsub__ can not?
+  * Code TODOs pertaining to operators
 
 Object:
   * [Medium] Assembly (Part) objects
@@ -100,6 +98,7 @@ Tests:
 Util:
 
 General:
+  * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
 Library:
 

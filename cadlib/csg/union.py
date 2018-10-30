@@ -22,15 +22,14 @@ class Union(Csg):
             return super().__add__(other)
 
     def __radd__(self, other):
-        if isinstance(other, Union):
-            # Union + Union - merge unions
-            return Union(other._children + self._children)
-        elif isinstance(other, Object):
-            # Object + Union - prepend to union
+        # other cannot be a Union: Union + Union calls Union.__add__.
+        if isinstance(other, Object):
+            # Object + Union (deferred from Object.__add__) - prepend to union
             return Union([other] + self._children)
         else:
-            # Other + Union - defer to superclass
-            return super().__radd__(other)
+            # Other + Union - unknown (no __radd__ in superclass)
+            return NotImplemented
+            # return super().__radd__(other)
 
     def to_scad(self):
         children = [child.to_scad() for child in self._children]

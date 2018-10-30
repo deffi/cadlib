@@ -15,22 +15,22 @@ class Intersection(Csg):
             # Intersection * Intersection - merge intersections
             return Intersection(self._children + other._children)
         elif isinstance(other, Object):
-            # Intersectino * Object - append to intersection
+            # Intersection * Object - append to intersection
             return Intersection(self._children + [other])
         else:
             # Intersection * other - defer to superclass
             return super().__mul__(other)
 
     def __rmul__(self, other):
-        if isinstance(other, Intersection):
-            # Intersection * Intersection - merge intersections
-            return Intersection(other._children + self._children)
-        elif isinstance(other, Object):
-            # Object * Intersection - prepend to intersection
+        # other cannot be an Intersection: Intersection + Intersection calls
+        # Intersection.__mul__.
+        if isinstance(other, Object):
+            # Object * Intersection (deferred from Object.__mul__) - prepend to
+            # intersection
             return Intersection([other] + self._children)
         else:
-            # Other * Intersection - defer to superclass
-            return super().__rmul__(other)
+            # Other * Intersection - unknown (no __rmul__ in superclass)
+            return NotImplemented
 
     def to_scad(self):
         children = [child.to_scad() for child in self._children]

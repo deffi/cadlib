@@ -1,32 +1,89 @@
 from cadlib.util.tree import Node
 from cadlib.transform import Transform, shortcuts, generators
 
-# Note that, while Union is a subclass of Object, the special case of adding an
-# Object and a Union (in either order) or adding two Unions is handled
-# differently from adding two generic Objects: rather than nested Unions, a
-# merged Union is created (this ensures the associativity of the addition
-# operator).
-# This special case is handled in the __add__ and __radd__ methods of the Union
-# class. Thus, for an expression of the form `Object + Union`, Union.__radd__
-# must be called instead of Object.__add__.
-# The Python documentation states that
+# Adding objects: it's not as simple as it seems.
+#
+# First of all, the basic operation is
+#   (1) Object + Object -> Union
+#
+# This is easily done in Object.__add__, but but adding (in either order) an
+# Object and a Union (which is a subclass of Object) would create nested Unions
+# and therefore, addition would not be associative:
+#     o1 + (o2 + o3) -> o1 + Union(o2, o3) -> Union(o1, Union(o2, o3))
+#     (o1 + o2) + o3 -> Union(o1, o2) + o3 -> Union(Union(o1, o2), o3)
+# Besides, adding multiple objects/unions would result in deeply and confusingly
+# nested Unions.
+#
+# What we want is:
+#     o1 + (o2 + o3) -> o1 + Union(o2, o3) -> Union(o1, o2, o3)
+#     (o1 + o2) + o3 -> Union(o1, o2) + o3 -> Union(o1, o2, o3)
+# And also:
+#     Union(o1, o2) + Union(o3, o4) -> Union(o1, o2, o3, o4)
+#
+# This means we have to explicitly handle the following special cases:
+#   (2) Union + Union  -> Union
+#   (3) Union + Object -> Union
+#   (4) Object + Union -> Union
+# These special cases extract the individual objects from the Union operands
+# instead of simply using the Union as an object.
+#
+# Now where to implement these operations? Ideally we'd implement them in the
+# Union class so the Object class does not need to know how to extract objects
+# from a Union. (2) and (3) are naturally implemented in Union.__add__. For (4),
+# the Python documentation states that
 #     "If the right operand’s type is a [direct or indirect] subclass of the
 #     left operand’s type and that subclass provides the reflected method for
 #     the operation, this method will be called before the left operand’s non-
-#     reflected method." [1]
-# In this particular case, this means that Union.__radd__ is called before
-# Object.__add__.
-# However, this does not apply if a subclass of Object (such as Cube) is used
-# instead: for an expression of the form `Cube + Union`, Object.__add__ will be
-# called first (Cube does not override __add__) because Union is not a subclass
-# of Cube. This is a violation of the Liskov substitution principle (by Python)
-# and may be a flaw in the language design.
-# As a workaround, Object.__add__ checks whether the "other" object is a Union
-# and returns NotImplemented in this case, in order to defer to Union.__radd__.
-# TODO test cases?
+#     reflected method. This behavior allows subclasses to override their
+#     ancestors’ operations." [1]
+# Overriding an ancestor's operation in a subclass is exactly the kind of
+# situation we, dealing with here, so we should be able to implement (4) in
+# Union.__radd__ and be done, right?
 #
-# The same issue applies to Intersection (with the __mul__ and __rmul__) methods
-# and Difference (with the __sub__ and __rsub__) methods.
+# Welll not so fast. We won't be using direct instances of Object - we will be
+# using instances of an Object subclass - for example, Cube:
+#   (1b) Cube + Cube
+#   (2b) Union + Union
+#   (3b) Union + Cube
+#   (4b) Cube + Union
+#
+# Since Object subclasses won't be overriding __add__, (1b) will still call
+# Object.__add__. (2b) is identical to (2) and (3b) will still call
+# Union.__add__. What about (4b)?
+#
+# The Liskov substitution principle states that objects of one type can be
+# replaced with an object of a subtype. Since Cube is a subtype of Object, (4b)
+# should still result in a call to Union.__radd__.
+#
+# Python has a different opinion on this matter: since Union is not a (direct or
+# indirect) subclass of Cube, the rule from [1] does not apply and Cube.__add__
+# (inherited from Object.__add__) will be called.
+#
+# (As an aside, this violation of the Liskov substitution principle might be a
+# flaw in the design of Python. The condition of the rule from [1] might be
+# restated as "If the right operand’s type is a [direct or indirect] subclass of
+# _the class that defines the non-reflected method for the operation_").
+#
+# As a workaround, Object.__add__ checks whether the `other` object is a Union
+# and returns NotImplemented in this case, in order to defer to Union.__radd__.
+#
+# Alternatively, we could have handled Object + Union in Object.__add__, but
+# that would have introduced knowledge about the more specific Union into the
+# more general Object. It would also have separated the "prepend to union" case
+# from the analogous "append to union" case in Union.__add__, unless we handled
+# that case in Object.__add__ as well, which would have introduced... On the
+# plus side, we could get rid of Union.__add__ and Union.__radd__ completely
+# that way, concentrating all of the arithmetic in a single place. Less pure,
+# but maybe more maintainable?
+#
+# The same issue applies to Intersection (with the __mul__ and __rmul__ methods)
+# and Difference (with the __sub__ and __rsub__ methods). __mul__ is further
+# complicated by the following operations:
+#   * Transform * Transform,
+#   * Transform * Chained and Chained * Transform
+#   * Transform * Object
+#   * Transform * Transformed
+
 #
 # [1] https://docs.python.org/3/reference/datamodel.html
 
@@ -48,41 +105,13 @@ class Object:
     def __add__(self, other):
         from cadlib.csg import Union
         if isinstance(other, Union):
-            # Object + Union - defer to Union.__radd__ (see note above)
+            # Object + Union - defer to Union.__radd__ (see note above).
             return NotImplemented
         elif isinstance(other, Object):
             # Object + Object - create Union
             return Union([self, other])
         else:
             # Object + other - unknown
-            return NotImplemented
-
-    def __sub__(self, other):
-        """
-        Handles:
-            Object(1) - Object(2) => Difference(1, 2)
-        Needs special case:
-            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3)) # No special case
-            Difference(1, 2) - Object(3) => Difference(1, 2, 3)
-        But currently:
-            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3))
-            Difference(1, 2) - Object(3) => Difference(Difference(1, 2), 3)
-        """
-        from cadlib.csg import Difference
-
-        if isinstance(other, Object):
-            return Difference([self, other])
-        else:
-            return NotImplemented
-
-        if isinstance(other, Difference):
-            # Object - Difference - defer to Difference.__rsub__ (see note above)
-            return NotImplemented
-        elif isinstance(other, Object):
-            # Object - Object - create Difference
-            return Difference([self, other])
-        else:
-            # Object - other - unknown
             return NotImplemented
 
     def __mul__(self, other):
@@ -95,15 +124,29 @@ class Object:
             return Intersection([self, other])
         else:
             # Object * other - unknown
+            # In particular, we cannot do Object * Transform.
             return NotImplemented
 
-    def __rmul__(self, other):
-        from cadlib.object import Transformed
-        if isinstance(other, Transform):
-            # Transform * Object - create Transformed Object
-            return Transformed(other, self)
+    def __sub__(self, other):
+        """
+        Handles:
+            Object(1) - Object(2) => Difference(1, 2)
+        Needs special case:
+            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3)) # No special case
+            Difference(1, 2) - Object(3) => Difference(1, 2, 3)
+        But currently:
+            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3))
+            Difference(1, 2) - Object(3) => Difference(Difference(1, 2), 3)
+            TODO up to date?
+        """
+        # TODO up?
+        from cadlib.csg import Difference
+
+        if isinstance(other, Object):
+            # Object - Object - create Difference
+            return Difference([self, other])
         else:
-            # other * Object - unknown
+            # Object - other - unknown
             return NotImplemented
 
 
