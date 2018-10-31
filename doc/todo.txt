@@ -1,6 +1,3 @@
-Next:
-  * Code TODOs pertaining to operators
-
 Object:
   * [Medium] Assembly (Part) objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
@@ -45,10 +42,11 @@ Transform:
   * [Low]    Empty-chained * object should be object, not chained
 
 CSG:
-  * [Low]    Make it so that a-(b+c) == a-b-c. Two options:
+  * [Low]    Make it so that a-(b+c) == (a-b)-c. Two options:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
                * When subtracting a union, extract its children (must also be done for Object - Union)
+             Also, (a-b)-c should not result in a nested difference.
   * [Low]    Can we make Union and Intersection independent of the order, so that a+b == b+a?
                * We could use a set instead of a list, or we could convert the list to a set for comparison. This would
                  require a hash method

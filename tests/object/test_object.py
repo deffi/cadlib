@@ -102,7 +102,7 @@ class TestObject(TestCase):
         c = Cylinder(Z, 5, 5)
         d = Cube(20)
 
-        # TODO document: some of these should be special?
+        # Difference is non-associative, so we get nested differences
         self.assertEqual(    a  -  b             , Difference([a, b      ]))
         self.assertEqual(    c  -  c             , Difference([c, c      ]))
         self.assertEqual(   (a  -  b) - c        , Difference([a, b, c   ]))

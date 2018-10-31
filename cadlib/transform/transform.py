@@ -34,7 +34,6 @@ from cadlib.util.tree import Node
 
 class Transform:
     def __mul__(self, other):
-        # TODO up?
         from cadlib.transform.chained import Chained
         from cadlib.object import Object, Transformed
 

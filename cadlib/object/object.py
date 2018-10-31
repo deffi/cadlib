@@ -68,6 +68,9 @@ from cadlib.transform import Transform, shortcuts, generators
 #
 # As a workaround, Object.__add__ checks whether the `other` object is a Union
 # and returns NotImplemented in this case, in order to defer to Union.__radd__.
+# Note that this requires object.py to import Union, which is unfortunate
+# because it creates a circular dependency (of course, union.py has to import
+# Object in order to inherit from it).
 #
 # Alternatively, we could have handled Object + Union in Object.__add__, but
 # that would have introduced knowledge about the more specific Union into the
@@ -133,18 +136,6 @@ class Object:
             return NotImplemented
 
     def __sub__(self, other):
-        """
-        Handles:
-            Object(1) - Object(2) => Difference(1, 2)
-        Needs special case:
-            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3)) # No special case
-            Difference(1, 2) - Object(3) => Difference(1, 2, 3)
-        But currently:
-            Object(1) - Difference(2, 3) => Difference(1, Difference(2, 3))
-            Difference(1, 2) - Object(3) => Difference(Difference(1, 2), 3)
-            TODO up to date?
-        """
-        # TODO up?
         from cadlib.csg import Difference
 
         if isinstance(other, Object):
