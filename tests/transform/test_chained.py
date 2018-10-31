@@ -11,6 +11,7 @@ class TestChained(TestCase):
         t3 = ScaleXyz(3, 3, 3)
 
         # Valid
+        self.assertEqual(Chained([t1, t2, t3]).transforms, [t1, t2, t3])
         with self.assertNothingRaised(): chained0 = Chained([])                       # No children
         with self.assertNothingRaised(): chained1 = Chained([t1, t2, t3])             # Regular
         with self.assertNothingRaised(): chained2 = Chained([t1, t1, t1])             # Repeated child

@@ -27,16 +27,15 @@ class Transformed(Object):
 
     def __rmul__(self, other):
         if isinstance(other, Transform):
-            # Transformation of an already-transformed object. Instead of transforming the object twice, we merge the
-            # individual transform. While this is not strictly required, we want the following two terms to be equal:
-            #   (a) (transform2 * transform1) * object
-            #   (b) transform2 * (transform1 * object)
-            # Basically, we're turning case (b) into case (a).
-            # TODO that is basically what we described for Object+Object, including the deferring from Transform.__mul__.
-            # Discuss in Transform (short form, refer to Object)
+            # Transform * Transformed (deferred from Transform.__mul__) - insert Transform into own transform
+            # This basically turns
+            #     transform2 * (transform1 * object)
+            # into
+            #     (transform2 * transform1) * object
+            # See transform.py for details.
             return Transformed(other * self._transform, self._object)
         else:
-            # Other * Intersection - unknown (no __rmul__ in superclass)
+            # Other * Transformed - unknown (no __rmul__ in superclass)
             return NotImplemented
 
     def to_tree(self):

@@ -1,42 +1,61 @@
 from cadlib.util.tree import Node
 
+# Multiplying transforms:
+#
+# A Transform can be multiplied with another Transform or with an Object:
+#   (1) Transform * Transform -> Chained   (Chained is a subclass of Transform)
+#   (2) Transform * Object -> Transformed  (Transformed is a subclass of Object)
+#
+# Similar to Object + Union (see object.py), this is not sufficient to make
+# multiplication associative:
+#     t1 * (t2 * t3) -> t1 * Chained(t2, t3) -> Chained(t1, Chained(t2, t3))
+#     (t1 * t2) * t3 -> Chained(t1, t2) * t3 -> Chained(Chained(t1, t2), t3)
+# The same is true for multiplication with an Object:
+#     (t1 * t2) * o -> Chained(t1, t2) * o     -> Transformed(Chained(t1, t2), o))
+#     t1 * (t2 * o) -> t1 * Transformed(t2, o) -> Transformed(t1, Transformed(t2, o))
+#
+# In both cases, both results describe the same object, but as with Unions, the
+# non-associativity is unsatisfactory.
+#
+# What we want instead is:
+#     t1 * (t2 * t3) -> t1 * Chained(t2, t3) -> Chained(t1, t2, t3)
+#     (t1 * t2) * t3 -> Chained(t1, t2) * t3 -> Chained(t1, t2, t3)
+# And:
+#     (t1 * t2) * o -> Chained(t1, t2) * o     -> Transformed(Chained(t1, t2), o))
+#     t1 * (t2 * o) -> t1 * Transformed(t2, o) -> Transformed(Chained(t1, t2), o))
+#
+# This means that we have to explicitly handle the following special cases:
+#   (3) Chained * Chained       -> Chained
+#   (4) Chained * Transform     -> Chained
+#   (5) Transform * Chained     -> Chained
+#   (6) Transform * Transformed -> Transformed
+#
+# The solution is basically the same as described in object.py.
 
 class Transform:
     def __mul__(self, other):
-        """
-        Handles:
-            Transform(1) * Transform(2) => Chained(1, 2)
-        Special case:
-            Transform(1) * Chained(2, 3) => Chained(1, 2, 3)
-            Chained(1, 2) * Transform(3) => Chained(1, 2, 3)
-        Does not handle:
-            Transform * Object # Defer to Object.__rmul__
-            TODO update
-        """
+        # TODO up?
         from cadlib.transform.chained import Chained
         from cadlib.object import Object, Transformed
 
-        if isinstance(other, Transform):
-            # Transform * Transform - chain into single multi-element transform
-            # TODO get rid of _transform_list and handle this like Object.__add__
-            return Chained(self._transform_list() + other._transform_list())
-            # Transform * Transform - create nested transform
-            # return Chained([self, other])
+        if isinstance(other, Chained):
+            # Transform * Chained - defer to Chained.__rmul__
+            return NotImplemented
+        elif isinstance(other, Transform):
+            # Transform * Transform - create Chained
+            return Chained([self, other])
         elif isinstance(other, Transformed):
-            # Defer to Transformed.__rmul__
+            # Transform * Transformed - defer to Transformed.__rmul__
             return NotImplemented
         elif isinstance(other, Object):
-            # Transform * Object - create Transformed Object
+            # Transform * Object - create Transformed
             return Transformed(self, other)
-
         else:
+            # Transform * other - unknown
             return NotImplemented
 
     def to_tree(self):
         return Node(self, [])
-
-    def _transform_list(self):
-        return [self]
 
     def inverse(self):
         raise NotImplementedError("inverse not implemented in {}".format(type(self)))

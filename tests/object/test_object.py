@@ -139,9 +139,10 @@ class TestObject(TestCase):
     def test_invalid_operations(self):
         a = Sphere(2)
         b = Cube([10, 10, 10])
+        s = ScaleUniform(1)
         t = Translate([0, 0, 0])
 
-        for target in [a, t, t*a, a+b, a-b, a*b]:
+        for target in [a, t, t*a, a+b, a-b, a*b, s*t]:
             for invalid in [None, 0, 0.0, ""]:
                 with self.assertRaises(TypeError): target + invalid
                 with self.assertRaises(TypeError): target - invalid

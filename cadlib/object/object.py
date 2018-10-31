@@ -4,23 +4,25 @@ from cadlib.transform import Transform, shortcuts, generators
 # Adding objects: it's not as simple as it seems.
 #
 # First of all, the basic operation is
-#   (1) Object + Object -> Union
+#   (1) Object + Object -> Union  (Union is a subclass of Object)
 #
 # This is easily done in Object.__add__, but but adding (in either order) an
 # Object and a Union (which is a subclass of Object) would create nested Unions
 # and therefore, addition would not be associative:
 #     o1 + (o2 + o3) -> o1 + Union(o2, o3) -> Union(o1, Union(o2, o3))
 #     (o1 + o2) + o3 -> Union(o1, o2) + o3 -> Union(Union(o1, o2), o3)
-# Besides, adding multiple objects/unions would result in deeply and confusingly
-# nested Unions.
 #
-# What we want is:
+# Both results describe the same object, but the non-associativity is
+# unsatisfactory; besides, adding multiple objects/unions would result in deeply
+# and confusingly nested Unions.
+#
+# What we want instead is:
 #     o1 + (o2 + o3) -> o1 + Union(o2, o3) -> Union(o1, o2, o3)
 #     (o1 + o2) + o3 -> Union(o1, o2) + o3 -> Union(o1, o2, o3)
 # And also:
 #     Union(o1, o2) + Union(o3, o4) -> Union(o1, o2, o3, o4)
 #
-# This means we have to explicitly handle the following special cases:
+# This means that we have to explicitly handle the following special cases:
 #   (2) Union + Union  -> Union
 #   (3) Union + Object -> Union
 #   (4) Object + Union -> Union
@@ -74,7 +76,10 @@ from cadlib.transform import Transform, shortcuts, generators
 # that case in Object.__add__ as well, which would have introduced... On the
 # plus side, we could get rid of Union.__add__ and Union.__radd__ completely
 # that way, concentrating all of the arithmetic in a single place. Less pure,
-# but maybe more maintainable?
+# but maybe more maintainable? Note that even in the purer case, Object has to
+# know about Union in order to defer to Union.__radd__ in the appropriate case.
+# On the other hand, this means that we would have the check whether self is a
+# Union in Object.__add__, which is ridiculous, OO-wise.
 #
 # The same issue applies to Intersection (with the __mul__ and __rmul__ methods)
 # and Difference (with the __sub__ and __rsub__ methods). __mul__ is further

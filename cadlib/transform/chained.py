@@ -14,8 +14,32 @@ class Chained(Transform):
 
         self._transforms = transforms
 
+    @property
+    def transforms(self):
+        return self._transforms
+
     def __eq__(self, other):
         return isinstance(other, Chained) and other._transforms == self._transforms
+
+    def __mul__(self, other):
+        if isinstance(other, Chained):
+            # Chained * Chained - merge chains
+            return Chained(self._transforms + other._transforms)
+        elif isinstance(other, Transform):
+            # Chained * Transform - append to chain
+            return Chained(self._transforms + [other])
+        else:
+            # Chained * other - defer to superclass
+            return super().__mul__(other)
+
+    def __rmul__(self, other):
+        # other cannot be a Chained: Chained * Chained calls Chained.__add__.
+        if isinstance(other, Transform):
+            # Transform * Chained (deferred from Transform.__mul__) - prepend to chain
+            return Chained([other] + self._transforms)
+        else:
+            # Other * Chained - unknown (no __rmul__ in superclass)
+            return NotImplemented
 
     def __str__(self):
         return "Chained transform"
@@ -23,9 +47,6 @@ class Chained(Transform):
     def __repr__(self):
         transform_representations = (repr(tf) for tf in self._transforms)
         return f"Chained([{', '.join(transform_representations)}])"
-
-    def _transform_list(self):
-        return self._transforms
 
     def to_tree(self):
         return Node(self, [tf.to_tree() for tf in self._transforms])
