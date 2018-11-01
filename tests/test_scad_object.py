@@ -197,6 +197,10 @@ class TestScadObject(TestCase):
         self.assertEqual(ScadObject("Dummy", [r'foo"bar'       ], None, None).to_code(), r'Dummy("foo\"bar");'  )
         self.assertEqual(ScadObject("Dummy", [r'foo\bar'       ], None, None).to_code(), r'Dummy("foo\\bar");'  )
 
+    def test_to_scad(self):
+        o = ScadObject("cylinder", [4], [("r", 0.5)], None)
+
+        self.assertEqual(o.to_scad(), o)
 
     def test_to_code(self):
         sphere   = ScadObject("sphere"  , [0.6]       , None, None)
