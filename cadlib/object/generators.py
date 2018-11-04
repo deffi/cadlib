@@ -1,7 +1,8 @@
 from cadlib.object.primitives import Cuboid, Cylinder, Plane, Slice, Sphere
 from cadlib.util import both, neither
+from cadlib.util.number import to_number
 
-__all__ = ['cuboid', 'cylinder', 'plane', 'slice', 'sphere']
+__all__ = ['cuboid', 'cube', 'cylinder', 'plane', 'slice', 'sphere']
 
 
 def cuboid(size_or_x, y = None, z = None):
@@ -16,6 +17,9 @@ def cuboid(size_or_x, y = None, z = None):
     else:
         raise ValueError("y and z can only be specified together")
 
+def cube(size):
+    size = to_number(size, None, "size", [])
+    return Cuboid([size, size, size])
 
 def cylinder(direction_or_base, length_or_cap, r = None, d = None):
     return Cylinder(direction_or_base, length_or_cap, r, d)

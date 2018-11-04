@@ -8,6 +8,7 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cuboid(1), Cuboid(1))
         self.assertEqual(cuboid([1, 2, 3]), Cuboid([1, 2, 3]))
         self.assertEqual(cuboid(1, 2, 3), Cuboid([1, 2, 3]))
+        self.assertEqual(cube(1), Cuboid([1, 1, 1]))
         with self.assertRaises(ValueError): cuboid(1, 2)
         with self.assertRaises(ValueError): cuboid(1, 2, None)
         with self.assertRaises(ValueError): cuboid(1, None, 2)

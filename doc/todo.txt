@@ -1,6 +1,3 @@
-Work in progress: rename Cube to Cuboid
-  * Add generators "box", "cube"
-
 Object:
   * [Medium] Generators: cube/cuboid should accept x,y,z; [x,y,z]; size
   * [Medium] Assembly (Part) objects
