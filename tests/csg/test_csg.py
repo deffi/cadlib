@@ -1,4 +1,4 @@
-from cadlib.object.primitives import Sphere, Cube, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Cylinder
 from cadlib.csg import Csg, Intersection, Difference, Union
 from cadlib.scad import ScadObject
 from cadlib.util.vector import Z
@@ -7,9 +7,9 @@ from tests.unit_test import TestCase
 class TestCsg(TestCase):
     def test_construction(self):
         sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
+        cube     = Cuboid([11, 22, 33]) # TODO cube
         cylinder = Cylinder(Z, 11, 22)
-        object_list = [sphere, cube, cylinder]
+        object_list = [sphere, cube, cylinder] # TODO cube
 
         # Empty
         Csg([])
@@ -29,9 +29,9 @@ class TestCsg(TestCase):
 
     def test_equality(self):
         sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
+        cube     = Cuboid([11, 22, 33]) # TODO cube
         cylinder = Cylinder(Z, 11, 22)
-        objects = [sphere, cube, cylinder]
+        objects = [sphere, cube, cylinder] # TODO cube
 
         # Different types of CSG are not equal, even if their children are identical
         self.assertNotEqual(Union       (objects), Intersection(objects))
@@ -40,11 +40,11 @@ class TestCsg(TestCase):
 
     def test_to_scad(self):
         sphere   = Sphere(2)
-        cube     = Cube([10, 10, 10])
+        cube     = Cuboid([10, 10, 10]) # TODO cube
         cylinder = Cylinder(Z, 5, 5)
 
-        mixed = Union([Intersection([sphere, cylinder]), Difference([cube, sphere])])
+        mixed = Union([Intersection([sphere, cylinder]), Difference([cube, sphere])]) # TODO cube
         self.assertEqual(mixed.to_scad(), ScadObject("union", None, None, [
             ScadObject("intersection", None, None, [ sphere  .to_scad(), cylinder.to_scad() ]),
-            ScadObject("difference"  , None, None, [ cube    .to_scad(), sphere  .to_scad() ]),
+            ScadObject("difference"  , None, None, [ cube    .to_scad(), sphere  .to_scad() ]), # TODO cube
         ]))

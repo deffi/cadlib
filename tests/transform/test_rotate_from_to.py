@@ -1,7 +1,7 @@
 from tests.unit_test import TestCase
 from cadlib.transform.primitives import RotateFromTo
 from cadlib.util import Vector, X, Y, Z
-from cadlib.object.primitives import Cube
+from cadlib.object.primitives import Cuboid
 from cadlib.util.geometry import affine_matrix
 
 class TestRotateFromTo(TestCase):
@@ -70,10 +70,10 @@ class TestRotateFromTo(TestCase):
 
         # Same direction (no effect). This generates a zero XYZ transform (not
         # an empty ScadObject, which would also be possible).
-        cube = Cube(2).to_scad()
+        cube = Cuboid(2).to_scad() # TODO cube
         self.assertScadObjectTarget(RotateFromTo(X        , X        ), None, "rotate", [[0, 0, 0]], None, None)
-        self.assertScadObjectTarget(RotateFromTo(X        , X        ), cube, "rotate", [[0, 0, 0]], None, [cube])
-        self.assertScadObjectTarget(RotateFromTo([1, 2, 3], [2, 4, 6]), cube, "rotate", [[0, 0, 0]], None, [cube])
+        self.assertScadObjectTarget(RotateFromTo(X        , X        ), cube, "rotate", [[0, 0, 0]], None, [cube]) # TODO cube
+        self.assertScadObjectTarget(RotateFromTo([1, 2, 3], [2, 4, 6]), cube, "rotate", [[0, 0, 0]], None, [cube]) # TODO cube
 
         # Opposite direction (ambiguous rotation)
         self.assertIn(("a", 180), RotateFromTo(X        , -X          , ignore_ambiguity=True).to_scad(None)._kw_parameters)

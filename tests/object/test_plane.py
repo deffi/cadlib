@@ -39,7 +39,7 @@ class TestPlane(TestCase):
             ScadObject("rotate", None, [('a', 45.0), ('v', [-1.0, 0.0, 0.0])], [
                 ScadObject("translate", [[0, 0, 2]], None, [
                     ScadObject("translate", [[-infinity/2, -infinity/2, -infinity]], None, [
-                        ScadObject("cube", [[infinity, infinity, infinity]], None, None)
+                        ScadObject("cube", [[infinity, infinity, infinity]], None, None) # TODO cube
                     ])
                 ])
             ]))

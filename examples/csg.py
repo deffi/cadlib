@@ -3,7 +3,7 @@ from cadlib.simple import *
 sphere_r = 1
 cube_size = 1.6
 
-cube     = cube(cube_size).translate([-cube_size/2, -cube_size/2, -cube_size/2])
+cube     = cuboid(cube_size).translate([-cube_size/2, -cube_size/2, -cube_size/2])
 sphere   = sphere(1)
 
 assembly = \

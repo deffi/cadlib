@@ -5,7 +5,7 @@ from cadlib.object import Object
 from cadlib.scad import ScadObject
 
 
-class Cube(Object):
+class Cuboid(Object):
     def __init__(self, size):
         if isinstance(size, Number):
             if size == 0:
@@ -20,10 +20,10 @@ class Cube(Object):
             raise ValueError("Invalid size: {}".format(size))
 
     def __eq__(self, other):
-        return isinstance(other, Cube) and other._size == self._size
+        return isinstance(other, Cuboid) and other._size == self._size
 
     def __repr__(self):
-        return f"Cube({self._size!r})"
+        return f"Cuboid({self._size!r})"
 
     def __str__(self):
         w, d, h = self._size
@@ -33,4 +33,5 @@ class Cube(Object):
             return f"Cuboid with width {w}, depth {d}, and height {h}"
 
     def to_scad(self):
+        # In OpenSCAD, it's called "cube" - even if the sides are not equal.
         return ScadObject("cube", [self._size], None, None)

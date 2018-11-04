@@ -1,7 +1,7 @@
 from cadlib.scad import ScadObject, render_to_file
 from tests.unit_test import TestCase
 from cadlib.util.tree import Node
-from cadlib.object.primitives import Sphere, Cube, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Cylinder
 from tempfile import mkstemp
 import os
 
@@ -204,18 +204,18 @@ class TestScadObject(TestCase):
 
     def test_to_code(self):
         sphere   = ScadObject("sphere"  , [0.6]       , None, None)
-        cube     = ScadObject("cube"    , [[1, 2, 3]] , None, None)
+        cuboid   = ScadObject("cube"    , [[1, 2, 3]] , None, None)
         cylinder = ScadObject("cylinder", [4], [("r", 0.5)], None)
 
         union      = ScadObject("union"     , None, None, [sphere, cylinder])
-        difference = ScadObject("difference", None, None, [union, cube])
+        difference = ScadObject("difference", None, None, [union, cuboid])
 
-        chain1 = ScadObject("union", None, None, [cube]);
+        chain1 = ScadObject("union", None, None, [cuboid]);
         chain2 = ScadObject("intersection", None, None, [chain1]);
 
         # Simple object
         self.assertEqual(sphere  .to_code(), "sphere(0.6);"       ) # Basic
-        self.assertEqual(cube    .to_code(), "cube([1, 2, 3]);"   ) # List parameter
+        self.assertEqual(cuboid    .to_code(), "cube([1, 2, 3]);"   ) # List parameter
         self.assertEqual(cylinder.to_code(), "cylinder(4, r = 0.5);") # Multiple parameters
 
         # Nested CSG
@@ -276,7 +276,7 @@ class TestScadObject(TestCase):
 
     def test_to_code_empty(self):
         sphere   = ScadObject("sphere"  , [0.6]       , None, None)
-        cube     = ScadObject("cube"    , [[1, 2, 3]] , None, None)
+        cuboid   = ScadObject("cube"    , [[1, 2, 3]] , None, None)
 
         # Empty SCAD object
         empty_comment = ScadObject(None, None, None, None)
@@ -292,7 +292,7 @@ class TestScadObject(TestCase):
         ]))
 
         # Empty SCAD object with children
-        empty_children = ScadObject(None, None, None, [sphere, cube])
+        empty_children = ScadObject(None, None, None, [sphere, cuboid])
         self.assertEqual(empty_children.to_code(), "\n".join([
             "{",
             "    sphere(0.6);",
@@ -301,7 +301,7 @@ class TestScadObject(TestCase):
         ]))
 
         # Empty SCAD object with children and comment
-        empty_children_comment = ScadObject(None, None, None, [sphere, cube]).comment("Empty")
+        empty_children_comment = ScadObject(None, None, None, [sphere, cuboid]).comment("Empty")
         self.assertEqual(empty_children_comment.to_code(), "\n".join([
             "// Empty",
             "{",
@@ -316,11 +316,11 @@ class TestScadObject(TestCase):
 
     def test_to_tree(self):
         sphere   = ScadObject("sphere"  , [0.6]       , None, None)
-        cube     = ScadObject("cube"    , [[1, 2, 3]] , None, None)
+        cuboid   = ScadObject("cube"    , [[1, 2, 3]] , None, None)
         cylinder = ScadObject("cylinder", [4], [("r", 0.5)], None)
 
         union      = ScadObject("union"     , None, None, [sphere, cylinder])
-        difference = ScadObject("difference", None, None, [union, cube])
+        difference = ScadObject("difference", None, None, [union, cuboid])
 
         self.assertEqual(difference.to_tree(),
             Node("difference()", [
@@ -332,7 +332,7 @@ class TestScadObject(TestCase):
             ]))
 
     def test_render_to_file(self):
-        part = Sphere(0.6) + Cube([1, 2, 3]) - Cylinder([0, 0, 1], 4, r=0.5)
+        part = Sphere(0.6) + Cuboid([1, 2, 3]) - Cylinder([0, 0, 1], 4, r=0.5)
 
         expected_file_name = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_expected.scad")
         actual_file_name   = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_actual.scad")

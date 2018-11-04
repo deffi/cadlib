@@ -4,7 +4,7 @@ from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
-from cadlib.object.primitives import Cube
+from cadlib.object.primitives import Cuboid
 from cadlib.util.number import to_number
 
 
@@ -40,7 +40,7 @@ class Slice(Object):
         o1 = min(self._offset1, self._offset2)
         o2 = max(self._offset1, self._offset2)
 
-        return Cube([inf, inf, o2 - o1]) \
+        return Cuboid([inf, inf, o2 - o1]) \
             .translate([-inf / 2, -inf / 2, 0]) \
             .up(o1) \
             .rotate(frm = Z, to = self._normal, ignore_ambiguity = True) \

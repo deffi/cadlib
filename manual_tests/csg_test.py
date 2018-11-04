@@ -1,4 +1,4 @@
-from cadlib.object.primitives import Cube, Cylinder, Sphere
+from cadlib.object.primitives import Cuboid, Cylinder, Sphere
 from cadlib.util.vector import Z
 
 def test_case(name, object):
@@ -8,7 +8,7 @@ def test_case(name, object):
     print("    OpenSCAD tree:")
     print(object.to_scad().to_tree().format(top_indent="        "))
 
-o1 = Cube([10, 10, 10])
+o1 = Cuboid([10, 10, 10])
 o2 = Cylinder(Z, 5, 5)
 o3 = Sphere(2)
 

@@ -1,4 +1,4 @@
-from cadlib.object.primitives import Cube, Cylinder, Sphere
+from cadlib.object.primitives import Cuboid, Cylinder, Sphere
 from cadlib.transform.primitives import RotateXyz, ScaleXyz, Translate
 from cadlib.util.vector import Z
 
@@ -13,7 +13,7 @@ def test_case(name, object):
     print(object.to_scad().to_code(top_indent="        "))
 
 
-o1 = Cube([10, 10, 10])
+o1 = Cuboid([10, 10, 10])
 o2 = Cylinder(Z, 5, 5)
 o3 = Sphere(2)
 

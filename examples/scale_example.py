@@ -1,6 +1,6 @@
 from cadlib.simple import *
 
-cube = cube(20, 15, 10)
+cube = cube(20, 15, 10) # TODO cube
 
 uniform = [
     scale(1),
@@ -20,7 +20,7 @@ groups = [uniform, xyz, axis_factor]
 assembly = union()
 for i, group in enumerate(groups):
     for j, tf in enumerate(group):
-        assembly = assembly + (tf * cube).forward(i*50).right(j*50)
+        assembly = assembly + (tf * cube).forward(i*50).right(j*50) # TODO cube
 
 
 render_to_file(assembly, "scale_example.scad")

@@ -2,7 +2,7 @@ from cadlib.util.vector import Vector
 from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
-from cadlib.object.primitives import Cube
+from cadlib.object.primitives import Cuboid
 from cadlib.util.number import to_number
 
 
@@ -27,7 +27,7 @@ class Plane(Object):
         return f"Plane with normal {self._normal} and offset {self._offset}"
 
     def to_scad(self):
-        return Cube([inf, inf, inf]) \
+        return Cuboid([inf, inf, inf]) \
             .translate([-inf / 2, -inf / 2, -inf]) \
             .up(self._offset) \
             .rotate(frm = Z, to = self._normal, ignore_ambiguity = True) \

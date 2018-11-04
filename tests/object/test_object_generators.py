@@ -1,16 +1,16 @@
 from cadlib.object.generators import *
-from cadlib.object.primitives import Cube, Cylinder, Plane, Slice, Sphere
+from cadlib.object.primitives import Cuboid, Cylinder, Plane, Slice, Sphere
 from cadlib.util import Vector, X, Y, Z
 from tests.unit_test import TestCase
 
 class TestObjectGenerators(TestCase):
     def test_csg_generators(self):
-        self.assertEqual(cube(1), Cube(1))
-        self.assertEqual(cube([1, 2, 3]), Cube([1, 2, 3]))
-        self.assertEqual(cube(1, 2, 3), Cube([1, 2, 3]))
-        with self.assertRaises(ValueError): cube(1, 2)
-        with self.assertRaises(ValueError): cube(1, 2, None)
-        with self.assertRaises(ValueError): cube(1, None, 2)
+        self.assertEqual(cuboid(1), Cuboid(1))
+        self.assertEqual(cuboid([1, 2, 3]), Cuboid([1, 2, 3]))
+        self.assertEqual(cuboid(1, 2, 3), Cuboid([1, 2, 3]))
+        with self.assertRaises(ValueError): cuboid(1, 2)
+        with self.assertRaises(ValueError): cuboid(1, 2, None)
+        with self.assertRaises(ValueError): cuboid(1, None, 2)
 
         self.assertEqual(cylinder(X, Y, r = 2), Cylinder(X, Y, r = 2))
         self.assertEqual(cylinder(X, 1, d = 3), Cylinder(X, 1, d = 3))

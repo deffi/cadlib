@@ -1,5 +1,5 @@
 from cadlib.object import Object, Transformed
-from cadlib.object.primitives import Sphere, Cube, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Cylinder
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives import Translate, ScaleXyz, ScaleUniform, ScaleAxisFactor, RotateXyz
 from cadlib.util.vector import Z
@@ -15,7 +15,7 @@ class TestObject(TestCase):
     ################
 
     def test_postfix_transform(self):
-        cube = Cube(11)
+        cube = Cuboid(11)
 
         # Vectors
         rv = [60, 34, 30]
@@ -40,7 +40,7 @@ class TestObject(TestCase):
         with self.assertRaises(TypeError): cube.transform(cube)
 
     def test_transform_shortcuts(self):
-        a = Cube(11)
+        a = Cuboid(11)
 
         self.assertEqual(a.up     (1), Transformed(Translate([ 0,  0,  1]), a))
         self.assertEqual(a.down   (2), Transformed(Translate([ 0,  0, -2]), a))
@@ -63,9 +63,9 @@ class TestObject(TestCase):
 
     def test_addition(self):
         a = Sphere(2)
-        b = Cube([10, 10, 10])
+        b = Cuboid([10, 10, 10])
         c = Cylinder(Z, 5, 5)
-        d = Cube(20)
+        d = Cuboid(20)
 
         self.assertEqual(   a +  b               , Union([a, b      ]))
         self.assertEqual(   c +  c               , Union([c, c      ]))
@@ -83,9 +83,9 @@ class TestObject(TestCase):
 
     def test_multiplication(self):
         a = Sphere(2)
-        b = Cube([10, 10, 10])
+        b = Cuboid([10, 10, 10])
         c = Cylinder(Z, 5, 5)
-        d = Cube(20)
+        d = Cuboid(20)
 
         self.assertEqual(    a  *  b             , Intersection([a, b      ]))
         self.assertEqual(    c  *  c             , Intersection([c, c      ]))
@@ -98,9 +98,9 @@ class TestObject(TestCase):
 
     def test_subtraction(self):
         a = Sphere(2)
-        b = Cube([10, 10, 10])
+        b = Cuboid([10, 10, 10])
         c = Cylinder(Z, 5, 5)
-        d = Cube(20)
+        d = Cuboid(20)
 
         # Difference is non-associative, so we get nested differences
         self.assertEqual(    a  -  b             , Difference([a, b      ]))
@@ -127,7 +127,7 @@ class TestObject(TestCase):
     def test_multiplication_with_object_and_transform(self):
         # Multiplication is used for both intersection (Object * Object) and transform (Transform * Object)
         a = Sphere(2)
-        b = Cube(3)
+        b = Cuboid(3)
         s = ScaleXyz(1, 2, -1)
         t = Translate([0, 0, 0])
 
@@ -138,7 +138,7 @@ class TestObject(TestCase):
 
     def test_invalid_operations(self):
         a = Sphere(2)
-        b = Cube([10, 10, 10])
+        b = Cuboid([10, 10, 10])
         s = ScaleUniform(1)
         t = Translate([0, 0, 0])
 
@@ -153,7 +153,7 @@ class TestObject(TestCase):
 
     def test_to_tree(self):
         a = Sphere(2)
-        b = Cube(3)
+        b = Cuboid(3)
         s = ScaleXyz(1, 2, -1)
         t = Translate([0, 0, 0])
 

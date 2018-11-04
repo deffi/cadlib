@@ -1,4 +1,4 @@
-from cadlib.object.primitives import Sphere, Cube, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Cylinder
 from cadlib.csg import Union
 from cadlib.scad import ScadObject
 from cadlib.util.vector import Z
@@ -10,9 +10,9 @@ class TestUnion(TestCase):
 
     def test_equality(self):
         sphere   = Sphere(11)
-        cube     = Cube([11, 22, 33])
+        cuboid   = Cuboid([11, 22, 33])
         cylinder = Cylinder(Z, 11, 22)
-        objects = [sphere, cube, cylinder]
+        objects = [sphere, cuboid, cylinder]
 
         # Same object
         self.assertEqualToItself(Union([]     ))
@@ -23,15 +23,15 @@ class TestUnion(TestCase):
         self.assertEqual(Union(objects), Union(objects))
 
         # Different objects
-        self.assertNotEqual(Union(objects       ), Union([sphere, cube]))
-        self.assertNotEqual(Union([cube, sphere]), Union([sphere, cube]))
+        self.assertNotEqual(Union(objects         ), Union([sphere, cuboid]))
+        self.assertNotEqual(Union([cuboid, sphere]), Union([sphere, cuboid]))
 
         # Equal objects from different specifications
         self.assertEqual(Union.empty(), Union([]))
 
     def test_to_scad(self):
         sphere   = Sphere(2)
-        cube     = Cube([10, 10, 10])
+        cube     = Cuboid([10, 10, 10])
         cylinder = Cylinder(Z, 5, 5)
 
         self.assertEqual(Union([sphere, cube, cylinder]).to_scad(),
@@ -46,7 +46,7 @@ class TestUnion(TestCase):
 
     def test_sum(self):
         sphere   = Sphere(2)
-        cube     = Cube([10, 10, 10])
+        cube     = Cuboid([10, 10, 10])
         cylinder = Cylinder(Z, 5, 5)
         objects = [sphere, cube, cylinder]
 
