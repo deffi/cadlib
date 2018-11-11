@@ -1,4 +1,4 @@
-from cadlib.object.primitives import Sphere, Cuboid, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Frustum
 from cadlib.csg import Difference
 from cadlib.scad import ScadObject
 from cadlib.util.vector import Z
@@ -11,7 +11,7 @@ class TestDifference(TestCase):
     def test_equality(self):
         sphere   = Sphere(11)
         cuboid   = Cuboid([11, 22, 33])
-        cylinder = Cylinder(Z, 11, 22)
+        cylinder = Frustum(0, Z, 11, 11)
         objects = [sphere, cuboid, cylinder]
 
         # Same object
@@ -32,7 +32,7 @@ class TestDifference(TestCase):
     def test_to_scad(self):
         sphere   = Sphere(2)
         cube     = Cuboid([10, 10, 10])
-        cylinder = Cylinder(Z, 5, 5)
+        cylinder = Frustum(0, Z, 11, 11)
 
         self.assertEqual(Difference([sphere, cube, cylinder]).to_scad(),
             ScadObject("difference", None, None, [

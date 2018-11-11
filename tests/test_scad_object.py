@@ -1,7 +1,7 @@
 from cadlib.scad import ScadObject, render_to_file
 from tests.unit_test import TestCase
 from cadlib.util.tree import Node
-from cadlib.object.primitives import Sphere, Cuboid, Cylinder
+from cadlib.object.primitives import Sphere, Cuboid, Frustum
 from tempfile import mkstemp
 import os
 
@@ -332,7 +332,7 @@ class TestScadObject(TestCase):
             ]))
 
     def test_render_to_file(self):
-        part = Sphere(0.6) + Cuboid([1, 2, 3]) - Cylinder([0, 0, 1], 4, r=0.5)
+        part = Sphere(0.6) + Cuboid([1, 2, 3]) - Frustum([0, 0, 0], [0, 0, 4], 0.5, 0.5)
 
         expected_file_name = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_expected.scad")
         actual_file_name   = os.path.join(os.path.dirname(__file__), "test_scad_object_render_to_file_actual.scad")
