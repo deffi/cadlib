@@ -81,8 +81,6 @@ class Vector:
     # TODO remove and rename convert2 to convert
     @classmethod
     def convert(cls, value, label = None, required_length = None):
-        # TODO support shortcut 0 together with required_length
-
         if not isinstance(value, (Vector, list, tuple)):
             raise TypeError("Invalid vector for {}: {}".format(label, value))
 
