@@ -1,5 +1,5 @@
 from cadlib.object.generators import *
-from cadlib.object.primitives import Cuboid, Cylinder, Plane, Slice, Sphere
+from cadlib.object.primitives import Cuboid, Frustum, Plane, Slice, Sphere
 from cadlib.util import Vector, X, Y, Z
 from tests.unit_test import TestCase
 
@@ -14,12 +14,10 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(ValueError): cuboid(1, None, 2)
 
     def test_frustum_generators(self):
-        pass
-
-
-    def test_cylinder_generators(self):
-        self.assertEqual(cylinder(X, Y, r = 2), Cylinder(X, Y, r = 2))
-        self.assertEqual(cylinder(X, 1, d = 3), Cylinder(X, 1, d = 3))
+        # Cylinder
+        self.assertEqual(cylinder(X, Y, r = 2), Frustum(X, Y, 2, 2)) # Base, cap, radius
+        self.assertEqual(cylinder(X, Y, d = 4), Frustum(X, Y, 2, 2)) # Base, cap, diameter
+        self.assertEqual(cylinder(X, 1, r = 2), Frustum(0, X, 2, 2)) # Direction, length, radius
 
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
