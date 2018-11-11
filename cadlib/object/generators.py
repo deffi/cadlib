@@ -22,13 +22,13 @@ def _get_radius(r, d):
 def _get_radii(r, d):
     # TODO check 2-tuple-of-numeric
     if both(r, d):
-        raise ValueError("radius and diameter cannot be specified together")
+        raise ValueError("radii and diameters cannot be specified together")
     elif r is not None:
         return r
     elif d is not None:
         return (x / 2 for x in d)
     else:
-        raise ValueError("radius or diameter must be specified")
+        raise ValueError("radii or diameters must be specified")
 
 
 def cuboid(size_or_x, y = None, z = None):
@@ -51,7 +51,7 @@ def cube(size):
     return Cuboid([size, size, size])
 
 
-def cylinder(direction_or_base, length_or_cap, *, r = None, d = None):
+def cylinder(direction_or_base, length_or_cap, r = None, d = None):
     # Signatures (convenience forms only):
     #   * cylinder (direction, length, radius)
     #   * cylinder (direction, length, d = diameter)
@@ -71,10 +71,10 @@ def cylinder(direction_or_base, length_or_cap, *, r = None, d = None):
         return Frustum(direction_or_base, length_or_cap, radius, radius)
 
     else:
-        raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
+        raise TypeError("Invalid call signature: length_or_cap must be a vector type or a number")
 
 
-def cone(direction_or_base, length_or_cap, *, r = None, d = None):
+def cone(direction_or_base, length_or_cap, r = None, d = None):
     # Signatures (convenience forms only):
     #   * cone (direction, length, radius)
     #   * cone (direction, length, d = diameter)
@@ -96,7 +96,7 @@ def cone(direction_or_base, length_or_cap, *, r = None, d = None):
     else:
         raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
 
-def frustum(direction_or_base, length_or_cap, *, r = None, d = None):
+def frustum(direction_or_base, length_or_cap, r = None, d = None):
     # Signatures (convenience forms only):
     #   * frustum (direction, length, radius)
     #   * frustum (direction, length, d = diameter)

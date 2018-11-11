@@ -42,6 +42,7 @@ class Frustum(Object):
 
     @classmethod
     def direction_length(cls, direction, length, base_radius, cap_radius):
+        direction = Vector.convert(direction, "direction", 3)
         # TODO ensure that direction is a vector (and test with tuple)
 
         # TODO test

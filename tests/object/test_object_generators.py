@@ -14,20 +14,45 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(ValueError): cuboid(1, None, 2)
 
     def test_frustum_generators(self):
-        # Cylinder
-        self.assertEqual(cylinder(X, Y, r = 2), Frustum(X, Y, 2, 2)) # Base, cap, radius
-        self.assertEqual(cylinder(X, Y, d = 4), Frustum(X, Y, 2, 2)) # Base, cap, diameter
-        self.assertEqual(cylinder(X, 1, r = 2), Frustum(0, X, 2, 2)) # Direction, length, radius
+        # Cylinder - base/cap
+        self.assertEqual(cylinder(X, Y,     2), Frustum(X, Y, 2, 2))
+        self.assertEqual(cylinder(X, Y, r = 2), Frustum(X, Y, 2, 2))
+        self.assertEqual(cylinder(X, Y, d = 4), Frustum(X, Y, 2, 2))
+        self.assertEqual(cylinder(0, Y,     2), Frustum(0, Y, 2, 2)) # 0 is allowed as base
+        # 0 is not allowed as cap because it would be interpreted as
+        # direction/length
 
-        # Cone
-        self.assertEqual(cone(X, Y, r = 2), Frustum(X, Y, 2, 0)) # Base, cap, radius
-        self.assertEqual(cone(X, Y, d = 4), Frustum(X, Y, 2, 0)) # Base, cap, diameter
-        self.assertEqual(cone(X, 1, r = 2), Frustum(0, X, 2, 0)) # Direction, length, radius
+        # Cylinder - direction/length
+        self.assertEqual(cylinder(X, 1,     2), Frustum(0, X, 2, 2))
+        self.assertEqual(cylinder(X, 1, r = 2), Frustum(0, X, 2, 2))
+        self.assertEqual(cylinder(X, 1, d = 4), Frustum(0, X, 2, 2))
 
-        # Frustum
-        self.assertEqual(frustum(X, Y, r = (2, 3)), Frustum(X, Y, 2, 3)) # Base, cap, radius
-        self.assertEqual(frustum(X, Y, d = (4, 6)), Frustum(X, Y, 2, 3)) # Base, cap, diameter
-        self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3)) # Direction, length, radius
+        # Cylinder - invalid
+        with self.assertRaises(TypeError) : cylinder(5              , 5, 1)    # First is not a vector
+        with self.assertRaises(TypeError) : cylinder(X              , "", 1)   # Second is not a vector or number
+        with self.assertRaises(ValueError): cylinder(X              , 5)       # Radius missing
+        with self.assertRaises(ValueError): cylinder(X              , 5, 1, 1) # Radius and diameter
+        with self.assertRaises(ValueError): cylinder(Vector(0, 0, 0), 5)       # Zero vector is not allowed as direction
+
+        # Cone - base/cap
+        self.assertEqual(cone(X, Y,     2), Frustum(X, Y, 2, 0))
+        self.assertEqual(cone(X, Y, r = 2), Frustum(X, Y, 2, 0))
+        self.assertEqual(cone(X, Y, d = 4), Frustum(X, Y, 2, 0))
+
+        # Cone - direction/length
+        self.assertEqual(cone(X, 1,     2), Frustum(0, X, 2, 0))
+        self.assertEqual(cone(X, 1, r = 2), Frustum(0, X, 2, 0))
+        self.assertEqual(cone(X, 1, d = 4), Frustum(0, X, 2, 0))
+
+        # Frustum - base/cap
+        self.assertEqual(frustum(X, Y,     (2, 3)), Frustum(X, Y, 2, 3))
+        self.assertEqual(frustum(X, Y, r = (2, 3)), Frustum(X, Y, 2, 3))
+        self.assertEqual(frustum(X, Y, d = (4, 6)), Frustum(X, Y, 2, 3))
+
+        # Frustum - direction/length
+        self.assertEqual(frustum(X, 1,     (2, 3)), Frustum(0, X, 2, 3))
+        self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3))
+        self.assertEqual(frustum(X, 1, d = (4, 6)), Frustum(0, X, 2, 3))
 
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
