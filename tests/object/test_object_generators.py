@@ -1,9 +1,27 @@
 from cadlib.object.generators import *
+from cadlib.object.generators import _get_radius, _get_radii
 from cadlib.object.primitives import Cuboid, Frustum, Plane, Slice, Sphere
 from cadlib.util import Vector, X, Y, Z
 from tests.unit_test import TestCase
 
 class TestObjectGenerators(TestCase):
+    def test_get_radius_helper(self):
+        self.assertEqual(_get_radius(r=1   , d=None), 1)
+        self.assertEqual(_get_radius(r=None, d=4   ), 2)
+
+        with self.assertRaises(ValueError): _get_radius(r=None, d=None)
+        with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
+
+    def test_get_radii_helper(self):
+        # TODO implement
+        pass
+        # self.assertEqual(_get_radius(r=1   , d=None), 1)
+        # self.assertEqual(_get_radius(r=None, d=4   ), 2)
+        #
+        # with self.assertRaises(ValueError): _get_radius(r=None, d=None)
+        # with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
+
+
     def test_cuboid_generators(self):
         self.assertEqual(cuboid(1), Cuboid(1))
         self.assertEqual(cuboid([1, 2, 3]), Cuboid([1, 2, 3]))

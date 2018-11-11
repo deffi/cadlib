@@ -2,24 +2,27 @@ from numbers import Number
 
 from cadlib.object.primitives import Cuboid, Frustum, Plane, Slice, Sphere
 from cadlib.util import both, neither
-from cadlib.util.number import to_number
+from cadlib.util.number import to_number2
 from cadlib.util import Vector
 
 __all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'slice', 'sphere']
 
 
 def _get_radius(r, d):
-    # TODO check numeric
+    # TODO also test callers
+
     if both(r, d):
         raise ValueError("radius and diameter cannot be specified together")
     elif r is not None:
-        return r
+        return to_number2(r, "radius")
     elif d is not None:
-        return d / 2
+        return to_number2(d, "diameter") / 2
     else:
         raise ValueError("radius or diameter must be specified")
 
 def _get_radii(r, d):
+    # TODO test directly and callers
+
     # TODO check 2-tuple-of-numeric
     if both(r, d):
         raise ValueError("radii and diameters cannot be specified together")
@@ -47,7 +50,7 @@ def cuboid(size_or_x, y = None, z = None):
 def cube(size):
     # Signatures (convenience forms only):
     #   * cube(size)
-    size = to_number(size, None, "size", [])
+    size = to_number2(size, "size")
     return Cuboid([size, size, size])
 
 
