@@ -5,7 +5,30 @@ from cadlib.util import both, neither
 from cadlib.util.number import to_number
 from cadlib.util import Vector
 
-__all__ = ['cuboid', 'cube', 'cylinder', 'plane', 'slice', 'sphere']
+__all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'slice', 'sphere']
+
+
+def _get_radius(r, d):
+    # TODO check numeric
+    if both(r, d):
+        raise ValueError("radius and diameter cannot be specified together")
+    elif r is not None:
+        return r
+    elif d is not None:
+        return d / 2
+    else:
+        raise ValueError("radius or diameter must be specified")
+
+def _get_radii(r, d):
+    # TODO check 2-tuple-of-numeric
+    if both(r, d):
+        raise ValueError("radius and diameter cannot be specified together")
+    elif r is not None:
+        return r
+    elif d is not None:
+        return (x / 2 for x in d)
+    else:
+        raise ValueError("radius or diameter must be specified")
 
 
 def cuboid(size_or_x, y = None, z = None):
@@ -20,27 +43,20 @@ def cuboid(size_or_x, y = None, z = None):
     else:
         raise ValueError("y and z can only be specified together")
 
+
 def cube(size):
+    # Signatures (convenience forms only):
+    #   * cube(size)
     size = to_number(size, None, "size", [])
     return Cuboid([size, size, size])
 
-def _get_radius(r, d):
-    if both(r, d):
-        raise ValueError("radius and diameter cannot be specified together")
-    elif r is not None:
-        return r
-    elif d is not None:
-        return d / 2
-    else:
-        raise ValueError("radius or diameter must be specified")
 
-
-def cylinder(direction_or_base, length_or_cap, r = None, d = None):
+def cylinder(direction_or_base, length_or_cap, *, r = None, d = None):
     # Signatures (convenience forms only):
-    #   * Cylinder (direction, length, radius)
-    #   * Cylinder (direction, length, d = diameter)
-    #   * Cylinder (base, cap, radius)
-    #   * Cylinder (base, cap, d = diameter)
+    #   * cylinder (direction, length, radius)
+    #   * cylinder (direction, length, d = diameter)
+    #   * cylinder (base, cap, radius)
+    #   * cylinder (base, cap, d = diameter)
 
     # Radius or diameter
     radius = _get_radius(r, d)
@@ -58,10 +74,56 @@ def cylinder(direction_or_base, length_or_cap, r = None, d = None):
         raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
 
 
+def cone(direction_or_base, length_or_cap, *, r = None, d = None):
+    # Signatures (convenience forms only):
+    #   * cone (direction, length, radius)
+    #   * cone (direction, length, d = diameter)
+    #   * cone (base, cap, radius)
+    #   * cone (base, cap, d = diameter)
+
+    # Radius or diameter
+    radius = _get_radius(r, d)
+
+    # length_or_base must be a vector or a number
+    if isinstance(length_or_cap, Number):
+        # Number - direction/length
+        return Frustum.direction_length(direction_or_base, length_or_cap, radius, 0)
+
+    elif isinstance(length_or_cap, (Vector, list, tuple)):
+        # Vector type - base/cap
+        return Frustum(direction_or_base, length_or_cap, radius, 0)
+
+    else:
+        raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
+
+def frustum(direction_or_base, length_or_cap, *, r = None, d = None):
+    # Signatures (convenience forms only):
+    #   * frustum (direction, length, radius)
+    #   * frustum (direction, length, d = diameter)
+    #   * frustum (base, cap, radius)
+    #   * frustum (base, cap, d = diameter)
+
+    # Radius or diameter
+    radii = _get_radii(r, d)
+
+    # length_or_base must be a vector or a number
+    if isinstance(length_or_cap, Number):
+        # Number - direction/length
+        return Frustum.direction_length(direction_or_base, length_or_cap, *radii)
+
+    elif isinstance(length_or_cap, (Vector, list, tuple)):
+        # Vector type - base/cap
+        return Frustum(direction_or_base, length_or_cap, *radii)
+
+    else:
+        raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
+
+
 def plane(normal, offset):
     return Plane(normal, offset)
 
 
+# TODO rename to layer? slice is a built-in
 def slice(normal, offset1, offset2):
     return Slice(normal, offset1, offset2)
 

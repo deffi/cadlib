@@ -19,6 +19,16 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cylinder(X, Y, d = 4), Frustum(X, Y, 2, 2)) # Base, cap, diameter
         self.assertEqual(cylinder(X, 1, r = 2), Frustum(0, X, 2, 2)) # Direction, length, radius
 
+        # Cone
+        self.assertEqual(cone(X, Y, r = 2), Frustum(X, Y, 2, 0)) # Base, cap, radius
+        self.assertEqual(cone(X, Y, d = 4), Frustum(X, Y, 2, 0)) # Base, cap, diameter
+        self.assertEqual(cone(X, 1, r = 2), Frustum(0, X, 2, 0)) # Direction, length, radius
+
+        # Frustum
+        self.assertEqual(frustum(X, Y, r = (2, 3)), Frustum(X, Y, 2, 3)) # Base, cap, radius
+        self.assertEqual(frustum(X, Y, d = (4, 6)), Frustum(X, Y, 2, 3)) # Base, cap, diameter
+        self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3)) # Direction, length, radius
+
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
         self.assertEqual(sphere(r = 2), Sphere(r = 2))

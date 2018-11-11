@@ -1,11 +1,9 @@
-# from numbers import Number
 from warnings import warn
 
 from cadlib.util import Vector, X, Y, Z
 from cadlib.object import Object
 from cadlib.scad import ScadObject
 from cadlib.transform.primitives import RotateFromTo, Translate
-# from cadlib.util import both
 from cadlib.util.number import to_number
 
 class Frustum(Object):
