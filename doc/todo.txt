@@ -105,6 +105,9 @@ Tests:
 Util:
 
 General:
+  * [Medium] In all constructors/generators, use Vector.valid_type and
+             Vector.convert and to_number
+  * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
   * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
 Library:

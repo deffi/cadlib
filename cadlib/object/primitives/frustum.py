@@ -4,48 +4,29 @@ from cadlib.util import Vector, X, Y, Z
 from cadlib.object import Object
 from cadlib.scad import ScadObject
 from cadlib.transform.primitives import RotateFromTo, Translate
-from cadlib.util.number import to_number
+from cadlib.util.number import to_number2
 
 class Frustum(Object):
     def __init__(self, base, cap, base_radius, cap_radius):
-        # base must be a vector type, or 0 as a shortcut for (0, 0, 0)
-        if isinstance(base, (Vector, list, tuple)):
-            # Vector type
-            self._base = Vector.convert(base, "base", 3)
-        elif base == 0:
-            # Zero
-            self._base = Vector(0, 0, 0)
-        else:
-            raise TypeError("base must be a vector type or 0")
+        # TODO don't allow?
+        if base == 0: base = (0, 0, 0)
+        if cap  == 0: cap  = (0, 0, 0)
+        self._base = Vector.convert2(base, "base", required_length=3)
+        self._cap  = Vector.convert2(cap , "cap" , required_length=3)
+        self._base_radius = to_number2(base_radius, "base_radius")
+        self._cap_radius  = to_number2(cap_radius , "cap_radius" )
 
-        # Dito for cap
-        # TODO all of this should be in Vector.valid/Vector.convert or something
-        if isinstance(cap, (Vector, list, tuple)):
-            # Vector type
-            self._cap = Vector.convert(cap, "cap", 3)
-        elif cap == 0:
-            # Zero
-            self._cap = Vector(0, 0, 0)
-        else:
-            raise TypeError("cap must be a vector type or 0")
-
-        if self._base == self._cap:
-            warn("length is 0")
-
-
-        if base_radius == cap_radius == 0:
-            warn("radius is 0")
-
-        # TODO verify that it's a number
-        self._base_radius = to_number(base_radius, None, "base_radius", [])
-        self._cap_radius  = to_number(cap_radius , None, "cap_radius" , [])
+        # Warn if the cap is equal to the base (zero length) or both radii are
+        # zero (zero thickness; note that it is allowed for *one* of the radii
+        # to be zero).
+        if self._base == self._cap:                    warn("length is 0")
+        if self._base_radius == self._cap_radius == 0: warn("radius is 0")
 
     @classmethod
     def direction_length(cls, direction, length, base_radius, cap_radius):
-        direction = Vector.convert(direction, "direction", 3)
-        # TODO ensure that direction is a vector (and test with tuple)
+        direction = Vector.convert2(direction, "direction", required_length=3)
+        length    = to_number2(length, "length")
 
-        # TODO test
         if direction.is_zero:
             raise ValueError("direction must be non-zero")
 

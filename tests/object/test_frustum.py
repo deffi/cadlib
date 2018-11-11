@@ -24,7 +24,11 @@ class TestFrustum(TestCase):
         with self.assertRaises(TypeError): Frustum(X, Y, 1, X) # Base radius is not a number
 
     def test_direction_length(self):
-        self.assertEqual(Frustum.direction_length(X, 5, 1, 2), Frustum(0, X*5, 1, 2))
+        self.assertEqual(Frustum.direction_length(X        , 5, 1, 2), Frustum(0, X*5, 1, 2))
+        self.assertEqual(Frustum.direction_length((1, 0, 0), 5, 1, 2), Frustum(0, X*5, 1, 2))
+
+        # Zero direction
+        with self.assertRaises(ValueError): Frustum.direction_length((0, 0, 0), 5, 1, 2)
 
         # Zero size
         with self.assertWarnsRegex(UserWarning, r'length is 0'): Frustum.direction_length(X, 0, 1, 2)
