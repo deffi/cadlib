@@ -19,6 +19,14 @@ def to_list_of_numbers(value, label = None, required_length = None):
     return list(value)
 
 
+def to_number2(value, label = None):
+    if isinstance(value, Number):
+        return value
+    else:
+        raise TypeError(f"Invalid {label}: {value!r} ({type(value)}")
+
+
+# TODO remove and rename to_number2 to to_number
 def to_number(value, default, label, default_values = [None]):
     if value in default_values:
         return default
