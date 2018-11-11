@@ -33,6 +33,60 @@ class TestVector(TestCase):
         self.assertEqual(Vector.zero(2).values, [0, 0])
         self.assertEqual(Vector.zero(3).values, [0, 0, 0])
 
+    def test_valid_type(self):
+        self.assertTrue(Vector.valid_type(Vector(1, 2, 3)))
+        self.assertTrue(Vector.valid_type((1, 2, 3)))
+        self.assertTrue(Vector.valid_type([1, 2, 3]))
+
+        self.assertFalse(Vector.valid_type(0))
+        self.assertFalse(Vector.valid_type(1))
+        self.assertFalse(Vector.valid_type("0"))
+
+    def test_convert2(self):
+        # Regular call without length check
+        self.assertEqual(Vector.convert2(Vector(1, 2, 3), "dummy"), Vector(1, 2, 3)) # From Vector
+        self.assertEqual(Vector.convert2(      [1, 2, 3], "dummy"), Vector(1, 2, 3)) # From list
+        self.assertEqual(Vector.convert2(      (1, 2, 3), "dummy"), Vector(1, 2, 3)) # From tuple
+
+        # Calling with a vector does not construct a new vector
+        v = Vector(1, 2, 3)
+        self.assertIs(Vector.convert2(v, "dummy"), v)
+
+        # Empty
+        self.assertEqual(Vector.convert2([], "dummy"), Vector())
+
+        # Length check
+        self.assertEqual(                   Vector.convert2([1, 2, 3], "dummy", required_length=3), Vector(1, 2, 3)) # Success
+        with self.assertRaises(ValueError): Vector.convert2([1, 2, 3], "dummy", required_length=4)                   # Failure
+
+        # Invalid values
+        with self.assertRaises(TypeError ): Vector.convert2(None       , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert2(1          , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert2(""         , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert2("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert2([1, 2, "3"], "dummy", None)
+
+
+    def test_convert(self):
+        # Regular call without length check
+        self.assertEqual(Vector.convert(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
+        self.assertEqual(Vector.convert(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
+        self.assertEqual(Vector.convert(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
+
+        # Empty
+        self.assertEqual(Vector.convert([], "dummy", None), Vector())
+
+        # Length check
+        self.assertEqual(                   Vector.convert([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
+        with self.assertRaises(ValueError): Vector.convert([1, 2, 3], "dummy", 4)                   # Failure
+
+        # Invalid values
+        with self.assertRaises(TypeError ): Vector.convert(None       , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert(1          , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert(""         , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert("123"      , "dummy", None)
+        with self.assertRaises(TypeError ): Vector.convert([1, 2, "3"], "dummy", None)
+
 
     ################
     ## Properties ##
@@ -474,28 +528,3 @@ class TestVector(TestCase):
         self.assertEqual(Vector(1, 2, 3).replace(0, 1), Vector(1, 2, 3))
         self.assertEqual(Vector(0, 0, 3).replace(0, 1), Vector(1, 1, 3))
         self.assertEqual(Vector(1, 2, 3).replace(1, 0).replace(2, 0), Vector(0, 0, 3))
-
-
-    #############
-    ## Helpers ##
-    #############
-
-    def test_convert(self):
-        # Regular call without length check
-        self.assertEqual(Vector.convert(Vector(1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From Vector
-        self.assertEqual(Vector.convert(      [1, 2, 3], "dummy", None), Vector(1, 2, 3)) # From list
-        self.assertEqual(Vector.convert(      (1, 2, 3), "dummy", None), Vector(1, 2, 3)) # From tuple
-
-        # Empty
-        self.assertEqual(Vector.convert([], "dummy", None), Vector())
-
-        # Length check
-        self.assertEqual(                   Vector.convert([1, 2, 3], "dummy", 3), Vector(1, 2, 3)) # Success
-        with self.assertRaises(ValueError): Vector.convert([1, 2, 3], "dummy", 4)                   # Failure
-
-        # Invalid values
-        with self.assertRaises(TypeError ): Vector.convert(None       , "dummy", None)
-        with self.assertRaises(TypeError ): Vector.convert(1          , "dummy", None)
-        with self.assertRaises(TypeError ): Vector.convert(""         , "dummy", None)
-        with self.assertRaises(TypeError ): Vector.convert("123"      , "dummy", None)
-        with self.assertRaises(TypeError ): Vector.convert([1, 2, "3"], "dummy", None)

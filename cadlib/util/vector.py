@@ -57,6 +57,29 @@ class Vector:
         return cls(*values)
 
     @classmethod
+    def valid_type(cls, value):
+        return isinstance(value, (Vector, list, tuple))
+
+    @classmethod
+    def convert2(cls, value, label, *, required_length = None):
+        # Make sure the type can be converted to a vector
+        if not isinstance(value, (Vector, list, tuple)):
+            raise TypeError(f"Invalid vector for {label}: {value}")
+
+        # If a required length is specified, check that the length is correct
+        if required_length is not None and len(value) != required_length:
+            raise ValueError(f"Invalid length for {label}, must be {required_length}")
+
+        # We can return vectors directly
+        if isinstance(value, Vector):
+            return value
+
+        # All others, we convert
+        return Vector(*value)
+
+
+    # TODO remove and rename convert2 to convert
+    @classmethod
     def convert(cls, value, label = None, required_length = None):
         # TODO support shortcut 0 together with required_length
 
