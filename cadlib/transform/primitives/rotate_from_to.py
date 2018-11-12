@@ -6,8 +6,8 @@ from cadlib.transform.primitives import RotateAxisAngle, RotateXyz
 
 class RotateFromTo(Transform):
     def __init__(self, frm, to, ignore_ambiguity = False):
-        frm = Vector.convert2(frm, "frm", required_length=3)
-        to  = Vector.convert2(to , "to" , required_length=3)
+        frm = Vector.convert(frm, "frm", required_length=3)
+        to  = Vector.convert(to, "to", required_length=3)
 
         if frm.is_zero:
             raise ValueError("frm may not be zero-length")

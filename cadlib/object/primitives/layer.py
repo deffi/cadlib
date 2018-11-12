@@ -10,7 +10,7 @@ from cadlib.util.number import to_number
 
 class Layer(Object):
     def __init__(self, normal, offset1, offset2):
-        normal = Vector.convert2(normal, "normal", required_length=3)
+        normal = Vector.convert(normal, "normal", required_length=3)
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 

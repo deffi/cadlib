@@ -11,8 +11,8 @@ class Frustum(Object):
         # TODO don't allow?
         if base == 0: base = (0, 0, 0)
         if cap  == 0: cap  = (0, 0, 0)
-        self._base = Vector.convert2(base, "base", required_length=3)
-        self._cap  = Vector.convert2(cap , "cap" , required_length=3)
+        self._base = Vector.convert(base, "base", required_length=3)
+        self._cap  = Vector.convert(cap, "cap", required_length=3)
         self._base_radius = to_number2(base_radius, "base_radius")
         self._cap_radius  = to_number2(cap_radius , "cap_radius" )
 
@@ -24,7 +24,7 @@ class Frustum(Object):
 
     @classmethod
     def direction_length(cls, direction, length, base_radius, cap_radius):
-        direction = Vector.convert2(direction, "direction", required_length=3)
+        direction = Vector.convert(direction, "direction", required_length=3)
         length    = to_number2(length, "length")
 
         if direction.is_zero:

@@ -61,7 +61,7 @@ class Vector:
         return isinstance(value, (Vector, list, tuple))
 
     @classmethod
-    def convert2(cls, value, label, *, required_length = None):
+    def convert(cls, value, label, *, required_length = None):
         # Make sure the type can be converted to a vector
         if not isinstance(value, (Vector, list, tuple)):
             raise TypeError(f"Invalid vector for {label}: {value}")
