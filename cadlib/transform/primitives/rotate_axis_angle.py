@@ -3,7 +3,7 @@ import math
 from cadlib.util import Vector, Matrix, degree
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
-from cadlib.util.number import to_number2
+from cadlib.util.number import to_number
 
 class RotateAxisAngle(Transform):
     def __init__(self, axis, angle = None):
@@ -12,7 +12,7 @@ class RotateAxisAngle(Transform):
             raise ValueError("axis may not be zero-length")
 
         self._axis  = axis
-        self._angle = to_number2(angle, "angle", default=self._axis.length)
+        self._angle = to_number(angle, "angle", default=self._axis.length)
 
     def __eq__(self, other):
         if isinstance(other, RotateAxisAngle):

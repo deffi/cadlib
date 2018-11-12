@@ -2,12 +2,12 @@ from warnings import warn
 
 from cadlib.object import Object
 from cadlib.scad import ScadObject
-from cadlib.util.number import to_number2
+from cadlib.util.number import to_number
 
 
 class Sphere(Object):
     def __init__(self, r):
-        self._radius = to_number2(r)
+        self._radius = to_number(r)
 
         if self._radius == 0: warn("radius is 0")
 

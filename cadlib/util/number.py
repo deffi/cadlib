@@ -19,7 +19,7 @@ def to_list_of_numbers(value, label = None, required_length = None):
     return list(value)
 
 
-def to_number2(value, label = None, *, default = None):
+def to_number(value, label = None, *, default = None):
     if isinstance(value, Number):
         return value
     elif value is None and default is not None:

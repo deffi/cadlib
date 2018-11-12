@@ -3,14 +3,14 @@ from warnings import warn
 from cadlib.util import Matrix
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
-from cadlib.util.number import to_number2
+from cadlib.util.number import to_number
 
 
 class ScaleXyz(Transform):
     def __init__(self, x, y, z):
-        x = to_number2(x, "x")
-        y = to_number2(y, "y")
-        z = to_number2(z, "z")
+        x = to_number(x, "x")
+        y = to_number(y, "y")
+        z = to_number(z, "z")
 
         if x == 0: warn("x is 0")
         if y == 0: warn("y is 0")
