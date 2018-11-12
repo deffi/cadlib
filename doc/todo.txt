@@ -25,6 +25,9 @@ Object:
                * Are we supposed to do Pipe+Hole or Pipe-Hole?
                * Can we do Block - (Pipe +- Hole)?
                * Is Hole * Object defined?
+  * [Low]    Maybe Object classes should not do the conversion to number/vector
+             but instead accept only valid numbers/vectors, and the conversion
+             be done in the generators
 
 Primitives:
   * [Medium] More primitives: cone
