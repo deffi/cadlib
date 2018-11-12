@@ -27,11 +27,10 @@ class TestNumber(unittest.TestCase):
         self.assertEqual(to_number(42, "dummy"), 42) # Int
         self.assertEqual(to_number(4.2, "dummy"), 4.2) # Float
 
+        # Default
+        self.assertEqual(to_number(1   , "dummy", default=999), 1)
         self.assertEqual(to_number(None, "dummy", default=999), 999) # Default value
 
-        # TODO re-enable or remove
-        #with self.assertRaises(TypeError): to_number2(None, 999, "dummy", []) # No default value
-
-        # Invalid values
+        # Invalid values (a default does not help)
         with self.assertRaises(TypeError): to_number("", "dummy", default=999)
         with self.assertRaises(TypeError): to_number([], "dummy", default=999)

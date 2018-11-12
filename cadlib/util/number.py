@@ -23,7 +23,6 @@ def to_number(value, label = None, *, default = None):
     if isinstance(value, Number):
         return value
     elif value is None and default is not None:
-        # TODO test
         return default
     else:
         raise TypeError(f"Invalid {label}: {value!r} ({type(value)}")
