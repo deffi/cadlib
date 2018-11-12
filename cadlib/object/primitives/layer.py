@@ -8,7 +8,7 @@ from cadlib.object.primitives import Cuboid
 from cadlib.util.number import to_number
 
 
-class Slice(Object):
+class Layer(Object):
     def __init__(self, normal, offset1, offset2):
         normal = Vector.convert(normal, 3)
         if normal.is_zero:
@@ -24,17 +24,17 @@ class Slice(Object):
         self._offset2 = offset2
 
     def __eq__(self, other):
-        if not isinstance(other, Slice): return False
+        if not isinstance(other, Layer): return False
 
         return other._normal == self._normal \
            and other._offset1 == self._offset1 \
            and other._offset2 == self._offset2
 
     def __repr__(self):
-        return(f"Slice({self._normal!r}, {self._offset1!r}, {self._offset2!r})")
+        return(f"Layer({self._normal!r}, {self._offset1!r}, {self._offset2!r})")
 
     def __str__(self):
-        return f"Slice with normal {self._normal} from {self._offset1} to {self._offset2}"
+        return f"Layer with normal {self._normal} from {self._offset1} to {self._offset2}"
 
     def to_scad(self):
         o1 = min(self._offset1, self._offset2)

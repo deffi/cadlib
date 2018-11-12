@@ -1,6 +1,6 @@
 from cadlib.object.generators import *
 from cadlib.object.generators import _get_radius, _get_radii
-from cadlib.object.primitives import Cuboid, Frustum, Plane, Slice, Sphere
+from cadlib.object.primitives import Cuboid, Frustum, Plane, Layer, Sphere
 from cadlib.util import Vector, X, Y, Z
 from tests.unit_test import TestCase
 
@@ -105,5 +105,5 @@ class TestObjectGenerators(TestCase):
     def test_plane_generators(self):
         self.assertEqual(plane(X, 1), Plane(X, 1))
 
-    def test_slice_generators(self):
-        self.assertEqual(slice(X, 1, 2), Slice(X, 1, 2))
+    def test_layer_generators(self):
+        self.assertEqual(layer(X, 1, 2), Layer(X, 1, 2))

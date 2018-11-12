@@ -1,5 +1,5 @@
 from .cuboid import Cuboid
 from .plane import Plane
-from .slice import Slice
+from .layer import Layer
 from .sphere import Sphere
 from .frustum import Frustum

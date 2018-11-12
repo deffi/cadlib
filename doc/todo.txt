@@ -71,7 +71,7 @@ Scad:
   * [Low]    We should be able to compare SCAD objects independent of union/intersection order, so we can write unit
              tests for part/hole
   * [Low]    Remove null translates/scales/rotates (e. g. Plane(Z, 0))
-  * [Low]    Render with SCAD function: rotate_from_to, Plane, Slice. This will make it possible to use symblic
+  * [Low]    Render with SCAD function: rotate_from_to, Plane, Layer. This will make it possible to use symblic
              constants
   * [Low]    Modifiers: %background, #debug, !root, *disable
   * [Low]    Colors (RGBA)

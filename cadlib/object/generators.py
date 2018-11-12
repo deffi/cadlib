@@ -1,11 +1,11 @@
 from numbers import Number
 
-from cadlib.object.primitives import Cuboid, Frustum, Plane, Slice, Sphere
+from cadlib.object.primitives import Cuboid, Frustum, Plane, Layer, Sphere
 from cadlib.util import both, neither
 from cadlib.util.number import to_number2
 from cadlib.util import Vector
 
-__all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'slice', 'sphere']
+__all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'layer', 'sphere']
 
 
 def _get_radius(r, d):
@@ -131,9 +131,8 @@ def plane(normal, offset):
     return Plane(normal, offset)
 
 
-# TODO rename to layer? slice is a built-in
-def slice(normal, offset1, offset2):
-    return Slice(normal, offset1, offset2)
+def layer(normal, offset1, offset2):
+    return Layer(normal, offset1, offset2)
 
 
 def sphere(r = None, d = None):
