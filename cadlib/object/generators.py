@@ -23,13 +23,22 @@ def _get_radius(r, d):
 def _get_radii(r, d):
     # TODO test directly and callers
 
-    # TODO check 2-tuple-of-numeric
     if both(r, d):
         raise ValueError("radii and diameters cannot be specified together")
     elif r is not None:
-        return r
+        if not isinstance(r, tuple):
+            raise TypeError("r must be a tuple")
+        elif len(r) != 2:
+            raise ValueError("r must have two values")
+        else:
+            return r
     elif d is not None:
-        return (x / 2 for x in d)
+        if not isinstance(d, tuple):
+            raise TypeError("d must be a tuple")
+        elif len(d) != 2:
+            raise ValueError("d must have two values")
+        else:
+            return tuple(x/2 for x in d)
     else:
         raise ValueError("radii or diameters must be specified")
 
@@ -133,4 +142,5 @@ def slice(normal, offset1, offset2):
 
 def sphere(r = None, d = None):
     # TODO Sphere construction like Frustum
+    # TODO Then use for "applied" test of _get_radius
     return Sphere(r, d)

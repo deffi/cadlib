@@ -13,13 +13,17 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
 
     def test_get_radii_helper(self):
-        # TODO implement
-        pass
-        # self.assertEqual(_get_radius(r=1   , d=None), 1)
-        # self.assertEqual(_get_radius(r=None, d=4   ), 2)
-        #
-        # with self.assertRaises(ValueError): _get_radius(r=None, d=None)
-        # with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
+        self.assertEqual(_get_radii(r=(1, 2), d=None  ), (1, 2))
+        self.assertEqual(_get_radii(r=None  , d=(4, 6)), (2, 3))
+
+        with self.assertRaises(ValueError): _get_radii(r=None  , d=None  )
+        with self.assertRaises(ValueError): _get_radii(r=(1, 2), d=(4, 6))
+
+        with self.assertRaises(ValueError): _get_radii(r=(1, 2, 3), d=None     )
+        with self.assertRaises(ValueError): _get_radii(r=None     , d=(4, 6, 8))
+
+        with self.assertRaises(TypeError): _get_radii(r=1     , d=None  )
+        with self.assertRaises(TypeError): _get_radii(r=None  , d=4     )
 
 
     def test_cuboid_generators(self):
@@ -46,11 +50,11 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cylinder(X, 1, d = 4), Frustum(0, X, 2, 2))
 
         # Cylinder - invalid
-        with self.assertRaises(TypeError) : cylinder(5              , 5, 1)    # First is not a vector
-        with self.assertRaises(TypeError) : cylinder(X              , "", 1)   # Second is not a vector or number
-        with self.assertRaises(ValueError): cylinder(X              , 5)       # Radius missing
-        with self.assertRaises(ValueError): cylinder(X              , 5, 1, 1) # Radius and diameter
-        with self.assertRaises(ValueError): cylinder(Vector(0, 0, 0), 5)       # Zero vector is not allowed as direction
+        with self.assertRaises(TypeError) : cylinder(5              , 5     , 1)    # First is not a vector
+        with self.assertRaises(TypeError) : cylinder(X              , ""    , 1)    # Second is not a vector or number
+        with self.assertRaises(ValueError): cylinder(X              , 5)            # Radius missing
+        with self.assertRaises(ValueError): cylinder(X              , 5     , 1, 1) # Radius and diameter
+        with self.assertRaises(ValueError): cylinder(Vector(0, 0, 0), 5)            # Zero vector is not allowed as direction
 
         # Cone - base/cap
         self.assertEqual(cone(X, Y,     2), Frustum(X, Y, 2, 0))
