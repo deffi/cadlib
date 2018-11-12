@@ -5,7 +5,7 @@ from cadlib.transform import Transform
 
 class Translate(Transform):
     def __init__(self, vector):
-        self._vector = Vector.convert(vector, "vector", 3)
+        self._vector = Vector.convert2(vector, "vector", required_length=3)
 
     def __eq__(self, other):
         return isinstance(other, Translate) and other._vector == self._vector

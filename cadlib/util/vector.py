@@ -78,21 +78,6 @@ class Vector:
         return Vector(*value)
 
 
-    # TODO remove and rename convert2 to convert
-    @classmethod
-    def convert(cls, value, label = None, required_length = None):
-        if not isinstance(value, (Vector, list, tuple)):
-            raise TypeError("Invalid vector for {}: {}".format(label, value))
-
-        if required_length is not None and len(value) != required_length:
-            raise ValueError("Invalid length for {}, must be {}".format(label, required_length))
-
-        if isinstance(value, Vector):
-            return value
-        else:
-            return Vector(*value)
-
-
     ################
     ## Properties ##
     ################
