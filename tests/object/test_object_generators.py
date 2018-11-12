@@ -76,10 +76,31 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3))
         self.assertEqual(frustum(X, 1, d = (4, 6)), Frustum(0, X, 2, 3))
 
+        # Frustum erroneous (only a single radius/diameter)
+        with self.assertRaises(TypeError): frustum(X, 1,     2)
+        with self.assertRaises(TypeError): frustum(X, 1, r = 2)
+        with self.assertRaises(TypeError): frustum(X, 1, d = 4)
+
+        # Errors caught by _get_radii
+        with self.assertRaises(ValueError): frustum(X, 1, r=(2, 3), d=(4, 6))  # Both radius and diameter
+        with self.assertRaises(ValueError): frustum(X, 1)                      # Neither radius nor diameter
+        with self.assertRaises(ValueError): frustum(X, 1, r = (2, 3, 4)) # Too many radii
+        with self.assertRaises(ValueError): frustum(X, 1, d = (4, 6, 8)) # Too many diameters
+        with self.assertRaises(ValueError): frustum(X, 1, r = (2, )) # Too few radii
+        with self.assertRaises(ValueError): frustum(X, 1, d = (4, )) # Too few diameters
+
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
         self.assertEqual(sphere(r = 2), Sphere(r = 2))
         self.assertEqual(sphere(d = 2), Sphere(r = 1))
+
+        # Invalid
+        with self.assertRaises(TypeError): sphere(r = "2")
+        with self.assertRaises(TypeError): sphere(d = "2")
+
+        # Errors caught by _get_radius
+        with self.assertRaises(ValueError): sphere(r=2, d=2)  # Both radius and diameter
+        with self.assertRaises(ValueError): sphere()          # Neither radius nor diameter
 
     def test_plane_generators(self):
         self.assertEqual(plane(X, 1), Plane(X, 1))

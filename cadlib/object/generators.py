@@ -9,8 +9,6 @@ __all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'slice', 's
 
 
 def _get_radius(r, d):
-    # TODO also test callers
-
     if both(r, d):
         raise ValueError("radius and diameter cannot be specified together")
     elif r is not None:
@@ -21,8 +19,6 @@ def _get_radius(r, d):
         raise ValueError("radius or diameter must be specified")
 
 def _get_radii(r, d):
-    # TODO test directly and callers
-
     if both(r, d):
         raise ValueError("radii and diameters cannot be specified together")
     elif r is not None:
@@ -141,6 +137,5 @@ def slice(normal, offset1, offset2):
 
 
 def sphere(r = None, d = None):
-    # TODO Then use for "applied" test of _get_radius
     r = _get_radius(r, d)
     return Sphere(r)
