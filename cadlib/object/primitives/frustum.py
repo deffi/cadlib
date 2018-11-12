@@ -12,7 +12,7 @@ class Frustum(Object):
         if base == 0: base = (0, 0, 0)
         if cap  == 0: cap  = (0, 0, 0)
         self._base = Vector.convert(base, "base", required_length=3)
-        self._cap  = Vector.convert(cap, "cap", required_length=3)
+        self._cap  = Vector.convert(cap , "cap" , required_length=3)
         self._base_radius = to_number2(base_radius, "base_radius")
         self._cap_radius  = to_number2(cap_radius , "cap_radius" )
 

@@ -2,7 +2,7 @@ from warnings import warn
 
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform
-from cadlib.util.number import to_number
+from cadlib.util.number import to_number2
 from cadlib.util import Vector
 from cadlib.util.vector import X, Y, Z
 from cadlib.transform.primitives import ScaleXyz, RotateFromTo
@@ -14,7 +14,7 @@ class ScaleAxisFactor(Transform):
             raise ValueError("axis may not be zero-length")
 
         self._axis   = axis
-        self._factor = to_number(factor, self._axis.length, "factor")
+        self._factor = to_number2(factor, "factor", default=self._axis.length)
 
         if self._factor == 0: warn("factor is 0")
 

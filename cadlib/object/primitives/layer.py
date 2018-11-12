@@ -5,7 +5,7 @@ from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
 from cadlib.object.primitives import Cuboid
-from cadlib.util.number import to_number
+from cadlib.util.number import to_number2
 
 
 class Layer(Object):
@@ -14,8 +14,8 @@ class Layer(Object):
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 
-        offset1 = to_number(offset1, None, "offset1", [])
-        offset2 = to_number(offset2, None, "offset1", [])
+        offset1 = to_number2(offset1, "offset1")
+        offset2 = to_number2(offset2, "offset2")
 
         if offset1 == offset2: warn("offsets are equal")
 
