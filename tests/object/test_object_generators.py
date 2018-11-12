@@ -79,7 +79,7 @@ class TestObjectGenerators(TestCase):
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
         self.assertEqual(sphere(r = 2), Sphere(r = 2))
-        self.assertEqual(sphere(d = 2), Sphere(d = 2))
+        self.assertEqual(sphere(d = 2), Sphere(r = 1))
 
     def test_plane_generators(self):
         self.assertEqual(plane(X, 1), Plane(X, 1))

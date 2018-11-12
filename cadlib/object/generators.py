@@ -141,6 +141,6 @@ def slice(normal, offset1, offset2):
 
 
 def sphere(r = None, d = None):
-    # TODO Sphere construction like Frustum
     # TODO Then use for "applied" test of _get_radius
-    return Sphere(r, d)
+    r = _get_radius(r, d)
+    return Sphere(r)
