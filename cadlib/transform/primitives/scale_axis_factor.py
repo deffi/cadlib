@@ -20,9 +20,9 @@ class ScaleAxisFactor(Transform):
 
 
     def __eq__(self, other):
-        return isinstance(other, ScaleAxisFactor) \
-            and other._axis == self._axis \
-            and other._factor == self._factor
+        return (isinstance(other, ScaleAxisFactor)
+            and other._axis   == self._axis
+            and other._factor == self._factor)
 
     def __str__(self):
         return f"Scale by {self._factor} along {self._axis}"

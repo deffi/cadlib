@@ -18,7 +18,9 @@ class Plane(Object):
         self._offset = offset
 
     def __eq__(self, other):
-        return isinstance(other, Plane) and other._normal == self._normal and other._offset == self._offset
+        return (isinstance(other, Plane)
+            and other._normal == self._normal
+            and other._offset == self._offset)
 
     def __repr__(self):
         return f"Plane({self._normal!r}, {self._offset!r})"

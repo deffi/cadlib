@@ -24,11 +24,10 @@ class Layer(Object):
         self._offset2 = offset2
 
     def __eq__(self, other):
-        if not isinstance(other, Layer): return False
-
-        return other._normal == self._normal \
-           and other._offset1 == self._offset1 \
-           and other._offset2 == self._offset2
+        return (isinstance(other, Layer)
+            and other._normal  == self._normal
+            and other._offset1 == self._offset1
+            and other._offset2 == self._offset2)
 
     def __repr__(self):
         return(f"Layer({self._normal!r}, {self._offset1!r}, {self._offset2!r})")

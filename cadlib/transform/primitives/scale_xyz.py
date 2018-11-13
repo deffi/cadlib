@@ -19,7 +19,8 @@ class ScaleXyz(Transform):
         self._xyz = [x, y, z]
 
     def __eq__(self, other):
-        return isinstance(other, ScaleXyz) and other._xyz == self._xyz
+        return (isinstance(other, ScaleXyz)
+            and other._xyz == self._xyz)
 
     def __repr__(self):
         x, y, z = self._xyz

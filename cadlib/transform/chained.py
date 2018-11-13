@@ -19,7 +19,8 @@ class Chained(Transform):
         return self._transforms
 
     def __eq__(self, other):
-        return isinstance(other, Chained) and other._transforms == self._transforms
+        return (isinstance(other, Chained)
+            and other._transforms == self._transforms)
 
     def __mul__(self, other):
         if isinstance(other, Chained):

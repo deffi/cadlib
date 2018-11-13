@@ -8,7 +8,8 @@ class Translate(Transform):
         self._vector = Vector.convert(vector, "vector", required_length=3)
 
     def __eq__(self, other):
-        return isinstance(other, Translate) and other._vector == self._vector
+        return (isinstance(other, Translate)
+            and other._vector == self._vector)
 
     def __str__(self):
         return "Translate by {}".format(self._vector)

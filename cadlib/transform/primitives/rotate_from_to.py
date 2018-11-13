@@ -23,10 +23,9 @@ class RotateFromTo(Transform):
         self._to  = to
 
     def __eq__(self, other):
-        if isinstance(other, RotateFromTo):
-            return self._frm == other._frm and self._to == other._to
-        else:
-            return False
+        return (isinstance(other, RotateFromTo)
+            and self._frm == other._frm
+            and self._to  == other._to)
 
     def __str__(self):
         return "Rotate from {} to {}".format(self._frm, self._to)

@@ -13,7 +13,8 @@ class ScaleUniform(Transform):
 
 
     def __eq__(self, other):
-        return isinstance(other, ScaleUniform) and other._factor == self._factor
+        return (isinstance(other, ScaleUniform)
+            and other._factor == self._factor)
 
     def __str__(self):
         return "Scale by {}".format(self._factor)

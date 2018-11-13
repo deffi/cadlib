@@ -15,10 +15,9 @@ class RotateAxisAngle(Transform):
         self._angle = to_number(angle, "angle", default=self._axis.length)
 
     def __eq__(self, other):
-        if isinstance(other, RotateAxisAngle):
-            return self._axis == other._axis and self._angle == other._angle
-        else:
-            return False
+        return (isinstance(other, RotateAxisAngle)
+            and self._axis  == other._axis
+            and self._angle == other._angle)
 
     def __str__(self):
         return "Rotate by {}° around {}".format(self._angle, self._axis)

@@ -61,13 +61,12 @@ class ScadObject():
 
 
     def __eq__(self, other):
-        if not isinstance(other, ScadObject): return False
-        if other._id            != self._id           : return False
-        if other._parameters    != self._parameters   : return False
-        if other._kw_parameters != self._kw_parameters: return False
-        if other._children      != self._children     : return False
-        if other._comment       != self._comment      : return False
-        return True
+        return (isinstance(other, ScadObject)
+            and other._id            == self._id
+            and other._parameters    == self._parameters
+            and other._kw_parameters == self._kw_parameters
+            and other._children      == self._children
+            and other._comment       == self._comment)
 
     def __repr__(self):
         if self._comment is None:

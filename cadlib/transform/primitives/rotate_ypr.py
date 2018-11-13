@@ -14,10 +14,8 @@ class RotateYpr(Transform):
         self._ypr = [yaw, pitch, roll]
 
     def __eq__(self, other):
-        if isinstance(other, RotateYpr):
-            return self._ypr == other._ypr
-        else:
-            return False
+        return (isinstance(other, RotateYpr)
+            and self._ypr == other._ypr)
 
     def __str__(self):
         y, p, r = self._ypr

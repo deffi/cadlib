@@ -20,7 +20,8 @@ class Cuboid(Object):
             raise ValueError("Invalid size: {}".format(size))
 
     def __eq__(self, other):
-        return isinstance(other, Cuboid) and other._size == self._size
+        return (isinstance(other, Cuboid)
+            and other._size == self._size)
 
     def __repr__(self):
         return f"Cuboid({self._size!r})"

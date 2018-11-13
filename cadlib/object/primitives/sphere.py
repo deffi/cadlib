@@ -12,7 +12,8 @@ class Sphere(Object):
         if self._radius == 0: warn("radius is 0")
 
     def __eq__(self, other):
-        return isinstance(other, Sphere) and other._radius == self._radius
+        return (isinstance(other, Sphere)
+            and other._radius == self._radius)
 
     def __repr__(self):
         return f"Sphere(r={self._radius!r})"

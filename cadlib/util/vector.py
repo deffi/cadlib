@@ -107,10 +107,8 @@ class Vector:
     ################
 
     def __eq__(self, other):
-        if not isinstance(other, Vector):
-            return False
-
-        return self._values == other._values
+        return (isinstance(other, Vector)
+            and self._values == other._values)
 
 
     ################

@@ -34,11 +34,11 @@ class Frustum(Object):
         return cls(base, cap, base_radius, cap_radius)
 
     def __eq__(self, other):
-        return isinstance(other, Frustum) \
-            and other._base        == self._base \
-            and other._cap         == self._cap \
-            and other._base_radius == self._base_radius \
-            and other._cap_radius  == self._cap_radius
+        return (isinstance(other, Frustum)
+            and other._base        == self._base
+            and other._cap         == self._cap
+            and other._base_radius == self._base_radius
+            and other._cap_radius  == self._cap_radius)
 
     def __repr__(self):
         return f"Frustum({self._base!r}, {self._cap!r}, {self._base_radius!r}, {self._cap_radius!r})"

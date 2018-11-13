@@ -5,7 +5,8 @@ from cadlib.scad import ScadObject
 
 class Union(Csg):
     def __eq__(self, other):
-        return isinstance(other, Union) and other._children == self._children
+        return (isinstance(other, Union)
+            and other._children == self._children)
 
     def __str__(self):
         return "Union"

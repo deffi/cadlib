@@ -112,10 +112,8 @@ class Matrix:
     ################
 
     def __eq__(self, other):
-        if not isinstance(other, Matrix):
-            return False
-
-        return self._rows == other._rows
+        return (isinstance(other, Matrix)
+            and self._rows == other._rows)
 
 
     ################

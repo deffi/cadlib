@@ -15,9 +15,9 @@ class Transformed(Object):
         self._object    = object
 
     def __eq__(self, other):
-        return isinstance(other, Transformed) and \
-            other._transform == self._transform and \
-            other._object    == self._object
+        return (isinstance(other, Transformed)
+            and other._transform == self._transform
+            and other._object    == self._object)
 
     def __str__(self):
         return "Transformed object"

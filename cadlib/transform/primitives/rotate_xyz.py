@@ -12,10 +12,8 @@ class RotateXyz(Transform):
         self._xyz = [x, y, z]
 
     def __eq__(self, other):
-        if isinstance(other, RotateXyz):
-            return self._xyz == other._xyz
-        else:
-            return False
+        return (isinstance(other, RotateXyz)
+            and self._xyz == other._xyz)
 
     def __str__(self):
         x, y, z = self._xyz
