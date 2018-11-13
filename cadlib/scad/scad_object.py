@@ -94,15 +94,15 @@ class ScadObject():
             return str(value)
 
         elif isinstance(value, str):
-            bs = "\\" # Single backslash
-            dq = '"' # Double quote
+            bs = "\\"  # Single backslash
+            dq = '"'   # Double quote
 
             # The backslash is escaped first so we don't escape the backslashes that are part of an escape sequence.
-            value = value.replace(bs  , bs + bs ) # \   -> \\
-            value = value.replace('"' , bs + dq ) # "   -> \"
-            value = value.replace('\n', bs + "n") # LF  -> \n
-            value = value.replace('\r', bs + "r") # CR  -> \r
-            value = value.replace('\t', bs + "t") # TAB -> \t
+            value = value.replace(bs  , bs + bs )  # \   -> \\
+            value = value.replace('"' , bs + dq )  # "   -> \"
+            value = value.replace('\n', bs + "n")  # LF  -> \n
+            value = value.replace('\r', bs + "r")  # CR  -> \r
+            value = value.replace('\t', bs + "t")  # TAB -> \t
             return dq + value + dq # Wrap in double-quotes
 
         elif isinstance(value, list):
