@@ -323,8 +323,8 @@ class TestMatrix(TestCase):
         # Dimensions mismatch
         with self.assertRaises(ValueError): Matrix.identity(3) * m
         with self.assertRaises(ValueError): m * Matrix.identity(3)
-        with self.assertRaises(ValueError): Matrix.from_rows([16, 17, 18], [19, 20, 21]) * \
-                                            Matrix.from_rows([10, 11], [12, 13])
+        with self.assertRaises(ValueError): (Matrix.from_rows([16, 17, 18], [19, 20, 21]) *
+                                             Matrix.from_rows([10, 11], [12, 13]))
 
     def test_mixed_arithmetic(self):
         m1 = Matrix.from_rows([1, 2, 3], [4, 5, 6])

@@ -39,8 +39,8 @@ class Layer(Object):
         o1 = min(self._offset1, self._offset2)
         o2 = max(self._offset1, self._offset2)
 
-        return Cuboid([inf, inf, o2 - o1]) \
-            .translate([-inf / 2, -inf / 2, 0]) \
-            .up(o1) \
-            .rotate(frm = Z, to = self._normal, ignore_ambiguity = True) \
-            .to_scad().comment(str(self))
+        return (Cuboid([inf, inf, o2 - o1])
+            .translate([-inf / 2, -inf / 2, 0])
+            .up(o1)
+            .rotate(frm = Z, to = self._normal, ignore_ambiguity = True)
+            .to_scad().comment(str(self)))

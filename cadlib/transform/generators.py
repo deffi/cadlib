@@ -1,7 +1,8 @@
 from numbers import Number
 
-from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, RotateFromTo, \
-    ScaleXyz, ScaleUniform, ScaleAxisFactor, Translate
+from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, RotateFromTo
+from cadlib.transform.primitives import ScaleXyz, ScaleUniform, ScaleAxisFactor
+from cadlib.transform.primitives import Translate
 from cadlib.util import Vector
 from cadlib.util import both
 
