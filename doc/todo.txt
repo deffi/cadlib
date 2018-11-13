@@ -1,5 +1,4 @@
 Next:
-  * Code TODOs
   * Use vector.valid and vector.create functions
 
 Object:
@@ -17,6 +16,7 @@ Object:
   * [Medium] center flag (and use in examples where appropriate)
              Probably better: .center() which transforms to the center
              Probably even better: use the anchor mechanism
+  * [Medium] Allow or don't allow 0 as a shortcut for a zero vector?
   * [Low]    Frustum: generate from
                * base/tip/base_radius/cap_radius
                * base/tip/base_radius/length
