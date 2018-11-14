@@ -56,8 +56,8 @@ class TestVector(TestCase):
         self.assertEqual(Vector.convert([], "dummy"), Vector())
 
         # Length check
-        self.assertEqual(Vector.convert([1, 2, 3], "dummy", required_length=3), Vector(1, 2, 3)) # Success
-        with self.assertRaises(ValueError): Vector.convert([1, 2, 3], "dummy", required_length=4)                   # Failure
+        self.assertEqual(Vector.convert([1, 2, 3], "dummy", required_length=3), Vector(1, 2, 3))   # Success
+        with self.assertRaises(ValueError): Vector.convert([1, 2, 3], "dummy", required_length=4)  # Failure
 
         # Invalid values
         with self.assertRaises(TypeError ): Vector.convert(None, "dummy", None)

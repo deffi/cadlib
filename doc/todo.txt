@@ -1,8 +1,8 @@
 Next:
-  * Use vector.valid and vector.create functions
+  * Code TODOs
 
 Object:
-  * [Medium] Generators: accept 0 as shortcut for a vector?
+  * [Medium] Generators and/or objects: accept 0 as shortcut for a vector?
   * [Medium] Generators: cube/cuboid should accept x,y,z; [x,y,z]; size
   * [Medium] Assembly (Part) objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
@@ -16,7 +16,6 @@ Object:
   * [Medium] center flag (and use in examples where appropriate)
              Probably better: .center() which transforms to the center
              Probably even better: use the anchor mechanism
-  * [Medium] Allow or don't allow 0 as a shortcut for a zero vector?
   * [Low]    Frustum: generate from
                * base/tip/base_radius/cap_radius
                * base/tip/base_radius/length
@@ -128,3 +127,6 @@ Documentation:
              values. That's because it's not a vector. But you'll probably want
              to use the generator functions anyway.
   * [Medium] Docstrings
+               * Useful docstrings for all public classes and methods
+               * Consistent quoting with """..."""
+

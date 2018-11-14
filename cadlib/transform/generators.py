@@ -5,6 +5,7 @@ from cadlib.transform.primitives import ScaleXyz, ScaleUniform, ScaleAxisFactor
 from cadlib.transform.primitives import Translate
 from cadlib.util import Vector
 from cadlib.util import both
+from cadlib.util import number
 
 __all__ = ['rotate', 'scale', 'translate']
 
@@ -42,15 +43,15 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
 
     # Transform the convenience forms to canonical form
     if axis_or_frm is not None:
-        if not isinstance(axis_or_frm, (Vector, list, tuple)):
+        if not Vector.valid_type(axis_or_frm):
             raise TypeError("axis must be a vector type")
 
         if angle_or_to is not None:
-            if isinstance(angle_or_to, Number):
+            if number.valid(angle_or_to):
                 # Axis/angle (implicit)
                 axis = axis_or_frm
                 angle = angle_or_to
-            elif isinstance(angle_or_to, (Vector, list, tuple)):
+            elif Vector.valid_type(angle_or_to):
                 # From/to (implicit)
                 frm = axis_or_frm
                 to = angle_or_to
@@ -133,12 +134,13 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
 
     # Transform the convenience forms to canonical form
     if xyz_or_axis_or_factor is not None:
-        if not isinstance(xyz_or_axis_or_factor, (Vector, list, tuple, Number)):
+        # TODO clean up
+        if not (Vector.valid_type(xyz_or_axis_or_factor) or number.valid(xyz_or_axis_or_factor)):
             raise TypeError("xyz_or_axis_or_factor must be a vector type or a number")
 
         if factor is not None:
             axis = xyz_or_axis_or_factor
-        elif isinstance(xyz_or_axis_or_factor, Number):
+        elif number.valid(xyz_or_axis_or_factor):
             factor = xyz_or_axis_or_factor
         else:
             xyz = xyz_or_axis_or_factor

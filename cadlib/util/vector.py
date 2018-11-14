@@ -3,30 +3,6 @@ from numbers import Number
 from cadlib.util.table import Table
 from cadlib.util import Matrix
 
-# Nah, we already have Vector.convert
-# def valid(value, length):
-#     if value == 0:
-#         return True
-#     elif isinstance(value, (Vector, list, tuple)):
-#         if len(value) == length:
-#             return True
-#         else:
-#             return False
-#     else:
-#         return False
-#
-# def create(value, length):
-#     if value == 0:
-#         return Vector.zero(length)
-#     elif isinstance(value, (Vector, list, tuple)):
-#         if len(value) == length:
-#             return Vector(value)
-#         else:
-#             raise ValueError(f"Invalid length for vector: expected {length}, got {len(value)}")
-#     else:
-#         raise TypeError(f"Invalid value for vector: {value!r}")
-
-
 class Vector:
     '''
     Note that __len__, like the dimensions property, returns the number of elements. The length property returns the
@@ -46,6 +22,7 @@ class Vector:
 
     def __init__(self, *values):
         for value in values:
+            # TODO could use number.valid here, but number has a dependency on vector
             if not isinstance(value, Number):
                 raise TypeError("Vectors must consist of numeric values")
 
@@ -63,7 +40,7 @@ class Vector:
     @classmethod
     def convert(cls, value, label, *, required_length = None):
         # Make sure the type can be converted to a vector
-        if not isinstance(value, (Vector, list, tuple)):
+        if not cls.valid_type(value):
             raise TypeError(f"Invalid vector for {label}: {value}")
 
         # If a required length is specified, check that the length is correct

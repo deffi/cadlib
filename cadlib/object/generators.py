@@ -2,7 +2,7 @@ from numbers import Number
 
 from cadlib.object.primitives import Cuboid, Frustum, Plane, Layer, Sphere
 from cadlib.util import both, neither
-from cadlib.util.number import to_number
+from cadlib.util import number
 from cadlib.util import Vector
 
 __all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'layer', 'sphere']
@@ -12,9 +12,9 @@ def _get_radius(r, d):
     if both(r, d):
         raise ValueError("radius and diameter cannot be specified together")
     elif r is not None:
-        return to_number(r, "radius")
+        return number.to_number(r, "radius")
     elif d is not None:
-        return to_number(d, "diameter") / 2
+        return number.to_number(d, "diameter") / 2
     else:
         raise ValueError("radius or diameter must be specified")
 
@@ -22,6 +22,7 @@ def _get_radii(r, d):
     if both(r, d):
         raise ValueError("radii and diameters cannot be specified together")
     elif r is not None:
+        # TODO allow other types, including generators
         if not isinstance(r, tuple):
             raise TypeError("r must be a tuple")
         elif len(r) != 2:
@@ -29,6 +30,7 @@ def _get_radii(r, d):
         else:
             return r
     elif d is not None:
+        # TODO allow other types, including generators
         if not isinstance(d, tuple):
             raise TypeError("d must be a tuple")
         elif len(d) != 2:
@@ -55,7 +57,7 @@ def cuboid(size_or_x, y = None, z = None):
 def cube(size):
     # Signatures (convenience forms only):
     #   * cube(size)
-    size = to_number(size, "size")
+    size = number.to_number(size, "size")
     return Cuboid([size, size, size])
 
 
@@ -70,11 +72,11 @@ def cylinder(direction_or_base, length_or_cap, r = None, d = None):
     radius = _get_radius(r, d)
 
     # length_or_base must be a vector or a number
-    if isinstance(length_or_cap, Number):
+    if number.valid(length_or_cap):
         # Number - direction/length
         return Frustum.direction_length(direction_or_base, length_or_cap, radius, radius)
 
-    elif isinstance(length_or_cap, (Vector, list, tuple)):
+    elif Vector.valid_type(length_or_cap):
         # Vector type - base/cap
         return Frustum(direction_or_base, length_or_cap, radius, radius)
 
@@ -93,11 +95,11 @@ def cone(direction_or_base, length_or_cap, r = None, d = None):
     radius = _get_radius(r, d)
 
     # length_or_base must be a vector or a number
-    if isinstance(length_or_cap, Number):
+    if number.valid(length_or_cap):
         # Number - direction/length
         return Frustum.direction_length(direction_or_base, length_or_cap, radius, 0)
 
-    elif isinstance(length_or_cap, (Vector, list, tuple)):
+    elif Vector.valid_type(length_or_cap):
         # Vector type - base/cap
         return Frustum(direction_or_base, length_or_cap, radius, 0)
 
@@ -115,11 +117,11 @@ def frustum(direction_or_base, length_or_cap, r = None, d = None):
     radii = _get_radii(r, d)
 
     # length_or_base must be a vector or a number
-    if isinstance(length_or_cap, Number):
+    if number.valid(length_or_cap):
         # Number - direction/length
         return Frustum.direction_length(direction_or_base, length_or_cap, *radii)
 
-    elif isinstance(length_or_cap, (Vector, list, tuple)):
+    elif Vector.valid_type(length_or_cap):
         # Vector type - base/cap
         return Frustum(direction_or_base, length_or_cap, *radii)
 

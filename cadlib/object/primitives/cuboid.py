@@ -3,11 +3,12 @@ from warnings import warn
 
 from cadlib.object import Object
 from cadlib.scad import ScadObject
+from cadlib.util import number
 
 
 class Cuboid(Object):
     def __init__(self, size):
-        if isinstance(size, Number):
+        if number.valid(size):
             if size == 0:
                 warn("size is 0")
             self._size = [size, size, size]
