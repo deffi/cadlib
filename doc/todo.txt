@@ -107,6 +107,8 @@ Tests:
 Util:
 
 General:
+  * [Medium] Generators: raise TypeError on missing or extra parameters? What
+             does Python raise?
   * [Medium] In all constructors/generators, use Vector.valid_type and
              Vector.convert and to_number
   * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
