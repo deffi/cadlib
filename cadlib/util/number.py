@@ -1,7 +1,5 @@
 from numbers import Number
 
-from cadlib.util.vector import Vector
-
 def valid(value):
     return isinstance(value, Number)
 

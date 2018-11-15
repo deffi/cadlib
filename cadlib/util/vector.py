@@ -2,6 +2,7 @@ import math
 from numbers import Number
 from cadlib.util.table import Table
 from cadlib.util import Matrix
+from cadlib.util import number
 
 class Vector:
     '''
@@ -22,8 +23,7 @@ class Vector:
 
     def __init__(self, *values):
         for value in values:
-            # TODO could use number.valid here, but number has a dependency on vector
-            if not isinstance(value, Number):
+            if not number.valid(value):
                 raise TypeError("Vectors must consist of numeric values")
 
         self._values = list(values)
