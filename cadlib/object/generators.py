@@ -22,17 +22,15 @@ def _get_radii(r, d):
     if both(r, d):
         raise ValueError("radii and diameters cannot be specified together")
     elif r is not None:
-        # TODO allow other types, including generators
-        if not isinstance(r, tuple):
-            raise TypeError("r must be a tuple")
+        if not isinstance(r, (tuple, list)):
+            raise TypeError("r must be a tuple or a list")
         elif len(r) != 2:
             raise ValueError("r must have two values")
         else:
-            return r
+            return tuple(r)
     elif d is not None:
-        # TODO allow other types, including generators
-        if not isinstance(d, tuple):
-            raise TypeError("d must be a tuple")
+        if not isinstance(d, (tuple, list)):
+            raise TypeError("d must be a tuple or a list")
         elif len(d) != 2:
             raise ValueError("d must have two values")
         else:

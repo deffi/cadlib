@@ -13,8 +13,14 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
 
     def test_get_radii_helper(self):
-        self.assertEqual(_get_radii(r=(1, 2), d=None  ), (1, 2))
-        self.assertEqual(_get_radii(r=None  , d=(4, 6)), (2, 3))
+        self.assertEqual(_get_radii(r=(1, 2)  , d=None  ), (1, 2))
+        self.assertEqual(_get_radii(r=None    , d=(4, 6)), (2, 3))
+
+        self.assertEqual(_get_radii(r=[1, 2]  , d=None  ), (1, 2))
+        self.assertEqual(_get_radii(r=None    , d=[4, 6]), (2, 3))
+
+        with self.assertRaises(TypeError): _get_radii(r="xy")
+        with self.assertRaises(TypeError): _get_radii(d="xy")
 
         with self.assertRaises(ValueError): _get_radii(r=None  , d=None  )
         with self.assertRaises(ValueError): _get_radii(r=(1, 2), d=(4, 6))
