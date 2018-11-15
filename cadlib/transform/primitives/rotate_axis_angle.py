@@ -12,7 +12,7 @@ class RotateAxisAngle(Transform):
             raise ValueError("axis may not be zero-length")
 
         self._axis  = axis
-        self._angle = number.to_number(angle, "angle", default=self._axis.length)
+        self._angle = number.convert(angle, "angle", default=self._axis.length)
 
     def __eq__(self, other):
         return (isinstance(other, RotateAxisAngle)

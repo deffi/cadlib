@@ -24,13 +24,13 @@ class TestNumber(unittest.TestCase):
     #     with self.assertRaises(TypeError ): number.to_list_of_numbers([1, 2, "3"], "dummy", None)
 
     def test_to_number_helper(self):
-        self.assertEqual(number.to_number(42, "dummy"), 42) # Int
-        self.assertEqual(number.to_number(4.2, "dummy"), 4.2) # Float
+        self.assertEqual(number.convert(42, "dummy"), 42) # Int
+        self.assertEqual(number.convert(4.2, "dummy"), 4.2) # Float
 
         # Default
-        self.assertEqual(number.to_number(1   , "dummy", default=999), 1)
-        self.assertEqual(number.to_number(None, "dummy", default=999), 999) # Default value
+        self.assertEqual(number.convert(1, "dummy", default=999), 1)
+        self.assertEqual(number.convert(None, "dummy", default=999), 999) # Default value
 
         # Invalid values (a default does not help)
-        with self.assertRaises(TypeError): number.to_number("", "dummy", default=999)
-        with self.assertRaises(TypeError): number.to_number([], "dummy", default=999)
+        with self.assertRaises(TypeError): number.convert("", "dummy", default=999)
+        with self.assertRaises(TypeError): number.convert([], "dummy", default=999)

@@ -7,7 +7,7 @@ from cadlib.util import number
 
 class Sphere(Object):
     def __init__(self, r):
-        self._radius = number.to_number(r)
+        self._radius = number.convert(r)
 
         if self._radius == 0: warn("radius is 0")
 

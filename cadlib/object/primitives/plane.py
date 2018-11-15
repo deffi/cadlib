@@ -12,7 +12,7 @@ class Plane(Object):
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 
-        offset = number.to_number(offset, "offset")
+        offset = number.convert(offset, "offset")
 
         self._normal = normal
         self._offset = offset

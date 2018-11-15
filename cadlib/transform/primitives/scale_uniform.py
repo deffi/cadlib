@@ -7,7 +7,7 @@ from cadlib.util import number
 
 class ScaleUniform(Transform):
     def __init__(self, factor):
-        self._factor = number.to_number(factor, "factor")
+        self._factor = number.convert(factor, "factor")
 
         if self._factor == 0: warn("factor is 0")
 

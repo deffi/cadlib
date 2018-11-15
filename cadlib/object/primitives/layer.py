@@ -14,8 +14,8 @@ class Layer(Object):
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 
-        offset1 = number.to_number(offset1, "offset1")
-        offset2 = number.to_number(offset2, "offset2")
+        offset1 = number.convert(offset1, "offset1")
+        offset2 = number.convert(offset2, "offset2")
 
         if offset1 == offset2: warn("offsets are equal")
 

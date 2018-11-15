@@ -14,7 +14,7 @@ class ScaleAxisFactor(Transform):
             raise ValueError("axis may not be zero-length")
 
         self._axis   = axis
-        self._factor = number.to_number(factor, "factor", default=self._axis.length)
+        self._factor = number.convert(factor, "factor", default=self._axis.length)
 
         if self._factor == 0: warn("factor is 0")
 

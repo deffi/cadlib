@@ -12,8 +12,8 @@ class Frustum(Object):
         if cap  == 0: cap  = (0, 0, 0)
         self._base = Vector.convert(base, "base", required_length=3)
         self._cap  = Vector.convert(cap , "cap" , required_length=3)
-        self._base_radius = number.to_number(base_radius, "base_radius")
-        self._cap_radius  = number.to_number(cap_radius, "cap_radius")
+        self._base_radius = number.convert(base_radius, "base_radius")
+        self._cap_radius  = number.convert(cap_radius, "cap_radius")
 
         # Warn if the cap is equal to the base (zero length) or both radii are
         # zero (zero thickness; note that it is allowed for *one* of the radii
@@ -24,7 +24,7 @@ class Frustum(Object):
     @classmethod
     def direction_length(cls, direction, length, base_radius, cap_radius):
         direction = Vector.convert(direction, "direction", required_length=3)
-        length    = number.to_number(length, "length")
+        length    = number.convert(length, "length")
 
         if direction.is_zero:
             raise ValueError("direction must be non-zero")

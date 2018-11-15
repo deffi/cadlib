@@ -12,9 +12,9 @@ def _get_radius(r, d):
     if both(r, d):
         raise ValueError("radius and diameter cannot be specified together")
     elif r is not None:
-        return number.to_number(r, "radius")
+        return number.convert(r, "radius")
     elif d is not None:
-        return number.to_number(d, "diameter") / 2
+        return number.convert(d, "diameter") / 2
     else:
         raise ValueError("radius or diameter must be specified")
 
@@ -55,7 +55,7 @@ def cuboid(size_or_x, y = None, z = None):
 def cube(size):
     # Signatures (convenience forms only):
     #   * cube(size)
-    size = number.to_number(size, "size")
+    size = number.convert(size, "size")
     return Cuboid([size, size, size])
 
 

@@ -6,9 +6,9 @@ from cadlib.util import degree
 
 class RotateXyz(Transform):
     def __init__(self, x, y, z):
-        x = number.to_number(x, "x")
-        y = number.to_number(y, "y")
-        z = number.to_number(z, "z")
+        x = number.convert(x, "x")
+        y = number.convert(y, "y")
+        z = number.convert(z, "z")
         self._xyz = [x, y, z]
 
     def __eq__(self, other):

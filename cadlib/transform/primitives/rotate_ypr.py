@@ -8,9 +8,9 @@ from cadlib.util import degree
 
 class RotateYpr(Transform):
     def __init__(self, yaw, pitch, roll):
-        yaw   = number.to_number(yaw, "yaw")
-        pitch = number.to_number(pitch, "pitch")
-        roll  = number.to_number(roll, "roll")
+        yaw   = number.convert(yaw, "yaw")
+        pitch = number.convert(pitch, "pitch")
+        roll  = number.convert(roll, "roll")
         self._ypr = [yaw, pitch, roll]
 
     def __eq__(self, other):

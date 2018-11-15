@@ -6,8 +6,7 @@ def valid(value):
     return isinstance(value, Number)
 
 
-# TODO rename to convert
-def to_number(value, label = None, *, default = None):
+def convert(value, label = None, *, default = None):
     if valid(value):
         return value
     elif value is None and default is not None:
