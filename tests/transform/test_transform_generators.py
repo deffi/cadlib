@@ -153,10 +153,10 @@ class TestTransformGenerators(TestCase):
         # No such thing here because an incomplete axis/factor will be a valid XYZ
 
         # Convenience forms - invalid type
-        with self.assertRaises(TypeError): scale("")    # First argument must be a vector or a number
-        with self.assertRaises(TypeError): scale(X, "") # Invalid second argument
-        with self.assertRaises(TypeError): scale(X, X)  # Invalid second argument
-        with self.assertRaises(TypeError): scale(0, X)  # Would have been correct if switched
+        with self.assertRaises(TypeError) : scale("")    # First argument must be a vector or a number
+        with self.assertRaises(TypeError) : scale(X, "") # Invalid second argument
+        with self.assertRaises(TypeError) : scale(X, X)  # Invalid second argument
+        with self.assertRaises(ValueError): scale(0, X)  # Would have been correct if switched
 
     def test_translate(self):
         self.assertEqual(translate(Vector(1, 2, 3)), Translate(Vector(1, 2, 3)))

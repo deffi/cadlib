@@ -123,27 +123,33 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     #                         -     num     -     -  # Uniform
     # Convenience forms (-: must be None, *: overwritten)
     #                       vec     num     -     *  # Axis/factor (implicit or explicit)
-    #                      list       -     *     -  # XYZ
+    #                       vec       -     *     -  # XYZ
     #                       num       *     -     -  # Isotropic XYZ
     #
-    # "Vector type" is Vector, list, or tuple
-    #
+    # "Vector type" is Vector, list, or tuple. Note that a Vector can be used
+    # for xyz even though xyz is not strictly a vector.
+
     # Make sure that there are no conflicts between convenience parameters and canonical parameters
     if both(xyz_or_axis_or_factor, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
     if both(xyz_or_axis_or_factor, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
 
     # Transform the convenience forms to canonical form
     if xyz_or_axis_or_factor is not None:
-        # TODO clean up
-        if not (Vector.valid_type(xyz_or_axis_or_factor) or number.valid(xyz_or_axis_or_factor)):
-            raise TypeError("xyz_or_axis_or_factor must be a vector type or a number")
-
-        if factor is not None:
-            axis = xyz_or_axis_or_factor
+        if Vector.valid_type(xyz_or_axis_or_factor):
+            if factor is None:
+                # Xyz
+                xyz = xyz_or_axis_or_factor
+            else:
+                # Axis part of axis/factor
+                axis = xyz_or_axis_or_factor
         elif number.valid(xyz_or_axis_or_factor):
-            factor = xyz_or_axis_or_factor
+            if factor is None:
+                # Factor
+                factor = xyz_or_axis_or_factor
+            else:
+                raise ValueError("factor cannot be specified together with numeric xyz_or_axis")
         else:
-            xyz = xyz_or_axis_or_factor
+            raise TypeError("xyz_or_axis_or_factor must be a vector type or a number")
 
     # Check the parameters that must appear in pairs
     if axis is not None and factor is None: raise ValueError("factor" " is required when " "axis" " is given")
