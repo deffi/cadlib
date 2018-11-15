@@ -3,7 +3,7 @@ from cadlib import infinity as inf
 from cadlib.util import Z
 from cadlib.object import Object
 from cadlib.object.primitives import Cuboid
-from cadlib.util.number import to_number
+from cadlib.util import number
 
 
 class Plane(Object):
@@ -12,7 +12,7 @@ class Plane(Object):
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
 
-        offset = to_number(offset, "offset")
+        offset = number.to_number(offset, "offset")
 
         self._normal = normal
         self._offset = offset

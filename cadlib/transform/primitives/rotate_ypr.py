@@ -1,16 +1,16 @@
 from cadlib.scad import ScadObject
 from cadlib.transform import Transform, Chained
 from cadlib.transform.primitives import RotateXyz
-from cadlib.util.number import to_number
+from cadlib.util import number
 from cadlib.util.geometry import rotation_matrix
 from cadlib.util import degree
 
 
 class RotateYpr(Transform):
     def __init__(self, yaw, pitch, roll):
-        yaw   = to_number(yaw, "yaw")
-        pitch = to_number(pitch, "pitch")
-        roll  = to_number(roll, "roll")
+        yaw   = number.to_number(yaw, "yaw")
+        pitch = number.to_number(pitch, "pitch")
+        roll  = number.to_number(roll, "roll")
         self._ypr = [yaw, pitch, roll]
 
     def __eq__(self, other):
