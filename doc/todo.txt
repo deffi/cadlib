@@ -1,5 +1,4 @@
 Next:
-  * Code TODOs
 
 Object:
   * [Medium] Generators and/or objects: accept 0 as shortcut for a vector?
@@ -29,7 +28,6 @@ Object:
              be done in the generators
 
 Primitives:
-  * [Medium] More primitives: cone
   * [Medium] More primitives? See OpenSCAD documentation
   * [Medium] Plane: through point
 
@@ -109,8 +107,6 @@ Util:
 General:
   * [Medium] Generators: raise TypeError on missing or extra parameters? What
              does Python raise?
-  * [Medium] In all constructors/generators, use Vector.valid_type and
-             Vector.convert and to_number
   * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
   * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
