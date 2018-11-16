@@ -1,14 +1,14 @@
 from cadlib.object.primitives import Sphere, Cuboid, Frustum
 from cadlib.csg import Csg, Intersection, Difference, Union
 from cadlib.scad import ScadObject
-from cadlib.util.vector import Z
+from cadlib.util.vector import Z, origin
 from tests.unit_test import TestCase
 
 class TestCsg(TestCase):
     def test_construction(self):
         sphere   = Sphere(11)
         cube     = Cuboid(22)
-        cylinder = Frustum(0, Z, 11, 11)
+        cylinder = Frustum(origin, Z, 11, 11)
         object_list = [sphere, cube, cylinder]
 
         # Empty
@@ -30,7 +30,7 @@ class TestCsg(TestCase):
     def test_equality(self):
         sphere   = Sphere(11)
         cube     = Cuboid(22)
-        cylinder = Frustum(0, Z, 11, 11)
+        cylinder = Frustum(origin, Z, 11, 11)
         objects = [sphere, cube, cylinder]
 
         # Different types of CSG are not equal, even if their children are identical
@@ -41,7 +41,7 @@ class TestCsg(TestCase):
     def test_to_scad(self):
         sphere   = Sphere(2)
         cube     = Cuboid(10)
-        cylinder = Frustum(0, Z, 5, 5)
+        cylinder = Frustum(origin, Z, 5, 5)
 
         mixed = Union([Intersection([sphere, cylinder]), Difference([cube, sphere])])
         self.assertEqual(mixed.to_scad(), ScadObject("union", None, None, [

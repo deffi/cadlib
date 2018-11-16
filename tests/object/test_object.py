@@ -2,7 +2,7 @@ from cadlib.object import Object, Transformed
 from cadlib.object.primitives import Sphere, Cuboid, Frustum
 from cadlib.transform.chained import Chained
 from cadlib.transform.primitives import Translate, ScaleXyz, ScaleUniform, ScaleAxisFactor, RotateXyz
-from cadlib.util.vector import Z
+from cadlib.util.vector import Z, origin
 from tests.unit_test import TestCase
 from cadlib.csg import Intersection, Difference, Union
 from cadlib.transform.primitives import RotateYpr
@@ -64,7 +64,7 @@ class TestObject(TestCase):
     def test_addition(self):
         a = Sphere(2)
         b = Cuboid([10, 10, 10])
-        c = Frustum(0, Z, 11, 11)
+        c = Frustum(origin, Z, 11, 11)
         d = Cuboid(20)
 
         self.assertEqual(   a +  b               , Union([a, b      ]))
@@ -84,7 +84,7 @@ class TestObject(TestCase):
     def test_multiplication(self):
         a = Sphere(2)
         b = Cuboid([10, 10, 10])
-        c = Frustum(0, Z, 11, 11)
+        c = Frustum(origin, Z, 11, 11)
         d = Cuboid(20)
 
         self.assertEqual(    a  *  b             , Intersection([a, b      ]))
@@ -99,7 +99,7 @@ class TestObject(TestCase):
     def test_subtraction(self):
         a = Sphere(2)
         b = Cuboid([10, 10, 10])
-        c = Frustum(0, Z, 11, 11)
+        c = Frustum(origin, Z, 11, 11)
         d = Cuboid(20)
 
         # Difference is non-associative, so we get nested differences

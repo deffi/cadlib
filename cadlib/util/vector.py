@@ -249,6 +249,8 @@ class Vector:
         """Formats the vector for human consumption"""
         return Table([[v] for v in self._values]).format(alignment="r")
 
+
+origin = Vector(0, 0, 0)
 X = Vector(1, 0, 0)
 Y = Vector(0, 1, 0)
 Z = Vector(0, 0, 1)

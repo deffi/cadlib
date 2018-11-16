@@ -1,7 +1,7 @@
 import math
 
 from .matrix import Matrix
-from .vector import Vector, X, Y, Z
+from .vector import Vector, X, Y, Z, origin
 
 degree = math.pi / 180
 

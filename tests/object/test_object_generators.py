@@ -1,7 +1,7 @@
 from cadlib.object.generators import *
 from cadlib.object.generators import _get_radius, _get_radii
 from cadlib.object.primitives import Cuboid, Frustum, Plane, Layer, Sphere
-from cadlib.util import Vector, X, Y, Z
+from cadlib.util import Vector, X, Y, Z, origin
 from tests.unit_test import TestCase
 
 class TestObjectGenerators(TestCase):
@@ -45,17 +45,17 @@ class TestObjectGenerators(TestCase):
         v0 = Vector (0, 0, 0)
 
         # Cylinder - base/cap
-        self.assertEqual(cylinder(X, Y,     2), Frustum(X, Y, 2, 2))
-        self.assertEqual(cylinder(X, Y, r = 2), Frustum(X, Y, 2, 2))
-        self.assertEqual(cylinder(X, Y, d = 4), Frustum(X, Y, 2, 2))
-        self.assertEqual(cylinder(0, Y,     2), Frustum(0, Y, 2, 2)) # 0 is allowed as base
+        self.assertEqual(cylinder(X     , Y,     2), Frustum(X     , Y, 2, 2))
+        self.assertEqual(cylinder(X     , Y, r = 2), Frustum(X     , Y, 2, 2))
+        self.assertEqual(cylinder(X     , Y, d = 4), Frustum(X     , Y, 2, 2))
+        self.assertEqual(cylinder(origin, Y,     2), Frustum(origin, Y, 2, 2)) # 0 is allowed as base
         # 0 is not allowed as cap because it would be interpreted as
         # direction/length
 
         # Cylinder - direction/length
-        self.assertEqual(cylinder(X, 1,     2), Frustum(0, X, 2, 2))
-        self.assertEqual(cylinder(X, 1, r = 2), Frustum(0, X, 2, 2))
-        self.assertEqual(cylinder(X, 1, d = 4), Frustum(0, X, 2, 2))
+        self.assertEqual(cylinder(X, 1,     2), Frustum(origin, X, 2, 2))
+        self.assertEqual(cylinder(X, 1, r = 2), Frustum(origin, X, 2, 2))
+        self.assertEqual(cylinder(X, 1, d = 4), Frustum(origin, X, 2, 2))
 
         # Cylinder - invalid
         with self.assertNothingRaised()   : cylinder(X , 5 , 1)        # Reference
@@ -73,9 +73,9 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cone(X, Y, d = 4), Frustum(X, Y, 2, 0))
 
         # Cone - direction/length
-        self.assertEqual(cone(X, 1,     2), Frustum(0, X, 2, 0))
-        self.assertEqual(cone(X, 1, r = 2), Frustum(0, X, 2, 0))
-        self.assertEqual(cone(X, 1, d = 4), Frustum(0, X, 2, 0))
+        self.assertEqual(cone(X, 1,     2), Frustum(origin, X, 2, 0))
+        self.assertEqual(cone(X, 1, r = 2), Frustum(origin, X, 2, 0))
+        self.assertEqual(cone(X, 1, d = 4), Frustum(origin, X, 2, 0))
 
         # Cone - invalid
         with self.assertNothingRaised():    cone(X , 5 , 1)        # Reference
@@ -93,9 +93,9 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(frustum(X, Y, d = (4, 6)), Frustum(X, Y, 2, 3))
 
         # Frustum - direction/length
-        self.assertEqual(frustum(X, 1,     (2, 3)), Frustum(0, X, 2, 3))
-        self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3))
-        self.assertEqual(frustum(X, 1, d = (4, 6)), Frustum(0, X, 2, 3))
+        self.assertEqual(frustum(X, 1,     (2, 3)), Frustum(origin, X, 2, 3))
+        self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(origin, X, 2, 3))
+        self.assertEqual(frustum(X, 1, d = (4, 6)), Frustum(origin, X, 2, 3))
 
         # Frustum - invalid
         with self.assertNothingRaised():    frustum(X , 5 , (1, 2))         # Reference
