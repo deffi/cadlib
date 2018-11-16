@@ -18,19 +18,6 @@ class Cuboid(Object):
 
         self._size = [x, y, z]
 
-        # TODO additional tests? and remove
-        # if number.valid(size):
-        #     if size == 0:
-        #         warn("size is 0")
-        #     self._size = [size, size, size]
-        # elif len(size) == 3:
-        #     if size[0] == 0: warn("x size is 0")
-        #     if size[1] == 0: warn("y size is 0")
-        #     if size[2] == 0: warn("z size is 0")
-        #     self._size = size
-        # else:
-        #     raise ValueError("Invalid size: {}".format(size))
-
     def __eq__(self, other):
         return (isinstance(other, Cuboid)
             and other._size == self._size)

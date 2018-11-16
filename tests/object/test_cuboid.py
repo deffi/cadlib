@@ -20,10 +20,13 @@ class TestCuboid(TestCase):
         with self.assertWarnsRegex(UserWarning, r'z size is 0'): Cuboid(0, 0, 0)
 
         # Invalid
-        with self.assertRaises(TypeError): Cuboid()        # Empty size
-        with self.assertRaises(TypeError): Cuboid(11, 22)  # Wrong-size size
+        with self.assertRaises(TypeError): Cuboid()            # No parameters
+        with self.assertRaises(TypeError): Cuboid(11, 22)      # Parameter missing
+        with self.assertRaises(TypeError): Cuboid((1, 2, 3))   # Tuple is not allowed
+        with self.assertRaises(TypeError): Cuboid([1, 2, 3])   # List is not allowed
+        with self.assertRaises(TypeError): Cuboid(1, 2, None)  # Invalid number
+        with self.assertRaises(TypeError): Cuboid(1, 2, "3")   # Invalid number
 
-        # TODO test non-numbers
 
     def test_equality(self):
         # Same object

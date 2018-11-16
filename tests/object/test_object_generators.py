@@ -42,8 +42,11 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cube(1), Cuboid(1, 1, 1))
 
         with self.assertRaises(ValueError): cuboid(1, 2)
+        with self.assertRaises(ValueError): cuboid(None)
+        with self.assertRaises(ValueError): cuboid("1")
         with self.assertRaises(ValueError): cuboid(1, 2, None)
         with self.assertRaises(ValueError): cuboid(1, None, 2)
+        with self.assertRaises(TypeError) : cuboid(1, 2, "3")
 
     def test_frustum_generators(self):
         v0 = Vector (0, 0, 0)
