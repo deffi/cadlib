@@ -102,7 +102,7 @@ def cone(direction_or_base, length_or_cap, r = None, d = None):
         return Frustum(direction_or_base, length_or_cap, radius, 0)
 
     else:
-        raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
+        raise TypeError("Invalid call signature: length_or_cap must be a vector type or a number")
 
 def frustum(direction_or_base, length_or_cap, r = None, d = None):
     # Signatures (convenience forms only):
@@ -124,7 +124,7 @@ def frustum(direction_or_base, length_or_cap, r = None, d = None):
         return Frustum(direction_or_base, length_or_cap, *radii)
 
     else:
-        raise ValueError("Invalid call signature: length_or_cap must be a vector type or a number")
+        raise TypeError("Invalid call signature: length_or_cap must be a vector type or a number")
 
 
 def plane(normal, offset):

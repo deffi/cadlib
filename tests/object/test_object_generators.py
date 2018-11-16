@@ -42,6 +42,8 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(ValueError): cuboid(1, None, 2)
 
     def test_frustum_generators(self):
+        v0 = Vector (0, 0, 0)
+
         # Cylinder - base/cap
         self.assertEqual(cylinder(X, Y,     2), Frustum(X, Y, 2, 2))
         self.assertEqual(cylinder(X, Y, r = 2), Frustum(X, Y, 2, 2))
@@ -56,11 +58,14 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cylinder(X, 1, d = 4), Frustum(0, X, 2, 2))
 
         # Cylinder - invalid
-        with self.assertRaises(TypeError) : cylinder(5              , 5     , 1)    # First is not a vector
-        with self.assertRaises(TypeError) : cylinder(X              , ""    , 1)    # Second is not a vector or number
-        with self.assertRaises(ValueError): cylinder(X              , 5)            # Radius missing
-        with self.assertRaises(ValueError): cylinder(X              , 5     , 1, 1) # Radius and diameter
-        with self.assertRaises(ValueError): cylinder(Vector(0, 0, 0), 5)            # Zero vector is not allowed as direction
+        with self.assertNothingRaised()   : cylinder(X , 5 , 1)        # Reference
+        with self.assertRaises(TypeError) : cylinder(5 , 5 , 1)        # First is not a vector
+        with self.assertRaises(TypeError) : cylinder(X , "", 1)        # Second is not a vector or number
+        with self.assertRaises(ValueError): cylinder(X , 5    )        # Neither radius nor diameter
+        with self.assertRaises(ValueError): cylinder(X , 5 , 1, 1)     # Both radius and diameter
+        with self.assertRaises(ValueError): cylinder(v0, 5 , 1)        # Zero vector is not allowed as direction
+        with self.assertRaises(TypeError) : cylinder(X , 5 , r=(1, 2)) # Radii
+        with self.assertRaises(TypeError) : cylinder(X , 5 , d=(1, 2)) # Diameters
 
         # Cone - base/cap
         self.assertEqual(cone(X, Y,     2), Frustum(X, Y, 2, 0))
@@ -72,6 +77,16 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(cone(X, 1, r = 2), Frustum(0, X, 2, 0))
         self.assertEqual(cone(X, 1, d = 4), Frustum(0, X, 2, 0))
 
+        # Cone - invalid
+        with self.assertNothingRaised():    cone(X , 5 , 1)        # Reference
+        with self.assertRaises(TypeError) : cone(5 , 5 , 1)        # First is not a vector
+        with self.assertRaises(TypeError) : cone(X , "", 1)        # Second is not a vector or number
+        with self.assertRaises(ValueError): cone(X , 5    )        # Neither radius nor diameter
+        with self.assertRaises(ValueError): cone(X , 5 , 1, 1)     # Both radius and diameter
+        with self.assertRaises(ValueError): cone(v0, 5 , 1)        # Zero vector is not allowed as direction
+        with self.assertRaises(TypeError) : cone(v0, 5 , r=(1, 2)) # Radii
+        with self.assertRaises(TypeError) : cone(v0, 5 , d=(1, 2)) # Diameters
+
         # Frustum - base/cap
         self.assertEqual(frustum(X, Y,     (2, 3)), Frustum(X, Y, 2, 3))
         self.assertEqual(frustum(X, Y, r = (2, 3)), Frustum(X, Y, 2, 3))
@@ -82,10 +97,15 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(frustum(X, 1, r = (2, 3)), Frustum(0, X, 2, 3))
         self.assertEqual(frustum(X, 1, d = (4, 6)), Frustum(0, X, 2, 3))
 
-        # Frustum erroneous (only a single radius/diameter)
-        with self.assertRaises(TypeError): frustum(X, 1,     2)
-        with self.assertRaises(TypeError): frustum(X, 1, r = 2)
-        with self.assertRaises(TypeError): frustum(X, 1, d = 4)
+        # Frustum - invalid
+        with self.assertNothingRaised():    frustum(X , 5 , (1, 2))         # Reference
+        with self.assertRaises(TypeError) : frustum(5 , 5 , (1, 2))         # First is not a vector
+        with self.assertRaises(TypeError) : frustum(X , "", (1, 2))         # Second is not a vector or number
+        with self.assertRaises(ValueError): frustum(X , 5)                  # Neither radii nor diameters
+        with self.assertRaises(ValueError): frustum(X , 5 , (1, 2), (1, 2)) # Both radii and diameters
+        with self.assertRaises(ValueError): frustum(v0, 5 , (2, 3))         # Zero vector is not allowed as direction
+        with self.assertRaises(TypeError) : frustum(X , 1, r = 2)           # Single radius
+        with self.assertRaises(TypeError) : frustum(X , 1, d = 4)           # Single diameter
 
         # Errors caught by _get_radii
         with self.assertRaises(ValueError): frustum(X, 1, r=(2, 3), d=(4, 6))  # Both radius and diameter
