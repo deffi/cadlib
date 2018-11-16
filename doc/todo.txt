@@ -1,7 +1,6 @@
 Next:
 
 Object:
-  * [Medium] Generators: cube/cuboid should accept x,y,z; [x,y,z]; size
   * [Medium] Assembly (Part) objects
              Idea: Assembly is an Object; Object has a render() that returns an object or a CSG; primitives' render()
              returns self
@@ -103,8 +102,8 @@ Tests:
 Util:
 
 General:
-  * [Medium] Generators: raise TypeError on missing or extra parameters? What
-             does Python raise?
+  * [Medium] Several ValueErrors should probably be TypeErrors instead (in
+             particular, extra or missing parameters)
   * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
   * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
