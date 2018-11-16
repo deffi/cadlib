@@ -102,7 +102,6 @@ Tests:
 Util:
 
 General:
-  * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
   * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
 Library:
