@@ -10,7 +10,7 @@ def test_case(name, object):
     print(object.to_scad().to_tree().format(top_indent="        "))
 
 
-cuboid = Cuboid([5, 5, 2])
+cuboid = Cuboid(5, 5, 2)
 
 rotate = RotateXyz(90, 0, 45)
 scale = ScaleXyz(1, 1, 2)

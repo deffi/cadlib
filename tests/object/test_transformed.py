@@ -12,7 +12,7 @@ class TestTransformed(TestCase):
 
         # Transformed object
         t = Translate([10, 20, 30])
-        cube = Cuboid(1)
+        cube = Cuboid(1, 1, 1)
 
         with self.assertNothingRaised(): Transformed(t, cube)
 
@@ -26,9 +26,9 @@ class TestTransformed(TestCase):
         scale1b = ScaleUniform(1)
         scale2  = ScaleUniform(2)
 
-        cube1a = Cuboid(1)
-        cube1b = Cuboid(1)
-        cube2  = Cuboid(2)
+        cube1a = Cuboid(1, 1, 1)
+        cube1b = Cuboid(1, 1, 1)
+        cube2  = Cuboid(2, 2, 2)
 
         self.assertEqual   (Transformed(scale1a, cube1a), Transformed(scale1a, cube1b)) # Equal objects
         self.assertEqual   (Transformed(scale1a, cube1a), Transformed(scale1b, cube1a)) # Equal transform
@@ -39,7 +39,7 @@ class TestTransformed(TestCase):
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)
         s = ScaleXyz(1, 2, -1)
-        cube = Cuboid(11)
+        cube = Cuboid(11, 11, 11)
 
         # Simple transform
         self.assertEqual(Transformed(r, cube).to_scad(),
@@ -59,12 +59,12 @@ class TestTransformed(TestCase):
 
     def test_repr(self):
         t = Translate([10, 20, 30])
-        cube = Cuboid(1)
+        cube = Cuboid(1, 1, 1)
 
         self.assertRepr(Transformed(t, cube), "Transformed(Translate(Vector(10, 20, 30)), Cuboid([1, 1, 1]))")
 
     def test_str(self):
         t = Translate([10, 20, 30])
-        cube = Cuboid(1)
+        cube = Cuboid(1, 1, 1)
 
         self.assertStr(Transformed(t, cube), "Transformed object")

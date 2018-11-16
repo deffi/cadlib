@@ -10,7 +10,7 @@ class TestIntersection(TestCase):
 
     def test_equality(self):
         sphere   = Sphere(11)
-        cuboid   = Cuboid([11, 22, 33])
+        cuboid   = Cuboid(11, 22, 33)
         cylinder = Frustum(origin, Z, 11, 11)
         objects = [sphere, cuboid, cylinder]
 
@@ -31,7 +31,7 @@ class TestIntersection(TestCase):
 
     def test_to_scad(self):
         sphere   = Sphere(2)
-        cube     = Cuboid([10, 10, 10])
+        cube     = Cuboid(10, 10, 10)
         cylinder = Frustum(origin, Z, 11, 11)
 
         self.assertEqual(Intersection([sphere, cube, cylinder]).to_scad(),

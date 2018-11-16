@@ -29,7 +29,7 @@ class Plane(Object):
         return f"Plane with normal {self._normal} and offset {self._offset}"
 
     def to_scad(self):
-        return (Cuboid([inf, inf, inf])
+        return (Cuboid(inf, inf, inf)
             .translate([-inf / 2, -inf / 2, -inf])
             .up(self._offset)
             .rotate(frm = Z, to = self._normal, ignore_ambiguity = True)

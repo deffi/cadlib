@@ -7,7 +7,7 @@ from tests.unit_test import TestCase
 class TestCsg(TestCase):
     def test_construction(self):
         sphere   = Sphere(11)
-        cube     = Cuboid(22)
+        cube     = Cuboid(22, 22, 22)
         cylinder = Frustum(origin, Z, 11, 11)
         object_list = [sphere, cube, cylinder]
 
@@ -29,7 +29,7 @@ class TestCsg(TestCase):
 
     def test_equality(self):
         sphere   = Sphere(11)
-        cube     = Cuboid(22)
+        cube     = Cuboid(22, 22, 22)
         cylinder = Frustum(origin, Z, 11, 11)
         objects = [sphere, cube, cylinder]
 
@@ -40,7 +40,7 @@ class TestCsg(TestCase):
 
     def test_to_scad(self):
         sphere   = Sphere(2)
-        cube     = Cuboid(10)
+        cube     = Cuboid(10, 10, 10)
         cylinder = Frustum(origin, Z, 5, 5)
 
         mixed = Union([Intersection([sphere, cylinder]), Difference([cube, sphere])])

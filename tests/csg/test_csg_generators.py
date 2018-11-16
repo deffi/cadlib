@@ -7,7 +7,7 @@ from tests.unit_test import TestCase
 class TestTransformGenerators(TestCase):
     def test_csg_generators(self):
         sphere   = Sphere(11)
-        cuboid   = Cuboid([11, 22, 33])
+        cuboid   = Cuboid(11, 22, 33)
         cylinder = Frustum(origin, Z, 11, 11)
         object_list = [sphere, cuboid, cylinder]
 

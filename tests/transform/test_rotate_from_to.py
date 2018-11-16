@@ -70,7 +70,7 @@ class TestRotateFromTo(TestCase):
 
         # Same direction (no effect). This generates a zero XYZ transform (not
         # an empty ScadObject, which would also be possible).
-        cube = Cuboid(2).to_scad()
+        cube = Cuboid(2, 2, 2).to_scad()
         self.assertScadObjectTarget(RotateFromTo(X        , X        ), None, "rotate", [[0, 0, 0]], None, None)
         self.assertScadObjectTarget(RotateFromTo(X        , X        ), cube, "rotate", [[0, 0, 0]], None, [cube])
         self.assertScadObjectTarget(RotateFromTo([1, 2, 3], [2, 4, 6]), cube, "rotate", [[0, 0, 0]], None, [cube])

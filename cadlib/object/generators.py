@@ -39,15 +39,20 @@ def _get_radii(r, d):
         raise ValueError("radii or diameters must be specified")
 
 
-def cuboid(size_or_x, y = None, z = None):
+def cuboid(size_or_x_or_xyz, y = None, z = None):
     # Signatures (convenience forms only):
-    #   * cuboid([1, 2, 3])
-    #   * cuboid(1, 2, 3)
+    #   * cuboid(size)
+    #   * cuboid(x, y, z)
+    #   * cuboid(xyz)
+    # xzy can be Vector, list, or tuple. Note that a Vector can be used for xyz
+    # even though xyz is not strictly a vector.
 
     if both(y, z):
-        return Cuboid([size_or_x, y, z])
-    elif neither(y, z):
-        return Cuboid(size_or_x)
+        return Cuboid(size_or_x_or_xyz, y, z)
+    elif neither(y, z) and number.valid(size_or_x_or_xyz):
+        return Cuboid(size_or_x_or_xyz, size_or_x_or_xyz, size_or_x_or_xyz)
+    elif neither(y, z) and Vector.valid_type(size_or_x_or_xyz):
+        return Cuboid(*size_or_x_or_xyz)
     else:
         raise ValueError("y and z can only be specified together")
 
@@ -55,8 +60,9 @@ def cuboid(size_or_x, y = None, z = None):
 def cube(size):
     # Signatures (convenience forms only):
     #   * cube(size)
+
     size = number.convert(size, "size")
-    return Cuboid([size, size, size])
+    return Cuboid(size, size, size)
 
 
 def cylinder(direction_or_base, length_or_cap, r = None, d = None):
