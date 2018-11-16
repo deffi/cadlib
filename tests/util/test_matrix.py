@@ -59,7 +59,7 @@ class TestMatrix(TestCase):
 
     def test_construction_invalid(self):
         # Rows and columns
-        with self.assertRaises(ValueError): Matrix(rows = [[1]], columns = [[1]])
+        with self.assertRaises(TypeError): Matrix(rows = [[1]], columns = [[1]])
 
         # Rows - invalid
         with self.assertRaises(ValueError): Matrix(rows = [[]    , []       ])

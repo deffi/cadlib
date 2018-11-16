@@ -95,7 +95,7 @@ class Vector:
     def __add__(self, other):
         if isinstance(other, Vector):
             if other.dimensions != self.dimensions:
-                raise ValueError("Dimensions don't match")
+                raise ValueError("Dimension mismatch: {} + {}".format(other.dimensions, self.dimensions))
             else:
                 return Vector(*[x1 + x2 for x1, x2 in zip(self._values, other._values)])
         else:
@@ -142,7 +142,7 @@ class Vector:
             raise TypeError("Dot product is only defined for vectors")
 
         if other.dimensions != self.dimensions:
-            raise ValueError("Vectors must have the same dimensions")
+            raise ValueError("Dimension mismatch: {} · {}".format(other.dimensions, self.dimensions))
 
         return sum(a * b for a, b in zip(self._values, other._values))
 

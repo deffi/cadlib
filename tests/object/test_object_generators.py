@@ -9,8 +9,8 @@ class TestObjectGenerators(TestCase):
         self.assertEqual(_get_radius(r=1   , d=None), 1)
         self.assertEqual(_get_radius(r=None, d=4   ), 2)
 
-        with self.assertRaises(ValueError): _get_radius(r=None, d=None)
-        with self.assertRaises(ValueError): _get_radius(r=1   , d=4   )
+        with self.assertRaises(TypeError): _get_radius(r=None, d=None)
+        with self.assertRaises(TypeError): _get_radius(r=1   , d=4   )
 
     def test_get_radii_helper(self):
         self.assertEqual(_get_radii(r=(1, 2)  , d=None  ), (1, 2))
@@ -22,8 +22,8 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(TypeError): _get_radii(r="xy")
         with self.assertRaises(TypeError): _get_radii(d="xy")
 
-        with self.assertRaises(ValueError): _get_radii(r=None  , d=None  )
-        with self.assertRaises(ValueError): _get_radii(r=(1, 2), d=(4, 6))
+        with self.assertRaises(TypeError): _get_radii(r=None  , d=None  )
+        with self.assertRaises(TypeError): _get_radii(r=(1, 2), d=(4, 6))
 
         with self.assertRaises(ValueError): _get_radii(r=(1, 2, 3), d=None     )
         with self.assertRaises(ValueError): _get_radii(r=None     , d=(4, 6, 8))
@@ -41,11 +41,11 @@ class TestObjectGenerators(TestCase):
 
         self.assertEqual(cube(1), Cuboid(1, 1, 1))
 
-        with self.assertRaises(ValueError): cuboid(1, 2)
-        with self.assertRaises(ValueError): cuboid(None)
-        with self.assertRaises(ValueError): cuboid("1")
-        with self.assertRaises(ValueError): cuboid(1, 2, None)
-        with self.assertRaises(ValueError): cuboid(1, None, 2)
+        with self.assertRaises(TypeError): cuboid(1, 2)
+        with self.assertRaises(TypeError): cuboid(None)
+        with self.assertRaises(TypeError): cuboid("1")
+        with self.assertRaises(TypeError): cuboid(1, 2, None)
+        with self.assertRaises(TypeError): cuboid(1, None, 2)
         with self.assertRaises(TypeError) : cuboid(1, 2, "3")
 
     def test_frustum_generators(self):
@@ -68,8 +68,8 @@ class TestObjectGenerators(TestCase):
         with self.assertNothingRaised()   : cylinder(X , 5 , 1)        # Reference
         with self.assertRaises(TypeError) : cylinder(5 , 5 , 1)        # First is not a vector
         with self.assertRaises(TypeError) : cylinder(X , "", 1)        # Second is not a vector or number
-        with self.assertRaises(ValueError): cylinder(X , 5    )        # Neither radius nor diameter
-        with self.assertRaises(ValueError): cylinder(X , 5 , 1, 1)     # Both radius and diameter
+        with self.assertRaises(TypeError) : cylinder(X , 5    )        # Neither radius nor diameter
+        with self.assertRaises(TypeError) : cylinder(X , 5 , 1, 1)     # Both radius and diameter
         with self.assertRaises(ValueError): cylinder(v0, 5 , 1)        # Zero vector is not allowed as direction
         with self.assertRaises(TypeError) : cylinder(X , 5 , r=(1, 2)) # Radii
         with self.assertRaises(TypeError) : cylinder(X , 5 , d=(1, 2)) # Diameters
@@ -88,8 +88,8 @@ class TestObjectGenerators(TestCase):
         with self.assertNothingRaised():    cone(X , 5 , 1)        # Reference
         with self.assertRaises(TypeError) : cone(5 , 5 , 1)        # First is not a vector
         with self.assertRaises(TypeError) : cone(X , "", 1)        # Second is not a vector or number
-        with self.assertRaises(ValueError): cone(X , 5    )        # Neither radius nor diameter
-        with self.assertRaises(ValueError): cone(X , 5 , 1, 1)     # Both radius and diameter
+        with self.assertRaises(TypeError) : cone(X , 5    )        # Neither radius nor diameter
+        with self.assertRaises(TypeError) : cone(X , 5 , 1, 1)     # Both radius and diameter
         with self.assertRaises(ValueError): cone(v0, 5 , 1)        # Zero vector is not allowed as direction
         with self.assertRaises(TypeError) : cone(v0, 5 , r=(1, 2)) # Radii
         with self.assertRaises(TypeError) : cone(v0, 5 , d=(1, 2)) # Diameters
@@ -108,19 +108,19 @@ class TestObjectGenerators(TestCase):
         with self.assertNothingRaised():    frustum(X , 5 , (1, 2))         # Reference
         with self.assertRaises(TypeError) : frustum(5 , 5 , (1, 2))         # First is not a vector
         with self.assertRaises(TypeError) : frustum(X , "", (1, 2))         # Second is not a vector or number
-        with self.assertRaises(ValueError): frustum(X , 5)                  # Neither radii nor diameters
-        with self.assertRaises(ValueError): frustum(X , 5 , (1, 2), (1, 2)) # Both radii and diameters
+        with self.assertRaises(TypeError) : frustum(X , 5)                  # Neither radii nor diameters
+        with self.assertRaises(TypeError) : frustum(X , 5 , (1, 2), (1, 2)) # Both radii and diameters
         with self.assertRaises(ValueError): frustum(v0, 5 , (2, 3))         # Zero vector is not allowed as direction
         with self.assertRaises(TypeError) : frustum(X , 1, r = 2)           # Single radius
         with self.assertRaises(TypeError) : frustum(X , 1, d = 4)           # Single diameter
 
         # Errors caught by _get_radii
-        with self.assertRaises(ValueError): frustum(X, 1, r=(2, 3), d=(4, 6))  # Both radius and diameter
-        with self.assertRaises(ValueError): frustum(X, 1)                      # Neither radius nor diameter
-        with self.assertRaises(ValueError): frustum(X, 1, r = (2, 3, 4)) # Too many radii
-        with self.assertRaises(ValueError): frustum(X, 1, d = (4, 6, 8)) # Too many diameters
-        with self.assertRaises(ValueError): frustum(X, 1, r = (2, )) # Too few radii
-        with self.assertRaises(ValueError): frustum(X, 1, d = (4, )) # Too few diameters
+        with self.assertRaises(TypeError) : frustum(X, 1, r=(2, 3), d=(4, 6))  # Both radius and diameter
+        with self.assertRaises(TypeError) : frustum(X, 1)                      # Neither radius nor diameter
+        with self.assertRaises(ValueError): frustum(X, 1, r = (2, 3, 4))       # Too many radii
+        with self.assertRaises(ValueError): frustum(X, 1, d = (4, 6, 8))       # Too many diameters
+        with self.assertRaises(ValueError): frustum(X, 1, r = (2, ))           # Too few radii
+        with self.assertRaises(ValueError): frustum(X, 1, d = (4, ))           # Too few diameters
 
     def test_sphere_generators(self):
         self.assertEqual(sphere(2), Sphere(2))
@@ -132,8 +132,8 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(TypeError): sphere(d = "2")
 
         # Errors caught by _get_radius
-        with self.assertRaises(ValueError): sphere(r=2, d=2)  # Both radius and diameter
-        with self.assertRaises(ValueError): sphere()          # Neither radius nor diameter
+        with self.assertRaises(TypeError): sphere(r=2, d=2)  # Both radius and diameter
+        with self.assertRaises(TypeError): sphere()          # Neither radius nor diameter
 
     def test_plane_generators(self):
         self.assertEqual(plane(X, 1), Plane(X, 1))

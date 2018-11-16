@@ -36,10 +36,10 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
     # "Vector type" is Vector, list, or tuple
 
     # Make sure that there are no conflicts between convenience parameters and canonical parameters
-    if both(axis_or_frm, axis ): raise ValueError("axis"  " cannot be specified together with axis_or_frm")
-    if both(axis_or_frm, frm  ): raise ValueError("frm"   " cannot be specified together with axis_or_frm")
-    if both(angle_or_to, angle): raise ValueError("angle" " cannot be specified together with angle_or_to")
-    if both(angle_or_to, to   ): raise ValueError("to"    " cannot be specified together with angle_or_to")
+    if both(axis_or_frm, axis ): raise TypeError("axis"  " cannot be specified together with axis_or_frm")
+    if both(axis_or_frm, frm  ): raise TypeError("frm"   " cannot be specified together with axis_or_frm")
+    if both(angle_or_to, angle): raise TypeError("angle" " cannot be specified together with angle_or_to")
+    if both(angle_or_to, to   ): raise TypeError("to"    " cannot be specified together with angle_or_to")
 
     # Transform the convenience forms to canonical form
     if axis_or_frm is not None:
@@ -65,46 +65,46 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
             frm = axis_or_frm
 
     # Check the parameters that must appear in pairs
-    if axis  is not None and angle is None: raise ValueError("angle" " is required when " "axis"  " is given")
-    if angle is not None and axis  is None: raise ValueError("axis"  " is required when " "angle" " is given")
-    if frm   is not None and to    is None: raise ValueError("to"    " is required when " "frm"   " is given")
-    if to    is not None and frm   is None: raise ValueError("frm"   " is required when " "to"    " is given")
+    if axis  is not None and angle is None: raise TypeError("angle" " is required when " "axis"  " is given")
+    if angle is not None and axis  is None: raise TypeError("axis"  " is required when " "angle" " is given")
+    if frm   is not None and to    is None: raise TypeError("to"    " is required when " "frm"   " is given")
+    if to    is not None and frm   is None: raise TypeError("frm"   " is required when " "to"    " is given")
 
     # Handle the different cases
     if axis is not None:
         # Check that no other specification is given
-        if frm is not None: raise ValueError("frm" " cannot be specified together with axis")
-        if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
-        if ypr is not None: raise ValueError("ypr" " cannot be specified together with axis")
+        if frm is not None: raise TypeError("frm" " cannot be specified together with axis")
+        if xyz is not None: raise TypeError("xyz" " cannot be specified together with axis")
+        if ypr is not None: raise TypeError("ypr" " cannot be specified together with axis")
 
         return RotateAxisAngle(axis, angle)
 
     elif frm is not None:
         # Check that no other specification is given
-        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
-        if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with frm")
-        if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with frm")
+        if axis is not None: raise TypeError("axis" " cannot be specified together with frm")
+        if xyz  is not None: raise TypeError("xyz"  " cannot be specified together with frm")
+        if ypr  is not None: raise TypeError("ypr"  " cannot be specified together with frm")
 
         return RotateFromTo(frm, to, ignore_ambiguity)
 
     elif xyz is not None:
         # Check that no other specification is given
-        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
-        if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
-        if ypr  is not None: raise ValueError("ypr"  " cannot be specified together with axis")
+        if axis is not None: raise TypeError("axis" " cannot be specified together with frm")
+        if frm  is not None: raise TypeError("frm"  " cannot be specified together with axis")
+        if ypr  is not None: raise TypeError("ypr"  " cannot be specified together with axis")
 
         return RotateXyz(*xyz)
 
     elif ypr is not None:
         # Check that no other specification is given
-        if axis is not None: raise ValueError("axis" " cannot be specified together with frm")
-        if frm  is not None: raise ValueError("frm"  " cannot be specified together with axis")
-        if xyz  is not None: raise ValueError("xyz"  " cannot be specified together with axis")
+        if axis is not None: raise TypeError("axis" " cannot be specified together with frm")
+        if frm  is not None: raise TypeError("frm"  " cannot be specified together with axis")
+        if xyz  is not None: raise TypeError("xyz"  " cannot be specified together with axis")
 
         return RotateYpr(*ypr)
 
     else:
-        raise ValueError("Invalid call signature")
+        raise TypeError("Invalid call signature")
 
 def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     # Signatures (canonical forms):
@@ -130,8 +130,8 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     # for xyz even though xyz is not strictly a vector.
 
     # Make sure that there are no conflicts between convenience parameters and canonical parameters
-    if both(xyz_or_axis_or_factor, xyz ): raise ValueError("xyz"   " cannot be specified together with xyz_or_axis")
-    if both(xyz_or_axis_or_factor, axis): raise ValueError("axis"  " cannot be specified together with xyz_or_axis")
+    if both(xyz_or_axis_or_factor, xyz ): raise TypeError("xyz"   " cannot be specified together with xyz_or_axis")
+    if both(xyz_or_axis_or_factor, axis): raise TypeError("axis"  " cannot be specified together with xyz_or_axis")
 
     # Transform the convenience forms to canonical form
     if xyz_or_axis_or_factor is not None:
@@ -147,24 +147,24 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
                 # Factor
                 factor = xyz_or_axis_or_factor
             else:
-                raise ValueError("factor cannot be specified together with numeric xyz_or_axis")
+                raise TypeError("factor cannot be specified together with numeric xyz_or_axis")
         else:
             raise TypeError("xyz_or_axis_or_factor must be a vector type or a number")
 
     # Check the parameters that must appear in pairs
-    if axis is not None and factor is None: raise ValueError("factor" " is required when " "axis" " is given")
+    if axis is not None and factor is None: raise TypeError("factor" " is required when " "axis" " is given")
 
     # Handle the different cases
     if axis is not None:
         # Check that no other specification is given
-        if xyz is not None: raise ValueError("xyz" " cannot be specified together with axis")
+        if xyz is not None: raise TypeError("xyz" " cannot be specified together with axis")
 
         return ScaleAxisFactor(axis, factor)
 
     elif xyz is not None:
         # Check that no other specification is given
-        if axis   is not None: raise ValueError("axis"   " cannot be specified together with xyz")
-        if factor is not None: raise ValueError("factor" " cannot be specified together with xyz")
+        if axis   is not None: raise TypeError("axis"   " cannot be specified together with xyz")
+        if factor is not None: raise TypeError("factor" " cannot be specified together with xyz")
 
         return ScaleXyz(*xyz)
 
@@ -172,7 +172,7 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
         return ScaleUniform(factor)
 
     else:
-        raise ValueError("Invalid call signature")
+        raise TypeError("Invalid call signature")
 
 
 

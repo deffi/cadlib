@@ -10,17 +10,17 @@ __all__ = ['cone', 'cuboid', 'cube', 'cylinder', 'frustum', 'plane', 'layer', 's
 
 def _get_radius(r, d):
     if both(r, d):
-        raise ValueError("radius and diameter cannot be specified together")
+        raise TypeError("radius and diameter cannot be specified together")
     elif r is not None:
         return number.convert(r, "radius")
     elif d is not None:
         return number.convert(d, "diameter") / 2
     else:
-        raise ValueError("radius or diameter must be specified")
+        raise TypeError("radius or diameter must be specified")
 
 def _get_radii(r, d):
     if both(r, d):
-        raise ValueError("radii and diameters cannot be specified together")
+        raise TypeError("radii and diameters cannot be specified together")
     elif r is not None:
         if not isinstance(r, (tuple, list)):
             raise TypeError("r must be a tuple or a list")
@@ -36,7 +36,7 @@ def _get_radii(r, d):
         else:
             return tuple(x/2 for x in d)
     else:
-        raise ValueError("radii or diameters must be specified")
+        raise TypeError("radii or diameters must be specified")
 
 
 def cuboid(size_or_x_or_xyz, y = None, z = None):
@@ -54,7 +54,7 @@ def cuboid(size_or_x_or_xyz, y = None, z = None):
     elif neither(y, z) and Vector.valid_type(size_or_x_or_xyz):
         return Cuboid(*size_or_x_or_xyz)
     else:
-        raise ValueError("y and z can only be specified together")
+        raise TypeError("y and z can only be specified together")
 
 
 def cube(size):

@@ -12,7 +12,7 @@ class Matrix:
         self._rows = []
 
         if rows is not None and columns is not None:
-            raise ValueError("rows and columns cannot be specified together")
+            raise TypeError("rows and columns cannot be specified together")
 
         elif rows is not None:
             rows = list(rows)
@@ -126,7 +126,7 @@ class Matrix:
     def __add__(self, other):
         if isinstance(other, Matrix):
             if other.dimensions != self.dimensions:
-                raise ValueError("Dimensions don't match")
+                raise ValueError("Dimension mismatch: {} + {}".format(self.dimensions, other.dimensions))
             else:
                 return Matrix.from_rows(*[[x1 + x2 for x1, x2 in zip(r1, r2)] for r1, r2 in zip(self._rows, other._rows)])
         else:

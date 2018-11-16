@@ -102,8 +102,6 @@ Tests:
 Util:
 
 General:
-  * [Medium] Several ValueErrors should probably be TypeErrors instead (in
-             particular, extra or missing parameters)
   * [Medium] Really allow_zero? Maybe add Vector.origin as metavalue
   * [Low]    Consistent order: Union, Intersection, Difference (+, *, -)
 
