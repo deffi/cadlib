@@ -23,7 +23,8 @@ class Cuboid(Object):
             and other._size == self._size)
 
     def __repr__(self):
-        return f"Cuboid({self._size!r})"
+        x, y, z = self._size
+        return f"Cuboid({x!r}, {y!r}, {z!r})"
 
     def __str__(self):
         w, d, h = self._size

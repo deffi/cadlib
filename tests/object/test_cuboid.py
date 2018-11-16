@@ -43,8 +43,8 @@ class TestCuboid(TestCase):
         self.assertScadObject(Cuboid(11, 22, 33), "cube", [[11, 22, 33]], None, None)
 
     def test_repr(self):
-        # TODO repr must be changed
-        self.assertRepr(Cuboid(11, 22, 33), "Cuboid([11, 22, 33])")
+        self.assertRepr(Cuboid(11, 22, 33), "Cuboid(11, 22, 33)")
+        self.assertRepr(Cuboid(11, 11, 11), "Cuboid(11, 11, 11)")
 
     def test_str(self):
         self.assertStr(Cuboid(11, 22, 33), "Cuboid with width 11, depth 22, and height 33")
