@@ -28,16 +28,15 @@ Object:
              be done in the generators
 
 Primitives:
-  * [Medium] More primitives? See OpenSCAD documentation
-  * [Medium] Plane: through point
+  * [Low]    Plane: through point
 
 Transform:
-  * [Medium] arrange objects in a grid (from list, or factory)
-  * [Medium] Scale around (instead of along) axis?
+  * [Low]    Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
              But we need the around parameter to specify a scale origin?
-  * [Medium] Scaling (XYZ and along a vector): specify the fixed point/offset
+  * [Low]    Scaling (XYZ and along a vector): specify the fixed point/offset
+  * [Low]    arrange objects in a grid (from list, or factory)
   * [Low]    transform generator: axis_angle (direction/magnitude)
   * [Low]    Non-chained inverse of RotateYpr and RotateXyz
   * [Low]    mirror(along which axis and which point/offset)
