@@ -18,7 +18,7 @@ class Node:
                 and self._children == other._children)
 
     def lines(self, indent = None, top_indent = ""):
-        '''Indent: indent string per level, or None for pretty-printing'''
+        """Indent: indent string per level, or None for pretty-printing"""
         result = []
         result.append(top_indent + str(self._data))
 
@@ -41,5 +41,5 @@ class Node:
         return result
 
     def format(self, indent = None, top_indent = ""):
-        '''Indent: indent string per level, or None for pretty-printing'''
+        """Indent: indent string per level, or None for pretty-printing"""
         return "\n".join(self.lines(indent, top_indent))

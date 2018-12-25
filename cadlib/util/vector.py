@@ -5,7 +5,7 @@ from cadlib.util import Matrix
 from cadlib.util import number
 
 class Vector:
-    '''
+    """
     Note that __len__, like the dimensions property, returns the number of elements. The length property returns the
     vector's magnitude.
 
@@ -15,7 +15,7 @@ class Vector:
     Besides, since arithmetic operations such as Vector+Vector and Matrix*Vector are supposed to return a vector, the
     corresponding methods would have to be overridden to convert the result to a vector. Finally, calling
     .transpose().transpose() on a Vector would change the type to Matrix.
-    '''
+    """
 
     ####################
     ## Initialization ##
