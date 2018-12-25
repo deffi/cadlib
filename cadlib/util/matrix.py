@@ -59,16 +59,6 @@ class Matrix:
                 if not isinstance(value, Number):
                     raise TypeError("Matrices must consist of numeric values")
 
-    # TODO remove
-    @classmethod
-    def from_rows(cls, *rows):
-        return cls(rows = rows)
-
-    # TODO remove
-    @classmethod
-    def from_columns(cls, *columns):
-        return cls(columns = columns)
-
     @classmethod
     def identity(cls, size):
         """Create an identity matrix.
@@ -160,7 +150,8 @@ class Matrix:
             if other.dimensions != self.dimensions:
                 raise ValueError("Dimension mismatch: {} + {}".format(self.dimensions, other.dimensions))
             else:
-                return Matrix.from_rows(*[[x1 + x2 for x1, x2 in zip(r1, r2)] for r1, r2 in zip(self._rows, other._rows)])
+                rows = [[x1 + x2 for x1, x2 in zip(r1, r2)] for r1, r2 in zip(self._rows, other._rows)]
+                return Matrix(rows = rows)
         else:
             return NotImplemented
 

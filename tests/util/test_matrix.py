@@ -105,29 +105,29 @@ class TestMatrix(TestCase):
 
     def test_from_rows(self):
         # Valid
-        self.assertEqual(Matrix.from_rows().row_values, [])
-        self.assertEqual(Matrix.from_rows([1, 2, 3]).row_values, [[1, 2, 3]])
-        self.assertEqual(Matrix.from_rows([1, 2, 3], [4, 5, 6]).row_values, [[1, 2, 3], [4, 5, 6]])
+        self.assertEqual(Matrix(rows = []).row_values, [])
+        self.assertEqual(Matrix(rows = [[1, 2, 3]]).row_values, [[1, 2, 3]])
+        self.assertEqual(Matrix(rows = [[1, 2, 3], [4, 5, 6]]).row_values, [[1, 2, 3], [4, 5, 6]])
 
         # Invalid
-        with self.assertRaises(ValueError): Matrix.from_rows([1, 2], [3, 4, 5])
+        with self.assertRaises(ValueError): Matrix(rows = [[1, 2], [3, 4, 5]])
 
         # Wrong type
-        with self.assertRaises(TypeError): Matrix.from_rows(1)
-        with self.assertRaises(TypeError): Matrix.from_rows(1, 2)
+        with self.assertRaises(TypeError): Matrix(rows = [1])
+        with self.assertRaises(TypeError): Matrix(rows = [1, 2])
 
     def test_from_columns(self):
         # Valid
-        self.assertEqual(Matrix.from_columns().row_values, [])
-        self.assertEqual(Matrix.from_columns([1, 2, 3]).row_values, [[1], [2], [3]])
-        self.assertEqual(Matrix.from_columns([1, 2, 3], [4, 5, 6]).row_values, [[1, 4], [2, 5], [3, 6]])
+        self.assertEqual(Matrix(columns = []).row_values, [])
+        self.assertEqual(Matrix(columns = [[1, 2, 3]]).row_values, [[1], [2], [3]])
+        self.assertEqual(Matrix(columns = [[1, 2, 3], [4, 5, 6]]).row_values, [[1, 4], [2, 5], [3, 6]])
 
         # Invalid
-        with self.assertRaises(ValueError): Matrix.from_columns([1, 2], [3, 4, 5])
+        with self.assertRaises(ValueError): Matrix(columns = [[1, 2], [3, 4, 5]])
 
         # Wrong type
-        with self.assertRaises(TypeError): Matrix.from_columns(1)
-        with self.assertRaises(TypeError): Matrix.from_columns(1, 2)
+        with self.assertRaises(TypeError): Matrix(columns = [1])
+        with self.assertRaises(TypeError): Matrix(columns = [1, 2])
 
 
     ################
@@ -135,9 +135,9 @@ class TestMatrix(TestCase):
     ################
 
     def test_equality(self):
-        m1 = Matrix.from_rows([1, 2], [3, 4])
-        m2 = Matrix.from_rows([1, 2], [3, 4])
-        m3 = Matrix.from_rows([1, 2], [3, 5])
+        m1 = Matrix(rows = [[1, 2], [3, 4]])
+        m2 = Matrix(rows = [[1, 2], [3, 4]])
+        m3 = Matrix(rows = [[1, 2], [3, 5]])
 
         self.assertEqual(m1, m2)
         self.assertNotEqual(m1, m3)
@@ -152,13 +152,13 @@ class TestMatrix(TestCase):
         self.assertEqual(m.column_count, 0)
         self.assertEqual(m.dimensions, (0, 0))
 
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
         self.assertEqual(m.row_count, 2)
         self.assertEqual(m.column_count, 3)
         self.assertEqual(m.dimensions, (2, 3))
 
     def test_item(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         # Positive index
         self.assertEqual(m[0, 0], 1)
@@ -186,7 +186,7 @@ class TestMatrix(TestCase):
         with self.assertRaises(TypeError): m[0]
 
     def test_row_values_and_column_values(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         self.assertEqual(m.row_values   , [[1, 2, 3], [4, 5, 6]])
         self.assertEqual(m.column_values, [[1, 4], [2, 5], [3, 6]])
@@ -216,61 +216,61 @@ class TestMatrix(TestCase):
     ################
 
     def test_transpose(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         self.assertEqual(m.row_values                        , [[1, 2, 3], [4, 5, 6]])
         self.assertEqual(m.transpose().row_values            , [[1, 4], [2, 5], [3, 6]])
         self.assertEqual(m.transpose().transpose().row_values, [[1, 2, 3], [4, 5, 6]])
 
     def test_negation(self):
-        m1 = Matrix.from_rows([1, 2, 3], [4, 5, 0])
-        m2 = Matrix.from_rows([-1, -2, -3], [-4, -5, 0])
+        m1 = Matrix(rows = [[1, 2, 3], [4, 5, 0]])
+        m2 = Matrix(rows = [[-1, -2, -3], [-4, -5, 0]])
         self.assertEqual(-m1, m2)
 
     def test_matrix_addition(self):
         # Regular addition
-        m1 = Matrix.from_rows([1, 2, 3], [4, 5, 6])
-        m2 = Matrix.from_rows([7, 8, 9], [-1, -2, 0])
-        m3 = Matrix.from_rows([8, 10, 12], [3, 3, 6])
+        m1 = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
+        m2 = Matrix(rows = [[7, 8, 9], [-1, -2, 0]])
+        m3 = Matrix(rows = [[8, 10, 12], [3, 3, 6]])
         self.assertEqual(m1 + m2, m3)
 
         # Size mismatch
-        m4 = Matrix.from_rows([1, 2], [3, 4], [5, 6])
+        m4 = Matrix(rows = [[1, 2], [3, 4], [5, 6]])
         with self.assertRaises(ValueError): m1 + m4
 
     def test_matrix_subtraction(self):
         # Regular addition
-        m1 = Matrix.from_rows([1, 2, 3], [4, 5, 6])
-        m2 = Matrix.from_rows([7, 8, 9], [-1, -2, 0])
-        m3 = Matrix.from_rows([-6, -6, -6], [5, 7, 6])
+        m1 = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
+        m2 = Matrix(rows = [[7, 8, 9], [-1, -2, 0]])
+        m3 = Matrix(rows = [[-6, -6, -6], [5, 7, 6]])
         self.assertEqual(m1 - m2, m3)
 
         # Size mismatch
-        m4 = Matrix.from_rows([1, 2], [3, 4], [5, 6])
+        m4 = Matrix(rows = [[1, 2], [3, 4], [5, 6]])
         with self.assertRaises(ValueError): m1 - m4
 
     def test_scalar_multiplication(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         # Matrix * Number
         self.assertEqual(m * 1  , m)
-        self.assertEqual(m * 2  , Matrix.from_rows([2, 4, 6], [8, 10, 12]))
-        self.assertEqual(m * 0.5, Matrix.from_rows([0.5, 1, 1.5], [2, 2.5, 3]))
-        self.assertEqual(m * 0  , Matrix.from_rows([0, 0, 0], [0, 0, 0]))
+        self.assertEqual(m * 2  , Matrix(rows = [[2, 4, 6], [8, 10, 12]]))
+        self.assertEqual(m * 0.5, Matrix(rows = [[0.5, 1, 1.5], [2, 2.5, 3]]))
+        self.assertEqual(m * 0  , Matrix(rows = [[0, 0, 0], [0, 0, 0]]))
 
         # Number * Matrix
         self.assertEqual(1   * m, m)
-        self.assertEqual(2   * m, Matrix.from_rows([2, 4, 6], [8, 10, 12]))
-        self.assertEqual(0.5 * m, Matrix.from_rows([0.5, 1, 1.5], [2, 2.5, 3]))
-        self.assertEqual(0   * m, Matrix.from_rows([0, 0, 0], [0, 0, 0]))
+        self.assertEqual(2   * m, Matrix(rows = [[2, 4, 6], [8, 10, 12]]))
+        self.assertEqual(0.5 * m, Matrix(rows = [[0.5, 1, 1.5], [2, 2.5, 3]]))
+        self.assertEqual(0   * m, Matrix(rows = [[0, 0, 0], [0, 0, 0]]))
 
     def test_scalar_division(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         # Matrix / Number
         self.assertEqual(m / 1  , m)
-        self.assertEqual(m / 2  , Matrix.from_rows([0.5, 1, 1.5], [2, 2.5, 3]))
-        self.assertEqual(m / 0.5, Matrix.from_rows([2, 4, 6], [8, 10, 12]))
+        self.assertEqual(m / 2  , Matrix(rows = [[0.5, 1, 1.5], [2, 2.5, 3]]))
+        self.assertEqual(m / 0.5, Matrix(rows = [[2, 4, 6], [8, 10, 12]]))
 
         # Matrix / 0 is invalid
         with self.assertRaises(ZeroDivisionError): m / 0
@@ -279,7 +279,7 @@ class TestMatrix(TestCase):
         with self.assertRaises(TypeError): 1 / m
 
     def test_matrix_multiplication(self):
-        m = Matrix.from_rows([1, 2], [3, 4])
+        m = Matrix(rows = [[1, 2], [3, 4]])
 
         # Left and right multiplication with identity
         self.assertEqual(Matrix.identity(2) * m, m)
@@ -294,46 +294,46 @@ class TestMatrix(TestCase):
         self.assertEqual(m * (5 * Matrix.identity(2)), 5 * m)
 
         # Multiplications
-        m1 = Matrix.from_rows([1, 2], [3, 4])
-        m2 = Matrix.from_rows([5, 6], [7, 8])
-        m3 = Matrix.from_rows([19, 22], [43, 50])
-        flip = Matrix.from_rows([1, 0], [0, -1])
-        turn = Matrix.from_rows([0, -1], [1, 0])
+        m1 = Matrix(rows = [[1, 2], [3, 4]])
+        m2 = Matrix(rows = [[5, 6], [7, 8]])
+        m3 = Matrix(rows = [[19, 22], [43, 50]])
+        flip = Matrix(rows = [[1, 0], [0, -1]])
+        turn = Matrix(rows = [[0, -1], [1, 0]])
 
-        self.assertEqual(flip * m1  , Matrix.from_rows([1, 2], [-3, -4])) # Invert y
-        self.assertEqual(m1   * flip, Matrix.from_rows([1, -2], [3, -4]))
-        self.assertEqual(turn * m1  , Matrix.from_rows([-3, -4], [1, 2])) # Rotate by 90 degrees
+        self.assertEqual(flip * m1  , Matrix(rows = [[1, 2], [-3, -4]])) # Invert y
+        self.assertEqual(m1   * flip, Matrix(rows = [[1, -2], [3, -4]]))
+        self.assertEqual(turn * m1  , Matrix(rows = [[-3, -4], [1, 2]])) # Rotate by 90 degrees
         self.assertEqual(m1   * m2  , m3) # Arbitrary
 
         # 2x3 * 3x2
-        self.assertEqual(Matrix.from_rows([10, 11, 12], [13, 14, 15]) *
-                         Matrix.from_rows([16, 17], [18, 19], [20, 21]),
-                         Matrix.from_rows([598, 631], [760, 802]))
+        self.assertEqual(Matrix(rows = [[10, 11, 12], [13, 14, 15]]) *
+                         Matrix(rows = [[16, 17], [18, 19], [20, 21]]),
+                         Matrix(rows = [[598, 631], [760, 802]]))
 
         # 3x2 * 2x3
-        self.assertEqual(Matrix.from_rows([10, 11], [12, 13], [14, 15]) *
-                         Matrix.from_rows([16, 17, 18], [19, 20, 21]),
-                         Matrix.from_rows([369, 390, 411], [439, 464, 489], [509, 538, 567]))
+        self.assertEqual(Matrix(rows = [[10, 11], [12, 13], [14, 15]]) *
+                         Matrix(rows = [[16, 17, 18], [19, 20, 21]]),
+                         Matrix(rows = [[369, 390, 411], [439, 464, 489], [509, 538, 567]]))
 
         # 3x3
-        self.assertEqual(Matrix.from_rows([10, 11, 12], [13, 14, 15], [16, 17, 18]) *
-                         Matrix.from_rows([19, 20, 21], [22, 23, 24], [25, 26, 27]),
-                         Matrix.from_rows([732, 765, 798], [930, 972, 1014], [1128, 1179, 1230]))
+        self.assertEqual(Matrix(rows = [[10, 11, 12], [13, 14, 15], [16, 17, 18]]) *
+                         Matrix(rows = [[19, 20, 21], [22, 23, 24], [25, 26, 27]]),
+                         Matrix(rows = [[732, 765, 798], [930, 972, 1014], [1128, 1179, 1230]]))
 
         # Dimensions mismatch
         with self.assertRaises(ValueError): Matrix.identity(3) * m
         with self.assertRaises(ValueError): m * Matrix.identity(3)
-        with self.assertRaises(ValueError): (Matrix.from_rows([16, 17, 18], [19, 20, 21]) *
-                                             Matrix.from_rows([10, 11], [12, 13]))
+        with self.assertRaises(ValueError): (Matrix(rows = [[16, 17, 18], [19, 20, 21]]) *
+                                             Matrix(rows = [[10, 11], [12, 13]]))
 
     def test_mixed_arithmetic(self):
-        m1 = Matrix.from_rows([1, 2, 3], [4, 5, 6])
-        m2 = Matrix.from_rows([7, 8, 9], [-1, -2, 0])
+        m1 = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
+        m2 = Matrix(rows = [[7, 8, 9], [-1, -2, 0]])
         self.assertEqual(m1 + (-m2), m1 - m2)
         self.assertEqual(m1 - (-m2), m1 + m2)
 
     def test_invalid_arithmetic(self):
-        m = Matrix.from_rows([1, 2, 3], [4, 5, 6])
+        m = Matrix(rows = [[1, 2, 3], [4, 5, 6]])
 
         for invalid in [0, None, ""]:
             with self.assertRaises(TypeError): m + invalid

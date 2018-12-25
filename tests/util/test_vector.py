@@ -226,20 +226,20 @@ class TestVector(TestCase):
         self.assertEqual(Matrix.zero(3) * Vector(1, 2, 3), Vector(0, 0, 0))
 
         # (Square) Matrix * Vector
-        m = Matrix.from_rows(
+        m = Matrix(rows=[
             [1, 1, 1],
             [0, 1, 1],
-            [0, 0, 1])
+            [0, 0, 1]])
         self.assertEqual(m * Vector(0, 0, 0), Vector(0, 0, 0))
         self.assertEqual(m * Vector(1, 2, 3), Vector(6, 5, 3))
         with self.assertRaises(ValueError): m * Vector(1, 2, 3, 4)
 
         # (Non-square) Matrix * Vector
-        m = Matrix.from_rows(
+        m = Matrix(rows = [
             [1, 1, 1],
             [0, 2, 2],
             [0, 3, 0],
-            [0, 0, 4])
+            [0, 0, 4]])
         self.assertEqual(m * Vector(0, 0, 0), Vector(0, 0, 0, 0))
         self.assertEqual(m * Vector(1, 2, 3), Vector(6, 10, 6, 12))
         with self.assertRaises(ValueError): m * Vector(1, 2, 3, 4)

@@ -26,9 +26,9 @@ class Translate(Transform):
 
     def to_matrix(self):
         x, y, z = self._vector
-        return Matrix.from_rows(
+        return Matrix(rows = [
             [1, 0, 0, x],
             [0, 1, 0, y],
             [0, 0, 1, z],
             [0, 0, 0, 1],
-        )
+        ])

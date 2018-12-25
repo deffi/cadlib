@@ -38,9 +38,9 @@ class RotateAxisAngle(Transform):
         C = 1 - c
         x, y, z = self._axis.normalized()
 
-        return Matrix.from_rows(
+        return Matrix(rows = [
             [x*x*C + c  , x*y*C - z*s, x*z*C + y*s, 0],
             [y*x*C + z*s, y*y*C + c  , y*z*C - x*s, 0],
             [z*x*C - y*s, z*y*C + x*s, z*z*C + c  , 0],
             [0          , 0          , 0          , 1],
-        )
+        ])

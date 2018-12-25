@@ -54,9 +54,9 @@ class ScaleXyz(Transform):
 
     def to_matrix(self):
         x, y, z = self._xyz
-        return Matrix.from_rows(
+        return Matrix(rows=[
             [x, 0, 0, 0],
             [0, y, 0, 0],
             [0, 0, z, 0],
             [0, 0, 0, 1],
-        )
+        ])

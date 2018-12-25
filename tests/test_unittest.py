@@ -71,10 +71,10 @@ class TestUnitTest(TestCase):
         epsilon = 1e-8
         delta   = 0.1
 
-        m1 = Matrix.from_rows([1, 2], [3, 4])
-        m2 = Matrix.from_rows([1 + epsilon, 2 + epsilon], [3 + epsilon, 4 + epsilon])
-        m3 = Matrix.from_rows([1 + delta  , 2 + delta  ], [3 + delta  , 4 + delta  ])
-        m4 = Matrix.from_rows([1, 2], [3, 4], [5, 6])
+        m1 = Matrix(rows = [[1, 2], [3, 4]])
+        m2 = Matrix(rows = [[1 + epsilon, 2 + epsilon], [3 + epsilon, 4 + epsilon]])
+        m3 = Matrix(rows = [[1 + delta  , 2 + delta  ], [3 + delta  , 4 + delta  ]])
+        m4 = Matrix(rows = [[1, 2], [3, 4], [5, 6]])
 
         # Almost equal
         self.assertAlmostEqual(m1, m1)

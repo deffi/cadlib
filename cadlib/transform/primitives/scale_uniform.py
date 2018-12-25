@@ -32,9 +32,9 @@ class ScaleUniform(Transform):
 
     def to_matrix(self):
         f = self._factor
-        return Matrix.from_rows(
+        return Matrix(rows = [
             [f, 0, 0, 0],
             [0, f, 0, 0],
             [0, 0, f, 0],
             [0, 0, 0, 1],
-        )
+        ])
