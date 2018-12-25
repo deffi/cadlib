@@ -13,7 +13,8 @@ class Matrix:
 
         The specified rows or columns must be non-empty iterables of non-empty
         iterables with identical length and numeric values. Either rows or
-        columns, but not both, must be specified.
+        columns, but not both, can be specified. If neither rows nor columns are
+        specified, the resulting matrix will be empty.
 
         The matrix is not required to be square.
         """
