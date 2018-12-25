@@ -86,13 +86,6 @@ class Vector:
     ################
 
     @property
-    def values(self):
-        """Return a copy of the values as a list."""
-        # TODO replace with iterable?
-        # Make a copy so the caller can't change our values
-        return list(self._values)
-
-    @property
     def dimensions(self):
         """Return the dimensions (i. e., the number of elements)"""
         return len(self._values)

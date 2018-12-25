@@ -9,12 +9,12 @@ class TestVector(TestCase):
 
     def test_construction(self):
         # Empty
-        self.assertEqual(Vector().values, [])
+        self.assertEqual(list(Vector()), [])
 
         # Non-empty
-        self.assertEqual(Vector(1)      .values, [1])
-        self.assertEqual(Vector(1, 2)   .values, [1, 2])
-        self.assertEqual(Vector(1, 2, 3).values, [1, 2, 3])
+        self.assertEqual(Vector(1)      ._values, [1])
+        self.assertEqual(Vector(1, 2)   ._values, [1, 2])
+        self.assertEqual(Vector(1, 2, 3)._values, [1, 2, 3])
 
         with self.assertRaises(TypeError): Vector([1, 2])
         with self.assertRaises(TypeError): Vector([1, "2"])
@@ -23,15 +23,15 @@ class TestVector(TestCase):
     def test_construction_immutability(self):
         values = [1, 2, 3]
         v = Vector(*values)
-        self.assertEqual(v.values, [1, 2, 3])
+        self.assertEqual(list(v), [1, 2, 3])
         values[0] = 0
-        self.assertEqual(v.values, [1, 2, 3]) # Still
+        self.assertEqual(list(v), [1, 2, 3]) # Still
 
     def test_zero(self):
-        self.assertEqual(Vector.zero(0).values, [])
-        self.assertEqual(Vector.zero(1).values, [0])
-        self.assertEqual(Vector.zero(2).values, [0, 0])
-        self.assertEqual(Vector.zero(3).values, [0, 0, 0])
+        self.assertEqual(list(Vector.zero(0)), [])
+        self.assertEqual(list(Vector.zero(1)), [0])
+        self.assertEqual(list(Vector.zero(2)), [0, 0])
+        self.assertEqual(list(Vector.zero(3)), [0, 0, 0])
 
     def test_valid_type(self):
         self.assertTrue(Vector.valid_type(Vector(1, 2, 3)))
@@ -93,16 +93,16 @@ class TestVector(TestCase):
         self.assertFalse(Vector(1, 0)   .is_zero)
         self.assertFalse(Vector(1, 0, 0).is_zero)
 
-    def test_values(self):
-        self.assertEqual(Vector(1, 2, 3).values, [1, 2, 3])
+    def test_iterable(self):
+        self.assertEqual(list(Vector(1, 2, 3)), [1, 2, 3])
 
-    def test_values_immutability(self):
+    def test_iterable_immutability(self):
         v = Vector(1, 2, 3)
 
-        self.assertEqual(v.values, [1, 2, 3])
-        values = v.values
+        self.assertEqual(list(v), [1, 2, 3])
+        values = list(v)
         values[0] = 0
-        self.assertEqual(v.values, [1, 2, 3])
+        self.assertEqual(list(v), [1, 2, 3])
 
     def test_item(self):
         v = Vector(1, 2, 3)
