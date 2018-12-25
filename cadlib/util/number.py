@@ -5,7 +5,7 @@ def valid(value):
     return isinstance(value, Number)
 
 
-def convert(value, label = None, *, default = None):
+def convert(value, label, *, default = None):
     """Return a numeric value and handle non-numeric values.
 
     If value is not a number and default is specified, then default is returned.
@@ -17,7 +17,6 @@ def convert(value, label = None, *, default = None):
     elif value is None and default is not None:
         return default
     else:
-        # TODO None label
         raise TypeError(f"Invalid {label}: {value!r} ({type(value)}")
 
 
