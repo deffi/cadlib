@@ -61,3 +61,27 @@ Other operations are not associative:
   * Differences:
         a - (b - c)
         (a - b) - c
+
+== Class hierarchy ==
+
+Object
+|-- Cuboid
+|-- Frustum
+|-- Layer
+|-- Plane
+|-- Sphere
+|-- Transformed
+'-- Csg
+    |-- Union
+    |-- Difference
+    '-- Intersection
+Transform
+|-- Chained
+|-- RotateAxisAngle
+|-- RotateFromTo
+|-- RotateXyz
+|-- RotateYpr
+|-- ScaleAxisFactor
+|-- ScaleUniform
+|-- ScaleXyz
+'-- Translate
