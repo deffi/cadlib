@@ -1,10 +1,29 @@
 class Table:
+    """A table that can be pretty-printed."""
+
     def __init__(self, rows = None):
+        """Initialize the table with the specified rows.
+
+        The rows must be specified as iterable of iterables.
+        """
         rows = rows or []
 
         self._rows = rows
 
     def format(self, column_sep = " ", row_sep = "\n", row_prefix = "", row_suffix = "", alignment = "l"):
+        """Pretty-print the table.
+
+        All columns are padded to equal length, according to the alignment
+        parameter (which can be "l" or "r"). Columns are separated by column_sep
+        and rows are separated by row_set. Additionally, each row is prefixed
+        with row_prefix and suffixed with row_suffix.
+
+        TODO do rows have to have the same size?
+
+        There is only one alignment parameter and all columns are aligned in the
+        same way.
+        """
+
         if len(self._rows) == 0:
             return "" # No rows, not even an empty row
 

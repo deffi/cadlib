@@ -1,15 +1,23 @@
 from numbers import Number
 
 def valid(value):
+    """Return true if the value is a valid number."""
     return isinstance(value, Number)
 
 
 def convert(value, label = None, *, default = None):
+    """Return a numeric value and handle non-numeric values.
+
+    If value is not a number and default is specified, then default is returned.
+    If value is not a number and default is not specified, then a TypeError is
+    raised.
+    """
     if valid(value):
         return value
     elif value is None and default is not None:
         return default
     else:
+        # TODO None label
         raise TypeError(f"Invalid {label}: {value!r} ({type(value)}")
 
 

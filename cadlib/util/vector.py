@@ -5,16 +5,24 @@ from cadlib.util import Matrix
 from cadlib.util import number
 
 class Vector:
-    """
-    Note that __len__, like the dimensions property, returns the number of elements. The length property returns the
-    vector's magnitude.
+    """An immutable vector with basic arithmetic.
 
-    Despite mathematical considerations, Vector does not inherit Matrix because its interface is different:
-      * Vectors are subscripted with a single value (vector[i] rather than matrix[i, 0])
-      * The size of a vector is a single value (vector.dimensions == 3 rather than matrix.dimensions == (3, 0))
-    Besides, since arithmetic operations such as Vector+Vector and Matrix*Vector are supposed to return a vector, the
-    corresponding methods would have to be overridden to convert the result to a vector. Finally, calling
-    .transpose().transpose() on a Vector would change the type to Matrix.
+    Note that __len__, like the dimensions property, returns the number of
+    elements. The length property returns the vector's magnitude.
+
+    Despite mathematical considerations, Vector does not inherit Matrix:
+      * Vectors are subscripted with a single value (vector[i] rather than
+        matrix[i, 0])
+      * The size of a vector is a single value (vector.dimensions == 3 rather
+        than matrix.dimensions == (3, 0))
+      * Since arithmetic operations such as (Vector + Vector) and (Matrix
+        * Vector) are supposed to return a vector, the corresponding methods
+        would have to be overridden to convert the result to a vector.
+      * Calling.transpose().transpose() on a Vector would change the type to
+        Matrix.
+      * Matrices are initialized from an iterable of iterables; vectors can be
+        initialized from individual values because the distinction between
+        initialization by row and by column is not required.
     """
 
     ####################
@@ -22,6 +30,10 @@ class Vector:
     ####################
 
     def __init__(self, *values):
+        """Create a vector from individual values.
+
+        The specified values must be numeric. A 0-dimensional vector can be
+        created by passing no values."""
         for value in values:
             if not number.valid(value):
                 raise TypeError("Vectors must consist of numeric values")
@@ -30,15 +42,29 @@ class Vector:
 
     @classmethod
     def zero(cls, size):
+        """Create a vector of all-zeros with the specified size."""
         values = [0] * size
         return cls(*values)
 
     @classmethod
     def valid_type(cls, value):
+        """Determine whether the specified value can be converted to a vector.
+
+        Types that can be converted are Vector, list, and tuple.
+        """
         return isinstance(value, (Vector, list, tuple))
 
     @classmethod
     def convert(cls, value, label, *, required_length = None):
+        """Convert the specified value to a Vector.
+
+        If the value cannot be converted to a vector (according to the
+        valid_type class method), TypeError is raised. If required_length is
+        specified and does not match the actual length, ValueError is raised.
+
+        The label is used in the message of exceptions.
+        """
+
         # Make sure the type can be converted to a vector
         if not cls.valid_type(value):
             raise TypeError(f"Invalid vector for {label}: {value}")
@@ -61,18 +87,23 @@ class Vector:
 
     @property
     def values(self):
+        """Return a copy of the values as a list."""
+        # TODO replace with iterable?
         # Make a copy so the caller can't change our values
         return list(self._values)
 
     @property
     def dimensions(self):
+        """Return the dimensions (i. e., the number of elements)"""
         return len(self._values)
 
     @property
     def is_zero(self):
+        """Return true if all elements of the vector are 0."""
         return all(x == 0 for x in self._values)
 
     def __len__(self):
+        """The length is the number of elements in the vector."""
         return len(self._values)
 
     def __getitem__(self, index):
@@ -84,6 +115,7 @@ class Vector:
     ################
 
     def __eq__(self, other):
+        """Vectors are equal if their values are equal."""
         return (isinstance(other, Vector)
             and self._values == other._values)
 
@@ -93,6 +125,7 @@ class Vector:
     ################
 
     def __add__(self, other):
+        """Vectors are added element-wise. The dimensions must match."""
         if isinstance(other, Vector):
             if other.dimensions != self.dimensions:
                 raise ValueError("Dimension mismatch: {} + {}".format(other.dimensions, self.dimensions))
@@ -102,21 +135,30 @@ class Vector:
             return NotImplemented
 
     def __sub__(self, other):
+        """Vectors are subtract element-wise. The dimensions must match."""
         if isinstance(other, Vector):
             return self + (-other)
         else:
             return NotImplemented
 
     def __neg__(self):
+        """Vectors are negated by scalar multiplication with -1."""
         return (-1) * self
 
     def __mul__(self, other):
+        """Vectors can be multiplied with scalars."""
         if isinstance(other, Number):
             return Vector(*[x * other for x in self._values])
         else:
             return NotImplemented
 
     def __rmul__(self, other):
+        """Vectors can be right-multiplied with scalars or matrices.
+
+        For multiplication with a matrix, the dimensions of the matrix must be
+        compatible with this vector.
+        """
+
         if isinstance(other, Number):
             return self.__mul__(other)
 
@@ -132,12 +174,17 @@ class Vector:
             return NotImplemented
 
     def __truediv__(self, other):
+        """Division is only possible with scalars."""
         if isinstance(other, Number):
             return Vector(*[x / other for x in self._values])
         else:
             return NotImplemented
 
     def dot(self, other):
+        """Calculate the dot product between two vectors.
+
+        The dimensions of the vectors must match.
+        """
         if not isinstance(other, Vector):
             raise TypeError("Dot product is only defined for vectors")
 
@@ -147,6 +194,8 @@ class Vector:
         return sum(a * b for a, b in zip(self._values, other._values))
 
     def cross(self, other):
+        """Calculate the cross product between 3-vectors."""
+
         if not isinstance(other, Vector):
             raise TypeError("Cross product is only defined for vectors")
 
@@ -170,11 +219,16 @@ class Vector:
     ##############
 
     def angle(self, other):
+        """Calculate the angle between two 3-vectors in degrees."""
+        # TODO should be in radians
         from cadlib.util import degree
 
-        # While mathematically correct, this performs poorly due to rounding errors:
-        #     Vector(2, 3.4).angle(Vector(2, 3.4)) is only equal to 0.0 within 5 decimal places
-        #     Vector(1, 1, 1).angle(Vector(-1, -1, -1)) fails because the argument of acos is -1.0000000000000002.
+        # While mathematically correct, this performs poorly due to rounding
+        # errors:
+        #   * Vector(2, 3.4).angle(Vector(2, 3.4)) is only equal to 0.0 within 5
+        #     decimal places
+        #   * Vector(1, 1, 1).angle(Vector(-1, -1, -1)) fails because the
+        #     argument of acos is -1.0000000000000002.
         # return math.acos(self.dot(other) / (self.length * other.length)) / degree
 
         # This is better
@@ -185,23 +239,38 @@ class Vector:
 
     @property
     def length_squared(self):
+        """Calculate the square of the magnitude."""
         return sum(x ** 2 for x in self._values)
 
     @property
     def length(self):
+        """Calculate the magnitude."""
         return math.sqrt(self.length_squared)
 
     def normalized(self):
+        """Calculate a vector with the same direction and magnitude 1.
+
+        This will fail for zero-magnitude vectors.
+        """
         return self / self.length
 
     def normal(self):
+        """Calculate a normal for this vector.
+
+        If there is no normal, ValueError is raised. If the normal is ambiguous,
+        an arbitrary normal will be returned.
+
+        The vector must have at least 2 dimensions and non-zero magnitude.
+        """
+
         # Invalid operation for empty, one-dimensional, and zero-length vectors
         if len(self) == 0: raise ValueError("Empty vectors don't have normals")
         if len(self) == 1: raise ValueError("One-dimensional vectors don't have normals")
         if self.is_zero  : raise ValueError("Zero vectors don't have normals")
 
-        # Algorithm: find any two values, at least one of which is not zero. Swap them and invert one of them. Set all
-        # other values to zero. Note that it is permissible for the inverted value to be zero.
+        # Algorithm: find any two values, at least one of which is not zero.
+        # Swap them and negate one of them. Set all other values to zero. Note
+        # that it is permissible for the negated value to be zero.
 
         # Find the index of the first non-zero value and the index of following value (wrapping around if necessary).
         i1 = next((index for index, value in enumerate(self._values) if value != 0), None)
@@ -216,21 +285,29 @@ class Vector:
         return Vector(*values)
 
     def collinear(self, other):
+        """Determine whether two vectors are collinear."""
         return self.dot(other) ** 2 == self.length_squared * other.length_squared
 
     def snap_to_axis(self):
+        """Calculate the projection of this vector to the nearest axis."""
+
         _, index = max((abs(v), i) for i, v in enumerate(self._values))
         result_values = [0] * len(self)
         result_values[index] = self._values[index]
         return Vector(*result_values)
 
     def closest_axis(self):
+        """Find the nearest (positive or negative) unit vector."""
+
         _, index = max((abs(v), i) for i, v in enumerate(self._values))
         result_values = [0] * len(self)
         result_values[index] = math.copysign(1, self._values[index])
         return Vector(*result_values)
 
     def replace(self, value, replacement):
+        """Replace all items that have the specified value with the specified
+        replacement.
+        """
         values = [replacement if v == value else v for v in self._values]
         return Vector(*values)
 
@@ -240,16 +317,17 @@ class Vector:
     #########
 
     def __str__(self):
+        """Example: <1, 2, 3>"""
         return "<" + ", ".join(map(str, self._values)) + ">"
 
     def __repr__(self):
         return "Vector({})".format(", ".join(str(value) for value in self._values))
 
     def format(self):
-        """Formats the vector for human consumption"""
+        """Format the vector for human consumption"""
         return Table([[v] for v in self._values]).format(alignment="r")
 
-
+# Important constants
 origin = Vector(0, 0, 0)
 X = Vector(1, 0, 0)
 Y = Vector(0, 1, 0)

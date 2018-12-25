@@ -1,5 +1,14 @@
 class Node:
+    """A tree (node).
+
+    All nodes (not just leaf nodes) can have data.
+    """
+
     def __init__(self, data, children = None):
+        """Create a tree node with the specified data and children.
+
+        All children must be instances of Node. Data is arbitrary.
+        """
         children = children or []
 
         for child in children:
@@ -13,12 +22,19 @@ class Node:
         return f"Node({self._data}, {self._children})"
 
     def __eq__(self, other):
+        """Nodes are equal if both their data and children are equal."""
         return (isinstance(other, Node)
                 and self._data     == other._data
                 and self._children == other._children)
 
     def lines(self, indent = None, top_indent = ""):
-        """Indent: indent string per level, or None for pretty-printing"""
+        """Format the tree as a list of strings, one string for each node.
+
+        If indent is None, the lines are prefixed with a line drawing of the
+        tree structure. Otherwise, each level is prefixed with the corresponding
+        number of copies of indent. In any case, each line is prefixed with
+        top_indent.
+        """
         result = []
         result.append(top_indent + str(self._data))
 
@@ -41,5 +57,8 @@ class Node:
         return result
 
     def format(self, indent = None, top_indent = ""):
-        """Indent: indent string per level, or None for pretty-printing"""
+        """Format the tree as a single string.
+
+        See the lines method for the interpretation of the parameters.
+        """
         return "\n".join(self.lines(indent, top_indent))

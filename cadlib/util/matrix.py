@@ -2,11 +2,21 @@ from numbers import Number
 from cadlib.util.table import Table
 
 class Matrix:
+    """An immutable matrix with basic arithmetic."""
+
     ####################
     ## Initialization ##
     ####################
 
     def __init__(self, rows = None, columns = None):
+        """Create a matrix from either rows or columns
+
+        The specified rows or columns must be non-empty iterables of non-empty
+        iterables with identical length and numeric values. Either rows or
+        columns, but not both, must be specified.
+
+        The matrix is not required to be square.
+        """
         self._row_count    = 0
         self._column_count = 0
         self._rows = []
@@ -42,22 +52,31 @@ class Matrix:
                 # Convert to list of lists
                 self._rows = [list(row) for row in zip(*columns)]
 
+        # TODO error if rows and columns are both None
+
         for row in self._rows:
             # Make sure that all values are numeric
             for value in row:
                 if not isinstance(value, Number):
                     raise TypeError("Matrices must consist of numeric values")
 
+    # TODO remove
     @classmethod
     def from_rows(cls, *rows):
         return cls(rows = rows)
 
+    # TODO remove
     @classmethod
     def from_columns(cls, *columns):
         return cls(columns = columns)
 
     @classmethod
     def identity(cls, size):
+        """Create an identity matrix.
+
+        The created matrix will be square with the specified size, ones on the
+        main diagonal, and zeros everywhere else."""
+
         rows = []
         for i in range(size):
             row = [0] * size
@@ -68,6 +87,8 @@ class Matrix:
 
     @classmethod
     def zero(cls, size):
+        """Create a square zero matrix."""
+
         rows = [[0] * size for i in range(size)]
         return cls(rows = rows)
 
@@ -78,28 +99,36 @@ class Matrix:
 
     @property
     def row_count(self):
+        """Return the number of rows in the matrix."""
         return self._row_count
 
     @property
     def column_count(self):
+        """Return the number of columns in the matrix."""
         return self._column_count
 
     @property
     def dimensions(self):
+        """Return the dimensions as a tuple of (rows, columns)."""
         return (self._row_count, self._column_count)
 
     def __getitem__(self, item):
+        """Return the value at the position specified by (row, column)"""
         row = item[0]
         column = item[1]
         return self._rows[row][column]
 
     @property
     def row_values(self):
+        """Return a copy of the matrix values as list of lists, row-wise."""
+
         # Make a copy so the caller can't change our values
         return list(list(row) for row in self._rows)
 
     @property
     def column_values(self):
+        """Return a copy of the matrix values as list of lists, column-wise."""
+
         if len(self._rows) == 0:
             return []
         else:
@@ -112,6 +141,7 @@ class Matrix:
     ################
 
     def __eq__(self, other):
+        """Two matrices are identical if all of their values are identical."""
         return (isinstance(other, Matrix)
             and self._rows == other._rows)
 
@@ -121,9 +151,12 @@ class Matrix:
     ################
 
     def transpose(self):
+        """Create a new matrix that is this matrix transposed"""
         return Matrix(columns = self._rows)
 
     def __add__(self, other):
+        """Matrices are added element-wise. The dimensions must be identical."""
+
         if isinstance(other, Matrix):
             if other.dimensions != self.dimensions:
                 raise ValueError("Dimension mismatch: {} + {}".format(self.dimensions, other.dimensions))
@@ -133,15 +166,24 @@ class Matrix:
             return NotImplemented
 
     def __sub__(self, other):
+        """Matrices are subtracted element-wise. The dimensions must be identical."""
         if isinstance(other, Matrix):
             return self + (-other)
         else:
             return NotImplemented
 
     def __neg__(self):
+        """Matrices are negated by scalar multiplication with -1."""
         return (-1) * self
 
     def __mul__(self, other):
+        """Matrices can be multiplied with scalars or other matrices.
+
+        For matrix multiplication, the dimensions of the matrices must be
+        compatible.
+
+        Multiplication of Matrix and Vector is implemented in Vector.__rmul__.
+        """
         if isinstance(other, Number):
             return Matrix(rows = [[x * other for x in row] for row in self._rows])
 
@@ -157,6 +199,8 @@ class Matrix:
             return NotImplemented
 
     def __rmul__(self, other):
+        """Reverse multiplication is only relevant for scalars."""
+
         if isinstance(other, Number):
             return self.__mul__(other)
         else:
@@ -170,6 +214,7 @@ class Matrix:
             raise NotImplemented
 
     def __truediv__(self, other):
+        """Matrix division is only possible with scalars."""
         if isinstance(other, Number):
             return Matrix(rows = [[x / other for x in row] for row in self._rows])
         else:
@@ -181,8 +226,9 @@ class Matrix:
     #########
 
     def __repr__(self):
-        #return "Matrix(rows={})".format(", ".join((str(row) for row in self._rows)))
+        # TODO !r?
         return f"Matrix(rows={self.row_values})"
 
     def format(self):
+        """Pretty-print the matrix as a multi-line string."""
         return Table(self._rows).format(alignment="r")
