@@ -53,8 +53,6 @@ class Matrix:
                 # Convert to list of lists
                 self._rows = [list(row) for row in zip(*columns)]
 
-        # TODO error if rows and columns are both None
-
         for row in self._rows:
             # Make sure that all values are numeric
             for value in row:
@@ -227,8 +225,7 @@ class Matrix:
     #########
 
     def __repr__(self):
-        # TODO !r?
-        return f"Matrix(rows={self.row_values})"
+        return f"Matrix(rows={self.row_values!r})"
 
     def format(self):
         """Pretty-print the matrix as a multi-line string."""
