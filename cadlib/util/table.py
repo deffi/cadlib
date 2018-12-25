@@ -18,10 +18,12 @@ class Table:
         and rows are separated by row_set. Additionally, each row is prefixed
         with row_prefix and suffixed with row_suffix.
 
-        TODO do rows have to have the same size?
+        Rows do not have to be the same size. Incomplete rows will be filled
+        with empty values.
 
-        There is only one alignment parameter and all columns are aligned in the
-        same way.
+        Limitations:
+          * There is only one alignment parameter and all columns have the same
+            alignment.
         """
 
         if len(self._rows) == 0:
