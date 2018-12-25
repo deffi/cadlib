@@ -1,4 +1,16 @@
 Next:
+  * 2D objects
+      * Classes:
+          * class Shape(Object)
+          * class Solid(Object)
+      * Transforms:
+          * RotateAngle (should RotateAxisAngle be RotateAngleAxis?)
+          * RotateFromTo
+          * ScaleAxisFactor
+          * ScaleUniform
+          * ScaleXy
+          * Translate
+      * CSGs should accept either, but enforce uniform dimensionality
 
 Object:
   * [Medium] Assembly (Part) objects
