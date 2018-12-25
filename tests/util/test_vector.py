@@ -1,3 +1,4 @@
+from cadlib.util import degree
 from cadlib.util.vector import Vector, X, Y, Z
 from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
@@ -342,32 +343,32 @@ class TestVector(TestCase):
 
     def test_angle(self):
         # Colinear 2D
-        self.assertAlmostEqual(Vector( 1, 0  ).angle(Vector( 1, 0  )),   0.0)
-        self.assertAlmostEqual(Vector( 2, 3.4).angle(Vector( 2, 3.4)),   0.0)
+        self.assertAlmostEqual(Vector( 1, 0  ).angle(Vector( 1, 0  )),   0.0 * degree)
+        self.assertAlmostEqual(Vector( 2, 3.4).angle(Vector( 2, 3.4)),   0.0 * degree)
 
         # Generic 2D
-        self.assertAlmostEqual(Vector( 1, 0).angle(Vector( 1, 1)),  45.0)
-        self.assertAlmostEqual(Vector( 1, 0).angle(Vector( 0, 2)),  90.0)
-        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-1, 1)), 135.0)
-        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-1, 0)), 180.0)
-        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-2, 0)), 180.0)
-        self.assertAlmostEqual(Vector( 1, 1).angle(Vector(-1, 1)),  90.0)
+        self.assertAlmostEqual(Vector( 1, 0).angle(Vector( 1, 1)),  45.0 * degree)
+        self.assertAlmostEqual(Vector( 1, 0).angle(Vector( 0, 2)),  90.0 * degree)
+        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-1, 1)), 135.0 * degree)
+        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-1, 0)), 180.0 * degree)
+        self.assertAlmostEqual(Vector( 1, 0).angle(Vector(-2, 0)), 180.0 * degree)
+        self.assertAlmostEqual(Vector( 1, 1).angle(Vector(-1, 1)),  90.0 * degree)
 
         # Colinear 3D
-        self.assertAlmostEqual(Vector(1, 0  ,  0   ).angle(Vector(1, 0  ,  0   )), 0.0)
-        self.assertAlmostEqual(Vector(2, 3.4,  0   ).angle(Vector(2, 3.4,  0   )), 0.0)
-        self.assertAlmostEqual(Vector(2, 3.4, -5.67).angle(Vector(2, 3.4, -5.67)), 0.0)
+        self.assertAlmostEqual(Vector(1, 0  ,  0   ).angle(Vector(1, 0  ,  0   )), 0.0 * degree)
+        self.assertAlmostEqual(Vector(2, 3.4,  0   ).angle(Vector(2, 3.4,  0   )), 0.0 * degree)
+        self.assertAlmostEqual(Vector(2, 3.4, -5.67).angle(Vector(2, 3.4, -5.67)), 0.0 * degree)
 
         # Planar 3D
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 1, 0, 0)),   0.0)
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 1, 1, 0)),  45.0)
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 0, 2, 0)),  90.0)
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-1, 1, 0)), 135.0)
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-1, 0, 0)), 180.0)
-        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-2, 0, 0)), 180.0)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 1, 0, 0)),   0.0 * degree)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 1, 1, 0)),  45.0 * degree)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector( 0, 2, 0)),  90.0 * degree)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-1, 1, 0)), 135.0 * degree)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-1, 0, 0)), 180.0 * degree)
+        self.assertAlmostEqual(Vector(1, 0, 0).angle(Vector(-2, 0, 0)), 180.0 * degree)
 
         # Generic 3D
-        self.assertAlmostEqual(Vector(1, 1, 1).angle(Vector(-1, -1, -1)), 180.0)
+        self.assertAlmostEqual(Vector(1, 1, 1).angle(Vector(-1, -1, -1)), 180.0 * degree)
 
     def test_normal(self):
         test_values = [

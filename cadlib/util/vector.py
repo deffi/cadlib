@@ -212,9 +212,7 @@ class Vector:
     ##############
 
     def angle(self, other):
-        """Calculate the angle between two 3-vectors in degrees."""
-        # TODO should be in radians
-        from cadlib.util import degree
+        """Calculate the angle between two 3-vectors in radians."""
 
         # While mathematically correct, this performs poorly due to rounding
         # errors:
@@ -228,7 +226,7 @@ class Vector:
         # Source: https://math.stackexchange.com/questions/1143354/numerically-stable-method-for-angle-between-3d-vectors
         u = self
         v = other
-        return 2 * math.atan2((v.length*u - u.length*v).length, (v.length*u + u.length*v).length) / degree
+        return 2 * math.atan2((v.length*u - u.length*v).length, (v.length*u + u.length*v).length)
 
     @property
     def length_squared(self):

@@ -1,6 +1,6 @@
 from warnings import warn
 
-from cadlib.util import Vector, Matrix
+from cadlib.util import Vector, Matrix, degree
 from cadlib.transform import Transform
 from cadlib.transform.primitives import RotateAxisAngle, RotateXyz
 
@@ -51,7 +51,7 @@ class RotateFromTo(Transform):
         else:
             # Regular case
             axis  = self._frm.cross(self._to)
-            angle = self._frm.angle(self._to)
+            angle = self._frm.angle(self._to) / degree
 
         return axis, angle
 
