@@ -132,3 +132,9 @@ Documentation:
              to use the generator functions anyway.
   * [Medium] Docstrings
                * Useful docstrings for all public classes and methods
+               * transform/generators, transform/shortcuts
+               * object/object, object/transformed, object/primitives/*
+               * csg/*
+               * transform/chained, transform/transform, transform/primitives/*
+               * scad/*
+  * [Medium] Generator signatures are different for objects and transforms.
