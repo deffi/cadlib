@@ -1,9 +1,10 @@
 == Object arithmetic ==
 
-We want to be able to re-use Transform objects without cloning; this implies that the Transform object cannot store a
-reference to the object being transformed or to the next Transform in a chain. Therefore, transformation chains are
-represented by a Chained Transform and a transformed object is represented by a Transformed Object. Also, Objects and
-Transforms are immutable.
+We want to be able to re-use Transform objects without cloning; this implies
+that the Transform object cannot store a reference to the object being
+transformed or to the next Transform in a chain. Therefore, transformation
+chains are represented by a Chained Transform and a transformed object is
+represented by a Transformed Object. Also, Objects and Transforms are immutable.
 
 Supported operations:
   * Transform * Transform => Chained (Transform)
@@ -12,16 +13,16 @@ Supported operations:
   * Object    + Object    => Union (Object)
   * Object    - Object    => Difference (Object)
 
-
-Object * Transform is not supported: the only (?) reasonable interpretation would be that o*t is the same as t*o, but
-this would mean that
+Object * Transform is not supported: the only (?) reasonable interpretation
+would be that o*t is the same as t*o, but this would mean that
     (o * t1) * t2 == t2 * (t1 * o)
     o * (t1 * t2) == (t1 * t2) * o
 and therefore o * t1 * t2 would not be associative.
 
 Each transform applies to a single object (potentially a union).
 
-Associative operations with more than two elements are combined so the result is independent of parentheses placement:
+Associative operations with more than two elements are combined so the result is
+independent of parentheses placement:
   * Chaining of transforms:
         (rotate * scale) * translate
         rotate * (scale * translate)
