@@ -10,17 +10,20 @@ from cadlib.util import number
 __all__ = ['rotate', 'scale', 'translate']
 
 def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, frm = None, to = None, xyz = None, ypr = None, ignore_ambiguity = False):
-    # Signatures (canonical forms):
-    #   * rotate(axis = x, angle = 45)
-    #   * rotate(frm = x, to = y)
-    #   * rotate(xyz = [45, 0, 30])
-    #   * rotate(ypr = [45, -30, 10])
-    # Signatures (convenience forms):
-    #   * rotate(x, 45)
-    #   * rotate(x, angle = 45)
-    #   * rotate(x, y)
-    #   * rotate(x, to = y)
-    #
+    """Generate a rotation around an axis through the origin.
+
+    Signatures (canonical forms):
+      * rotate(axis = x, angle = 45)
+      * rotate(frm = x, to = y)
+      * rotate(xyz = [45, 0, 30])
+      * rotate(ypr = [45, -30, 10])
+    Signatures (convenience forms):
+      * rotate(x, 45)
+      * rotate(x, angle = 45)
+      * rotate(x, y)
+      * rotate(x, to = y)
+    """
+
     # Canonical forms:
     #     axis_or_axmag_or_frm  angle_or_to  axis  angle  frm   to   xyz   ypr
     #                        -            -   vec    num    -    -     -     -  # Axis/angle
@@ -107,15 +110,21 @@ def rotate(axis_or_frm = None, angle_or_to = None, axis = None, angle = None, fr
         raise TypeError("Invalid call signature")
 
 def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
-    # Signatures (canonical forms):
-    #   * scale(xyz = [2, 1, 1])
-    #   * scale(factor = 2)
-    #   * scale(axis = X, factor = 2)
-    # Signatures (convenience forms):
-    #   * scale([2, 1, 1])
-    #   * scale(2)
-    #   * scale(X, 2)
-    #
+    """Generate a scaling transform around the origin.
+
+    Signatures (canonical forms):
+      * scale(xyz = [2, 1, 1])
+      * scale(factor = 2)
+      * scale(axis = X, factor = 2)
+    Signatures (convenience forms):
+      * scale([2, 1, 1])
+      * scale(2)
+      * scale(X, 2)
+
+    Vectors can be specified as Vector, list, or tuple. Note that a Vector can
+    be used for xyz even though xyz is not strictly a vector.
+    """
+
     # Canonical forms:
     #     xyz_or_axis_or_factor  factor   xyz  axis
     #                         -       -  list     -  # XYZ
@@ -126,8 +135,6 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
     #                       vec       -     *     -  # XYZ
     #                       num       *     -     -  # Isotropic XYZ
     #
-    # "Vector type" is Vector, list, or tuple. Note that a Vector can be used
-    # for xyz even though xyz is not strictly a vector.
 
     # Make sure that there are no conflicts between convenience parameters and canonical parameters
     if both(xyz_or_axis_or_factor, xyz ): raise TypeError("xyz"   " cannot be specified together with xyz_or_axis")
@@ -177,4 +184,9 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
 
 
 def translate(vector):
+    """Generate a translation.
+
+    Signatures (canonical forms):
+      * scale(xyz = [2, 1, 1])
+    """
     return Translate(vector)

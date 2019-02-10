@@ -6,7 +6,7 @@ from cadlib.transform import Transform, shortcuts, generators
 # First of all, the basic operation is
 #   (1) Object + Object -> Union  (Union is a subclass of Object)
 #
-# This is easily done in Object.__add__, but but adding (in either order) an
+# This is easily done in Object.__add__, but adding (in either order) an
 # Object and a Union (which is a subclass of Object) would create nested Unions
 # and therefore, addition would not be associative:
 #     o1 + (o2 + o3) -> o1 + Union(o2, o3) -> Union(o1, Union(o2, o3))
@@ -39,7 +39,7 @@ from cadlib.transform import Transform, shortcuts, generators
 #     reflected method. This behavior allows subclasses to override their
 #     ancestors’ operations." [1]
 # Overriding an ancestor's operation in a subclass is exactly the kind of
-# situation we, dealing with here, so we should be able to implement (4) in
+# situation we're dealing with here, so we should be able to implement (4) in
 # Union.__radd__ and be done, right?
 #
 # Welll not so fast. We won't be using direct instances of Object - we will be
@@ -91,18 +91,37 @@ from cadlib.transform import Transform, shortcuts, generators
 #   * Transform * Chained and Chained * Transform
 #   * Transform * Object
 #   * Transform * Transformed
-
 #
 # [1] https://docs.python.org/3/reference/datamodel.html
 
 class Object:
-    # Implementations must always return a valid ScadObject (except when they
-    # raise an exception), so that .comment can be called on the result
-    # unconditionally.
+    """A description of an object. Object instances are immutable.
+
+    Implementations must override to_scad and, if they can have children,
+    to_tree.
+
+    Objects can be added, multiplied, and subtracted to create unions,
+    differences, and intersections, respectively. Objects can be left-multipled
+    with transforms to create transformed objects.
+    """
+
     def to_scad(self):
+        """Converts the object to an OpenSCAD representation.
+
+        Implementations must always return a valid ScadObject (except when they
+        raise an exception), so that .comment can be called on the result
+        unconditionally."""
         raise NotImplementedError("In {}".format(type(self)))
 
     def to_tree(self):
+        """Creates a tree representation for this object.
+
+        Returns a tree.Node with this object as the data and tree
+        representations of the object's children as child nodes.
+
+        Implementations that can have children must override this method to
+        create child nodes for the children.
+        """
         return Node(self, [])
 
 
@@ -111,6 +130,13 @@ class Object:
     ################
 
     def __add__(self, other):
+        """Adding objects creates a union.
+
+        As a special case, adding an object and a union (in either order) or a
+        union and a union will create a flat union with multiple children rather
+        than nested unions.
+        """
+
         from cadlib.csg import Union
         if isinstance(other, Union):
             # Object + Union - defer to Union.__radd__ (see note above).
@@ -123,6 +149,13 @@ class Object:
             return NotImplemented
 
     def __mul__(self, other):
+        """Multiplying objects creates an intersection.
+
+        As a special case, multiplying an object and an intersectino (in either
+        order) or an intersection and an intersection will create a flat
+        intersection with multiple children rather than nested intersection.
+        """
+
         from cadlib.csg.intersection import Intersection
         if isinstance(other, Intersection):
             # Object * Intersection - defer to Intersection.__rmul__ (see note above)
@@ -136,6 +169,13 @@ class Object:
             return NotImplemented
 
     def __sub__(self, other):
+        """Subtracting objects creates a difference.
+
+        As a special case, subtracting an object from a difference will create
+        a difference with a union as the subtrahend, rather than nested
+        differences. Note that this does not apply to subtracting a difference
+        from an object or from another difference.
+        """
         from cadlib.csg import Difference
 
         if isinstance(other, Object):
@@ -150,11 +190,34 @@ class Object:
     ## Postfix transform ##
     #######################
 
-    def rotate   (self, *args, **kwargs): return generators.rotate   (*args, **kwargs) * self
-    def scale    (self, *args, **kwargs): return generators.scale    (*args, **kwargs) * self
-    def translate(self, *args, **kwargs): return generators.translate(*args, **kwargs) * self
+    def rotate(self, *args, **kwargs):
+        """Create a rotated copy of the object.
+
+        See generators.rotate for possible parameters.
+        """
+        return generators.rotate(*args, **kwargs) * self
+
+    def scale(self, *args, **kwargs):
+        """Create a scaled copy of the object.
+
+        See generators.rotate for possible parameters.
+        """
+        return generators.scale(*args, **kwargs) * self
+
+    def translate(self, *args, **kwargs):
+        """Create a translated copy of the object.
+
+        See generators.rotate for possible parameters.
+        """
+        return generators.translate(*args, **kwargs) * self
 
     def transform(self, transform):
+        """Create a transformed copy of the object.
+
+        This is the same as transform * self.
+
+        transform must be a Transform.
+        """
         if not isinstance(transform, Transform):
             raise TypeError()
         return transform * self

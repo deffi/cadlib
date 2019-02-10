@@ -131,8 +131,6 @@ Documentation:
              values. That's because it's not a vector. But you'll probably want
              to use the generator functions anyway.
   * [Medium] Docstrings
-               * Useful docstrings for all public classes and methods
-               * transform/generators, transform/shortcuts
                * object/object, object/transformed, object/primitives/*
                * csg/*
                * transform/chained, transform/transform, transform/primitives/*
