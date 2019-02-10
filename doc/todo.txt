@@ -52,7 +52,7 @@ Transform:
   * [Low]    Empty-chained * object should be object, not chained
 
 CSG:
-  * [Medium]
+  * [Medium] Auto-enlarge subtrahend for difference
   * [Low]    Make it so that a-(b+c) == (a-b)-c. Two options:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
