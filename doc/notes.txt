@@ -1,3 +1,5 @@
+== Object arithmetic ==
+
 We want to be able to re-use Transform objects without cloning; this implies that the Transform object cannot store a
 reference to the object being transformed or to the next Transform in a chain. Therefore, transformation chains are
 represented by a Chained Transform and a transformed object is represented by a Transformed Object. Also, Objects and
@@ -61,6 +63,46 @@ Other operations are not associative:
   * Differences:
         a - (b - c)
         (a - b) - c
+
+== 2D/3D objects ==
+
+Primitives are different, obviously:
+  * 3D: Cuboid, Frustum, Layer, Plane, Sphere, Polyhedron
+  * 2D: Rectangle, Circle, Polygon
+
+Transforms are different:
+  * 3D only: RotateAxisAngle, RotateYpr
+  * 2D only: RotateAngle
+  * Both, different parameters: RotateFromTo, RotateAxes, ScaleAxisFactor,
+    ScaleAxes, Translate
+  * Both, same parameters: ScaleUniform
+
+Transform shortcuts are also different - this applies to both the generator
+shortcuts and the object-method shortcuts:
+  * 3D only: pitch_up/down, yaw_left/right, roll_left/right, forward, back
+  * Both, different parameters: up, down (in 2D: second parameter)
+
+Operations are also different:
+  * 3D only: none so far, potentially projection
+  * 2D only: extrude
+
+Options for handling 2D and 3D objects:
+  * Classes Shape(Object) and Solid(Object)
+      * Extrude method is only in Shape, pitch_up only in Solid
+      * .up() has different implementations for Shape and Solid
+      * Transformed and all CSG classes must therefore also derive from Shape or
+        Solid => Transformed and all CSG classes duplicated (potentially with
+        multiple inheritance to avoid excessive code duplication)
+      * Would we need to duplicate transforms? Note that ScaleUniform does not
+        have an inherent dimensionality.
+      * The dimensionality of ScaleUniform or up (as in up(2)*my_object) is
+        unknown until it is applied to an object or chained with another
+        transform
+  * dimensions property
+      * Property can be None or [2,3] if both are possible
+      * Extrude and pitch_up methods in Object, Exceptions if invalid dimensions
+        Could potentially be done with a decorator
+      * CSGs, Transformed, and Chained enforce uniform dimensionality
 
 == Class hierarchy ==
 

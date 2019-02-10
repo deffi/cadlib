@@ -1,16 +1,5 @@
 Next:
   * 2D objects
-      * Classes:
-          * class Shape(Object)
-          * class Solid(Object)
-      * Transforms:
-          * RotateAngle (should RotateAxisAngle be RotateAngleAxis?)
-          * RotateFromTo
-          * ScaleAxisFactor
-          * ScaleUniform
-          * ScaleXy
-          * Translate
-      * CSGs should accept either, but enforce uniform dimensionality
 
 Object:
   * [Medium] Assembly (Part) objects
@@ -41,6 +30,9 @@ Primitives:
   * [Low]    Plane: through point
 
 Transform:
+  * [Medium] RotateXyz -> RotateAxes
+  * [Medium] rotate generator: Xyz -> Axes
+  * [Medium] Should we have a ScaleAlongAxis and ScaleAroundAxis?
   * [Low]    Scale around (instead of along) axis?
              Maybe: scale(axis, along, around)
              Or, idea: scale(factor, around = (point or line))
@@ -60,6 +52,7 @@ Transform:
   * [Low]    Empty-chained * object should be object, not chained
 
 CSG:
+  * [Medium]
   * [Low]    Make it so that a-(b+c) == (a-b)-c. Two options:
                * Difference always has a single subtrahend, which is an Object or a Union
                    * This is probably better
