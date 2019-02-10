@@ -1,4 +1,4 @@
-from cadlib.transform.primitives import RotateXyz, ScaleXyz, Translate
+from cadlib.transform.primitives import RotateXyz, ScaleAxes, Translate
 def test_case(name, transform):
     print(name)
     print("    Cadlib tree:")
@@ -8,7 +8,7 @@ def test_case(name, transform):
 
 
 rotate    = RotateXyz(90, 0, 45)
-scale     = ScaleXyz(1, 1, 2)
+scale     = ScaleAxes(1, 1, 2)
 translate = Translate([10, 10, 2])
 
 test_case("One", rotate)

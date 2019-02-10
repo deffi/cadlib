@@ -1,5 +1,5 @@
 from cadlib.object.primitives import Cuboid, Cylinder, Sphere
-from cadlib.transform.primitives import RotateXyz, ScaleXyz, Translate
+from cadlib.transform.primitives import RotateXyz, ScaleAxes, Translate
 from cadlib.util.vector import Z
 
 
@@ -18,7 +18,7 @@ o2 = Cylinder(Z, 5, 5)
 o3 = Sphere(2)
 
 rotate = RotateXyz(90, 0, 45)
-scale = ScaleXyz(1, 1, 2)
+scale = ScaleAxes(1, 1, 2)
 translate = Translate([10, 10, 2])
 
 test_case("Translated object", translate * o1)

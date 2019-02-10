@@ -83,5 +83,5 @@ Transform
 |-- RotateYpr
 |-- ScaleAxisFactor
 |-- ScaleUniform
-|-- ScaleXyz
+|-- ScaleAxes
 '-- Translate

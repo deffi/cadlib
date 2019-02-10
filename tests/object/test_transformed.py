@@ -3,7 +3,7 @@ from cadlib.object import Transformed
 from cadlib.transform.chained import Chained
 from cadlib.scad import ScadObject
 from cadlib.object.primitives import Cuboid
-from cadlib.transform.primitives import ScaleXyz, ScaleUniform, Translate, RotateXyz
+from cadlib.transform.primitives import ScaleAxes, ScaleUniform, Translate, RotateXyz
 
 class TestTransformed(TestCase):
     def test_construction(self):
@@ -38,7 +38,7 @@ class TestTransformed(TestCase):
 
     def test_to_scad(self):
         r = RotateXyz(60, 30, 15)
-        s = ScaleXyz(1, 2, -1)
+        s = ScaleAxes(1, 2, -1)
         cube = Cuboid(11, 11, 11)
 
         # Simple transform

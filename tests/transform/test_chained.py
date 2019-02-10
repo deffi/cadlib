@@ -1,14 +1,14 @@
 from tests.unit_test import TestCase
 from cadlib.transform.chained import Chained
-from cadlib.transform.primitives import ScaleXyz, RotateXyz, Translate, ScaleUniform
+from cadlib.transform.primitives import ScaleAxes, RotateXyz, Translate, ScaleUniform
 from cadlib.scad import ScadObject
 
 class TestChained(TestCase):
     def test_construction(self):
         # Parameters
-        t1 = ScaleXyz(1, 1, 1)
-        t2 = ScaleXyz(2, 2, 2)
-        t3 = ScaleXyz(3, 3, 3)
+        t1 = ScaleAxes(1, 1, 1)
+        t2 = ScaleAxes(2, 2, 2)
+        t3 = ScaleAxes(3, 3, 3)
 
         # Valid
         self.assertEqual(Chained([t1, t2, t3]).transforms, [t1, t2, t3])
@@ -27,7 +27,7 @@ class TestChained(TestCase):
 
     def test_equality(self):
         r = RotateXyz( 60, 30, 15 )
-        s = ScaleXyz(1, 2, -1)
+        s = ScaleAxes(1, 2, -1)
         t = Translate([60, 30, 15])
         c = Chained([r, s, t])
 
@@ -42,8 +42,8 @@ class TestChained(TestCase):
             Chained([r, s, t]),
             Chained([r, s, t])) # Identical children
         self.assertEqual(
-            Chained([RotateXyz( 60, 30, 15 ), ScaleXyz(60, 30, 15), Translate([60, 30, 15])]),
-            Chained([RotateXyz( 60, 30, 15 ), ScaleXyz(60, 30, 15), Translate([60, 30, 15])])) # Equal children
+            Chained([RotateXyz( 60, 30, 15 ), ScaleAxes(60, 30, 15), Translate([60, 30, 15])]),
+            Chained([RotateXyz( 60, 30, 15 ), ScaleAxes(60, 30, 15), Translate([60, 30, 15])])) # Equal children
 
         # Different objects
         self.assertNotEqual(Chained([r, s, t]), Chained([r, s]   )) # Different number of children
@@ -53,8 +53,8 @@ class TestChained(TestCase):
             Chained([RotateXyz(60, 30, 15), RotateXyz(60, 30, 15), Translate([60, 30, 16])])) # Unequal children
 
     def test_inverse(self):
-        tf1 = ScaleXyz(1, 2, -1) * Translate([1, 2, 3])
-        tf2 = Translate([-1, -2, -3]) * ScaleXyz(1, 0.5, -1)
+        tf1 = ScaleAxes(1, 2, -1) * Translate([1, 2, 3])
+        tf2 = Translate([-1, -2, -3]) * ScaleAxes(1, 0.5, -1)
         self.assertInverse(tf1, tf2)
 
         self.assertInverse(Chained([]), Chained([]))
@@ -62,7 +62,7 @@ class TestChained(TestCase):
     def test_to_scad(self):
         # Create some transforms
         r = RotateXyz(60, 30, 15)
-        s = ScaleXyz (1, 2, -1)
+        s = ScaleAxes (1, 2, -1)
         t = Translate([30, 20, 10])
 
         # Non-empty chained with None target

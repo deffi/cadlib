@@ -1,5 +1,5 @@
 from cadlib.transform.primitives import RotateAxisAngle, RotateYpr, RotateXyz, RotateFromTo
-from cadlib.transform.primitives import ScaleXyz, ScaleAxisFactor, ScaleUniform
+from cadlib.transform.primitives import ScaleAxes, ScaleAxisFactor, ScaleUniform
 from cadlib.transform.primitives import Translate
 from tests.unit_test import TestCase
 from cadlib.transform.generators import *
@@ -100,8 +100,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(scale(axis =       [1, 2, 3], factor = 4), ScaleAxisFactor(      [1, 2, 3], 4))
 
         # Canonical XYZ
-        self.assertEqual(scale(xyz = Vector(1, 2, 3)), ScaleXyz(1, 2, 3))
-        self.assertEqual(scale(xyz =       [1, 2, 3]), ScaleXyz(1, 2, 3))
+        self.assertEqual(scale(xyz = Vector(1, 2, 3)), ScaleAxes(1, 2, 3))
+        self.assertEqual(scale(xyz =       [1, 2, 3]), ScaleAxes(1, 2, 3))
 
         # Canonical uniform
         self.assertEqual(scale(factor = 2), ScaleUniform(2))
@@ -116,8 +116,8 @@ class TestTransformGenerators(TestCase):
         self.assertEqual(scale(      [1, 2, 3], factor = 4), ScaleAxisFactor(      [1, 2, 3], 4))
 
         # Convenience XYZ
-        self.assertEqual(scale(Vector(1, 2, 3)), ScaleXyz(1, 2, 3))
-        self.assertEqual(scale(      [1, 2, 3]), ScaleXyz(1, 2, 3))
+        self.assertEqual(scale(Vector(1, 2, 3)), ScaleAxes(1, 2, 3))
+        self.assertEqual(scale(      [1, 2, 3]), ScaleAxes(1, 2, 3))
 
         # Convenience uniform
         self.assertEqual(scale(2), ScaleUniform(2))

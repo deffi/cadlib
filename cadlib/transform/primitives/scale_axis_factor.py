@@ -5,7 +5,7 @@ from cadlib.transform import Transform
 from cadlib.util import number
 from cadlib.util import Vector
 from cadlib.util.vector import X, Y, Z
-from cadlib.transform.primitives import ScaleXyz, RotateFromTo
+from cadlib.transform.primitives import ScaleAxes, RotateFromTo
 
 class ScaleAxisFactor(Transform):
     def __init__(self, axis, factor):
@@ -37,7 +37,7 @@ class ScaleAxisFactor(Transform):
         transform_axis = self._axis.closest_axis()
 
         forward_rotation = RotateFromTo(self._axis, transform_axis)
-        scale = ScaleXyz(*(transform_axis * self._factor).replace(0, 1))
+        scale = ScaleAxes(*(transform_axis * self._factor).replace(0, 1))
         back_rotation = RotateFromTo(transform_axis, self._axis)
 
         return back_rotation * scale * forward_rotation

@@ -1,4 +1,4 @@
-from cadlib.transform.primitives import RotateAxisAngle, RotateFromTo, RotateXyz, RotateYpr, ScaleAxisFactor, ScaleUniform, ScaleXyz, Translate
+from cadlib.transform.primitives import RotateAxisAngle, RotateFromTo, RotateXyz, RotateYpr, ScaleAxisFactor, ScaleUniform, ScaleAxes, Translate
 from cadlib.transform import Transform
 from cadlib.transform.chained import Chained
 from tests.unit_test import TestCase
@@ -14,7 +14,7 @@ class TestTransform(TestCase):
             RotateYpr(0, 0, 0),
             ScaleAxisFactor(X, 1),
             ScaleUniform(1),
-            ScaleXyz (1, 1, 1),
+            ScaleAxes (1, 1, 1),
             Translate([0, 0, 0]),
         ]
 
@@ -32,7 +32,7 @@ class TestTransform(TestCase):
     def test_multiplication(self):
         # Create some transform
         r = RotateXyz(60, 30, 15)
-        s = ScaleXyz (1, 2, -1)
+        s = ScaleAxes (1, 2, -1)
         t = Translate([30, 20, 10])
 
         # 2-chained

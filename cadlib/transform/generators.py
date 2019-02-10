@@ -1,7 +1,7 @@
 from numbers import Number
 
 from cadlib.transform.primitives import RotateAxisAngle, RotateXyz, RotateYpr, RotateFromTo
-from cadlib.transform.primitives import ScaleXyz, ScaleUniform, ScaleAxisFactor
+from cadlib.transform.primitives import ScaleAxes, ScaleUniform, ScaleAxisFactor
 from cadlib.transform.primitives import Translate
 from cadlib.util import Vector
 from cadlib.util import both
@@ -173,7 +173,7 @@ def scale(xyz_or_axis_or_factor = None, factor = None, xyz = None, axis = None):
         if axis   is not None: raise TypeError("axis"   " cannot be specified together with xyz")
         if factor is not None: raise TypeError("factor" " cannot be specified together with xyz")
 
-        return ScaleXyz(*xyz)
+        return ScaleAxes(*xyz)
 
     elif factor is not None:
         return ScaleUniform(factor)

@@ -127,11 +127,11 @@ Documentation:
                  larger/smaller (to prevent coincident faces), SVG reading,
                  commented output, symbolic variables
                  Most features are TBD.
-  * [Medium] Translate takes a vector, but ScaleXyz and RotateXyz take single
+  * [Medium] Translate takes a vector, but ScaleAxes and RotateXyz take single
              values. That's because it's not a vector. But you'll probably want
              to use the generator functions anyway.
   * [Medium] Docstrings
-               * object/object, object/transformed, object/primitives/*
+               * object/transformed, object/primitives/*
                * csg/*
                * transform/chained, transform/transform, transform/primitives/*
                * scad/*
