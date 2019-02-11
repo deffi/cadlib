@@ -1,5 +1,8 @@
-Next:
+Big tasks:
   * 2D objects
+  * Anchors
+  * Part/Hole
+
 
 Object:
   * [Medium] Assembly (Part) objects

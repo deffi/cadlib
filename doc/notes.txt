@@ -104,6 +104,8 @@ Options for handling 2D and 3D objects:
       * Extrude and pitch_up methods in Object, Exceptions if invalid dimensions
         Could potentially be done with a decorator
       * CSGs, Transformed, and Chained enforce uniform dimensionality
+      * How does ScaleUniform's toScad method know how many dimensions to
+        generate?
 
 == Class hierarchy ==
 
