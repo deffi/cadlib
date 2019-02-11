@@ -1,3 +1,12 @@
+Next:
+  * Anchors
+      * Allow directions
+      * Allow setting as property in addition to add_anchor
+      * Allow setting at(vector) and at(0)
+      * Better multiplication with homegeneous coordinates
+        (Transformed.__init__)
+      * Add anchors to all primitives
+
 Big tasks:
   * 2D objects
   * Anchors

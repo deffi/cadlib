@@ -1,13 +1,15 @@
 from numbers import Number
 from warnings import warn
 
-from cadlib.object import Object
+from cadlib.object import Object, Anchor # TODO remove anchor?
 from cadlib.scad import ScadObject
 from cadlib.util import number
 
 
 class Cuboid(Object):
     def __init__(self, x, y, z):
+        super().__init__() # TODO in all Object subclasses
+
         x = number.convert(x, "x")
         y = number.convert(y, "y")
         z = number.convert(z, "z")
@@ -17,6 +19,10 @@ class Cuboid(Object):
         if z == 0: warn("z size is 0")
 
         self._size = [x, y, z]
+
+        #self.top_face = Anchor(self, [x/2, y/2, z])
+        #setattr(self, "top_face", Anchor(self, [x/2, y/2, z]))
+        self.add_anchor("top_face", [x/2, y/2, z])
 
     def __eq__(self, other):
         return (isinstance(other, Cuboid)

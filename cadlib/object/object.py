@@ -1,5 +1,6 @@
 from cadlib.util.tree import Node
 from cadlib.transform import Transform, shortcuts, generators
+from cadlib.object import Anchor # TODO remove? TODO from cadlib.object.anchor
 
 # Adding objects: it's not as simple as it seems.
 #
@@ -104,6 +105,9 @@ class Object:
     differences, and intersections, respectively. Objects can be left-multipled
     with transforms to create transformed objects.
     """
+
+    def __init__(self):
+        self._anchors = dict()
 
     def to_scad(self):
         """Converts the object to an OpenSCAD representation.
@@ -240,3 +244,17 @@ class Object:
     def pitch_down(self, a): return shortcuts.pitch_down(a) * self
     def roll_right(self, a): return shortcuts.roll_right(a) * self
     def roll_left (self, a): return shortcuts.roll_left (a) * self
+
+
+    #############
+    ## Anchors ##
+    #############
+
+    def add_anchor(self, name, position):
+        anchor = Anchor(self, name, position)
+        self._anchors[name] = anchor
+        setattr(self, name, anchor)
+
+    @property
+    def anchors(self):
+        return self._anchors

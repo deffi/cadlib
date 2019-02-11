@@ -5,6 +5,8 @@ from cadlib.util.tree import Node
 
 class Transformed(Object):
     def __init__(self, transform, object):
+        super().__init__()
+
         # Parameter check
         if not isinstance(transform, Transform):
             raise TypeError("transform must be a Transform")
@@ -13,6 +15,14 @@ class Transformed(Object):
 
         self._transform = transform
         self._object    = object
+
+        for name, anchor in object.anchors.items(): # TODO simplify
+            matrix = transform.to_matrix()
+            position = anchor.position
+            position = position.extend()
+            position = matrix * position
+            position = position.unextend()
+            self.add_anchor(name, position)
 
     def __eq__(self, other):
         return (isinstance(other, Transformed)

@@ -318,6 +318,20 @@ class Vector:
         """Format the vector for human consumption"""
         return Table([[v] for v in self._values]).format(alignment="r")
 
+
+    ##########
+    ## Misc ##
+    ##########
+
+	# TODO remove? better name?
+    def extend(self): # TODO unit test
+        return Vector(*(self._values + [1]))
+
+    def unextend(self): # TODO unit test
+        if self._values[-1] != 1:
+            raise ValueError(f"Expect 1 for last component, got {self._values[-1]}")
+        return Vector(*self._values[:-1])
+
 # Important constants
 origin = Vector(0, 0, 0)
 X = Vector(1, 0, 0)
