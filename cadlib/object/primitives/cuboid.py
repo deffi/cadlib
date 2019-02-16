@@ -8,7 +8,7 @@ from cadlib.util import number
 
 class Cuboid(Object):
     def __init__(self, x, y, z):
-        super().__init__() # TODO in all Object subclasses
+        super().__init__()
 
         x = number.convert(x, "x")
         y = number.convert(y, "y")

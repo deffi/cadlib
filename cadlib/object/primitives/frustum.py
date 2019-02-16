@@ -8,6 +8,8 @@ from cadlib.util import number
 
 class Frustum(Object):
     def __init__(self, base, cap, base_radius, cap_radius):
+        super().__init__()
+
         self._base = Vector.convert(base, "base", required_length=3)
         self._cap  = Vector.convert(cap , "cap" , required_length=3)
         self._base_radius = number.convert(base_radius, "base_radius")

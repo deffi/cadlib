@@ -7,7 +7,7 @@ from cadlib.util import number
 
 class Sphere(Object):
     def __init__(self, r):
-        super().__init__() # TODO in all Object subclasses
+        super().__init__()
 
         self._radius = number.convert(r, "radius")
 

@@ -4,6 +4,8 @@ from cadlib.object import Object
 
 class Csg(Object):
     def __init__(self, children):
+        super().__init__()
+
         children = list(children)
 
         # Check parameters

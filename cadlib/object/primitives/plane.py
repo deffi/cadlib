@@ -8,6 +8,8 @@ from cadlib.util import number
 
 class Plane(Object):
     def __init__(self, normal, offset):
+        super().__init__()
+
         normal = Vector.convert(normal, "normal", required_length=3)
         if normal.is_zero:
             raise ValueError("Normal vector is zero")
