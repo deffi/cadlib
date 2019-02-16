@@ -1,11 +1,19 @@
 Next:
   * Anchors
-      * Allow directions
+      * How to add anchors?
+          * Options:
+              * self.tip = Anchor(self, ...)?
+              * self.tip = Anchor(...)?
+              * self.add_anchor(name, ...)?
+          * Criteria:
+              * IDE autocompletion
+              * Transformed needs to access all anchors with name
+      * Maybe: anchor.at(transformed, untransformed.tip)?
       * Allow setting as property in addition to add_anchor
-      * Allow setting at(vector) and at(0)
-      * Better multiplication with homegeneous coordinates
-        (Transformed.__init__)
       * Add anchors to all primitives
+      * Allow directions or orientations
+      * Allow anchor.at(vector) and anchor.at(0)
+      * What about .at(transformed_part.wheel)?
 
 Big tasks:
   * 2D objects
