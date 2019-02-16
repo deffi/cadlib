@@ -16,13 +16,8 @@ class Transformed(Object):
         self._transform = transform
         self._object    = object
 
-        for name, anchor in object.anchors.items(): # TODO simplify
-            matrix = transform.to_matrix()
-            position = anchor.position
-            position = position.extend()
-            position = matrix * position
-            position = position.unextend()
-            self.add_anchor(name, position)
+        for name, anchor in object.anchors.items():
+            self.add_anchor(name, transform * anchor.position)
 
     def __eq__(self, other):
         return (isinstance(other, Transformed)

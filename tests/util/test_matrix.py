@@ -1,6 +1,7 @@
 from cadlib.util.matrix import Matrix
 from tests.unit_test import TestCase
 from cadlib.util.vector import Vector, X, Y, Z
+from cadlib.util.geometry import affine_matrix
 
 class TestMatrix(TestCase):
     ####################
@@ -325,6 +326,13 @@ class TestMatrix(TestCase):
         with self.assertRaises(ValueError): m * Matrix.identity(3)
         with self.assertRaises(ValueError): (Matrix(rows = [[16, 17, 18], [19, 20, 21]]) *
                                              Matrix(rows = [[10, 11], [12, 13]]))
+
+    def test_homogeneous_multiplication(self):
+        # Swap X and Y axes and translate by <2, 3, 4>
+        m = affine_matrix(Y, X, Z, [2, 3, 4])
+
+        self.assertEqual(m.homogeneous_mul(Vector ( 0,  0,  0)), Vector ( 2,  3,  4))
+        self.assertEqual(m.homogeneous_mul(Vector (10, 20, 30)), Vector (22, 13, 34))
 
     def test_mixed_arithmetic(self):
         m1 = Matrix(rows = [[1, 2, 3], [4, 5, 6]])

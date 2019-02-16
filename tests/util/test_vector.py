@@ -509,3 +509,13 @@ class TestVector(TestCase):
         self.assertEqual(Vector(1, 2, 3).replace(0, 1), Vector(1, 2, 3))
         self.assertEqual(Vector(0, 0, 3).replace(0, 1), Vector(1, 1, 3))
         self.assertEqual(Vector(1, 2, 3).replace(1, 0).replace(2, 0), Vector(0, 0, 3))
+
+    def test_homogeneous(self):
+        self.assertEqual(Vector(0, 0, 0).homogeneous(), Vector(0, 0, 0, 1))
+        self.assertEqual(Vector(1, 2, 3).homogeneous(), Vector(1, 2, 3, 1))
+
+    def test_inhomogeneous(self):
+        self.assertEqual(Vector(0, 0, 0, 1).inhomogeneous(), Vector(0, 0, 0))
+        self.assertEqual(Vector(1, 2, 3, 1).inhomogeneous(), Vector(1, 2, 3))
+        self.assertEqual(Vector(2, 4, 6, 2).inhomogeneous(), Vector(1, 2, 3))
+        with self.assertRaises(ValueError): Vector(1, 2, 3, 0).inhomogeneous()

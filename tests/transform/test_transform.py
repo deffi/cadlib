@@ -3,6 +3,7 @@ from cadlib.transform import Transform
 from cadlib.transform.chained import Chained
 from tests.unit_test import TestCase
 from cadlib.util import X, Y, Z
+from cadlib.util import Vector
 
 class TestTransform(TestCase):
     def test_inequality(self):
@@ -59,6 +60,25 @@ class TestTransform(TestCase):
         self.assertEqual(Chained([]) * Chained([]), Chained([]))
         self.assertEqual(Chained([]) * r, Chained([r]))
         self.assertEqual(r * Chained([]), Chained([r]))
+
+    def test_multiplication_with_vector(self):
+        r = RotateAxisAngle(X, 90)
+        s = ScaleAxes (1, 2, -1)
+        t = Translate([1, 2, 3])
+
+        self.assertAlmostEqual(r * Vector( 0,  0,  0), Vector( 0,   0,  0))
+        self.assertAlmostEqual(r * Vector(10, 20, 30), Vector(10, -30, 20))
+
+        self.assertAlmostEqual(s * Vector( 0,  0,  0), Vector( 0,  0,   0))
+        self.assertAlmostEqual(s * Vector(10, 20, 30), Vector(10, 40, -30))
+
+        self.assertAlmostEqual(t * Vector( 0,  0,  0), Vector( 1,  2,  3))
+        self.assertAlmostEqual(t * Vector(10, 20, 30), Vector(11, 22, 33))
+
+        self.assertAlmostEqual((t *  s) * Vector(10, 20, 30) , Vector(11, 42, -27))
+        self.assertAlmostEqual( t * (s  * Vector(10, 20, 30)), Vector(11, 42, -27))
+
+        with self.assertRaises(ValueError): r * Vector(0, 0)
 
     def test_multiplication_with_invalid(self):
         t = Translate([30, 20, 10])

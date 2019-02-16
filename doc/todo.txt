@@ -141,3 +141,4 @@ Documentation:
                * transform/chained, transform/transform, transform/primitives/*
                * scad/*
   * [Medium] Generator signatures are different for objects and transforms.
+  * [Medium] Document where angles are expressed in degrees

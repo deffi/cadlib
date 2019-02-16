@@ -210,6 +210,9 @@ class Matrix:
         else:
             return NotImplemented
 
+    def homogeneous_mul(self,  vector):
+        return (self * vector.homogeneous()).inhomogeneous()
+
 
     #########
     ## I/O ##

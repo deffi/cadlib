@@ -1,3 +1,4 @@
+from cadlib.util import Vector
 from cadlib.util.tree import Node
 
 # Multiplying transforms:
@@ -37,7 +38,12 @@ class Transform:
         from cadlib.transform.chained import Chained
         from cadlib.object import Object, Transformed
 
-        if isinstance(other, Chained):
+        if isinstance(other, Vector):
+            # Transform * Vector - calculate transformed vector
+            if other.dimensions != 3:
+                raise ValueError(f"Dimension mismatch: Transform ({3}) x Vector ({other.dimensions})")
+            return self.to_matrix().homogeneous_mul(other)
+        elif isinstance(other, Chained):
             # Transform * Chained - defer to Chained.__rmul__
             return NotImplemented
         elif isinstance(other, Transform):
