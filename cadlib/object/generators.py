@@ -113,7 +113,7 @@ def cylinder(direction_or_base, length_or_cap, r = None, d = None):
         raise TypeError("Invalid call signature: length_or_cap must be a vector type or a number")
 
 
-def cone(direction_or_base, length_or_cap, r = None, d = None):
+def cone(direction_or_base, length_or_tip, r = None, d = None):
     """Generate a cone.
 
     For the forms with a direction, the base will be at the origin.
@@ -125,19 +125,18 @@ def cone(direction_or_base, length_or_cap, r = None, d = None):
       * cone(base, cap, d = diameter)
     """
     # TODO should use r = None, *, d = None? (not just here)
-    # TODO should be tip instead of cap
 
     # Radius or diameter
     radius = _get_radius(r, d)
 
     # length_or_base must be a vector or a number
-    if number.valid(length_or_cap):
+    if number.valid(length_or_tip):
         # Number - direction/length
-        return Frustum.direction_length(direction_or_base, length_or_cap, radius, 0)
+        return Frustum.direction_length(direction_or_base, length_or_tip, radius, 0)
 
-    elif Vector.valid_type(length_or_cap):
+    elif Vector.valid_type(length_or_tip):
         # Vector type - base/cap
-        return Frustum(direction_or_base, length_or_cap, radius, 0)
+        return Frustum(direction_or_base, length_or_tip, radius, 0)
 
     else:
         raise TypeError("Invalid call signature: length_or_cap must be a vector type or a number")

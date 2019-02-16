@@ -74,7 +74,7 @@ class TestObjectGenerators(TestCase):
         with self.assertRaises(TypeError) : cylinder(X , 5 , r=(1, 2)) # Radii
         with self.assertRaises(TypeError) : cylinder(X , 5 , d=(1, 2)) # Diameters
 
-        # Cone - base/cap
+        # Cone - base/tip
         self.assertEqual(cone(X, Y,     2), Frustum(X, Y, 2, 0))
         self.assertEqual(cone(X, Y, r = 2), Frustum(X, Y, 2, 0))
         self.assertEqual(cone(X, Y, d = 4), Frustum(X, Y, 2, 0))
